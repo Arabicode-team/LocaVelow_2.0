@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bicycle: one
+  renter: one
+  start_date: 2023-12-03 19:02:49
+  end_date: 2023-12-03 19:02:49
+  rental_status: 1
+
+two:
+  bicycle: two
+  renter: two
+  start_date: 2023-12-03 19:02:49
+  end_date: 2023-12-03 19:02:49
+  rental_status: 1

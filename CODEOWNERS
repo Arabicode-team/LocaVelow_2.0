@@ -1,0 +1,12 @@
+/app/models/accessory @masechkacat
+/app/models/bicycle @masechkacat
+/app/models/rental @masechkacat
+/app/models/review @masechkacat
+/app/models/user @masechkacat
+/db/migrate/20231203175614_devise_create_users @masechkacat
+/db/migrate/20231203180116_create_bicycles @masechkacat
+/db/migrate/20231203180249_create_rentals @masechkacat
+/db/migrate/20231203180350_create_reviews @masechkacat
+/db/migrate/20231203180427_create_accessories @masechkacat
+/db/seeds @masechkacat
+/app/helpers/bicycle_helper @masechkacat
