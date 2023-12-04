@@ -11,6 +11,12 @@ class User < ApplicationRecord
 
   before_destroy :check_active_rentals
 
+  after_create :welcome_send
+
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
+  end
+
   private
 
   def check_active_rentals
