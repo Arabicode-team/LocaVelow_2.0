@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :owner_reviews, class_name: 'Review', foreign_key: 'reviewed_user_id', dependent: :nullify
   has_many :renter_reviews, class_name: 'Review', foreign_key: 'reviewer_user_id', dependent: :nullify
 
+  has_one_attached :image
+
   before_destroy :check_active_rentals
 
   private
