@@ -9,78 +9,55 @@
 #   end
 require "faker"
 
-# db/seeds.rb
+# Supprimer toutes les données existantes
+User.destroy_all
+Bicycle.destroy_all
+Rental.destroy_all
+Review.destroy_all
 
-# User creation
+# Créer un utilisateur spécifique sans locations en cours
+user_without_rentals = User.create!(
+  email: 'user_without_rentals@example.com',
+  password: 'password',
+  # Ajoutez ici d'autres attributs si nécessaire
+)
+
+# Créer des utilisateurs normaux avec des locations en cours
+users = []
 5.times do
-    User.create!(
-      email: Faker::Internet.email,
-      password: 'password',
-      password_confirmation: 'password'
-    )
-  end
-  
-  users = User.all
-  
-  # Bicycle creation
-  10.times do
-    Bicycle.create!(
-      owner: users.sample,
-      model: Faker::Vehicle.make_and_model,
-      bicycle_type: Bicycle.bicycle_types.keys.sample,
-      size: Bicycle.sizes.keys.sample,
-      condition: ['new', 'used', 'good', 'excellent'].sample,
-      price_per_hour: rand(5..20),
-      latitude: Faker::Address.latitude,
-      longitude: Faker::Address.longitude,
-      address: Faker::Address.full_address
-    )
-  end
-  
-  bicycles = Bicycle.all
-  
-  # Création d'accessoires
-  10.times do
-    Accessory.create!(
-      name: Faker::Commerce.product_name,
-      bicycle: bicycles.sample
-    )
-  end
-  
+  user = User.create!(
+    email: Faker::Internet.email,
+    password: Faker::Internet.password,
+    # Ajoutez ici d'autres attributs si nécessaire
+  )
+  users << user
+end
 
-  
+# Créer des vélos
+bicycles = []
+10.times do
+  bicycle = Bicycle.create!(
+    owner: users.sample,
+    # Ajoutez ici les attributs nécessaires pour créer un Bicycle
+  )
+  bicycles << bicycle
+end
 
-# Rental creation (with reviews)
 start_date = Date.today
 
 bicycles.each do |bicycle|
+  # Assurez-vous que le vélo n'appartient pas à l'utilisateur sans locations
+  next if bicycle.owner == user_without_rentals
+
   rand(0..5).times do
     renter = users.sample
 
-    # Generate a random end date between 1 and 5 days after the start date
-    start_date += rand(1..5)
-    end_date = start_date + rand(1..5)
-
-    rental = Rental.create!(
-      bicycle: bicycle,
+    Rental.create!(
       renter: renter,
+      bicycle: bicycle,
       start_date: start_date,
-      end_date: end_date,
-      rental_status: Rental.rental_statuses.keys.sample
-    )
-
-    # Reset the start date for the next rental
-    start_date = end_date
-
-    # Create a review for the rental
-    Review.create!(
-      rental: rental,
-      reviewed_user: bicycle.owner, # The owner of the bicycle as the reviewed_user
-      reviewer_user: renter,        # The renter of the bicycle as the reviewer_user
-      rating: rand(1..5),
-      review_text: Faker::Lorem.sentence(word_count: 15),
+      end_date: nil, # end_date is nil to indicate the rental is in progress
+      # Add other necessary attributes for Rental
     )
   end
 end
-  
-  

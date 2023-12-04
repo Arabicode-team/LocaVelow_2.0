@@ -42,5 +42,11 @@ module Admin
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
+    def destroy
+      requested_resource.delete
+      flash[:notice] = translate_with_resource("destroy.success")
+      redirect_to action: :index
+    end
   end
-end
+  end
+

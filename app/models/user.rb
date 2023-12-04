@@ -13,16 +13,17 @@ class User < ApplicationRecord
 
   private
 
+  private
+
   def check_active_rentals
-    if bicycles.any? { |bicycle| bicycle.rentals.where.not(rental_status: "completed").exists? }
-      errors.add(:base, "Cannot delete user with active rentals.")
+    if bicycles.any? { |bicycle| bicycle.rentals.where(rental_status: "in_progress").exists? }
+      errors.add(:base, "Cannot delete user with pending rentals.")
       throw :abort
     end
-
-    if rentals.where.not(rental_status: "completed").exists?
-      errors.add(:base, "Cannot delete user with active rentals.")
+  
+    if rentals.where(rental_status: "in_progress").exists?
+      errors.add(:base, "Cannot delete user with pending rentals.")
       throw :abort
     end
   end
-
 end
