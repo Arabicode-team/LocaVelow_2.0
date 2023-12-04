@@ -1,0 +1,65 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bicycle %>
+
+<%= month_calendar do |date| %>
+  <div class="day">
+    <%= date %>
+    <% reserved_intervals = group_reserved_intervals(@bicycle.rentals, date) %>
+    <% reserved_intervals.each do |interval| %>
+      <div class="reserved-interval">
+        <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Reserved
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_with model: @new_rental, url: rentals_path(@bicycle), html: { id: "rental_form", data: { price_per_hour: @bicycle.price_per_hour } } do |form| %>
+  <%= form.date_field :start_date %>
+  <%= form.time_select :start_time %>
+  <br/>
+  <%= form.date_field :end_date %>
+  <%= form.time_select :end_time %>
+  <br/>
+  <%= form.button "Calculate Cost", type: "button", id: "calculate_cost_button" %>
+  <%= form.submit "Reserve" %>
+<% end %>
+<div id="calculated_cost">Estimated Cost: $0</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('rental_form');
+  const pricePerHour = parseFloat(form.dataset.pricePerHour);
+  const startDateField = form.querySelector('[name="start_date"]');
+  const endDateField = form.querySelector('[name="end_date"]');
+  const startTimeHourField = form.querySelector('[name="[start_time(4i)]"]');
+  const startTimeMinuteField = form.querySelector('[name="[start_time(5i)]"]');
+  const endTimeHourField = form.querySelector('[name="[end_time(4i)]"]');
+  const endTimeMinuteField = form.querySelector('[name="[end_time(5i)]"]');
+  const calculateCostButton = document.getElementById('calculate_cost_button');
+  const costDisplay = document.getElementById('calculated_cost');
+
+  function calculateCost() {
+    if (!startDateField || !endDateField || !startTimeHourField || !startTimeMinuteField || !endTimeHourField || !endTimeMinuteField) {
+      console.error("One or more fields are missing.");
+      return;
+    }
+
+    const startDateTime = new Date(startDateField.value + ' ' + startTimeHourField.value + ':' + startTimeMinuteField.value);
+    const endDateTime = new Date(endDateField.value + ' ' + endTimeHourField.value + ':' + endTimeMinuteField.value);
+    const duration = (endDateTime - startDateTime) / 36e5; // Преобразование миллисекунд в часы
+    const cost = duration * pricePerHour;
+    costDisplay.textContent = 'Estimated Cost: $' + cost.toFixed(2);
+  }
+
+  calculateCostButton.addEventListener('click', calculateCost);
+});
+
+</script>
+
+<div>
+  <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle) %> |
+  <%= link_to "Back to bicycles", bicycles_path %>
+
+  <%= button_to "Destroy this bicycle", @bicycle, method: :delete %>
+</div>
