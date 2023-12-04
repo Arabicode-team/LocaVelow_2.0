@@ -3,6 +3,18 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.default_url_options = { :host => 'locavelow-70268798a3e1.herokuapp.com' }
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['MAILJET_NORMAL_KEY'],
+    :password => ENV['MAILJET_SECRET_KEY'],
+    :domain => 'locavelow-70268798a3e1.herokuapp.com',
+    :address => 'in-v3.mailjet.com',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
