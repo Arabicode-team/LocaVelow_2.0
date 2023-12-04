@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :accessories
+      resources :bicycles
+      resources :rentals
+      resources :reviews
+      resources :users
+
+      root to: "accessories#index"
+    end
   root "bicycles#index"
   devise_for :users
   resources :users

@@ -11,7 +11,7 @@ require "faker"
 
 # db/seeds.rb
 
-# Предполагается, что у вас уже есть некоторые пользователи
+# User creation
 5.times do
     User.create!(
       email: Faker::Internet.email,
@@ -22,7 +22,7 @@ require "faker"
   
   users = User.all
   
-  # Создаем велосипеды
+  # Bicycle creation
   10.times do
     Bicycle.create!(
       owner: users.sample,
@@ -39,7 +39,7 @@ require "faker"
   
   bicycles = Bicycle.all
   
-  # Создаем аксессуары
+  # Création d'accessoires
   10.times do
     Accessory.create!(
       name: Faker::Commerce.product_name,
@@ -47,43 +47,40 @@ require "faker"
     )
   end
   
-  # Создаем аренды и отзывы
-  # ... код для создания пользователей и велосипедов ...
 
-# Создаем аренды и отзывы
+  
+
+# Rental creation (with reviews)
+start_date = Date.today
+
 bicycles.each do |bicycle|
-    rand(0..5).times do
-      renter = users.sample
-      rental = Rental.create!(
-        bicycle: bicycle,
-        renter: renter,
-        start_date: Faker::Date.backward(days: 14),
-        end_date: Faker::Date.backward(days: 7),
-        rental_status: Rental.rental_statuses.keys.sample
-      )
-  
-      # Создание отзыва от арендатора
-      Review.create!(
-        rental: rental,
-        reviewed_user: bicycle.owner, # Владелец велосипеда как reviewed_user
-        reviewer_user: renter,        # Арендатор как reviewer_user
-        rating: rand(1..5),
-        review_text: Faker::Lorem.sentence(word_count: 15),
-        review_date: Faker::Date.backward(days: 3)
-      )
-  
-      # Создание отзыва от владельца
-      Review.create!(
-        rental: rental,
-        reviewed_user: renter,        # Арендатор как reviewed_user
-        reviewer_user: bicycle.owner, # Владелец велосипеда как reviewer_user
-        rating: rand(1..5),
-        review_text: Faker::Lorem.sentence(word_count: 15),
-        review_date: Faker::Date.backward(days: 2)
-      )
-    end
+  rand(0..5).times do
+    renter = users.sample
+
+    # Generate a random end date between 1 and 5 days after the start date
+    start_date += rand(1..5)
+    end_date = start_date + rand(1..5)
+
+    rental = Rental.create!(
+      bicycle: bicycle,
+      renter: renter,
+      start_date: start_date,
+      end_date: end_date,
+      rental_status: Rental.rental_statuses.keys.sample
+    )
+
+    # Reset the start date for the next rental
+    start_date = end_date
+
+    # Create a review for the rental
+    Review.create!(
+      rental: rental,
+      reviewed_user: bicycle.owner, # The owner of the bicycle as the reviewed_user
+      reviewer_user: renter,        # The renter of the bicycle as the reviewer_user
+      rating: rand(1..5),
+      review_text: Faker::Lorem.sentence(word_count: 15),
+    )
   end
-  
-  puts "Seed data created successfully!"
+end
   
   
