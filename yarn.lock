@@ -79,7 +79,7 @@
 
 "@esbuild/linux-x64@0.19.8":
   version "0.19.8"
-  resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.19.8.tgz"
+  resolved "https://registry.yarnpkg.com/@esbuild/linux-x64/-/linux-x64-0.19.8.tgz#b187295393a59323397fe5ff51e769ec4e72212b"
   integrity sha512-lytMAVOM3b1gPypL2TRmZ5rnXl7+6IIk8uB3eLsV1JwcizuolblXRrc5ShPrO9ls/b+RTp+E6gbsuLWHWi2zGg==
 
 "@esbuild/netbsd-x64@0.19.8":
@@ -114,12 +114,12 @@
 
 "@hotwired/stimulus@^3.2.2":
   version "3.2.2"
-  resolved "https://registry.npmjs.org/@hotwired/stimulus/-/stimulus-3.2.2.tgz"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
   integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
 
 "@hotwired/turbo-rails@^8.0.0-beta.1":
   version "8.0.0-beta.1"
-  resolved "https://registry.npmjs.org/@hotwired/turbo-rails/-/turbo-rails-8.0.0-beta.1.tgz"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-8.0.0-beta.1.tgz#7d5bd2843caa5d8d224eb36f22078311163128bd"
   integrity sha512-x9G95vehf5LR4yYGvhD4z6wBMbmAVi0V87FTfenrmXPru4SfOVDsCwdEINBWsLqOvCgRPQD9eY2nGyDfZlsukg==
   dependencies:
     "@hotwired/turbo" "^8.0.0-beta.1"
@@ -127,19 +127,19 @@
 
 "@hotwired/turbo@^8.0.0-beta.1":
   version "8.0.0-beta.1"
-  resolved "https://registry.npmjs.org/@hotwired/turbo/-/turbo-8.0.0-beta.1.tgz"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-8.0.0-beta.1.tgz#35a7086c4c959445db059ea4a9b9af85cdafa616"
   integrity sha512-g66YmO/Oa+EThB3KkNDhrM9mFnNyRn6tqgwGiBHh4Vf+d3XjCznuWSG2o2e2cO/RlddVRtCwvBSMuG6sYQWX+g==
   dependencies:
     idiomorph "https://github.com/basecamp/idiomorph#rollout-build"
 
 "@rails/actioncable@^7.0":
   version "7.1.2"
-  resolved "https://registry.npmjs.org/@rails/actioncable/-/actioncable-7.1.2.tgz"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.1.2.tgz#d261ff4b72844f5af496671346ec478798f4ac2c"
   integrity sha512-KGziTZfbmGm8/fHOpj515xupbYU+49hsp4etfdpoDJ/CEY2bRZR0cyFcJkpK6n0t/sxOHNWY6bo9vSgXZvT7Mg==
 
 esbuild@^0.19.8:
   version "0.19.8"
-  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.19.8.tgz"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.19.8.tgz#ad05b72281d84483fa6b5345bd246c27a207b8f1"
   integrity sha512-l7iffQpT2OrZfH2rXIp7/FkmaeZM0vxbxN9KfiCwGYuZqzMg/JdvX26R31Zxn/Pxvsrg3Y9N6XTcnknqDyyv4w==
   optionalDependencies:
     "@esbuild/android-arm" "0.19.8"
@@ -165,6 +165,6 @@ esbuild@^0.19.8:
     "@esbuild/win32-ia32" "0.19.8"
     "@esbuild/win32-x64" "0.19.8"
 
-"idiomorph@https://github.com/basecamp/idiomorph#rollout-build":
+"idiomorph@git+https://github.com/basecamp/idiomorph.git#rollout-build":
   version "0.0.8"
-  resolved "git+ssh://git@github.com/basecamp/idiomorph.git#e906820368e4c9c52489a3336b8c3826b1bf6de5"
+  resolved "git+https://github.com/basecamp/idiomorph.git#e906820368e4c9c52489a3336b8c3826b1bf6de5"
