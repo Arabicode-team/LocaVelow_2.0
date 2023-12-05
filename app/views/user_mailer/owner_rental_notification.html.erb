@@ -12,8 +12,8 @@
   <p>
     Détails de la location effectuée :
     <ul>
-      <li>Début de la location : <%= @rental.start_date %></li>
-      <li>Fin de la location : <%= @rental.end_date %></li>
+      <li>Début de la location : <%= @rental.start_date.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+      <li>Fin de la location : <%= @rental.end_date.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
       <li>Montant payé : <%= @rental.total_cost %> €</li>
     </ul>
   </p>
