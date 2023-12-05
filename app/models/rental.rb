@@ -53,4 +53,12 @@ class Rental < ApplicationRecord
   def owner_schedule_upcoming_reminder
     UserMailer.owner_upcoming_reminder(self).deliver_later
   end
+
+  def send_renter_return_reminder
+    time_until_return = (end_date - Time.current) / 60
+
+    if time_until_return <= 15
+      UserMailer.renter_return_reminder(self).deliver_later
+    end
+  end
 end
