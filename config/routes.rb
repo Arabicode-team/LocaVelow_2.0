@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :rentals
   resources :bicycles
 
+  #gem letter_opener for emails in dev environment
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
