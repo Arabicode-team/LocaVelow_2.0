@@ -14,6 +14,9 @@ class User < ApplicationRecord
   before_destroy :check_active_rentals
 
   before_destroy :nullify_rentals
+  def thumbnail
+    return self.image.variant(resize: '150x150!').processed
+  end
 
   private
 
