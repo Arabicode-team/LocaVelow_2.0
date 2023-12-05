@@ -1,0 +1,8 @@
+<%# app/views/rentals/confirm.html.erb %>
+<h3>Confirm Your Rental</h3>
+<p>Bicycle: <%= @rental.bicycle.model %></p>
+<p>Start Date: <%= @rental.start_date %></p>
+<p>End Date: <%= @rental.end_date %></p>
+<p>Total Cost: $<%= @rental.total_cost %></p>
+
+<%= button_to 'Pay with Stripe', @checkout_session_url, method: :get %>
