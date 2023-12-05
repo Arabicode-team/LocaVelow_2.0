@@ -24,7 +24,7 @@ class UserMailer < ApplicationMailer
         mail(to: @owner_email, subject: 'Notification : Un de vos vélos a été loué sur Locavelow!')
       end
 
-      def rental_upcoming_reminder(rental)
+      def renter_upcoming_reminder(rental)
         @rental = rental
         @renter = rental.renter
         @bicycle = rental.bicycle
