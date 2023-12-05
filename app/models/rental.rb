@@ -21,6 +21,12 @@ class Rental < ApplicationRecord
 
   validate :date_not_already_booked, on: :create
 
+  after_create :send_renter_confirmation_email
+
+  def send_renter_confirmation_email
+    UserMailer.renter_confirmation_email(User.find(self.renter_id), self).deliver_now
+  end
+
   private
 
   def date_not_already_booked
