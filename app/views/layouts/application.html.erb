@@ -15,39 +15,8 @@
   </head>
 
   <body>
-  <nav class="navbar navbar-expand-xl navbar-dark" style="z-index: 3; background-color: rgba(0, 0, 0, 0.5); ">
-      <div class="container-fluid">
-        <a href="/" class="navbar-brand">LocaVelow</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-          <% if user_signed_in? %>
-          <li class="nav-item">
-         <div class="nav-link"> Voici ton email : <%= current_user.email %></div>
-        </li>
-        <% end %>
-          <li class="nav-item">
-          <% if user_signed_in? %>
-            <%= link_to "Profile", user_path(current_user), class: "nav-link" %>
-          <% else %>
-            <%= link_to "Register", new_user_registration_path, class: "nav-link" %>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <% if user_signed_in? %>
-          <%= form_tag(destroy_user_session_path, method: :delete) do %>
-            <%= submit_tag "Logout", class: "btn btn-outline-light" %>
-          <% end %>
-                    <% else %>
-            <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light" %>
-          <% end %>
-        </li>        
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <%= render 'shared/navbar' %>
+  <%= render 'shared/footer' %>
     <%= yield %>
   </body>
 </html>
