@@ -22,13 +22,40 @@ class RentalsController < ApplicationController
   # POST /rentals or /rentals.json
   def create
     @rental = Rental.new(rental_params)
-    @rental.renter = current_user  # Предполагая, что у вас есть аутентификация
+    @rental.renter = current_user # или как вы определяете текущего пользователя
+    @rental.total_cost = @rental.calculate_total_cost
 
-    if @rental.save
-      redirect_to rentals_path, notice: 'Rental was successfully created.'
-    else
-      render :new, status: :unprocessable_entity
-    end
+  if @rental.valid?
+    session[:rental_details] = @rental.attributes
+    redirect_to confirm_rental_path
+  else
+    render :new, status: :unprocessable_entity
+  end
+  end
+
+  def confirm
+    Rails.logger.debug "Stripe session URL: #{@checkout_session_url}"
+
+    @rental = Rental.new(session[:rental_details])
+
+    @session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Rental Payment',
+          },
+          unit_amount: (@rental.total_cost * 100).to_i, # Цена в центах
+        },
+        quantity: 1,
+      }],
+    mode: 'payment',
+    success_url: rental_payment_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url: root_url
+  )
+  @checkout_session_url = @session.url
+
   end
 
   # PATCH/PUT /rentals/1 or /rentals/1.json
@@ -54,6 +81,24 @@ class RentalsController < ApplicationController
     end
   end
 
+  def payment_success
+    session_id = params[:session_id]
+    stripe_session = Stripe::Checkout::Session.retrieve(session_id)
+  
+    if stripe_session.payment_status == 'paid'
+      @rental = Rental.new(session[:rental_details])
+      
+      if @rental.save
+        session.delete(:rental_details)
+        redirect_to root_path, notice: 'Payment successful and rental confirmed!'
+      else
+        redirect_to root_path, alert: 'There was an error saving the rental.'
+      end
+    else
+      redirect_to some_failure_path, alert: 'Payment failed.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rental
@@ -62,6 +107,6 @@ class RentalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rental_params
-      params.require(:rental).permit(:bicycle_id, :renter_id, :start_date, :end_date, :rental_status)
+      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status)
     end
 end

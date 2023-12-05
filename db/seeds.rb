@@ -52,16 +52,22 @@ require "faker"
 
 # Создаем аренды и отзывы
 bicycles.each do |bicycle|
-    rand(0..5).times do
-      renter = users.sample
-      rental = Rental.create!(
-        bicycle: bicycle,
-        renter: renter,
-        start_date: Faker::Date.backward(days: 14),
-        end_date: Faker::Date.backward(days: 7),
-        rental_status: Rental.rental_statuses.keys.sample
-      )
-  
+    rand(0..5).times do |i|
+        renter = users.sample
+        start_date = Faker::Date.backward(days: 15 - i * 3)
+        end_date = start_date + rand(1..3).days
+
+        rental = Rental.new(
+          bicycle: bicycle,
+          renter: renter,
+          start_date: start_date,
+          end_date: end_date,
+          rental_status: Rental.rental_statuses.keys.sample
+        )
+    
+        if rental.valid?
+            rental.total_cost = rental.calculate_total_cost
+            rental.save!
       # Создание отзыва от арендатора
       Review.create!(
         rental: rental,
@@ -81,6 +87,7 @@ bicycles.each do |bicycle|
         review_text: Faker::Lorem.sentence(word_count: 15),
         review_date: Faker::Date.backward(days: 2)
       )
+        end
     end
   end
   

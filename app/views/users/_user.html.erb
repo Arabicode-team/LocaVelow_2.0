@@ -13,6 +13,33 @@
     <strong>Email:</strong>
     <%= user.email %>
   </p>
+<p>
+<h3>Offered Bicycles:</h3>
+  <ul>
+    <% user.bicycles.each do |bicycle| %>
+      <li>
+        <strong>Model:</strong> <%= bicycle.model %><br>
+        <strong>Type:</strong> <%= bicycle.bicycle_type.humanize %><br>
+        <strong>Size:</strong> <%= bicycle.size.humanize %><br>
+        <strong>Condition:</strong> <%= bicycle.condition %><br>
+        <strong>Price per hour:</strong> <%= number_to_currency(bicycle.price_per_hour) %><br>
+        <strong>Location:</strong> <%= bicycle.address %>
+      </li>
+    <% end %>
+    <li><%= link_to "New bicycle", new_bicycle_path %> </li>
+  </ul>
 
-
+  <h3>Rentals:</h3>
+  <ul>
+    <% user.rentals.each do |rental| %>
+      <li>
+        <strong>Bicycle:</strong> <%= rental.bicycle.model %><br>
+        <strong>From:</strong> <%= rental.start_date.strftime('%Y-%m-%d %H:%M') %><br>
+        <strong>To:</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
+        <strong>Status:</strong> <%= rental.rental_status.humanize %><br>
+        <strong>Total Cost:</strong> <%= number_to_currency(rental.total_cost) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 </div>

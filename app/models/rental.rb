@@ -8,6 +8,17 @@ class Rental < ApplicationRecord
 
   enum rental_status: { in_progress: 0, completed: 1, cancelled: 2 }
 
+  def calculate_total_cost
+    # Убедитесь, что у вас есть все необходимые данные для расчета
+    return 0 unless start_date && end_date && bicycle && bicycle.price_per_hour
+
+    duration_hours = (end_date - start_date) / 1.hour
+    total_cost = duration_hours * bicycle.price_per_hour
+
+    # Возвращаем итоговую стоимость
+    total_cost
+  end
+
   validate :date_not_already_booked, on: :create
 
   private
