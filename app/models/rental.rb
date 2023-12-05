@@ -23,6 +23,7 @@ class Rental < ApplicationRecord
 
   after_create :send_renter_confirmation_email
   after_create :send_owner_confirmation_email
+  after_create :schedule_upcoming_reminder
 
   def send_renter_confirmation_email
     UserMailer.renter_confirmation_email(User.find(self.renter_id), self).deliver_now
@@ -42,5 +43,9 @@ class Rental < ApplicationRecord
     if overlapping_rentals.exists?
       errors.add(:base, 'Bicycle is already booked for these dates.')
     end
+  end
+
+  def schedule_upcoming_reminder
+    UserMailer.rental_upcoming_reminder(self).deliver_later
   end
 end

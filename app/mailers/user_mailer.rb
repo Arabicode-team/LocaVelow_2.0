@@ -23,4 +23,15 @@ class UserMailer < ApplicationMailer
 
         mail(to: @owner_email, subject: 'Notification : Un de vos vélos a été loué sur Locavelow!')
       end
+
+      def rental_upcoming_reminder(rental)
+        @rental = rental
+        @renter = rental.renter
+        @bicycle = rental.bicycle
+        days_until_start = (@rental.start_date.to_date - Date.today).to_i
+    
+        if days_until_start == 1 && !@rental.cancelled? && !@rental.completed?
+          mail(to: @renter.email, subject: "Rappel : Votre réservation sur Locavelow, c'est pour bientôt!")
+        end
+      end
 end
