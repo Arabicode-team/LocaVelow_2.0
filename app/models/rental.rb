@@ -51,6 +51,6 @@ class Rental < ApplicationRecord
   end
 
   def owner_schedule_upcoming_reminder
-    UserMailer.owner_upcoming_reminder(rental).deliver_later
+    UserMailer.owner_upcoming_reminder(self).deliver_later
   end
 end
