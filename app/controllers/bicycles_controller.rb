@@ -22,6 +22,7 @@ class BicyclesController < ApplicationController
   # POST /bicycles or /bicycles.json
   def create
     @bicycle = Bicycle.new(bicycle_params)
+    @bicycle.owner = current_user
 
     respond_to do |format|
       if @bicycle.save
