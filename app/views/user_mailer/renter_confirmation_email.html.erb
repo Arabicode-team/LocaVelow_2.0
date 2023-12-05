@@ -10,13 +10,20 @@
   <p>
     Youpi ! 🚴‍♂️ Votre réservation chez Locavelow est dans la boîte et elle est déjà payée.
   </p>
+  
+  <p>
+    Détails de votre réservation :
+    <ul>
+      <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+      <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+      <li>Montant total : <%= @rental.total_cost %> €</li>
+    </ul>
+  </p>
+
   <p>
     Merci d'avoir choisi Locavelow pour vos besoins de location de vélos. On vous souhaite des virées à deux roues aussi géniales que vos choix écologiques ! 🚵‍♀️
   </p>
   <p>
-  On vous souhaite des virées à deux roues aussi géniales que vos choix écologiques !
-</p>
-<p>
-À très vite sur Locavelow ! 
-</p>
+    À très vite sur Locavelow ! 
+  </p>
 </div>
