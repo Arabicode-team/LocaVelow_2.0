@@ -14,4 +14,13 @@ class UserMailer < ApplicationMailer
 
         mail(to: @user.email, subject: 'Confirmation de votre réservation chez Locavelow')
       end
+      
+      def owner_rental_notification(owner_email, rental)
+        @owner_email = owner_email
+        @owner = User.find_by(email: @owner_email)
+
+        @rental = rental
+
+        mail(to: @owner_email, subject: 'Notification : Un de vos vélos a été loué sur Locavelow!')
+      end
 end
