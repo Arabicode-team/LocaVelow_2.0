@@ -17,5 +17,12 @@ module Admin
     # def records_per_page
     #   params[:per_page] || 20
     # end
+    private
+
+    def authenticate_admin
+      unless current_user && current_user.admin?
+        redirect_to root_path, alert: 'You do not have access to this page.'
+        end
+      end
   end
 end

@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   def show
     @user = current_user
   end
+  def user_params
+    params.require(:user).permit(:email, :password, :first_name, :last_name, :description, :image)
+  end
   
   def destroy
     if current_user.destroy

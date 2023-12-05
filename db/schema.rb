@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_223721) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer "rental_status"
+    t.decimal "total_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bicycle_id"], name: "index_rentals_on_bicycle_id"
@@ -94,6 +95,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_223721) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.boolean "admin", default: false
+    t.text "description"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

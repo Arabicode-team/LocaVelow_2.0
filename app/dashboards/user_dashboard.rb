@@ -1,4 +1,5 @@
 require "administrate/base_dashboard"
+require_relative "../fields/active_storage_field"
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -22,6 +23,9 @@ class UserDashboard < Administrate::BaseDashboard
     reset_password_token: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    admin: Field::Boolean,
+    description: Field::Text,
+    image: ActiveStorageField,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -70,6 +74,9 @@ class UserDashboard < Administrate::BaseDashboard
     renter_reviews
     reset_password_sent_at
     reset_password_token
+    admin
+    description
+    image
   ].freeze
 
   # COLLECTION_FILTERS
