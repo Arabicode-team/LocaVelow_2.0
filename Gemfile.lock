@@ -305,7 +305,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   faker
-  image_processing
+  image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
   mini_magick
