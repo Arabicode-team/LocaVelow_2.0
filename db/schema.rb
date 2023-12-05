@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_223721) do
     t.float "latitude"
     t.float "longitude"
     t.string "address"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_bicycles_on_owner_id"

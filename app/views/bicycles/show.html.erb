@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
-
+<%= image_tag url_for(@bicycle.image) if @bicycle.image.attached? %>
 <%= render @bicycle %>
+
 
 <%= month_calendar do |date| %>
   <div class="day">

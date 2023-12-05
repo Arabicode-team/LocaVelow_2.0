@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @user %>
-<%= image_tag @user.image if @user.image.attached? %>
+<%= image_tag url_for(@user.image) if @user.image.attached? %>
 <p><%= @user.description %></p>
 
 

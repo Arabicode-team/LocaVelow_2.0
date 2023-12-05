@@ -9,14 +9,15 @@ Rails.application.routes.draw do
       root to: "accessories#index"
     end
   root "bicycles#index"
-  devise_for :users
-  resources :users
+  devise_for :users, controllers: { registrations: 'registrations' }
+  resources :users, only: [:show, :edit, :update]
   resources :accessories
   resources :reviews
   get 'rentals/confirm', to: 'rentals#confirm', as: :confirm_rental
   get 'rentals/payment_success', to: 'rentals#payment_success', as: 'rental_payment_success'
 
   # config/routes.rb
+  
 
   resources :rentals
   resources :bicycles
