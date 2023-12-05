@@ -66,8 +66,8 @@
     --bs-black-rgb: 0, 0, 0;
     --bs-body-color-rgb: 103, 116, 142;
     --bs-body-bg-rgb: 255, 255, 255;
-    --bs-font-sans-serif: Open Sans;
-    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-font-sans-serif: 'Raleway', serif;
+    --bs-font-monospace: 'Quicksand', monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-body-font-family: var(--bs-font-sans-serif);
     --bs-body-font-size: 1rem;
@@ -390,7 +390,7 @@
   }
   
   button {
-    border-radius: 0;
+    border-radius: 20px;
   }
   
   button:focus:not(:focus-visible) {
@@ -3623,7 +3623,7 @@
     --bs-btn-bg: transparent;
     --bs-btn-border-width: 1px;
     --bs-btn-border-color: transparent;
-    --bs-btn-border-radius: 0.5rem;
+    --bs-btn-border-radius: 2rem;
     --bs-btn-hover-border-color: transparent;
     --bs-btn-box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
     --bs-btn-disabled-opacity: 0.65;
@@ -24845,6 +24845,7 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.6;
+    font-family: var(--bs-font-monospace);
   }
   
   .lead {
