@@ -7,12 +7,11 @@ Détails de votre réservation :
 - Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %>
 - Montant total : <%= @rental.total_cost %> €
 
-<% if @rental.bicycle.present? %>
+<% if @rental.bicycle.address.present? %>
   Adresse du vélo : <%= @rental.bicycle.address %>
 <% else %>
-  Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse de votre vélo.
+Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse de votre vélo.
 <% end %>
-
 
 Merci d'avoir choisi Locavelow pour vos besoins de location de vélos. On vous souhaite des virées à deux roues aussi géniales que vos choix écologiques ! 🚵‍♀️
 
