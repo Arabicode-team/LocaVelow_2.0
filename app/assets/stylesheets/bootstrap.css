@@ -2748,9 +2748,10 @@
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #d2d6da;
+    border: 1px solid #fefefe;
     appearance: none;
     border-radius: 0.5rem;
+    box-shadow: 0 0 0 0.25rem rgba(91, 85, 70, 0.1);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
   
