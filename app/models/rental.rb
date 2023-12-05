@@ -24,6 +24,7 @@ class Rental < ApplicationRecord
   after_create :send_renter_confirmation_email
   after_create :send_owner_confirmation_email
   after_create :renter_schedule_upcoming_reminder
+  after_create :owner_schedule_upcoming_reminder
 
   def send_renter_confirmation_email
     UserMailer.renter_confirmation_email(User.find(self.renter_id), self).deliver_now
@@ -31,7 +32,7 @@ class Rental < ApplicationRecord
 
   def send_owner_confirmation_email
     owner_email = bicycle.owner.email
-    UserMailer.owner_rental_notification(owner_email, self).deliver_now if owner_email
+    UserMailer.owner_rental_notification(owner_email, self).deliver_now
   end
 
   private
