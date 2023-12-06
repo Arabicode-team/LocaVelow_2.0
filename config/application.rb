@@ -29,7 +29,7 @@ module LocaVelow20
 
     config.after_initialize do
       Rails.application.load_tasks
-      UpdateRentalStatusJob.set(wait: 30.minutes).perform_later
+      UpdateRentalStatusJob.set(wait: 15.minutes).perform_later
     end
   end
 end
