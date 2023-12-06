@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   before_destroy :nullify_rentals
   def thumbnail
-    return self.image.variant(resize: '150x150!').processed
+    return self.image.variant(resize_to_limit: [150, 150]).processed
   end
 
   private
