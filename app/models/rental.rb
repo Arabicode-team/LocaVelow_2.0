@@ -35,6 +35,14 @@ class Rental < ApplicationRecord
     UserMailer.owner_rental_notification(owner_email, self).deliver_now
   end
 
+  def renter_schedule_upcoming_reminder
+    UserMailer.renter_upcoming_reminder(self).deliver_later
+  end
+
+  def owner_schedule_upcoming_reminder
+    UserMailer.owner_upcoming_reminder(self).deliver_later
+  end
+
   private
 
   def date_not_already_booked
@@ -44,14 +52,6 @@ class Rental < ApplicationRecord
     if overlapping_rentals.exists?
       errors.add(:base, 'Bicycle is already booked for these dates.')
     end
-  end
-
-  def renter_schedule_upcoming_reminder
-    UserMailer.renter_upcoming_reminder(self).deliver_later
-  end
-
-  def owner_schedule_upcoming_reminder
-    UserMailer.owner_upcoming_reminder(self).deliver_later
   end
 
   def send_renter_return_reminder
