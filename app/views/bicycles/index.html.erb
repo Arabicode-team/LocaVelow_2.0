@@ -1,54 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <%= render 'shared/banner' %>
+<h1>Bicycles</h1>
 
-<div id="index-map" style="height: 400px;"></div>
-
-<div class="container">
-  <h1 style="font-weight: bold; font-style: italic;">Bienvenue chez Locavelow</h1>
-
-  <br></br>
-  <h3 style="font-weight: bold;">Liberté et Aventure avec Locavelow !</h3>
-
-  <h4 style="font-style: italic;">Le concept</h4>
-  <div style="width: 600px; padding: 10px; word-wrap: break-word;">
-    <p style="font-size: 16px; line-height: 1.5;">
-      Nous avons simplifié le processus de location de vélos pour que vous puissiez pédaler sans tracas.
-      Louez votre vélo idéal ou offrez au vôtre une vie pleine d'aventures en le mettant en location sur notre plateforme accessible dans toute la France.
+<div id="bicycles">
+  <% @bicycles.each do |bicycle| %>
+    <%= render bicycle %>
+    <p>
+      <%= link_to "Show this bicycle", bicycle %>
     </p>
-  </div>
-
-  <h4 style="font-style: italic; text-align: right;">Choix Illimité</h4>
-  <div class="d-flex justify-content-end">
-    <div style="width: 600px; padding: 10px; word-wrap: break-word; text-align: right;">
-      <p style="font-size: 16px; line-height: 1.5;">
-        Trouvez le modèle de vos rêves, vérifiez la disponibilité et partez à l'aventure n’importe où en France. Pas de complications, juste le plaisir sans limites de la découverte.
-      </p>
-    </div>
-  </div>
-
-  <h4 style="font-style: italic;">Simplicité et Disponibilité</h4>
-  <div style="width: 600px; padding: 10px; word-wrap: break-word;">
-    <p style="font-size: 16px; line-height: 1.5;">
-      Trouvez le modèle de vos rêves, vérifiez la disponibilité et partez à l'aventure n’importe où en France. Pas de complications, juste le plaisir sans limites de la découverte.
-    </p>
-  </div>
-
-  <div class="d-flex justify-content-end">
-      <%= link_to "Je loue un vélo", new_bicycle_path, class: "btn btn-outline-light btn-sm ml-auto", style: "background-color: #506191; color: #FFDE8C; border-radius: 25px;" %>
-  </div>
-
-    <div id="bicycles" class="row d-flex justify-content-around">
-        <% @bicycles.each do |bicycle| %>
-      <div class="card border-warning col-md-3 col-lg-3 mx-1 my-5 pb-3">
-        <%= render bicycle %>
-        <div class="d-flex justify-content-between align-items-center">
-        <h5 class="text-gradient text-primary mb-0"><%= bicycle.price_per_hour %></h5>
-        <%= link_to "Show this bike", bicycle, class: "btn btn-outline-primary btn-sm" %>
-      </div>
-    </div>
-<% end %>
-</div>
+  <% end %>
 </div>
 
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&callback=initIndexMap", defer: true %>
-<%= javascript_include_tag 'indexMap' %>
+<%= link_to "New bicycle", new_bicycle_path %>
