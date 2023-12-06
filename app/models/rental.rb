@@ -19,6 +19,12 @@ class Rental < ApplicationRecord
     total_cost
   end
 
+  def update_status_if_past
+    if end_date.present? && end_date < DateTime.now && rental_status != 'cancelled'
+      update(rental_status: :completed)
+    end
+  end
+
   validate :date_not_already_booked, on: :create
 
   private
