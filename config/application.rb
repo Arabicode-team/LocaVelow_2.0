@@ -23,5 +23,12 @@ module LocaVelow20
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.active_job.queue_adapter = :async
+
+    config.after_initialize do
+      Rails.application.load_tasks
+      UpdateRentalStatusJob.set(wait: 30.minutes).perform_later
+    end
   end
 end

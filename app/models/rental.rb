@@ -19,7 +19,7 @@ class Rental < ApplicationRecord
     total_cost
   end
 
-  def update_status_if_past
+  def update_status_for_past_rentals
     if end_date.present? && end_date < DateTime.now && rental_status != 'cancelled'
       update(rental_status: :completed)
     end
