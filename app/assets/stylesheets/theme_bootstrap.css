@@ -2751,7 +2751,7 @@
     border: 1px solid #fefefe;
     appearance: none;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0 0.25rem rgba(91, 85, 70, 0.1);
+    box-shadow: 0 0 0 0.25rem rgba(153, 165, 197, 0.3);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
   
@@ -2919,6 +2919,7 @@
     background-size: 16px 12px;
     border: 1px solid #d2d6da;
     border-radius: 0.5rem;
+    box-shadow: 0 0 0 0.25rem rgba(153, 165, 197, 0.3);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
     appearance: none;
   }
@@ -2930,9 +2931,9 @@
   }
   
   .form-select:focus {
-    border-color: #e293d3;
+    border-color: #FFDE8C;
     outline: 0;
-    box-shadow: 0 0 0 2px #e9aede;
+    box-shadow: 0 0 0 0.25rem rgba(245, 228, 185, 0.25);
   }
   
   .form-select[multiple],
