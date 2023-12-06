@@ -42,9 +42,9 @@ class RentalsController < ApplicationController
       payment_method_types: ['card'],
       line_items: [{
         price_data: {
-          currency: 'usd',
+          currency: 'eur',
           product_data: {
-            name: 'Rental Payment',
+            name: 'Paiement de votre réservation',
           },
           unit_amount: (@rental.total_cost * 100).to_i, # Цена в центах
         },
@@ -62,7 +62,7 @@ class RentalsController < ApplicationController
   def update
     respond_to do |format|
       if @rental.update(rental_params)
-        format.html { redirect_to rental_url(@rental), notice: "Rental was successfully updated." }
+        format.html { redirect_to rental_url(@rental), notice: "La location a bien été mise à jour." }
         format.json { render :show, status: :ok, location: @rental }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -76,7 +76,7 @@ class RentalsController < ApplicationController
     @rental.destroy!
 
     respond_to do |format|
-      format.html { redirect_to rentals_url, notice: "Rental was successfully destroyed." }
+      format.html { redirect_to rentals_url, notice: "La location a bien été supprimée." }
       format.json { head :no_content }
     end
   end
@@ -90,12 +90,12 @@ class RentalsController < ApplicationController
       
       if @rental.save
         session.delete(:rental_details)
-        redirect_to root_path, notice: 'Payment successful and rental confirmed!'
+        redirect_to root_path, notice: 'Le paiement a été effectué et votre réservation est confirmée! Rendez-vous dans votre espace personnel pour plus de détails.'
       else
-        redirect_to root_path, alert: 'There was an error saving the rental.'
+        redirect_to root_path, alert: "Une erreur est survenue, la réservation n'a pas été prise en compte."
       end
     else
-      redirect_to some_failure_path, alert: 'Payment failed.'
+      redirect_to some_failure_path, alert: 'La tentative de paiement a échoué.'
     end
   end
 
