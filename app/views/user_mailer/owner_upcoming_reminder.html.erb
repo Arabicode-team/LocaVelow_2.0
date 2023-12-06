@@ -18,22 +18,27 @@ Salut ami(e) cycliste et gardien(ne) de la planète! 🌍
 
   <p>
     Identité du locataire :
+    <ul>
     <% if @rental.renter.first_name.present? %>
-      <%= @rental.renter.first_name %> 
+      <li> Prénom : <%= @rental.renter.first_name %> </li>
     <% else %>
-      <%= 'Rendez-vous dans votre espace perso sur Locavelow pour obtenir 🔍 le prénom du locataire.' %>
+    <li> Prénom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le prénom du locataire. 🔎 ' %> </li>
     <% end %>
 
     <% if @rental.renter.last_name.present? %>
-      <%= @rental.renter.last_name %> 
+      <li> Nom : <%= @rental.renter.last_name %> </li>
     <% else %>
-      <%= 'Rendez-vous dans votre espace perso sur Locavelow pour obtenir 🔎 le nom du locataire.' %> 
+      <li> Nom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le nom du locataire. 🔎' %> </li>
     <% end %>
+
+    <% if @rental.renter.email.present? %>
+    <li> Email du locataire : <%= @rental.renter.email %> 📧</li>
+    <% else %>
+    <li><%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir les informations de contact du locataire. 🔎 ' %></li>
+    <% end %>
+    </ul>
   </p>
 
-  <p>
-    Email du locataire : <%= @rental.renter.email %> 📧
-  </p>
   <p>
     À bientôt sur Locavelow! 🚴‍♂️
   </p>
