@@ -1,7 +1,7 @@
 <div>
 <p>
 <% if @renter.first_name.present? %>
-  Salut <%= @renter.first_name %>, ami(e) cycliste et gardien(ne) de la planète! 🌍 !
+  Salut <%= @renter.first_name %>, ami(e) cycliste et gardien(ne) de la planète! 🌍
 <% else %>
   Salut ami(e) cycliste et gardien(ne) de la planète! 🌍
 <% end %>
@@ -16,7 +16,7 @@
   <ul>
   <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
   <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
-  <li>Montant total : <%= @rental.total_cost %> €</li>
+  <li>Montant total payé : <%= @rental.total_cost %> €</li>
   <% if @rental.bicycle.present? %>
     <li>Adresse du vélo : <%= @rental.bicycle.address %></li>
   <% else %>
@@ -26,6 +26,29 @@
 </p>
 
 <p>
-  À bientôt sur Locavelow, on a hâte de vous rencontrer ! 😄
+  Identité du propriétaire :
+  <ul>
+  <% if @rental.bicycle.owner.first_name.present? %>
+    <li> Prénom : <%= @rental.bicycle.owner.first_name %></li>
+  <% else %>
+    <li> Prénom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le prénom du propriétaire. 🔍' %></li>
+  <% end %>
+
+  <% if @rental.bicycle.owner.last_name.present? %>
+    <li> Nom : <%= @rental.bicycle.owner.last_name %></li>
+  <% else %>
+  <li> Nom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le nom du propriétaire. 🔍' %></li>
+  <% end %>
+
+  <% if @rental.bicycle.owner.email.present? %>
+    <li> Email du propriétaire : <%= @rental.bicycle.owner.email %> 📧</li>
+  <% else %>
+    <li><%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir les informations de contact du propriétaire. 🔍' %></li>
+  <% end %>
+  </ul>
+</p>
+
+<p>
+  À bientôt sur Locavelow, on a hâte de vous retrouver sur la piste ! 😄
 </p>
 </div>
