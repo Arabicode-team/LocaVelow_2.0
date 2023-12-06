@@ -87,6 +87,7 @@ class RentalsController < ApplicationController
   
     if stripe_session.payment_status == 'paid'
       @rental = Rental.new(session[:rental_details])
+      @rental.rental_status = :in_progress
       
       if @rental.save
         session.delete(:rental_details)
