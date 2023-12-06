@@ -1,0 +1,31 @@
+<div>
+<p>
+<% if @renter.first_name.present? %>
+  Salut <%= @renter.first_name %>, ami(e) cycliste et gardien(ne) de la planète! 🌍 !
+<% else %>
+  Salut ami(e) cycliste et gardien(ne) de la planète! 🌍
+<% end %>
+</p>
+
+<p>
+  On dirait que votre aventure à deux roues est sur le point de commencer ! 🚴‍♂️
+</p>
+
+<p>
+  Un petit rappel au sujet de votre réservation prévue pour demain :
+  <ul>
+  <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+  <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+  <li>Montant total : <%= @rental.total_cost %> €</li>
+  <% if @rental.bicycle.present? %>
+    <li>Adresse du vélo : <%= @rental.bicycle.address %></li>
+  <% else %>
+    <li>Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse du vélo que vous avez loué.</li>
+  <% end %>
+</ul>
+</p>
+
+<p>
+  À bientôt sur Locavelow, on a hâte de vous rencontrer ! 😄
+</p>
+</div>

@@ -1,0 +1,28 @@
+<% if @owner.first_name.present? %>
+Salut <%= @owner.first_name %>, ami(e) cycliste et gardien(ne) de la planète!
+<% else %>
+Salut ami(e) cycliste et gardien(ne) de la planète!
+<% end %>
+
+Un petit rappel au sujet de la réservation de votre vélo prévue pour demain :
+
+- Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %>
+- Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %>
+- Montant total encaissé : <%= @rental.total_cost %> €
+
+Identité du locataire :
+<% if @rental.renter.first_name.present? %>
+  <%= @rental.renter.first_name %>
+<% else %>
+  <%= 'Rendez-vous dans votre espace perso sur Locavelow pour obtenir le prénom du locataire.' %>
+<% end %>
+
+<% if @rental.renter.last_name.present? %>
+  <%= @rental.renter.last_name %>
+<% else %>
+  <%= 'Rendez-vous dans votre espace perso sur Locavelow pour obtenir le nom du locataire.' %>
+<% end %>
+
+Email du locataire : <%= @rental.renter.email %>
+
+À bientôt sur Locavelow!
