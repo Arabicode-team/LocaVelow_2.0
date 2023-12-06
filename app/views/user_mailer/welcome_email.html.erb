@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>
+      <% if @user.first_name.present? %>
+      Bienvenue chez Locavelow, <%= @user.first_name %> !
+      <% else %>
+        Bienvenue chez Locavelow !
+      <% end %>
+    </h1>
+    <p>
+      Félicitations, ami(e) cycliste et gardien(ne) de la planète ! 🚴‍♂️ Tu viens de t'inscrire sur Locavelow avec l'adresse e-mail suivante : <%= @user.email %>.
+    </p>
+    <p>
+      Connecte-toi rapidement en utilisant le lien suivant : <%= @url %> et commence à économiser en te baladant ! Quel sera ta prochaine destination ?
+    </p>
+    <p>
+      N'oublie pas de mettre ton casque avant de partir à l'aventure, et respecte toujours le code de la route pour que chaque trajet soit aussi agréable que les économies que tu viens de faire ! 🚵‍♀️
+    </p>
+    <p>
+      À très vite sur Locavelow ! 
+    </p>
+  </body>
+</html>
