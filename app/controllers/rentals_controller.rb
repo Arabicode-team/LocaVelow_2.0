@@ -21,15 +21,18 @@ class RentalsController < ApplicationController
 
   # POST /rentals or /rentals.json
   def create
+    @bicycle = Bicycle.find_by(id: params[:rental][:bicycle_id])
     @rental = Rental.new(rental_params)
     @rental.renter = current_user # или как вы определяете текущего пользователя
     @rental.total_cost = @rental.calculate_total_cost
 
   if @rental.valid?
+    Rails.logger.debug "Rental is valid"
+    Rails.logger.debug "Rental details: #{session[:rental_details]}"
     session[:rental_details] = @rental.attributes
     redirect_to confirm_rental_path
   else
-    render :new, status: :unprocessable_entity
+    redirect_to root_path, status: :unprocessable_entity
   end
   end
 

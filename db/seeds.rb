@@ -33,13 +33,16 @@ require "faker"
       price_per_hour: rand(5..20),
       latitude: Faker::Address.latitude,
       longitude: Faker::Address.longitude,
-      address: Faker::Address.full_address
+      address: Faker::Address.full_address,
+      city: Faker::Address.city,
+      country: Faker::Address.country,
+      postal_code: Faker::Address.postcode,
+      state: Faker::Address.state
     )
   end
   
   bicycles = Bicycle.all
   
-  # Создаем аксессуары
   10.times do
     Accessory.create!(
       name: Faker::Commerce.product_name,
@@ -47,11 +50,7 @@ require "faker"
     )
   end
   
-  # Создаем аренды и отзывы
-  # ... код для создания пользователей и велосипедов ...
-
-# Создаем аренды и отзывы
-bicycles.each do |bicycle|
+  bicycles.each do |bicycle|
     rand(0..5).times do |i|
         renter = users.sample
         start_date = Faker::Date.backward(days: 15 - i * 3)
