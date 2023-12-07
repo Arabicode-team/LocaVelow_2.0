@@ -9,7 +9,7 @@ en:
     failure:
       already_authenticated: "Vous êtes déjà connecté."
       inactive: "Your account is not activated yet."
-      invalid: "Identifiant %{authentication_keys} ou mot de passe invalide."
+      invalid: "%{authentication_keys} ou mot de passe invalide."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Invalid %{authentication_keys} or password."
