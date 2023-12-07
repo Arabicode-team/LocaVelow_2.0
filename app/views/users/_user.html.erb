@@ -7,7 +7,6 @@
       </div>
     </div>
     <div class="col-md-8 mt-6">
-      <!-- Informations de l'utilisateur -->
       <ul class="list-group">
         <li class="list-group-item"><strong>Nom : </strong><%= user.first_name %> <%= user.last_name %></li>
         <li class="list-group-item"><strong>Email :</strong> <%= user.email %></li>
@@ -18,8 +17,7 @@
         </div>
 
     <div class="col-md-5">
-      <!-- Offres de vélos -->
-      <h3 class="mb-3 mt-6">Vélos Proposés</h3>
+      <h3 class="mb-3 mt-6">Mes annonces</h3>
       <ul class="list-group">
         <% user.bicycles.each do |bicycle| %>
           <li class="list-group-item">
@@ -29,6 +27,8 @@
             <strong>État:</strong> <%= bicycle.condition %><br>
             <strong>Prix par heure:</strong> <%= number_to_currency(bicycle.price_per_hour) %><br>
             <strong>Adresse:</strong> <%= bicycle.address %>
+            <br>
+            <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
           </li>
         <% end %>
       </ul>
@@ -38,8 +38,7 @@
     </div>
 
     <div class="col-md-6 mx-auto">
-      <!-- Locations de vélos -->
-      <h3 class="mb-3 mt-6">Locations</h3>
+      <h3 class="mb-3 mt-6">Mes locations</h3>
       <ul class="list-group">
         <% user.rentals.each do |rental| %>
           <li class="list-group-item">
@@ -48,6 +47,8 @@
             <strong>À:</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
             <strong>Status:</strong> <%= rental.rental_status.humanize %><br>
             <strong>Coût total:</strong> <%= number_to_currency(rental.total_cost) %>
+            <br>
+            <%= link_to "Voir la location", rental, class: "btn btn-secondary btn-sm d-flex justify-content-center mt-2" %>
           </li>
         <% end %>
       </ul>
