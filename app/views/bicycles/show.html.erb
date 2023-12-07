@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @bicycle %>
+<%= render @bicycle, bicycle: @bicycle, show_details: true %>
 
 <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
 
