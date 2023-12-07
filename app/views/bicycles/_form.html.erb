@@ -5,57 +5,41 @@
         <% if bicycle.errors.any? %>
           <div style="color: red">
             <h2><%= pluralize(bicycle.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
-
-      <ul>
-        <% bicycle.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+            <ul>
+              <% bicycle.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :model, "Titre", style: "display: block" %>
-    <%= form.text_field :model, class:"form-control" %>
-  </div>
-
-  <div>
-    <%= form.label :bicycle_type, "Catégorie", style: "display: block" %>
-    <%= form.select :bicycle_type, Bicycle.bicycle_types.keys.map { |type| [type.humanize, type] }, {}, class: "form-select" %>
-  </div>
-
-  <div>
-    <%= form.label :size, "Taille", style: "display: block" %>
-    <%= form.select :size, Bicycle.sizes.keys.map { |size| [size.humanize, size] }, {}, class: "form-select" %>
-  </div>
-
-
+        <div class="form-group">
+          <%= form.label :model, "Titre", style: "display: block" %>
+          <%= form.text_field :model, class:"form-control" %>
+        </div>
+        <div>
+          <%= form.label :bicycle_type, "Catégorie", style: "display: block" %>
+          <%= form.select :bicycle_type, Bicycle.bicycle_types.keys.map { |type| [type.humanize, type] }, {}, class: "form-select" %>
+        </div>
+        <div>
+          <%= form.label :size, "Taille", style: "display: block" %>
+          <%= form.select :size, Bicycle.sizes.keys.map { |size| [size.humanize, size] }, {}, class: "form-select" %>
+        </div>
         <div>
           <%= form.label :condition, "Etat", style: "display: block" %>
           <%= form.text_field :condition, class: "form-control" %>
         </div>
-
         <div>
           <%= form.label :price_per_hour, "Prix/heure", style: "display: block" %>
-          <%= form.number_field :price_per_hour, class: "form-control" %>
+          <%= form.number_field :price_per_hour, class: "form-control mb-4" %>
         </div>
-
-  <%= render 'address_fields', form: form %>
-  
-  <div>
-  <%= form.submit "Checkout", class: "button-cta" %>
-        <div>
-          <%= form.label :address, "Adresse", style: "display: block" %>
-          <%= form.text_field :address, class: "form-control" %>
-        </div>
-
-        <div class="actions mt-5 d-flex justify-content-center">
-          <%= form.submit "Enregistrer le vélo", class: "btn btn-lg btn-primary btn-block p-2 px-4"  %>
-        </div>
+      <%= render 'address_fields', form: form %>
+      <div class="actions mt-5 d-flex justify-content-center">
+        <%= form.submit "Enregistrer le vélo", class: "btn btn-lg btn-primary btn-block p-2 px-4"  %>
+      </div>
       <% end %>
     </div>
   </div>
-  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
-  <%= javascript_include_tag 'autocompleteMap' %>
-</div>      
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
+    <%= javascript_include_tag 'autocompleteMap' %>
+</div>        
     

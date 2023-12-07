@@ -9,6 +9,9 @@
           <h4 class="text-center">
             <%= bicycle.model %>
           </h4>
+          <h6 class="text-center">
+            <%= bicycle.city %>, <%= bicycle.country %>
+          <h6>  
           <p>
             Description description du vélo description du vélo à modifier à faire remonter Description description du vélo description du vélo à modifier à faire remonter Description description du vélo description du vélo à modifier à faire remonter Description description du vélo description du vélo à modifier à faire remonter
           </p> 
@@ -51,16 +54,8 @@
         </div>
       </div>
     </div>   
-    <p>
-      <strong>Latitude:</strong>
-      <%= bicycle.latitude %>
-    </p>
-    <p>
-      <strong>Longitude:</strong>
-      <%= bicycle.longitude %>
-    </p>
-    <p>
-      <strong>Address:</strong>
+    <p class="text-center">
+      <strong>Adresse :</strong>
       <%= "#{bicycle.address}, #{bicycle.city}, #{bicycle.state}, #{bicycle.postal_code}, #{bicycle.country}" %>
     </p>
   </div>

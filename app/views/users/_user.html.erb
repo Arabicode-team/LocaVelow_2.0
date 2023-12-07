@@ -21,12 +21,12 @@
       <ul class="list-group">
         <% user.bicycles.each do |bicycle| %>
           <li class="list-group-item">
-            <h5 class="text-center"><strong>Modèle:</strong> <%= bicycle.model %></h5><br>
-            <strong>Type:</strong> <%= bicycle.bicycle_type.humanize %><br>
-            <strong>Taille:</strong> <%= bicycle.size.humanize %><br>
-            <strong>État:</strong> <%= bicycle.condition %><br>
-            <strong>Prix par heure:</strong> <%= number_to_currency(bicycle.price_per_hour) %><br>
-            <strong>Adresse:</strong> <%= bicycle.address %>
+            <h5 class="text-center"><strong>Modèle :</strong> <%= bicycle.model %></h5><br>
+            <strong>Type :</strong> <%= bicycle.bicycle_type.humanize %><br>
+            <strong>Taille :</strong> <%= bicycle.size.humanize %><br>
+            <strong>État :</strong> <%= bicycle.condition %><br>
+            <strong>Prix par heure :</strong> <%= number_to_currency(bicycle.price_per_hour) %><br>
+            <strong>Adresse : <%= bicycle.address %>, <%= bicycle.city %>, <%= bicycle.country %></strong>
             <br>
             <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
           </li>
@@ -42,11 +42,12 @@
       <ul class="list-group">
         <% user.rentals.each do |rental| %>
           <li class="list-group-item">
-            <h5 class="text-center"><strong>Vélo:</strong> <%= rental.bicycle.model %></h5><br>
-            <strong>De:</strong> <%= rental.start_date.strftime('%Y-%m-%d %H:%M') %><br>
-            <strong>À:</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
-            <strong>Status:</strong> <%= rental.rental_status.humanize %><br>
-            <strong>Coût total:</strong> <%= number_to_currency(rental.total_cost) %>
+            <h5 class="text-center"><strong>Vélo :</strong> <%= rental.bicycle.model %></h5><br>
+            <strong>Ville :</strong> <%= rental.bicycle.city %><br>
+            <strong>De :</strong> <%= rental.start_date.strftime('%Y-%m-%d %H:%M') %><br>
+            <strong>À :</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
+            <strong>Status :</strong> <%= rental.rental_status.humanize %><br>
+            <strong>Coût total :</strong> <%= number_to_currency(rental.total_cost) %>
             <br>
             <%= link_to "Voir la location", rental, class: "btn btn-secondary btn-sm d-flex justify-content-center mt-2" %>
           </li>

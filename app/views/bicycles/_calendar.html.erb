@@ -4,7 +4,7 @@
     <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
     <% reserved_intervals.each do |interval| %>
       <div class="reserved-interval">
-        <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Reserved
+        <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Reservé
       </div>
     <% end %>
   </div>
