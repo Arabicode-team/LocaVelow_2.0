@@ -1,56 +1,71 @@
-<div id="<%= dom_id bicycle %>">
-  <p>
-    <strong>Owner:</strong>
-    <%= bicycle.owner_id %>
-  </p>
-  <p>
-    <strong>Description:</strong>
-    <%= bicycle.description %>
-  </p>
-  <p>
-    <strong>Model:</strong>
-    <%= bicycle.model %>
-  </p>
-
-  <p>
-    <strong>Bicycle type:</strong>
-    <%= bicycle.bicycle_type %>
-  </p>
-
-  <p>
-    <strong>Size:</strong>
-    <%= bicycle.size %>
-  </p>
-
-  <p>
-    <strong>Condition:</strong>
-    <%= bicycle.condition %>
-  </p>
-
-  <p>
-    <strong>Price per hour:</strong>
-    <%= bicycle.price_per_hour %>
-  </p>
-
-  <p>
-    <strong>Latitude:</strong>
-    <%= bicycle.latitude %>
-  </p>
-
-  <p>
-    <strong>Longitude:</strong>
-    <%= bicycle.longitude %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= bicycle.address %>
-  </p>
-
-</div>
-
-
-<div class="col mt-3">
+<% if local_assigns[:show_details] == true %>
+  <div id="<%= dom_id bicycle %>">
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="https://images.frandroid.com/wp-content/uploads/2022/09/test-velo-mad-urbain-2-1-scaled.jpg" class="img-fluid rounded" alt="Image du vélo">
+        </div>
+        <div class="col-md-6">
+          <h4 class="text-center">
+            <%= bicycle.model %>
+          </h4>
+          <p>
+            Description description du vélo description du vélo à modifier à faire remonter Description description du vélo description du vélo à modifier à faire remonter Description description du vélo description du vélo à modifier à faire remonter Description description du vélo description du vélo à modifier à faire remonter
+          </p> 
+          <h5 class="text-center"> Caractéristiques</h5>
+          <p>
+          <li>
+            Catégorie :
+            <%= bicycle.bicycle_type %>
+          </li>
+          </p>
+          <p>
+          <li>
+            <strong>Taille :</strong>
+            <%= bicycle.size %>
+          </li>
+          </p>
+          <p>
+          <li>
+            <strong>Etat :</strong>
+            <%= bicycle.condition %>
+          </li>
+          </p>
+          <p>
+          <li>
+            <strong>Accessoires :</strong>
+            <%= bicycle.accessories.name %>
+          </li>
+          </p>
+          <p class="border rounded p-3 shadow mb-2 text-center">
+          <span class="ml-2" role="img" aria-label="Avatar">👤</span>
+            <strong>Propriétaire :</strong>
+            <%= bicycle.owner.email %>
+          </p>
+          <div class="d-flex justify-content-center">
+            <p class="btn btn-secondary">
+              <strong>Prix/heure : </strong>
+              <%= bicycle.price_per_hour %> €
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>   
+    <p>
+      <strong>Latitude:</strong>
+      <%= bicycle.latitude %>
+    </p>
+    <p>
+      <strong>Longitude:</strong>
+      <%= bicycle.longitude %>
+    </p>
+    <p>
+      <strong>Address:</strong>
+      <%= "#{bicycle.address}, #{bicycle.city}, #{bicycle.state}, #{bicycle.postal_code}, #{bicycle.country}" %>
+    </p>
+  </div>
+<% else %>
+  <div class="col mt-3">
     <div class="card card-blog card-plain">
       <div class="position-relative">
         <div class="d-block blur-shadow-image">
@@ -67,5 +82,5 @@
         <p>
         Adresse : <%= bicycle.address %>
       </div>
-    </div>
-  </div>
+  </div>	
+<% end %>  

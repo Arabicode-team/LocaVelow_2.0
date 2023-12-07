@@ -1,7 +1,10 @@
-<%= form_with(model: bicycle, local: true, html: { multipart: true }) do |form| %>
-  <% if bicycle.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(bicycle.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <%= form_with(model: bicycle) do |form| %>
+        <% if bicycle.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(bicycle.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
 
       <ul>
         <% bicycle.errors.each do |error| %>
@@ -11,61 +14,48 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :model, style: "display: block" %>
-    <%= form.text_field :model %>
+  <div class="form-group">
+    <%= form.label :model, "Titre", style: "display: block" %>
+    <%= form.text_field :model, class:"form-control" %>
   </div>
 
   <div>
-    <%= form.label :bicycle_type, style: "display: block" %>
-    <%= form.text_field :bicycle_type %>
+    <%= form.label :bicycle_type, "Catégorie", style: "display: block" %>
+    <%= form.select :bicycle_type, Bicycle.bicycle_types.keys.map { |type| [type.humanize, type] }, {}, class: "form-select" %>
   </div>
 
   <div>
-    <%= form.label :size, style: "display: block" %>
-    <%= form.text_field :size %>
+    <%= form.label :size, "Taille", style: "display: block" %>
+    <%= form.select :size, Bicycle.sizes.keys.map { |size| [size.humanize, size] }, {}, class: "form-select" %>
   </div>
 
-  <div>
-    <%= form.label :condition, style: "display: block" %>
-    <%= form.text_field :condition %>
-  </div>
 
-  <div>
-    <%= form.label :price_per_hour, style: "display: block" %>
-    <%= form.number_field :price_per_hour %>
-  </div>
+        <div>
+          <%= form.label :condition, "Etat", style: "display: block" %>
+          <%= form.text_field :condition, class: "form-control" %>
+        </div>
 
-  <div>
-    <%= form.label :latitude, style: "display: block" %>
-    <%= form.number_field :latitude %>
-  </div>
-
-  <div>
-    <%= form.label :longitude, style: "display: block" %>
-    <%= form.number_field :longitude %>
-  </div>
-
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  </div>
+        <div>
+          <%= form.label :price_per_hour, "Prix/heure", style: "display: block" %>
+          <%= form.number_field :price_per_hour, class: "form-control" %>
+        </div>
 
   <%= render 'address_fields', form: form %>
   
   <div>
   <%= form.submit "Checkout", class: "button-cta" %>
+        <div>
+          <%= form.label :address, "Adresse", style: "display: block" %>
+          <%= form.text_field :address, class: "form-control" %>
+        </div>
+
+        <div class="actions mt-5 d-flex justify-content-center">
+          <%= form.submit "Enregistrer le vélo", class: "btn btn-lg btn-primary btn-block p-2 px-4"  %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
   <%= javascript_include_tag 'autocompleteMap' %>
-<% end %>
+</div>      
+    

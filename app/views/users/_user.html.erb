@@ -1,3 +1,59 @@
+<div id="<%= dom_id user %>" class="container mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <!-- Avatar -->
+      <div class="text-center mb-3">
+        <img src="https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg" alt="Avatar" class="img-fluid rounded-circle" style="width: 200px; height: 200px;">
+      </div>
+    </div>
+    <div class="col-md-8 mt-6">
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Nom : </strong><%= user.first_name %> <%= user.last_name %></li>
+        <li class="list-group-item"><strong>Email :</strong> <%= user.email %></li>
+      </ul>
+      <div class="text-center mt-3">
+        <%= link_to "Modifier le compte", edit_user_registration_path(@user), class: "btn btn-primary" %>
+      </div>
+        </div>
+
+    <div class="col-md-5">
+      <h3 class="mb-3 mt-6">Mes annonces</h3>
+      <ul class="list-group">
+        <% user.bicycles.each do |bicycle| %>
+          <li class="list-group-item">
+            <h5 class="text-center"><strong>Modèle:</strong> <%= bicycle.model %></h5><br>
+            <strong>Type:</strong> <%= bicycle.bicycle_type.humanize %><br>
+            <strong>Taille:</strong> <%= bicycle.size.humanize %><br>
+            <strong>État:</strong> <%= bicycle.condition %><br>
+            <strong>Prix par heure:</strong> <%= number_to_currency(bicycle.price_per_hour) %><br>
+            <strong>Adresse:</strong> <%= bicycle.address %>
+            <br>
+            <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
+          </li>
+        <% end %>
+      </ul>
+      <li class="list-group-item mt-3">
+        <%= link_to "Nouveau vélo", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+      </li>
+    </div>
+
+    <div class="col-md-6 mx-auto">
+      <h3 class="mb-3 mt-6">Mes locations</h3>
+      <ul class="list-group">
+        <% user.rentals.each do |rental| %>
+          <li class="list-group-item">
+            <h5 class="text-center"><strong>Vélo:</strong> <%= rental.bicycle.model %></h5><br>
+            <strong>De:</strong> <%= rental.start_date.strftime('%Y-%m-%d %H:%M') %><br>
+            <strong>À:</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
+            <strong>Status:</strong> <%= rental.rental_status.humanize %><br>
+            <strong>Coût total:</strong> <%= number_to_currency(rental.total_cost) %>
+            <br>
+            <%= link_to "Voir la location", rental, class: "btn btn-secondary btn-sm d-flex justify-content-center mt-2" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 <div id="<%= dom_id user %>">
 <%= image_tag url_for(user.thumbnail) if user.image.attached? %>
   <p>
