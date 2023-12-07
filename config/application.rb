@@ -25,7 +25,9 @@ module LocaVelow20
 
     config.time_zone = "Paris"
 
-    config.active_job.queue_adapter = :async
+    config.before_configuration do
+      config.active_job.queue_adapter = :async
+    end
 
     config.after_initialize do
       Rails.application.load_tasks
