@@ -4,17 +4,15 @@
 
 <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
 
-<%= form_tag(rentals_path, method: :post, id: "rental_form") do %>
-  <%= hidden_field_tag 'rental[bicycle_id]', @bicycle.id %>
-  <%= hidden_field_tag 'rental[renter_id]', current_user.id %>
-  <%= hidden_field_tag 'rental[rental_status]', 'in_progress' %>
-  <%= label_tag 'rental[start_date]', 'Start Date and Time' %>
-  <%= datetime_field_tag 'rental[start_date]' %>
-  <br/>
-  <%= label_tag 'rental[end_date]', 'End Date and Time' %>
-  <%= datetime_field_tag 'rental[end_date]' %>
-  <br/>
- 
-<%= javascript_include_tag 'simpleMap' %>
 <%= render 'calendar', bicycle: @bicycle %>
+
 <%= render 'rentals/form', bicycle: @bicycle %>
+<div>
+  <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle) %> |
+  <%= link_to "Back to bicycles", bicycles_path %>
+  <%= button_to "Destroy this bicycle", @bicycle, method: :delete %>
+</div>
+
+<%= javascript_include_tag 'estimate_cost' %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initSimpleMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
+<%= javascript_include_tag 'simpleMap' %>
