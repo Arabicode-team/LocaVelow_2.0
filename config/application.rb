@@ -28,10 +28,13 @@ module LocaVelow20
     config.before_configuration do
       config.active_job.queue_adapter = :async
     end
-
+    
     config.after_initialize do
       Rails.application.load_tasks
-      UpdateRentalStatusJob.set(wait: 15.minutes).perform_later
+    end
+
+    config.before_initialize do
+      UpdateRentalStatusJob.set(wait: 5.minutes).perform_later
     end
   end
 end
