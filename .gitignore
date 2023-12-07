@@ -39,4 +39,3 @@
 !/app/assets/builds/.keep
 
 /node_modules
-/package-lock.json
