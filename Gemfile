@@ -74,3 +74,5 @@ gem "stripe"
 gem "dotenv-rails"
 gem "administrate"
 gem "simple_calendar"
+gem "mini_magick"
+gem 'image_processing', '~> 1.2'

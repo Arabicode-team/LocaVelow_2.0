@@ -9,9 +9,14 @@ class User < ApplicationRecord
   has_many :owner_reviews, class_name: 'Review', foreign_key: 'reviewed_user_id', dependent: :nullify
   has_many :renter_reviews, class_name: 'Review', foreign_key: 'reviewer_user_id', dependent: :nullify
 
+  has_one_attached :image
+
   before_destroy :check_active_rentals
 
   before_destroy :nullify_rentals
+  def thumbnail
+    return self.image.variant(resize_to_limit: [150, 150]).processed
+  end
 
   after_create :welcome_send
 
@@ -22,13 +27,13 @@ class User < ApplicationRecord
   private
 
   def check_active_rentals
-    if bicycles.any? { |bicycle| bicycle.rentals.where.not(rental_status: "completed").exists? }
-      errors.add(:base, "Cannot delete user with active rentals.")
+    if bicycles.any? { |bicycle| bicycle.rentals.where(rental_status: "in_progress").exists? }
+      errors.add(:base, "Cannot delete user with pending rentals.")
       throw :abort
     end
-
-    if rentals.where.not(rental_status: "completed").exists?
-      errors.add(:base, "Cannot delete user with active rentals.")
+  
+    if rentals.where(rental_status: "in_progress").exists?
+      errors.add(:base, "Cannot delete user with pending rentals.")
       throw :abort
     end
   end
