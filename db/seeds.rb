@@ -9,9 +9,85 @@
 #   end
 require "faker"
 
-# Supprimer toutes les données existantes
-User.destroy_all
-Bicycle.destroy_all
-Rental.destroy_all
-Review.destroy_all
+# db/seeds.rb
 
+# Предполагается, что у вас уже есть некоторые пользователи
+5.times do
+    User.create!(
+      email: Faker::Internet.email,
+      password: 'password',
+      password_confirmation: 'password'
+    )
+  end
+  
+  users = User.all
+  
+  # Создаем велосипеды
+  10.times do
+    Bicycle.create!(
+      owner: users.sample,
+      model: Faker::Vehicle.make_and_model,
+      bicycle_type: Bicycle.bicycle_types.keys.sample,
+      size: Bicycle.sizes.keys.sample,
+      condition: ['new', 'used', 'good', 'excellent'].sample,
+      price_per_hour: rand(5..20),
+      latitude: Faker::Address.latitude,
+      longitude: Faker::Address.longitude,
+      address: Faker::Address.full_address,
+      city: Faker::Address.city,
+      country: Faker::Address.country,
+      postal_code: Faker::Address.postcode,
+      state: Faker::Address.state
+    )
+  end
+  
+  bicycles = Bicycle.all
+  
+  10.times do
+    Accessory.create!(
+      name: Faker::Commerce.product_name,
+      bicycle: bicycles.sample
+    )
+  end
+  
+  bicycles.each do |bicycle|
+    rand(0..5).times do |i|
+        renter = users.sample
+        start_date = Faker::Date.backward(days: 15 - i * 3)
+        end_date = start_date + rand(1..3).days
+
+        rental = Rental.new(
+          bicycle: bicycle,
+          renter: renter,
+          start_date: start_date,
+          end_date: end_date,
+          rental_status: Rental.rental_statuses.keys.sample
+        )
+    
+        if rental.valid?
+            rental.total_cost = rental.calculate_total_cost
+            rental.save!
+      # Создание отзыва от арендатора
+      Review.create!(
+        rental: rental,
+        reviewed_user: bicycle.owner, # Владелец велосипеда как reviewed_user
+        reviewer_user: renter,        # Арендатор как reviewer_user
+        rating: rand(1..5),
+        review_text: Faker::Lorem.sentence(word_count: 15),
+        review_date: Faker::Date.backward(days: 3)
+      )
+  
+      # Создание отзыва от владельца
+      Review.create!(
+        rental: rental,
+        reviewed_user: renter,        # Арендатор как reviewed_user
+        reviewer_user: bicycle.owner, # Владелец велосипеда как reviewer_user
+        rating: rand(1..5),
+        review_text: Faker::Lorem.sentence(word_count: 15),
+        review_date: Faker::Date.backward(days: 2)
+      )
+        end
+    end
+  end
+  
+  puts "Seed data created successfully!"
