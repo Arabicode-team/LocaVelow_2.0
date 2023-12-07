@@ -25,11 +25,13 @@ module LocaVelow20
 
     config.time_zone = "Paris"
 
-    config.active_job.queue_adapter = :async
-
     config.after_initialize do
       Rails.application.load_tasks
-      UpdateRentalStatusJob.set(wait: 5.minutes).perform_later
-    end
-  end
+    
+      Thread.new do
+        loop do
+          UpdateRentalStatusJob.new.perform
+          sleep(5.minutes)
+        end
+      end
 end
