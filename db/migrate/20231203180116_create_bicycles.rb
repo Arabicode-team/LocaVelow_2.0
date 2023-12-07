@@ -10,6 +10,10 @@ class CreateBicycles < ActiveRecord::Migration[7.1]
       t.float :latitude
       t.float :longitude
       t.string :address
+      t.string :city
+      t.string :country
+      t.string :postal_code
+      t.string :state
 
       t.timestamps
     end

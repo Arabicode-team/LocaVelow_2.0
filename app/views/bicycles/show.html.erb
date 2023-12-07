@@ -2,67 +2,17 @@
 
 <%= render @bicycle %>
 
-<%= month_calendar do |date| %>
-  <div class="day">
-    <%= date %>
-    <% reserved_intervals = group_reserved_intervals(@bicycle.rentals, date) %>
-    <% reserved_intervals.each do |interval| %>
-      <div class="reserved-interval">
-        <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Reserved
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
 
-<%= form_tag(rentals_path, method: :post, id: "rental_form") do %>
-  <%= hidden_field_tag 'rental[bicycle_id]', @bicycle.id %>
-  <%= hidden_field_tag 'rental[renter_id]', current_user.id %>
-  <%= hidden_field_tag 'rental[rental_status]', 'in_progress' %>
-  <%= label_tag 'rental[start_date]', 'Start Date and Time' %>
-  <%= datetime_field_tag 'rental[start_date]' %>
-  <br/>
-  <%= label_tag 'rental[end_date]', 'End Date and Time' %>
-  <%= datetime_field_tag 'rental[end_date]' %>
-  <br/>
-  <%= submit_tag "Reserve" %>
-<% end %>
-<br/>
-<div id="calculated_cost">Estimated Cost: $0</div>
+<%= render 'calendar', bicycle: @bicycle %>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('rental_form');
-  const pricePerHour = parseFloat('<%= @bicycle.price_per_hour %>'); // Замените эту строку, чтобы получить цену за час
-  const startDateField = form.querySelector('[name="rental[start_date]"]');
-  const endDateField = form.querySelector('[name="rental[end_date]"]');
-  const costDisplay = document.getElementById('calculated_cost');
-
-  form.addEventListener('change', function () {
-    calculateCost();
-  });
-
-  function calculateCost() {
-    if (!startDateField.value || !endDateField.value) {
-      console.error("Start date or end date is missing.");
-      return;
-    }
-
-    const startDateTime = new Date(startDateField.value);
-    const endDateTime = new Date(endDateField.value);
-    const duration = (endDateTime - startDateTime) / 36e5; // Преобразование миллисекунд в часы
-    if(duration > 0){
-      const cost = duration * pricePerHour;
-      costDisplay.textContent = 'Estimated Cost: $' + cost.toFixed(2);
-    } else {
-      costDisplay.textContent = 'Estimated Cost: $0';
-    }
-  }
-});
-</script>
-
+<%= render 'rentals/form', bicycle: @bicycle %>
 <div>
   <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle) %> |
   <%= link_to "Back to bicycles", bicycles_path %>
-
   <%= button_to "Destroy this bicycle", @bicycle, method: :delete %>
 </div>
+
+<%= javascript_include_tag 'estimate_cost' %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initSimpleMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
+<%= javascript_include_tag 'simpleMap' %>
