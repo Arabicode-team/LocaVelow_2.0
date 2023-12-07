@@ -14,6 +14,7 @@ class CreateBicycles < ActiveRecord::Migration[7.1]
       t.string :country
       t.string :postal_code
       t.string :state
+      t.text :description
 
       t.timestamps
     end
