@@ -20,14 +20,9 @@ class Rental < ApplicationRecord
   end
 
   def update_status_for_past_rentals
-    Rails.logger.info("Updating status for rental #{id} - started at #{Time.now}")
-    
     if end_date.present? && end_date < DateTime.now && rental_status != 'cancelled'
       update(rental_status: :completed)
-      Rails.logger.info("Updated status for rental #{id} to completed")
     end
-  
-    Rails.logger.info("Updating status for rental #{id} - finished at #{Time.now}")
   end
 
   validate :date_not_already_booked, on: :create

@@ -25,15 +25,10 @@ module LocaVelow20
 
     config.time_zone = "Paris"
 
-    config.before_configuration do
-      config.active_job.queue_adapter = :async
-    end
-    
+    config.active_job.queue_adapter = :async
+
     config.after_initialize do
       Rails.application.load_tasks
-    end
-
-    config.before_initialize do
       UpdateRentalStatusJob.set(wait: 5.minutes).perform_later
     end
   end
