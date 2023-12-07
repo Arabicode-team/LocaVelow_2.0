@@ -2,7 +2,6 @@
 <%= image_tag url_for(@bicycle.image) if @bicycle.image.attached? %>
 <%= render @bicycle %>
 
-
 <%= month_calendar do |date| %>
   <div class="day">
     <%= date %>
@@ -64,6 +63,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <div>
   <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle) %> |
   <%= link_to "Back to bicycles", bicycles_path %>
-
   <%= button_to "Destroy this bicycle", @bicycle, method: :delete %>
 </div>
+
+<%= javascript_include_tag 'estimate_cost' %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initSimpleMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
+<%= javascript_include_tag 'simpleMap' %>

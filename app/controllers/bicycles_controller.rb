@@ -67,5 +67,9 @@ class BicyclesController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+    def bicycle_params
+      params.require(:bicycle).permit(:owner_id, :model, :bicycle_type, :size, :condition, :price_per_hour, :latitude, :longitude,
+        :address, :city, :country, :postal_code, :state)
+    end
    
 end

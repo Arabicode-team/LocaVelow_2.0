@@ -1,0 +1,19 @@
+<div class="card-container">
+  <div class="panel">
+    <div>
+      <img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg" alt="">
+      <span class="sb-title">Address Selection</span>
+    </div>
+    <%= form.text_field :address, id: "location-input", placeholder: "Address" %>
+    <%= form.hidden_field :suite, placeholder: "Apt, Suite, etc (optional)" %>
+    <%= form.text_field :city, id: "locality-input", placeholder: "City" %>
+    <div class="half-input-container">
+      <%= form.text_field :state, id: "administrative_area_level_1-input", placeholder: "State/Province", class: "half-input" %>
+      <%= form.text_field :postal_code, id: "postal_code-input", placeholder: "Zip/Postal code", class: "half-input" %>
+    </div>
+    <%= form.text_field :country, id: "country-input", placeholder: "Country" %>
+    <%= form.hidden_field :latitude, id: "latitude-input" %>
+    <%= form.hidden_field :longitude, id: "longitude-input" %>
+  </div>
+  <div class="map" id="gmp-map"></div>
+</div>
