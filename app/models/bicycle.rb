@@ -12,7 +12,22 @@ class Bicycle < ApplicationRecord
   enum size: { small: 0, medium: 1, large: 2, extra_large: 3, kids: 4, other: 5 }
 
   before_destroy :check_active_rentals
-  def wide
+  def thumbnail
+    return self.image.variant(resize_to_limit: [150, 150]).processed
+  end
+
+  def medium
+    return self.image.variant(resize_to_limit: [300, 300]).processed
+  end
+
+  def large
+    return self.image.variant(resize_to_limit: [600, 600]).processed
+  end
+
+  def extra_large
+    return self.image.variant(resize_to_limit: [1200, 1200]).processed
+  end
+end
 
   private
 
