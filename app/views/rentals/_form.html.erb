@@ -14,11 +14,10 @@
         <%= label_tag 'rental[end_date]', 'Date et heure de fin' %>
         <%= datetime_field_tag 'rental[end_date]', nil, class: 'form-control' %>
       </div>
+      <div id="calculated_cost" class="border border-primary rounded p-2 m-3 text-center">Prix total : 0€</div>
       <div class="d-flex justify-content-center">  
         <%= submit_tag "Reserver", class: "btn btn-primary p-2" %>
       </div>
     <% end %>
-
-    <div id="calculated_cost" class="border border-primary rounded p-2 mt-3">Prix total : 0€</div>
   </div>
 </div>
