@@ -105,6 +105,7 @@
   
   body {
     margin: 0;
+    padding-top: 120px;
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
@@ -2741,7 +2742,7 @@
   .form-control {
     display: block;
     width: 100%;
-    padding: 0.5rem 0.75rem;
+    padding: 1rem 0.75rem;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.4rem;
@@ -2751,7 +2752,7 @@
     border: 1px solid #fefefe;
     appearance: none;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0 0.25rem rgba(91, 85, 70, 0.1);
+    box-shadow: 0 0 0 0.25rem rgba(153, 165, 197, 0.3);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
   
@@ -2919,6 +2920,7 @@
     background-size: 16px 12px;
     border: 1px solid #d2d6da;
     border-radius: 0.5rem;
+    box-shadow: 0 0 0 0.25rem rgba(153, 165, 197, 0.3);
     transition: box-shadow 0.15s ease, border-color 0.15s ease;
     appearance: none;
   }
@@ -2930,9 +2932,9 @@
   }
   
   .form-select:focus {
-    border-color: #e293d3;
+    border-color: #FFDE8C;
     outline: 0;
-    box-shadow: 0 0 0 2px #e9aede;
+    box-shadow: 0 0 0 0.25rem rgba(245, 228, 185, 0.25);
   }
   
   .form-select[multiple],
@@ -21709,7 +21711,7 @@
   
   label,
   .form-label {
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: #344767;
