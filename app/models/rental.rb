@@ -26,6 +26,8 @@ class Rental < ApplicationRecord
   end
 
   validate :date_not_already_booked, on: :create
+  validate :date_not_in_past, on: :create
+
 
   after_create :send_renter_confirmation_email
   after_create :send_owner_confirmation_email
@@ -56,7 +58,17 @@ class Rental < ApplicationRecord
                                 .where.not(id: id)
                                 .where('start_date < ? AND end_date > ?', end_date, start_date)
     if overlapping_rentals.exists?
-      errors.add(:base, 'Bicycle is already booked for these dates.')
+      errors.add(:base, 'Le vélo a déjà été reservé pour ces dates.')
+    end
+  end
+
+  def date_not_in_past
+    if start_date.present? && start_date < Date.current
+      errors.add(:start_date, "La date de début de la location ne peut pas être dans le passé")
+    end
+
+    if end_date.present? && end_date < Date.current
+      errors.add(:end_date, "La date de fin de la location ne peut pas être dans le passé")
     end
   end
 
