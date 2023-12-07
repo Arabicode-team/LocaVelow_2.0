@@ -61,5 +61,5 @@ en:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 erreur empêche la sauvegarde de %{resource} :"
-        other: "%{count} erreurs empêchent la sauvegarde de %{resource} :"
+        one: "1 erreur empêche la sauvegarde de ce(tte) %{resource} :"
+        other: "%{count} erreurs empêchent la sauvegarde de ce(tte) %{resource} :"
