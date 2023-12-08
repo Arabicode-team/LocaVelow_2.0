@@ -6,9 +6,9 @@
 
 _Avant-propos :_
 
-☕- Github de l'équipe : [Arabicode-team sur Github](https://github.com/Arabicode-team)<br>
-🔌- Le site Locavelow en production : [Locavelow](https://locavelik.herokuapp.com/)<br>
-💡- Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
+☕ Github de l'équipe : [Arabicode-Team](https://github.com/Arabicode-team)<br>
+🔌Le site Locavelow en production : [Locavelow](https://locavelik.herokuapp.com/)<br>
+💡Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
 
 # Locavelow, c'est quoi ?
 
@@ -28,11 +28,7 @@ Il tient compte des créneaux disponibles, vérifie aussi que la date ne soit pa
 
 3. **Notifications par emails**
 
-Les utilisateurs peuvent recevoir des rappels de réservation à venir un jour avant la date si la reservation n'a pas été annulée.
-
-Ils reçoivent aussi des confirmations de réservation, des rappels avant le début de la location par email.
-
-Cette fonctionnalité est active pour les propriétaires et les locataires de vélos.
+Les utilisateurs peuvent recevoir des rappels de réservation à venir un jour avant la date si la reservation n'a pas été annulée. Ils reçoivent aussi des confirmations de réservation, des rappels avant le début de la location par email. Cette fonctionnalité est active pour les propriétaires et les locataires de vélos.
 
 Le fuseau horaire par défaut de l'application a été défini sur Paris.
 
@@ -42,15 +38,15 @@ _Inscription :_ Créez un compte Locavelow et recevez votre email de bienvenue.
 
 _Recherche et réservation :_ Parcourez les vélos disponibles sur la carte de l'API Google Maps ou sur les cards Bootstrap affichant les annonces, choisissez celui qui vous convient, et effectuez votre réservation en payant par Stripe.
 
-_Confirmation _: Recevez une confirmation détaillée de votre réservation, y compris les informations sur le vélo et le propriétaire. Vous recevrez aussi un rappel un jour avant la reservation si celle-ci n'a pas été annulée.
+_Confirmation :_ Recevez une confirmation détaillée de votre réservation, y compris les informations sur le vélo et le propriétaire. Vous recevrez aussi un rappel un jour avant la reservation si celle-ci n'a pas été annulée.
 
-# La base de données 
+# LA BASE DE DONNEES 
 
-## Schema
+## Diagramme de la base de données
 
 ![Diagramme de la base de données](app/assets/images/db_readme_locavelow.png)
 
-## Modèles
+## Modèles définis
 
 ### Utilisateur (User)
 
@@ -122,7 +118,7 @@ Voici comment fonctionne la logique de suppression en cascade dans cette base de
 
 Cela signifie que la suppression d'un utilisateur entraîne la suppression de ses vélos et accessoires, mais les locations et les avis restent avec des clés étrangères annulées. C'est important pour maintenir l'historique des transactions et des avis, même après la suppression des profils des utilisateurs.
 
-## Tests en console 
+### Tests en console 
 
 1. **Obtenir tous les vélos d'un utilisateur:**
 
@@ -153,9 +149,9 @@ Cela signifie que la suppression d'un utilisateur entraîne la suppression de se
     Bicycle.includes(:owner).all
    ```
 
-# La gestion des images et le tableau de bord administrateur 
+# LA GESTION DES IMAGES ET LE TABLEAU DE BORD ADMINISTRATEUR 
 
-## Utilisation actuelle d'Administrate
+## Utilisation de la gem administrate
 
 Dans l'état actuel de notre application, nous utilisons la gem `administrate` pour générer des tableaux de bord admin. 
 
@@ -185,7 +181,7 @@ Ces formats ont été choisis pour leur large prise en charge et leur utilisatio
 Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser la bibliothèque de la gemme qui a été utilisée, 'image_processing'.
 
 
-# Les API 
+# LES APIs DE L'APPLICATION
 
 ## Google Maps 
 
@@ -213,12 +209,20 @@ Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser 
 1. Exécutez votre application Rails en mode de développement.
 2. Envoyez des e-mails en utilisant les méthodes qui ont été implémentées.
 3. Consultez la boîte de réception pour visualiser les emails envoyés et vérifier qu'ils soient reçus.
-4. Accédez à l'URL suivante dans votre navigateur : [Serveur local - page de la gem letter_opener](http://localhost:3000/letter_opener)
+4. Accédez à l'URL suivante dans votre navigateur : [Serveur local - Page de la gem letter_opener](http://localhost:3000/letter_opener)
 
 En production, le Mailjet a été configuré. Il est fonctionnel pour les emails suivants :
 
-- email de bienvenue
-- conf
+- Email de bienvenue
+- Confirmation de reservation _(propriétaire et locataire)_
+- Rappel de reservation _(propriétaire et locataire, un jour avant la date prévue)_
+- Email de réinitialisation de mot de passe personnalisé
+
+D'autres emails restent intéressants à implémenter par la suite, comme par exemple :
+
+- Un rappel de retour si l'heure approche - *views manquantes*
+- Une confirmation de retour du vélo qui ne s'envoie que si le retour est validé par le owner et le renter - *en attente*
+- Un email qui demande aux owners et renters une review suite à leur expérience - *en attente*
 
 ### Tests en console
 
@@ -278,7 +282,7 @@ Après le paiement, l'utilisateur est redirigé vers la méthode `payment_succes
 
 La vue `confirm.html.erb` affiche les détails de la location en attente et offre un bouton pour procéder au paiement via Stripe.
 
-## Bonus: intégration de simple_calendar, calcul dynamique du coût, mise à jour dynamique des status des locations
+## Autres ajouts : intégration de simple_calendar, calcul dynamique du coût, mise à jour dynamique des status des locations
 
 ### Utilisation de simple_calendar pour la visualisation des créneaux
 
@@ -373,4 +377,3 @@ Elle est disponible ici : [Figma Locavelow](https://www.figma.com/file/6xWBCB7yc
 - [Grégory](https://github.com/100PBaguuette)
 - [Cyprien](https://github.com/cypradoux)
 - [Ikrame](https://github.com/ikramiste)
-
