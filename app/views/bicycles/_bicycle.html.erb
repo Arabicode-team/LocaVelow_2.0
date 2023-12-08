@@ -6,7 +6,7 @@
           <% if @bicycle.image.attached? %>
             <%= image_tag @bicycle.image, class: "img-fluid rounded" %>
           <% else %>
-            <p>Aucune image disponible</p>
+            <p class="text-center">Aucune image disponible</p>
           <% end %>    
         </div>
         <div class="col-md-6">
@@ -41,7 +41,7 @@
           <p>
           <li>
             <strong>Accessoires :</strong>
-            <%= bicycle.accessories.name %>
+            <%= bicycle.accessories.first&.name %>
           </li>
           </p>
           <p class="border rounded p-3 shadow mb-2 text-center">

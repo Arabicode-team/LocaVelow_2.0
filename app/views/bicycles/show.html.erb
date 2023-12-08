@@ -9,8 +9,8 @@
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
       <% if current_user.email == @bicycle.owner.email %>
-        <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
-        <%= button_to "Destroy this bicycle", @bicycle, method: :delete, class: "btn btn-danger" %>
+        <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
+        <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger" %>
       <% else %>
       <% end %>  
     <%= link_to "Retour", bicycles_path %>  

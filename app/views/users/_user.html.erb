@@ -3,7 +3,11 @@
     <div class="col-md-4">
       <!-- Avatar -->
       <div class="text-center mb-3">
-        <img src="https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg" alt="Avatar" class="img-fluid rounded-circle" style="width: 200px; height: 200px;">
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image, class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;" %>
+        <% else %>
+          <p>L'utilisateur n'a pas encore d'avatar</p>
+        <% end %>    
       </div>
     </div>
     <div class="col-md-8 mt-6">
@@ -25,7 +29,7 @@
             <strong>Type :</strong> <%= bicycle.bicycle_type.humanize %><br>
             <strong>Taille :</strong> <%= bicycle.size.humanize %><br>
             <strong>État :</strong> <%= bicycle.condition %><br>
-            <strong>Prix par heure :</strong> <%= number_to_currency(bicycle.price_per_hour) %><br>
+            <strong>Prix par heure :</strong> <%= number_to_currency(bicycle.price_per_hour, unit: '€') %><br>
             <strong>Adresse : <%= bicycle.address %>, <%= bicycle.city %>, <%= bicycle.country %></strong>
             <br>
             <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
