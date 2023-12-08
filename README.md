@@ -1,13 +1,13 @@
 # LOCAVELOW : Projet Fullstack Session Automne 2023
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com) 
-<svg xmlns="http://www.w3.org/2000/svg" width="224.2031478881836" height="35" viewBox="0 0 224.2031478881836 35"><rect width="87.96875762939453" height="35" fill="#4a90e2"/><rect x="87.96875762939453" width="136.23439025878906" height="35" fill="#f8e71c"/><text x="43.984378814697266" y="17.5" font-size="12" font-family="'Roboto', sans-serif" fill="#f8e71c" text-anchor="middle" alignment-baseline="middle" letter-spacing="2">MADE BY</text><text x="156.08595275878906" y="17.5" font-size="12" font-family="'Montserrat', sans-serif" fill="#4a90e2" text-anchor="middle" font-weight="900" alignment-baseline="middle" letter-spacing="2">ARABICODE ☕︎</text></svg>
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
+![Arabicode en mode Locavelow](app/assets/images/made-by-arabicode.svg)
 
 _Avant-propos :_
 
 ☕ Github de l'équipe : [Arabicode](https://github.com/Arabicode-team)<br>
 🔌Le site Locavelow en production : [Locavelow](https://locavelik.herokuapp.com/)<br>
-💡Le lien du Trello : [Trello](https://locavelik.herokuapp.com/)
+💡Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
 
 # Locavelow, c'est quoi ?
 
