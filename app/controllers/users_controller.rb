@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if current_user.destroy
       redirect_to root_path, notice: 'Your profile was successfully deleted.'
     else
-      redirect_to root_path, notice: 'Cannot delete user with active rentals.' #current_user.errors.full_messages.to_sentence
+      redirect_to root_path, notice: 'Cannot delete user with active rentals.'
     end
   end
   def update
