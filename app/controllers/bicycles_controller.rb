@@ -75,10 +75,10 @@ class BicyclesController < ApplicationController
 #                                                      `*b T$P'
  
  
- 
-  def bicycle_params
-    params.require(:bicycle).permit(:model, :bicycle_type, :size, :condition, :price_per_hour, :latitude, :longitude, :address, :description, :image)
-  end
+
+  #def bicycle_params
+   # params.require(:bicycle).permit(:model, :bicycle_type, :size, :condition, :price_per_hour, :latitude, :longitude, :address, :description, :image)
+  #end
 
   # GET /bicycles/new
   def new
@@ -136,7 +136,7 @@ class BicyclesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def bicycle_params
       params.require(:bicycle).permit(:owner_id, :model, :bicycle_type, :size, :condition, :price_per_hour, :latitude, :longitude,
-        :address, :city, :country, :postal_code, :state)
+        :address, :city, :country, :postal_code, :state, :description, :image)
     end
    
 end
