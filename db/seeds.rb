@@ -15,7 +15,6 @@ Rental.destroy_all
 Review.destroy_all
 Accessory.destroy_all
 
-
 Faker::Config.locale = 'fr'
 
 bike_models = ["Peugeot", "Lapierre", "Look", "B'Twin", "Time", "Moustache Bikes", "Gitane", "LAPIERRE", "Decathlon", "Sunn"]
