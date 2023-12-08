@@ -185,8 +185,8 @@ Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser 
 
 ## Google Maps 
 
-- Une carte a été ajoutée à la page listant toutes les annonces.
-- Chaque annonce est marquée par un marker sur la carte.
+- Une carte a été ajoutée à la page d'acceuil, la page show d'un vélo et la page listant toutes les annonces.
+- Chaque annonce est visible via un marker qui apparait sur la carte.
 - En cliquant sur un marker, une fenêtre d'information s'ouvre, affichant les détails de l'annonce et un lien vers sa page.
 - Sur la page de création d'une annonce, un formulaire d'adresse avec autocomplétion a été implémenté.
 - Lorsqu'une adresse est sélectionnée, un marker correspondant est automatiquement positionné sur la carte.
@@ -202,6 +202,13 @@ Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser 
 
 ## Mailjet / ActionMailer
 
+En production, le Mailjet a été configuré. Il est fonctionnel pour les emails suivants :
+
+- Email de bienvenue
+- Confirmation de reservation _(propriétaire et locataire)_
+- Rappel de reservation _(propriétaire et locataire, un jour avant la date prévue)_
+- Email de réinitialisation de mot de passe personnalisé
+
 `letter_opener_web` est une gem pour voir les e-mails dans le navigateur en serveur local au lieu de les envoyer réellement. Il y a une boite email commune pour toutes les adresses de la BDD en dev, ce qui est très pratique. On reçoit tout au même endroit et on peut vérifier l'affichage en `html.erb` et aussi en version simplifiée `text.erb`. Nous l'avons utilisé en developpement.
 
 - Une fois que la gem est installée, voici comment l'utiliser :
@@ -210,13 +217,6 @@ Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser 
 2. Envoyez des e-mails en utilisant les méthodes qui ont été implémentées.
 3. Consultez la boîte de réception pour visualiser les emails envoyés et vérifier qu'ils soient reçus.
 4. Accédez à l'URL suivante dans votre navigateur : [Serveur local - Page de la gem letter_opener](http://localhost:3000/letter_opener)
-
-En production, le Mailjet a été configuré. Il est fonctionnel pour les emails suivants :
-
-- Email de bienvenue
-- Confirmation de reservation _(propriétaire et locataire)_
-- Rappel de reservation _(propriétaire et locataire, un jour avant la date prévue)_
-- Email de réinitialisation de mot de passe personnalisé
 
 D'autres emails restent intéressants à implémenter par la suite, comme par exemple :
 
@@ -282,7 +282,7 @@ Après le paiement, l'utilisateur est redirigé vers la méthode `payment_succes
 
 La vue `confirm.html.erb` affiche les détails de la location en attente et offre un bouton pour procéder au paiement via Stripe.
 
-## Autres ajouts : intégration de simple_calendar, calcul dynamique du coût, mise à jour dynamique des status des locations
+## Autres ajouts : intégration de simple_calendar, calcul dynamique du coût, mise à jour dynamique des statuts des locations
 
 ### Utilisation de simple_calendar pour la visualisation des créneaux
 
@@ -353,7 +353,7 @@ UpdateRentalStatusJob finished at 2023-12-07 16:24:26 +0100
 
 # Front-End : Bootstrap, CSS, Javascript
 
-## Utilisation d'un thème bootstrap personnalisé
+## Utilisation d'un thème Bootstrap personnalisé
 
 Nous avons intégré une base de thème Bootstrap pour notre application, que nous avons ensuite personnalisé pour correspondre à notre charte graphique. 
 
