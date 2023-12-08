@@ -21,7 +21,19 @@ module LocaVelow20
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = "Paris"
+
+    config.after_initialize do
+      Rails.application.load_tasks
+    
+      Thread.new do
+        loop do
+          UpdateRentalStatusJob.new.perform
+          sleep(5.minutes)
+        end
+      end
+    end
   end
 end

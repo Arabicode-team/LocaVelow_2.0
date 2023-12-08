@@ -6,15 +6,19 @@
 
 <%= render 'calendar', bicycle: @bicycle %>
 
-<%= render 'rentals/form', bicycle: @bicycle %>
-<div class="mt-6 mb-6 d-flex flex-column align-items-center">
-    <% if current_user.email == @bicycle.owner.email %>
-      <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
-      <%= button_to "Destroy this bicycle", @bicycle, method: :delete, class: "btn btn-danger" %>
+<% if user_signed_in? %>
+  <%= render 'rentals/form', bicycle: @bicycle %>
+  <div class="mt-6 mb-6 d-flex flex-column align-items-center">
+      <% if current_user.email == @bicycle.owner.email %>
+        <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
+        <%= button_to "Destroy this bicycle", @bicycle, method: :delete, class: "btn btn-danger" %>
+      <% else %>
+      <% end %>  
+      <%= link_to "Retour", bicycles_path %>  
     <% else %>
-    <% end %>  
-  <%= link_to "Retour", bicycles_path %>  
-</div>
+      <%= link_to "Connectez-vous pour louer ce vélo", new_user_session_path, class: "btn btn-outline-primary btn-sm" %>
+    <% end %>
+  </div>
 
 <%= javascript_include_tag 'estimate_cost' %>
 <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initSimpleMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
