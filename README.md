@@ -40,7 +40,7 @@ _Recherche et réservation :_ Parcourez les vélos disponibles sur la carte de l
 
 _Confirmation :_ Recevez une confirmation détaillée de votre réservation, y compris les informations sur le vélo et le propriétaire. Vous recevrez aussi un rappel un jour avant la reservation si celle-ci n'a pas été annulée.
 
-# LA BASE DE DONNEES 
+# LA BASE DE DONNEES (PostgreSQL)
 
 ## Diagramme de la base de données
 
@@ -149,7 +149,7 @@ Cela signifie que la suppression d'un utilisateur entraîne la suppression de se
     Bicycle.includes(:owner).all
    ```
 
-# LA GESTION DES IMAGES ET LE TABLEAU DE BORD ADMINISTRATEUR 
+# LA GESTION DES IMAGES ET LE TABLEAU DE BORD ADMINISTRATEUR (ActiveStorage & Administrate)
 
 ## Utilisation de la gem administrate
 
