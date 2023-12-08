@@ -8,7 +8,7 @@
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
-      <% if current_user.email == @bicycle.owner.email %>
+      <% if current_user.id == @bicycle.owner.id %>
         <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
         <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger" %>
       <% else %>
