@@ -1,7 +1,6 @@
 <% if user_signed_in? %>
   <div class="container d-flex flex-row justify-content-center align-items-stretch">
     <div>
-      <div>
         <form class="d-md-flex justify-content-center mt-4">
           <div class="form-group mx-2">
             <input type="text" class="form-control" placeholder="Où">
@@ -10,16 +9,9 @@
             <input type="text" class="form-control" placeholder="Quand">
           </div>
           <div class="form-group mx-2">
-            <select class="form-control" name="category">
-              <option value="" selected disabled hidden>Catégorie</option>
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
+            <button type="submit" class="btn btn-primary">Rechercher</button>
           </div>
         </form>
-        <button type="submit" class="btn btn-primary mx-6">Rechercher</button>
-      </div>
       <div id="bicycles" class="row d-flex justify-content-center">
         <div style="flex: 1; height: 900px;">
           <div id="index-map" style="height: 100%;"></div>
