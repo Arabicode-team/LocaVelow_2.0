@@ -39,3 +39,11 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+#Screenshots used for readme
+
+app/assets/images/db_readme_locavelow.png
+app/assets/images/email_conf_owner.png
+app/assets/images/email_rappel.png
+app/assets/images/maps_annonce_readme.png
+app/assets/images/maps_readme.png
