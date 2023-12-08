@@ -3,7 +3,11 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6">
-          <img src="https://images.frandroid.com/wp-content/uploads/2022/09/test-velo-mad-urbain-2-1-scaled.jpg" class="img-fluid rounded" alt="Image du vélo">
+          <% if @bicycle.image.attached? %>
+            <%= image_tag @bicycle.image, class: "img-fluid rounded" %>
+          <% else %>
+            <p>Aucune image disponible</p>
+          <% end %>    
         </div>
         <div class="col-md-6">
           <h4 class="text-center">

@@ -33,6 +33,10 @@
           <%= form.text_field :description, class: "form-control" %>
         </div>
         <div>
+          <%= form.label :image, "Image", style: "display: block" %>
+          <%= form.file_field :image, class: "form-control" %>
+        </div>
+        <div>
           <%= form.label :price_per_hour, "Prix/heure", style: "display: block" %>
           <%= form.number_field :price_per_hour, class: "form-control mb-4" %>
         </div>
