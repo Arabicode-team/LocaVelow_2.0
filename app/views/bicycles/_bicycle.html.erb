@@ -71,7 +71,11 @@
   <div class="card card-blog card-plain">
     <div class="position-relative">
       <div class="d-block blur-shadow-image">
-        <img src="<%= asset_path('testcard') %>" class="img-fluid border-radius-lg">
+      <% if bicycle.image.attached? %>
+        <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
+      <% else %>
+        <%= image_tag 'testcard.jpg', class: "img-fluid border-radius-lg" %>
+      <% end %>  
       </div>
     </div>
     <div class="card-body px-0 pt-1">
