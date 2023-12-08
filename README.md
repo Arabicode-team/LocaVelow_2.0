@@ -1,12 +1,12 @@
 # LOCAVELOW : Projet Fullstack Session Automne 2023
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com) [![forthebadge](data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMjQuMjAzMTQ3ODg4MTgzNiIgaGVpZ2h0PSIzNSIgdmlld0JveD0iMCAwIDIyNC4yMDMxNDc4ODgxODM2IDM1Ij48cmVjdCB3aWR0aD0iODcuOTY4NzU3NjI5Mzk0NTMiIGhlaWdodD0iMzUiIGZpbGw9IiM0YTkwZTIiLz48cmVjdCB4PSI4Ny45Njg3NTc2MjkzOTQ1MyIgd2lkdGg9IjEzNi4yMzQzOTAyNTg3ODkwNiIgaGVpZ2h0PSIzNSIgZmlsbD0iI2Y4ZTcxYyIvPjx0ZXh0IHg9IjQzLjk4NDM3ODgxNDY5NzI2NiIgeT0iMTcuNSIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9IidSb2JvdG8nLCBzYW5zLXNlcmlmIiBmaWxsPSIjZjhlNzFjIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPk1BREUgQlk8L3RleHQ+PHRleHQgeD0iMTU2LjA4NTk1Mjc1ODc4OTA2IiB5PSIxNy41IiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iJ01vbnRzZXJyYXQnLCBzYW5zLXNlcmlmIiBmaWxsPSIjNGE5MGUyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iOTAwIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgbGV0dGVyLXNwYWNpbmc9IjIiPkFSQUJJQ09ERSDimJXvuI48L3RleHQ+PC9zdmc+)](https://forthebadge.com)
 
-_Avant propos_
+_Avant-propos :_
 
-Github de l'équipe : [Arabicode](https://github.com/Arabicode-team)
-Le site Locavelow en production : 
-Le lien du Trello :
+☕ Github de l'équipe : [Arabicode](https://github.com/Arabicode-team)<br>
+🔌Le site Locavelow en production : [Locavelow](https://locavelik.herokuapp.com/)<br>
+💡Le lien du Trello : [Trello](https://locavelik.herokuapp.com/)
 
 # Locavelow, c'est quoi ?
 
@@ -202,10 +202,9 @@ Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser 
 
 ![Integration API Maps dans la page show d'un vélo](app/assets/images/maps_annonce_readme.png)
 
-## Mailjet et ActionMailer
+## Mailjet / ActionMailer
 
 `letter_opener_web` est une gem pour voir les e-mails dans le navigateur en serveur local au lieu de les envoyer réellement. Il y a une boite email commune pour toutes les adresses de la BDD en dev, ce qui est très pratique. On reçoit tout au même endroit et on peut vérifier l'affichage en `html.erb` et aussi en version simplifiée `text.erb`. Nous l'avons utilisé en developpement.
-
 
 - Une fois que la gem est installée, voici comment l'utiliser :
 
@@ -213,6 +212,11 @@ Vous devrez peut-être exécuter `sudo apt-get install libvips42` pour utiliser 
 2. Envoyez des e-mails en utilisant les méthodes qui ont été implémentées.
 3. Consultez la boîte de réception pour visualiser les emails envoyés et vérifier qu'ils soient reçus.
 4. Accédez à l'URL suivante dans votre navigateur : [Serveur local - page de la gem letter_opener](http://localhost:3000/letter_opener)
+
+En production, le Mailjet a été configuré. Il est fonctionnel pour les emails suivants :
+
+- email de bienvenue
+- conf
 
 ### Tests en console
 
