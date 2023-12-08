@@ -1,12 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @bicycle %>
+<%= render @bicycle, bicycle: @bicycle, show_details: true %>
 
 <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
 
 <%= render 'calendar', bicycle: @bicycle %>
 
+<% if user_signed_in? %>
 <%= render 'rentals/form', bicycle: @bicycle %>
+<% else %>
+<%= link_to "Sign in to rent this bicycle", new_user_session_path, class: "btn btn-outline-primary btn-sm" %>
+<% end %>
 <div>
   <%= link_to "Edit this bicycle", edit_bicycle_path(@bicycle) %> |
   <%= link_to "Back to bicycles", bicycles_path %>
