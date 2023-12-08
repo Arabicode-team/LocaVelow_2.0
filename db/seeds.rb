@@ -9,13 +9,11 @@
 #   end
 require "faker"
 
-# Supprimer toutes les données existantes
 User.destroy_all
 Bicycle.destroy_all
 Rental.destroy_all
 Review.destroy_all
 Accessory.destroy_all
-
 
 Faker::Config.locale = 'fr'
 
@@ -41,10 +39,10 @@ puts "Starting the seed process..."
       password: 'password'
     )
   end
-
+  
   10.times do
     coordinates_for_city = coordinates.sample
-
+  
     Bicycle.create!(
       owner: User.all.sample,
       model: bike_models.sample,
@@ -62,26 +60,26 @@ puts "Starting the seed process..."
       description: Faker::Lorem.paragraph
     )
   end  
-
-
+  
+  
 10.times do
     Accessory.create!(
       name: accessories.sample,
       bicycle: Bicycle.all.sample
     )
   end
-
+  
   25.times do
     bicycle = Bicycle.all.sample
     renter = User.all.sample
     rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 30)
     rental_end = Faker::Time.between(from: rental_start, to: rental_start + 30.days)
-
+  
     while bicycle.rentals.exists?(['(start_date <= ? AND end_date >= ?) OR (start_date >= ? AND start_date <= ?)', rental_end, rental_start, rental_start, rental_end])
       rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 30)
       rental_end = Faker::Time.between(from: rental_start, to: rental_start + 30.days)
     end
-
+  
     Rental.create!(
       bicycle: bicycle,
       renter: renter,
@@ -91,7 +89,7 @@ puts "Starting the seed process..."
       total_cost: Faker::Commerce.price(range: 10..100.0, as_string: true)
     )
   end
-
+  
   10.times do
     Review.create!(
       rental: Rental.all.sample,
@@ -102,7 +100,5 @@ puts "Starting the seed process..."
       review_date: Faker::Time.between(from: DateTime.now - 30, to: DateTime.now)
     )
   end
-
+  
   puts "Seeds created successfully!"
-
-
