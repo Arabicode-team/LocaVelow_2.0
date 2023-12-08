@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   root "bicycles#index"
   devise_for :users, controllers: { registrations: 'registrations' }
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update, :destroy]
   resources :accessories
   resources :reviews
   get 'rentals/confirm', to: 'rentals#confirm', as: :confirm_rental
