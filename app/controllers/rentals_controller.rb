@@ -32,7 +32,7 @@ class RentalsController < ApplicationController
     session[:rental_details] = @rental.attributes
     redirect_to confirm_rental_path
   else
-    redirect_to root_path, alert: "Une erreur est survenue, la réservation n'a pas été prise en compte."
+    render 'bicycles/show', status: :unprocessable_entity
   end
   end
 

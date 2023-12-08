@@ -8,6 +8,15 @@ class Rental < ApplicationRecord
 
   enum rental_status: { in_progress: 0, completed: 1, cancelled: 2 }
 
+  validate :date_not_already_booked, on: :create
+  validate :date_not_in_past, on: :create
+
+
+  after_create :send_renter_confirmation_email
+  after_create :send_owner_confirmation_email
+  after_create :renter_schedule_upcoming_reminder
+  after_create :owner_schedule_upcoming_reminder
+
   def calculate_total_cost
     # Убедитесь, что у вас есть все необходимые данные для расчета
     return 0 unless start_date && end_date && bicycle && bicycle.price_per_hour
@@ -24,15 +33,6 @@ class Rental < ApplicationRecord
       update(rental_status: :completed)
     end
   end
-
-  validate :date_not_already_booked, on: :create
-  validate :date_not_in_past, on: :create
-
-
-  after_create :send_renter_confirmation_email
-  after_create :send_owner_confirmation_email
-  after_create :renter_schedule_upcoming_reminder
-  after_create :owner_schedule_upcoming_reminder
 
   def send_renter_confirmation_email
     UserMailer.renter_confirmation_email(User.find(self.renter_id), self).deliver_now
