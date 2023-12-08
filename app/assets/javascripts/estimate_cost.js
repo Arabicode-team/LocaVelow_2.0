@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const duration = (endDateTime - startDateTime) / 36e5; 
     if(duration > 0){
       const cost = duration * pricePerHour;
-      costDisplay.textContent = 'Estimated Cost: $' + cost.toFixed(2);
+      costDisplay.textContent = 'Prix total : ' + cost.toFixed(2) + '€';
     } else {
-      costDisplay.textContent = 'Estimated Cost: $0';
+      costDisplay.textContent = 'Prix total : 0 €';
     }
   }
 });

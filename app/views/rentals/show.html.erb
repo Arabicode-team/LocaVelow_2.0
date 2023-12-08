@@ -2,9 +2,11 @@
 
 <%= render @rental %>
 
-<div>
-  <%= link_to "Edit this rental", edit_rental_path(@rental) %> |
-  <%= link_to "Back to rentals", rentals_path %>
-
-  <%= button_to "Destroy this rental", @rental, method: :delete %>
+<div class="d-flex justify-content-center mt-4 mb-4">
+  <% if current_user.email == @rental.bicycle.owner.email %>
+    <%= link_to "Modifier cette location", edit_rental_path(@rental), class: "btn btn-primary" %>
+    <%= button_to "Supprimer cette location", @rental, method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <%= link_to "Retour", rentals_path %>
+  <% end %>  
 </div>
