@@ -1,13 +1,14 @@
-# LOCAVELOW : Projet Fullstack Session Automne 2023
+# LOCAVELOW : Projet Fullstack (Session Automne 2023)
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
+![ruby](https://forthebadge.com/images/badges/made-with-ruby.svg)
 ![Arabicode en mode Locavelow](app/assets/images/made-by-arabicode.svg)
+![Fait pour tous](app/assets/images/made-for-all.svg)
 
 _Avant-propos :_
 
-☕ Github de l'équipe : [Arabicode](https://github.com/Arabicode-team)<br>
-🔌Le site Locavelow en production : [Locavelow](https://locavelik.herokuapp.com/)<br>
-💡Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
+☕ - Github de l'équipe : [Arabicode-team sur Github](https://github.com/Arabicode-team)<br>
+🔌- Le site Locavelow en production : [Locavelow](https://locavelik.herokuapp.com/)<br>
+💡- Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
 
 # Locavelow, c'est quoi ?
 
