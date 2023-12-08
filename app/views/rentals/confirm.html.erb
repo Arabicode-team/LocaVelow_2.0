@@ -9,7 +9,7 @@
         <p>Date de fin : <strong><%= @rental.end_date %></strong></p>
         <p>Prix total : <strong><%= @rental.total_cost %> €</strong></p>
       </div>
-      <div class="d-flex justify-content-center"
+      <div class="d-flex justify-content-center">
         <%= button_to 'Payer avec Stripe', @checkout_session_url, method: :get, class: "btn btn-secondary mt-3", style: "color: #506191;" %>
       </div>  
     </div>
