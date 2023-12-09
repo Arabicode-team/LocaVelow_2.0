@@ -40,7 +40,7 @@ puts "Starting the seed process..."
     )
   end
   
-  10.times do
+  25.times do
     coordinates_for_city = coordinates.sample
   
     Bicycle.create!(
