@@ -52,14 +52,14 @@ class UserMailer < ApplicationMailer
     
         return unless rental.stripe_refund_id.present?
     
-        mail(to: @renter.email, subject: "Notification : Votre location a bien été annulée et remboursée.")
+        mail(to: @renter.email, subject: "Confirmation : Votre location sur Locavelow a bien été annulée et remboursée.")
       end
 
-      def renter_return_reminder(rental)
+      def owner_cancellation_and_refund_confirmation(rental)
         @rental = rental
-        @renter = rental.renter
-        @owner = rental.bicycle.owner
+        @owner_email = rental.bicycle.owner.email
+        @owner = User.find_by(email: @owner_email)
     
-        mail(to: @renter.email, subject: "La fin de votre virée à vélo approche, on compte sur vous !")
+        mail(to: @owner.email, subject: 'Alerte : La location de votre vélo sur Locavelow a été annulée et remboursée.')
       end
 end
