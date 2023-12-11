@@ -66,8 +66,8 @@
     --bs-black-rgb: 0, 0, 0;
     --bs-body-color-rgb: 103, 116, 142;
     --bs-body-bg-rgb: 255, 255, 255;
-    --bs-font-sans-serif: 'Raleway', serif;
-    --bs-font-monospace: 'Quicksand', monospace;
+    --bs-font-sans-serif: Verdana, Geneva, Tahoma, sans-serif;
+    --bs-font-monospace: Arial, Helvetica, sans-serif;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-body-font-family: var(--bs-font-sans-serif);
     --bs-body-font-size: 1rem;
@@ -3617,7 +3617,7 @@
   .btn {
     --bs-btn-padding-x: 1.5rem;
     --bs-btn-padding-y: 0.75rem;
-    --bs-btn-font-family: ;
+    --bs-btn-font-family: Arial, Helvetica, sans-serif;
     --bs-btn-font-size: 0.75rem;
     --bs-btn-font-weight: 700;
     --bs-btn-line-height: 1.4;
@@ -3963,37 +3963,15 @@
   }
   
   .btn-outline-light {
-    --bs-btn-color: #e9ecef;
-    --bs-btn-border-color: #e9ecef;
-    --bs-btn-hover-color: #000;
-    --bs-btn-hover-bg: #e9ecef;
-    --bs-btn-hover-border-color: #e9ecef;
-    --bs-btn-focus-shadow-rgb: 233, 236, 239;
-    --bs-btn-active-color: #000;
-    --bs-btn-active-bg: #e9ecef;
-    --bs-btn-active-border-color: #e9ecef;
-    --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #e9ecef;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #e9ecef;
-    --bs-gradient: none;
+    background-color: #FFDE8C; 
+    color: #506191; 
+    border-radius: 25px
   }
   
   .btn-outline-dark {
-    --bs-btn-color: #344767;
-    --bs-btn-border-color: #344767;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #344767;
-    --bs-btn-hover-border-color: #344767;
-    --bs-btn-focus-shadow-rgb: 52, 71, 103;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #344767;
-    --bs-btn-active-border-color: #344767;
-    --bs-btn-active-shadow: none;
-    --bs-btn-disabled-color: #344767;
-    --bs-btn-disabled-bg: transparent;
-    --bs-btn-disabled-border-color: #344767;
-    --bs-gradient: none;
+    background-color: #506191; 
+    color: #FFDE8C; 
+    border-radius: 25px
   }
   
   .btn-outline-white {
@@ -20722,10 +20700,10 @@
   }
   
   .btn-outline-light:hover:not(.active) {
-    background-color: transparent;
+    background-color: #FFDE8C;
     opacity: .75;
     box-shadow: none;
-    color: #e9ecef;
+    color: #506191;
   }
   
   .btn-dark:hover,
@@ -20761,10 +20739,10 @@
   }
   
   .btn-outline-dark:hover:not(.active) {
-    background-color: transparent;
+    background-color: #506191;
     opacity: .75;
     box-shadow: none;
-    color: #344767;
+    color: #FFDE8C;
   }
   
   .btn-white:hover,
@@ -20931,7 +20909,7 @@
   }
   
   .card .card-body {
-    font-family: "Open Sans";
+    font-family: Arial, Helvetica, sans-serif;
     padding: 1.5rem;
   }
   
