@@ -4,7 +4,8 @@ const CONFIGURATION = {
   "mapOptions": {"center": {"lat":48.8566,"lng":2.3522}, "zoom": 15},
 };
 
-function initSimpleMap() {
+export function initSimpleMap() {
+  console.log("initSimpleMap called");
   const {Map, Marker} = google.maps;
 
   const mapElement = document.getElementById('gmp-map');
