@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 <% if @rental && @rental.errors.any? %>
 <div id="error_explanation">
-<h2><%= pluralize(@rental.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
+<h2><%= pluralize(@rental.errors.count, "erreur(s)") %> vous enmpêchent de continuer:</h2>
 
 <ul>
   <% @rental.errors.full_messages.each do |message| %>
@@ -15,7 +15,7 @@
 
 <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
 
-<%= render 'calendar', bicycle: @bicycle %>
+<%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
