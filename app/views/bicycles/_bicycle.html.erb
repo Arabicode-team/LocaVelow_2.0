@@ -8,7 +8,7 @@
           <% if @bicycle.image.attached? %>
             <%= image_tag @bicycle.image, class: "img-fluid rounded", alt: "Image de vélo" %>
           <% else %>
-            <%= image_tag asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo", style: "max-height: 100px;" %>
+            <%= image_tag asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo" %>
           <% end %>    
         </div>
         <div class="col-md-6">
