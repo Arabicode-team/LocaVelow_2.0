@@ -121,23 +121,19 @@ class RentalsController < ApplicationController
   
         if refund_status == 'succeeded'
           @rental.update(stripe_refund_id: refund.id)
-          redirect_to root_path, notice: 'Le remboursementbien été effectué.'
+          redirect_to root_path, notice: 'Le remboursement a bien été effectué, la réservation est maintenant annulée. Rendez-vous dans votre espace personnel pour plus de détails.'
         else
-          redirect_to root_path, alert: 'Le remboursement a échoué. Veuillez réessayer ou contactez notre service client.'
+          redirect_to root_path, alert: 'Le remboursement a échoué. Veuillez réessayer. Si le problème persisite, nous vous invitons à contacter notre service client.'
         end
-        
+
       rescue Stripe::StripeError => e
         Rails.logger.error "Stripe Error: #{e.message}"
-        redirect_to root_path, alert: 'Erreur lors du remboursement. Veuillez réessayer ou contactez notre service client.'
+        redirect_to root_path, alert: 'Erreur lors du remboursement. Veuillez réessayer. Si le problème persisite, nous vous invitons à contacter notre service client.'
       end
     else
       redirect_to root_path, alert: 'Il est trop tard pour annuler cette location.'
     end
   end
-  
-  
-  
-  
 
   private
     # Use callbacks to share common setup or constraints between actions.
