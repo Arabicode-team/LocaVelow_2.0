@@ -49,7 +49,7 @@ class RentalsController < ApplicationController
           product_data: {
             name: 'Paiement de votre réservation',
           },
-          unit_amount: (@rental.total_cost * 100).to_i, # Цена в центах
+          unit_amount: (@rental.total_cost * 100).to_i, 
         },
         quantity: 1,
       }],
