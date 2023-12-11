@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_223721) do
   create_table "accessories", force: :cascade do |t|
     t.string "name"
     t.bigint "bicycle_id", null: false
+    t.integer "accessory_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bicycle_id"], name: "index_accessories_on_bicycle_id"
