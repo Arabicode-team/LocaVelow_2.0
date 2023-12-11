@@ -16,6 +16,10 @@
         <%= f.label :email, "Email" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
+      <div class="field">
+        <%= f.label :image, "Avatar", style: "display: block" %>
+        <%= f.file_field :image, class: "form-control p-2" %>
+      </div>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>

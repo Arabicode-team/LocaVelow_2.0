@@ -1,7 +1,8 @@
-<div class="jumbotron text-center">
-    <h1 class="display-4">Trouvez votre vélo idéal</h1>
-    <p class="lead">Louez un vélo près de chez vous</p>
-
+<div class="jumbotron position-relative" style="background-image: url('<%= asset_path('bicycle_banner_img.jpg') %>'); background-size: cover; padding: 100px; overflow: hidden; width: 100%; height: 100%; background-position: center; position: relative;">
+  <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-primary)); opacity: 0.8; z-index: 0;"></div>
+  <div style="z-index: 2; position: relative;">
+    <h1 class="display-4 mx-lg-10 text-center" style="padding: 1rem;">Trouvez votre vélo idéal</h1>
+    <p class="lead text-center" style="color: var(--bs-secondary);">Louez un vélo près de chez vous</p>
     <!-- Barre de recherche -->
     <form class="d-md-flex justify-content-center mt-4">
       <div class="form-group mx-2">
@@ -18,6 +19,9 @@
           <option value="option3">Option 3</option>
         </select>
       </div>
-    </form>
-    <button type="submit" class="btn btn-primary mx-2">Rechercher</button>
-  </div>
+    </form> 
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary mx-2">Rechercher</button>
+    </div>  
+  </div>   
+</div>

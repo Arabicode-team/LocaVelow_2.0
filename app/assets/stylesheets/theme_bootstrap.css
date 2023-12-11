@@ -2742,7 +2742,7 @@
   .form-control {
     display: block;
     width: 100%;
-    padding: 1rem 0.75rem;
+    padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.4rem;
@@ -20816,12 +20816,12 @@
   
   .btn-secondary,
   .btn.bg-gradient-secondary {
-    color: #fff;
+    color: #506191;
   }
   
   .btn-secondary:hover,
   .btn.bg-gradient-secondary:hover {
-    color: #fff;
+    color: #506191;
   }
   
   .btn-danger,
