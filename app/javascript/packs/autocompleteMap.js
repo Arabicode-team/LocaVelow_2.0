@@ -62,7 +62,7 @@ function renderAddress(place, map, marker) {
   }
 }
 
-async function initMap() {
+export async function initMap() {
   const {Map} = google.maps;
   const {AdvancedMarkerElement} = google.maps.marker;
   const {Autocomplete} = google.maps.places;

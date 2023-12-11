@@ -1,6 +1,7 @@
 "use strict";
 
-async function initIndexMap() {
+export async function initIndexMap() {
+  console.log("initIndexMap called");
   const { Map, Marker, InfoWindow } = google.maps;
   const mapElement = document.getElementById('index-map');
 
@@ -48,5 +49,3 @@ async function initIndexMap() {
     })
     .catch(error => console.error('Error loading bicycles:', error));
 }
-
-window.initIndexMap = initIndexMap;
