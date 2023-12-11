@@ -1,0 +1,35 @@
+<div>
+  <p>
+    <% if @renter.first_name.present? %>
+      Salut <%= @renter.first_name %>, ami(e) cycliste et gardien(ne) de la planète! 🌍
+    <% else %>
+      Salut ami(e) cycliste et gardien(ne) de la planète! 🌍
+    <% end %>
+  </p>
+
+  <p>
+    Nous sommes désolés d'apprendre que vous avez demandé l'annulation de votre réservation. Votre remboursement a été traitée et l'annulation a bien été effectuée ! 💔🚴‍♂️
+  </p>
+
+  <p>
+    Voici les détails de votre réservation annulée :
+    <ul>
+      <li>Date de début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M') %></li>
+      <li>Date de fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %></li>
+      <li>Montant total remboursé : <%= @rental.total_cost %> €</li>
+      <li>Réference du remboursement via Stripe (à conserver): <%= @rental.stripe_refund_id %></li>
+    </ul>
+  </p>
+
+  <blockquote>
+  Maintenant que votre demande a été traitée par Locavelow, Stripe va recréditer les fonds sur le moyen de paiement utilisé lors du paiement de la réservation. Selon les banques, les remboursements peuvent mettre de 5 à 14 jours ouvrés pour apparaître sur votre compte bancaire. Vous pouvez contacter l'assistance de Stripe si vous souhaitez obtenir plus de précisions.
+</blockquote>
+
+  <p>
+    En cas de pépin, ou pour toute question, n'hésitez pas à nous contacter muni de votre référence de remboursement Stripe fournie dans cet email et nous nous ferons un plaisir de vous venir en aide. 😊
+  </p>
+
+  <p>
+    À bientôt sur Locavelow, on espère vous revoir très vite sur la piste ! 🚴‍♂️
+  </p>
+</div>
