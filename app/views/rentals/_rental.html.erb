@@ -54,6 +54,12 @@
             <strong>Statut de la réservation :</strong>
             <%= rental.rental_status %>
           </p>
+          <p>
+          <p>
+          <% if @rental.refundable? %>
+          <%= button_to 'Annuler la location et demander un remboursement', refund_rental_path(@rental), method: :post, data: { confirm: 'Êtes-vous sûr de vouloir demander un remboursement?' } %>
+        <% end %>
+        </p>
         </div>
       </div>
     </div>

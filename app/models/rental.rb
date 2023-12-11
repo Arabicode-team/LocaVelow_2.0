@@ -1,7 +1,7 @@
 class Rental < ApplicationRecord
   belongs_to :bicycle, optional: true
   belongs_to :renter, class_name: 'User'
-  has_one :owner_review, ->(rental) { where(reviewer_user: rental.bicycle&.owner) }, #safe navigation (&.) operator
+  has_one :owner_review, ->(rental) { where(reviewer_user: rental.bicycle&.owner) },
     class_name: 'Review', foreign_key: 'rental_id', dependent: :destroy
   has_one :renter_review, ->(rental) { where(reviewer_user: rental.renter) },
     class_name: 'Review', foreign_key: 'rental_id', dependent: :destroy
@@ -18,13 +18,11 @@ class Rental < ApplicationRecord
   after_create :owner_schedule_upcoming_reminder
 
   def calculate_total_cost
-    # Убедитесь, что у вас есть все необходимые данные для расчета
     return 0 unless start_date && end_date && bicycle && bicycle.price_per_hour
 
     duration_hours = (end_date - start_date) / 1.hour
     total_cost = duration_hours * bicycle.price_per_hour
 
-    # Возвращаем итоговую стоимость
     total_cost
   end
 
@@ -33,6 +31,13 @@ class Rental < ApplicationRecord
       update(rental_status: :completed)
     end
   end
+
+  def refundable?
+    return false if rental_status.in?(['cancelled', 'completed'])
+    return false if start_date - 48.hours <= DateTime.now
+  
+    true
+  end  
 
   def send_renter_confirmation_email
     UserMailer.renter_confirmation_email(User.find(self.renter_id), self).deliver_now

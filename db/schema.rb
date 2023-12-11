@@ -77,6 +77,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_223721) do
     t.datetime "end_date"
     t.integer "rental_status"
     t.decimal "total_cost"
+    t.string "stripe_charge_id"
+    t.string "stripe_refund_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bicycle_id"], name: "index_rentals_on_bicycle_id"

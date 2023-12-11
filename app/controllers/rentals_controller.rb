@@ -91,7 +91,8 @@ class RentalsController < ApplicationController
     if stripe_session.payment_status == 'paid'
       @rental = Rental.new(session[:rental_details])
       @rental.rental_status = :in_progress
-      
+      @rental.stripe_charge_id = stripe_session.payment_intent
+     
       if @rental.save
         session.delete(:rental_details)
         redirect_to root_path, notice: 'Le paiement a été effectué et votre réservation est confirmée! Rendez-vous dans votre espace personnel pour plus de détails.'
@@ -101,7 +102,42 @@ class RentalsController < ApplicationController
     else
       redirect_to some_failure_path, alert: 'La tentative de paiement a échoué.'
     end
+  end  
+
+  def refund
+    @rental = Rental.find(params[:id])
+  
+    if @rental.refundable?
+      begin
+        payment_intent_id = @rental.stripe_charge_id
+  
+        refund = Stripe::Refund.create({
+          payment_intent: payment_intent_id,
+        })
+  
+        @rental.update(rental_status: :cancelled)
+  
+        refund_status = Stripe::Refund.retrieve(refund.id).status
+  
+        if refund_status == 'succeeded'
+          @rental.update(stripe_refund_id: refund.id)
+          redirect_to root_path, notice: 'Le remboursementbien été effectué.'
+        else
+          redirect_to root_path, alert: 'Le remboursement a échoué. Veuillez réessayer ou contactez notre service client.'
+        end
+        
+      rescue Stripe::StripeError => e
+        Rails.logger.error "Stripe Error: #{e.message}"
+        redirect_to root_path, alert: 'Erreur lors du remboursement. Veuillez réessayer ou contactez notre service client.'
+      end
+    else
+      redirect_to root_path, alert: 'Il est trop tard pour annuler cette location.'
+    end
   end
+  
+  
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -111,6 +147,6 @@ class RentalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rental_params
-      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status)
+      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status, :stripe_charge_id)
     end
 end
