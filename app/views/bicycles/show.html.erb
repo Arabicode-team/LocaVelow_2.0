@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 <% if @rental && @rental.errors.any? %>
 <div id="error_explanation">
-<h2><%= pluralize(@rental.errors.count, "erreur(s)") %> vous enmpêchent de continuer:</h2>
+<h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>
 
 <ul>
   <% @rental.errors.full_messages.each do |message| %>
