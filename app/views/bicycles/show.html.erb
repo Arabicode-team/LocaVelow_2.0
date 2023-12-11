@@ -4,7 +4,7 @@
 
 <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
 
-<%= render 'bicycle/calendar', bicycle: @bicycle %>
+<%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
