@@ -7,8 +7,8 @@
 On dirait que votre aventure à deux roues est sur le point de commencer !
   
 Un petit rappel au sujet de votre réservation prévue pour demain :
-- Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %>
-- Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %>
+- Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M') %>
+- Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %>
 - Montant total payé : <%= @rental.total_cost %> €
 <% if @rental.bicycle.present? %>
   - Adresse du vélo : <%= @rental.bicycle.address %>

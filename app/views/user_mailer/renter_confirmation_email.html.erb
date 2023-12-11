@@ -14,8 +14,8 @@
   <p>
   Détails de votre réservation :
   <ul>
-    <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
-    <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+    <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M') %></li>
+    <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %></li>
     <li>Montant total : <%= @rental.total_cost %> €</li>
     <% if @rental.bicycle.address.present? %>
       <li>Adresse du vélo : <%= @rental.bicycle.address %></li>
