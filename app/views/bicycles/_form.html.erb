@@ -41,11 +41,8 @@
           <%= form.text_field :condition, class: "form-control" %>
         </div>
         <div>
-          <div class="d-flex align-items-center">   
-            <%= form.label :name, "Accessoires", style: "display: block" %>
-            <span class="required-field-marker">*</span>
-          </div> 
-          <%= form.select :name, Bicycle.sizes.keys.map { |name| [name.humanize, name]}, {}, class: "form-select" %> 
+          <%= form.label :name, "Accessoires", style: "display: block" %>
+          <%= form.select :name, "Accessoires", class: "form-select" %>
         </div>
         <div>
           <%= form.label :description, "Description", style: "display: block" %>

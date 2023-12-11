@@ -121,7 +121,7 @@ class BicyclesController < ApplicationController
   # DELETE /bicycles/1 or /bicycles/1.json
     def destroy
       if @bicycle.destroy
-        redirect_to bicycles_path, notice: "L'annonce a bien été supprimée"
+        redirect_to bicycles_path, alert: "L'annonce a bien été supprimée"
       else
         redirect_to bicycles_path, alert: @bicycle.errors.full_messages.to_sentence
       end

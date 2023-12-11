@@ -103,7 +103,7 @@ input:focus::placeholder {
   <%= render 'shared/navbar' %>
 
   <% flash.each do |key, message| %>
-    <div class="alert alert-warning" role="alert">
+    <div class="alert <%= key == 'notice' ? 'alert-success' : 'alert-warning' %>" role="alert">
       <%= message %>
     </div>
   <% end %>
