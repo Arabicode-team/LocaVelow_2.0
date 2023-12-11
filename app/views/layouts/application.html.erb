@@ -93,6 +93,7 @@ input:focus::placeholder {
   line-height: 27px;
   padding: 3.5px 10.5px;
 }
+
 </style>
   </head>
     <script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
@@ -100,6 +101,13 @@ input:focus::placeholder {
 
   <body>
   <%= render 'shared/navbar' %>
+
+  <% flash.each do |key, message| %>
+    <div class="alert alert-warning" role="alert">
+      <%= message %>
+    </div>
+  <% end %>
+
   <%= yield %>
   <%= render 'shared/footer' %>
   </body>
