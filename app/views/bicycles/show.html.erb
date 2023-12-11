@@ -1,4 +1,15 @@
 <p style="color: green"><%= notice %></p>
+<% if @rental && @rental.errors.any? %>
+<div id="error_explanation">
+<h2><%= pluralize(@rental.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
+
+<ul>
+  <% @rental.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+</div>
+<% end %>
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
 
@@ -19,6 +30,3 @@
   <% end %>
 </div>
 
-<%= javascript_include_tag 'estimate_cost' %>
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initSimpleMap&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
-<%= javascript_include_tag 'simpleMap' %>
