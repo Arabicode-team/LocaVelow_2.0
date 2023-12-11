@@ -5,14 +5,21 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6">
-          <img src="https://images.frandroid.com/wp-content/uploads/2022/09/test-velo-mad-urbain-2-1-scaled.jpg" class="img-fluid rounded" alt="Image du vélo">
+          <% if @bicycle.image.attached? %>
+            <%= image_tag @bicycle.image, class: "img-fluid rounded" %>
+          <% else %>
+            <p class="text-center mt-6">Aucune image disponible</p>
+          <% end %>    
         </div>
         <div class="col-md-6">
           <h4 class="text-center">
             <%= bicycle.model %>
           </h4>
+          <h6 class="text-center">
+            <%= bicycle.city %>, <%= bicycle.country %>
+          <h6>  
           <p>
-          <%= bicycle.description %>
+            <%= bicycle.description %>
           </p> 
           <h5 class="text-center"> Caractéristiques</h5>
           <p>
@@ -53,16 +60,8 @@
         </div>
       </div>
     </div>   
-    <p>
-      <strong>Latitude:</strong>
-      <%= bicycle.latitude %>
-    </p>
-    <p>
-      <strong>Longitude:</strong>
-      <%= bicycle.longitude %>
-    </p>
-    <p>
-      <strong>Address:</strong>
+    <p class="text-center">
+      <strong>Adresse :</strong>
       <%= "#{bicycle.address}, #{bicycle.city}, #{bicycle.state}, #{bicycle.postal_code}, #{bicycle.country}" %>
     </p>
   </div>
@@ -72,7 +71,11 @@
   <div class="card card-blog card-plain">
     <div class="position-relative">
       <div class="d-block blur-shadow-image">
-        <img src="<%= asset_path('testcard') %>" class="img-fluid border-radius-lg">
+      <% if bicycle.image.attached? %>
+        <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
+      <% else %>
+        <%= image_tag 'testcard.jpg', class: "img-fluid border-radius-lg" %>
+      <% end %>  
       </div>
     </div>
     <div class="card-body px-0 pt-1">

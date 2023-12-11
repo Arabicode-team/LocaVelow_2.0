@@ -22,7 +22,9 @@
        <ul class="navbar-nav ms-auto">
         <li class="nav-item mx-4">
           <% if user_signed_in? %>
-            <%= link_to "Profil", user_path(current_user), class: "nav-link" %>
+            <%= link_to user_path(current_user), class: "nav-link" do %>
+              <i class="fas fa-user me-2"></i> Profil
+            <% end %>
           <% else %>
             <%= link_to "S'inscrire", new_user_registration_path, class: "nav-link" %>
           <% end %>

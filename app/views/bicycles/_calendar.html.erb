@@ -1,11 +1,46 @@
-<%= week_calendar do |date| %>
-  <div class="day">
-    <%= date %>
-    <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
-    <% reserved_intervals.each do |interval| %>
-      <div class="reserved-interval">
-        <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Reserved
+<style>
+  .week-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+  }
+
+  .day {
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .custom-calendar {
+    max-width: 100px;
+  }
+
+  .reserved-interval {
+    background-color: #FFDE8C;
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 5px;
+  }
+
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="week-calendar">
+        <%= week_calendar do |date| %>
+          <div class="day">
+            <%= date %>
+            <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
+            <% reserved_intervals.each do |interval| %>
+              <div class="reserved-interval">
+                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Réservé
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-<% end %>
+</div>

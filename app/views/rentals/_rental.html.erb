@@ -1,27 +1,61 @@
-<div id="<%= dom_id rental %>">
-  <p>
-    <strong>Bicycle:</strong>
-    <%= rental.bicycle_id %>
-  </p>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title text-center">Détails de la réservation</h3>
+      <div class="card-text">
+        <div id="<%= dom_id rental %>">
+          <p class="mb-1">
+            <strong>Vélo :</strong>
+            <%= rental.bicycle.model %>
+          </p>
+          <p class="mb-1">
+            <strong>Description :</strong>
+            <%= rental.bicycle.description %>
+          </p>
+          <p class="mb-1">
+            <strong>Catégorie :</strong>
+            <%= rental.bicycle.bicycle_type %>
+          </p>
+          <p class="mb-1">
+            <strong>Taille :</strong>
+            <%= rental.bicycle.size %>
+          </p>
+          <p class="mb-1">
+            <strong>Accessoires :</strong>
+            <%= rental.bicycle.accessories.first&.name %>
+          </p>
+          <p class="mb-1">
+            <strong>Etat :</strong>
+            <%= rental.bicycle.condition %>
+          </p>
+          <p class="mb-1">
+            <strong>Localisation :</strong>
+            <%= rental.bicycle.city %>, <%= rental.bicycle.postal_code %>, <%= rental.bicycle.country %>
+          </p>
+          <p class="mb-1">
+            <strong>Locataire :</strong>
+            <%= rental.renter.email %>
+          </p>
 
-  <p>
-    <strong>Renter:</strong>
-    <%= rental.renter_id %>
-  </p>
+          <p class="mb-1">
+            <strong>Date de début :</strong>
+            <%= rental.start_date %>
+          </p>
 
-  <p>
-    <strong>Start date:</strong>
-    <%= rental.start_date %>
-  </p>
-
-  <p>
-    <strong>End date:</strong>
-    <%= rental.end_date %>
-  </p>
-
-  <p>
-    <strong>Rental status:</strong>
-    <%= rental.rental_status %>
-  </p>
-
+          <p class="mb-1">
+            <strong>Date de fin :</strong>
+            <%= rental.end_date %>
+          </p>
+          <p class="mb-1">
+            <strong>Prix total :</strong>
+            <%= rental.total_cost %> €
+          </p>
+          <p class="mb-1">
+            <strong>Statut de la réservation :</strong>
+            <%= rental.rental_status %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
