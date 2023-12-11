@@ -3,3 +3,12 @@
     margin-left: 5px;
     color: red;
   }
+
+  .my-logo-container {
+    max-width: 150px;
+  }
+  
+  .my-logo-container img {
+    width: 30%;
+    height: auto;
+  }
