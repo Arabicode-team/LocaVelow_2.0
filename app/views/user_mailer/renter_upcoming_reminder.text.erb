@@ -11,9 +11,9 @@ Un petit rappel au sujet de votre réservation prévue pour demain :
 - Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %>
 - Montant total payé : <%= @rental.total_cost %> €
 <% if @rental.bicycle.present? %>
-  - Adresse du vélo : <%= @rental.bicycle.address %>
+  - Adresse de rendez-vous pour la récupération du vélo : <%= @rental.bicycle.address %>
 <% else %>
-  - Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse du vélo que vous avez loué.
+  - Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse de renez-vous avec le propriétaire pour la récupération du vélo que vous avez loué.
 <% end %>
   
 Identité du propriétaire :
