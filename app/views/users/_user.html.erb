@@ -5,7 +5,7 @@
         <% if @user.image.attached? %>
           <%= image_tag @user.image, class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;" %>
         <% else %>
-          <p>L'utilisateur n'a pas encore d'avatar</p>
+          <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;" %>
         <% end %>    
       </div>
     </div>
@@ -49,7 +49,7 @@
             <strong>Ville :</strong> <%= rental.bicycle.city %><br>
             <strong>De :</strong> <%= rental.start_date.strftime('%Y-%m-%d %H:%M') %><br>
             <strong>À :</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
-            <strong>Status :</strong> <%= rental.rental_status.humanize %><br>
+            <strong>Statut :</strong> <%= rental.rental_status.humanize %><br>
             <strong>Coût total :</strong> <%= number_to_currency(rental.total_cost, unit: '€') %>
             <br>
             <%= link_to "Voir la location", rental, class: "btn btn-secondary btn-sm d-flex justify-content-center mt-2" %>

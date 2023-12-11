@@ -6,9 +6,9 @@
       <div class="row">
         <div class="col-md-6">
           <% if @bicycle.image.attached? %>
-            <%= image_tag @bicycle.image, class: "img-fluid rounded" %>
+            <%= image_tag @bicycle.image, class: "img-fluid rounded", alt: "Image de vélo" %>
           <% else %>
-            <p class="text-center mt-6">Aucune image disponible</p>
+            <%= image_tag asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo" %>
           <% end %>    
         </div>
         <div class="col-md-6">
@@ -23,36 +23,38 @@
           </p> 
           <h5 class="text-center"> Caractéristiques</h5>
           <p>
-          <li>
-            Catégorie :
-            <%= bicycle.bicycle_type %>
-          </li>
-          </p>
-          <p>
-          <li>
-            <strong>Taille :</strong>
-            <%= bicycle.size %>
-          </li>
-          </p>
-          <p>
-          <li>
-            <strong>Etat :</strong>
-            <%= bicycle.condition %>
-          </li>
-          </p>
-          <p>
-          <li>
-            <strong>Accessoires :</strong>
-            <%= bicycle.accessories.first&.name %>
-          </li>
-          </p>
+          <ul>
+            <li>
+              Catégorie :
+              <%= bicycle.bicycle_type %>
+            </li>
+            </p>
+            <p>
+            <li>
+              <strong>Taille :</strong>
+              <%= bicycle.size %>
+            </li>
+            </p>
+            <p>
+            <li>
+              <strong>Etat :</strong>
+              <%= bicycle.condition %>
+            </li>
+            </p>
+            <p>
+            <li>
+              <strong>Accessoires :</strong>
+              <%= bicycle.accessories.first&.name %>
+            </li>
+            </p>
+          </ul>  
           <p class="border rounded p-3 shadow mb-2 text-center">
           <span class="ml-2" role="img" aria-label="Avatar">👤</span>
             <strong>Propriétaire :</strong>
-            <%= bicycle.owner.email %>
+            <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
           </p>
           <div class="d-flex justify-content-center">
-            <p class="btn btn-secondary">
+            <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
               <strong>Prix/heure : </strong>
               <%= bicycle.price_per_hour %> €
             </p>
@@ -62,7 +64,7 @@
     </div>   
     <p class="text-center">
       <strong>Adresse :</strong>
-      <%= "#{bicycle.address}, #{bicycle.city}, #{bicycle.state}, #{bicycle.postal_code}, #{bicycle.country}" %>
+      <%= "#{bicycle.city},#{bicycle.postal_code}, #{bicycle.country}" %>
     </p>
   </div>
 <% else %>
@@ -74,7 +76,7 @@
       <% if bicycle.image.attached? %>
         <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
       <% else %>
-        <%= image_tag 'testcard.jpg', class: "img-fluid border-radius-lg" %>
+        <%= image_tag 'icone_vélo.png', class: "img-fluid border-radius-lg" %>
       <% end %>  
       </div>
     </div>
