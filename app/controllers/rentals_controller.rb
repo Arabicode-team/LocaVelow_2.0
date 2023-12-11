@@ -114,13 +114,13 @@ class RentalsController < ApplicationController
         refund = Stripe::Refund.create({
           payment_intent: payment_intent_id,
         })
-  
-        @rental.update(rental_status: :cancelled)
-  
+    
         refund_status = Stripe::Refund.retrieve(refund.id).status
   
         if refund_status == 'succeeded'
           @rental.update(stripe_refund_id: refund.id)
+          @rental.update(rental_status: :cancelled)
+          @rental.process_successful_refund
           redirect_to root_path, notice: 'Le remboursement a bien été effectué, la réservation est maintenant annulée. Rendez-vous dans votre espace personnel pour plus de détails.'
         else
           redirect_to root_path, alert: 'Le remboursement a échoué. Veuillez réessayer. Si le problème persisite, nous vous invitons à contacter notre service client.'

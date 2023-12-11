@@ -46,6 +46,15 @@ class UserMailer < ApplicationMailer
         end
       end
 
+      def renter_cancellation_and_refund_confirmation(rental)
+        @rental = rental
+        @renter = rental.renter
+    
+        return unless rental.stripe_refund_id.present?
+    
+        mail(to: @renter.email, subject: "Notification : Votre location a bien été annulée et remboursée.")
+      end
+
       def renter_return_reminder(rental)
         @rental = rental
         @renter = rental.renter

@@ -56,6 +56,14 @@ class Rental < ApplicationRecord
     UserMailer.owner_upcoming_reminder(self).deliver_later
   end
 
+  def process_successful_refund
+    return unless stripe_refund_id.present?
+    return unless rental_status == 'cancelled'
+
+    UserMailer.renter_cancellation_and_refund_confirmation(self).deliver_now
+  end
+  
+
   private
 
   def date_not_already_booked
