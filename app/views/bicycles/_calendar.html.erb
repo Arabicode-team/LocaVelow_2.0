@@ -25,17 +25,17 @@
 
 </style>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="week-calendar">
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div style="overflow-x: auto;">
         <%= week_calendar do |date| %>
           <div class="day">
             <%= date %>
             <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
             <% reserved_intervals.each do |interval| %>
               <div class="reserved-interval">
-                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Réservé
+                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Reserved
               </div>
             <% end %>
           </div>
