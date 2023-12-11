@@ -56,7 +56,7 @@ class Rental < ApplicationRecord
     UserMailer.owner_upcoming_reminder(self).deliver_later
   end
 
-  def process_successful_refund
+  def send_renter_successful_refund
     return unless stripe_refund_id.present?
     return unless rental_status == 'cancelled'
 
@@ -77,11 +77,11 @@ class Rental < ApplicationRecord
 
   def date_not_in_past
     if start_date.present? && start_date < Date.current
-      errors.add(:start_date, "La date de début de la location ne peut pas être dans le passé")
+      errors.add(:start_date, "La date de début de la location ne peut pas être dans le passé.")
     end
 
     if end_date.present? && end_date < Date.current
-      errors.add(:end_date, "La date de fin de la location ne peut pas être dans le passé")
+      errors.add(:end_date, "La date de fin de la location ne peut pas être dans le passé.")
     end
   end
 
