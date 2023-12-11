@@ -1,38 +1,38 @@
-<%= if @renter.first_name.present? %>
+<% if @renter.first_name.present? %>
   Salut <%= @renter.first_name %>, ami(e) cycliste et gardien(ne) de la planète !
-  <% else %>
+<% else %>
   Salut ami(e) cycliste et gardien(ne) de la planète! 
-  <% end %>
+<% end %>
   
-  On dirait que votre aventure à deux roues est sur le point de commencer !
+On dirait que votre aventure à deux roues est sur le point de commencer !
   
-  Un petit rappel au sujet de votre réservation prévue pour demain :
-  - Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %>
-  - Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %>
-  - Montant total payé : <%= @rental.total_cost %> €
-  <% if @rental.bicycle.present? %>
-    - Adresse du vélo : <%= @rental.bicycle.address %>
-  <% else %>
-    - Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse du vélo que vous avez loué.
-  <% end %>
+Un petit rappel au sujet de votre réservation prévue pour demain :
+- Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %>
+- Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %>
+- Montant total payé : <%= @rental.total_cost %> €
+<% if @rental.bicycle.present? %>
+  - Adresse du vélo : <%= @rental.bicycle.address %>
+<% else %>
+  - Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse du vélo que vous avez loué.
+<% end %>
   
-  Identité du propriétaire :
-  <% if @rental.bicycle.owner.first_name.present? %>
-    - Prénom : <%= @rental.bicycle.owner.first_name %>
-  <% else %>
-    - Prénom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le prénom du propriétaire.' %>
-  <% end %>
+Identité du propriétaire :
+<% if @rental.bicycle.owner.first_name.present? %>
+  - Prénom : <%= @rental.bicycle.owner.first_name %>
+<% else %>
+  - Prénom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le prénom du propriétaire.' %>
+<% end %>
   
-  <% if @rental.bicycle.owner.last_name.present? %>
-    - Nom : <%= @rental.bicycle.owner.last_name %>
-  <% else %>
-    - Nom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le nom du propriétaire.' %>
-  <% end %>
+<% if @rental.bicycle.owner.last_name.present? %>
+  - Nom : <%= @rental.bicycle.owner.last_name %>
+<% else %>
+  - Nom : <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir le nom du propriétaire.' %>
+<% end %>
   
-  <% if @rental.bicycle.owner.email.present? %>
-    - Email du propriétaire : <%= @rental.bicycle.owner.email %>
-  <% else %>
-    - <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir les informations de contact du propriétaire.' %>
-  <% end %>
+<% if @rental.bicycle.owner.email.present? %>
+  - Email du propriétaire : <%= @rental.bicycle.owner.email %>
+<% else %>
+  - <%= 'Rendez-vous dans votre espace personnel sur Locavelow pour obtenir les informations de contact du propriétaire.' %>
+<% end %>
   
-  À bientôt sur Locavelow, on a hâte de vous retrouver sur la piste ! 
+À bientôt sur Locavelow, on a hâte de vous retrouver sur la piste !
