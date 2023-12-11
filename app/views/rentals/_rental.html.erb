@@ -8,7 +8,30 @@
             <strong>Vélo :</strong>
             <%= rental.bicycle.model %>
           </p>
-
+          <p class="mb-1">
+            <strong>Description :</strong>
+            <%= rental.bicycle.description %>
+          </p>
+          <p class="mb-1">
+            <strong>Catégorie :</strong>
+            <%= rental.bicycle.bicycle_type %>
+          </p>
+          <p class="mb-1">
+            <strong>Taille :</strong>
+            <%= rental.bicycle.size %>
+          </p>
+          <p class="mb-1">
+            <strong>Accessoires :</strong>
+            <%= rental.bicycle.accessories.first&.name %>
+          </p>
+          <p class="mb-1">
+            <strong>Etat :</strong>
+            <%= rental.bicycle.condition %>
+          </p>
+          <p class="mb-1">
+            <strong>Localisation :</strong>
+            <%= rental.bicycle.city %>, <%= rental.bicycle.postal_code %>, <%= rental.bicycle.country %>
+          </p>
           <p class="mb-1">
             <strong>Locataire :</strong>
             <%= rental.renter.email %>
@@ -23,7 +46,10 @@
             <strong>Date de fin :</strong>
             <%= rental.end_date %>
           </p>
-
+          <p class="mb-1">
+            <strong>Prix total :</strong>
+            <%= rental.total_cost %> €
+          </p>
           <p class="mb-1">
             <strong>Statut de la réservation :</strong>
             <%= rental.rental_status %>
