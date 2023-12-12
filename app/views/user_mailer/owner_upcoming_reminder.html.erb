@@ -10,8 +10,8 @@ Salut ami(e) cycliste et gardien(ne) de la planète! 🌍
   <p>
     Un petit rappel au sujet de la réservation de votre vélo prévue pour demain :
     <ul>
-      <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
-      <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %></li>
+      <li>Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M') %></li>
+      <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %></li>
       <li>Montant total encaissé : <%= @rental.total_cost %> €</li>
     </ul>
   </p>

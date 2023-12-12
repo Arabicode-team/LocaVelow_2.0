@@ -9,16 +9,16 @@ class UsersController < ApplicationController
   
   def destroy
     if current_user.destroy
-      redirect_to root_path, notice: 'Your profile was successfully deleted.'
+      redirect_to root_path, notice: 'Votre compte a bien été supprimé'
     else
-      redirect_to root_path, notice: 'Cannot delete user with active rentals.'
+      redirect_to root_path, notice: 'Impossible de supprimer un utilisateur avec des locations actives'
     end
   end
   def update
     @user = User.find(params[:id])
   
     if @user.update(user_params)
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to @user, notice: "L'utilisateur a bien été modifié"
     else
       render :edit
     end

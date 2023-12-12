@@ -21,6 +21,13 @@ Rails.application.routes.draw do
   resources :rentals
   resources :bicycles
 
+  resources :rentals do
+    member do
+      post 'refund'
+      get 'refund'
+    end
+  end
+    
   #route for gem letter_opener for emails in dev environment
   get 'terms_and_conditions', to: 'static#terms_and_conditions'
 

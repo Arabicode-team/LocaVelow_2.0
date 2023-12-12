@@ -1,47 +1,31 @@
 <footer>
   <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-md-4">
+    <div class="d-flex justify-content-between">
+      <div>
         <h3>Services</h3>
         <ul>
           <li><%= link_to "S'inscrire", new_user_registration_path %></li>
           <li><%= link_to "Se connecter", new_user_session_path %></li>
-          <li><%= link_to "Poster un annonce", new_bicycle_path %></li>
+          <li><%= link_to "Poster une annonce", new_bicycle_path %></li>
           <li><%= link_to "Louer un vélo", bicycles_path %></li>
+           <li><%= link_to 'Conditions générales', terms_and_conditions_path %></li>
         </ul>
       </div>
-      <div class="col-sm-6 col-md-4">
+      <div>
         <h3>A propos de nous</h3>
         <ul>
-          <li><a href="#">Entreprise</a></li>
-          <li><a href="#">L'équipe</a></li>
-          <li><a href="#">Presse</a></li>
+          <li><a href="https://github.com/ikramiste">Ikram Saadi</a></li>
+          <li><a href="https://github.com/masechkacat">Marina Torunova</a></li>
+          <li><a href="https://github.com/JerkStanton">Sylvain Deligny</a></li>
+          <li><a href="https://github.com/cypradoux">Cyprien Pradoux</a></li>
+          <li><a href="https://github.com/GregMagnat">Grégory Magnat</a></li> 
         </ul>
       </div>
-      <div class="col-sm-6 col-md-4">
-        <h3>Assistance</h3>
-        <ul>
-          <li><%= link_to 'Conditions générales', terms_and_conditions_path %></li>
-          <li><a href="#">Confidentialité</a></li>
-          <li><a href="#">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="col-md-4 text-md-right">
-        <a href="#">
-          <i class="fa-brands fa-facebook fa-xl"></i>
-        </a>
-        <a href="#">
-          <i class="fa-brands fa-twitter fa-xl"></i>
-        </a>
-        <a href="#">
+      <div class="d-flex align-items-end justify-content-center">
+        <a href="https://github.com/Arabicode-team/LocaVelow_2.0">
           <i class="fa-brands fa-github fa-xl"></i>
         </a>
-        <a href="#">
-          <i class="fa-brands fa-instagram fa-xl"></i>
-        </a>
-      </div>
-      <div class="col-md-8 text-md-center">
-        <p class="copyright">Locavelow © 2023</p>
+        <p class="small copyright ml-2 mb-0 ms-2">Locavelow © 2023</p>
       </div>
     </div>
   </div>
