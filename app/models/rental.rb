@@ -63,6 +63,21 @@ class Rental < ApplicationRecord
     UserMailer.renter_cancellation_and_refund_confirmation(self).deliver_now
     UserMailer.owner_cancellation_and_refund_confirmation(self).deliver_now
   end
+
+  def date_not_in_past
+    if start_date.present? && start_date < Date.current
+      errors.add(:start_date, "La date de début de la location ne peut pas être dans le passé.")
+    end
+  
+    if end_date.present? && end_date < Date.current
+      errors.add(:end_date, "La date de fin de la location ne peut pas être dans le passé.")
+    end
+  
+    if start_date.present? && end_date.present? && start_date > end_date
+      errors.add(:start_date, "La date de début ne peut pas être postérieure à la date de fin.")
+      errors.add(:end_date, "La date de fin ne peut pas être antérieure à la date de début.")
+    end
+  end
   
   private
 
@@ -72,16 +87,6 @@ class Rental < ApplicationRecord
                                 .where('start_date < ? AND end_date > ?', end_date, start_date)
     if overlapping_rentals.exists?
       errors.add(:base, 'Le vélo a déjà été reservé pour ces dates.')
-    end
-  end
-
-  def date_not_in_past
-    if start_date.present? && start_date < Date.current
-      errors.add(:start_date, "La date de début de la location ne peut pas être dans le passé.")
-    end
-
-    if end_date.present? && end_date < Date.current
-      errors.add(:end_date, "La date de fin de la location ne peut pas être dans le passé.")
     end
   end
 end
