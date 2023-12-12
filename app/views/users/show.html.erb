@@ -3,7 +3,19 @@
 <%= render @user %>
 
 <div class="container mt-4">
-  <h2 class="mb-3">Avis</h2>
+  <div class="d-flex align-items-center mb-3">
+    <h2 class="mx-3">Avis</h2>
+    <% received_reviews = Review.where(reviewed_user_id: @user.id) %>
+    <% if received_reviews.count > 0 %>
+      <% sum_of_ratings = received_reviews.sum(:rating) %>
+      <% average_rating = sum_of_ratings.to_f / received_reviews.count %>
+      <% average_rating_rounded = average_rating.round(1) %>
+      <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
+        <strong><%= average_rating_rounded %>/5</strong>
+      </p>
+    <% else %>
+    <% end %>
+  </div>  
   <% if @user.owner_reviews.any? %>
     <% @user.owner_reviews.each_slice(3) do |owner_reviews_slice| %>
       <div class="row">
