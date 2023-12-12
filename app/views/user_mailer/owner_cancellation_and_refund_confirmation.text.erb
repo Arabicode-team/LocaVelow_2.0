@@ -1,0 +1,19 @@
+<% if @owner.first_name.present? %>
+Salut <%= @owner.first_name %>, ami(e) cycliste et gardien(ne) de la planète!
+<% else %>
+Salut ami(e) cycliste et gardien(ne) de la planète!
+<% end %>
+
+Nous sommes désolés de l'apprendre, mais une des réservations prévues a été annulée. Le remboursement a été traité et l'annulation a bien été effectuée.
+
+Voici les détails de la réservation qui a été annulée :
+- Date de début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M') %>
+- Date de fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %>
+- Montant total remboursé au locataire : <%= @rental.total_cost %> €
+- Référence du remboursement via Stripe (à conserver) : <%= @rental.stripe_refund_id %>
+
+Maintenant que la demande a été traitée par Locavelow, Stripe va recréditer les fonds au locataire sur le moyen de paiement utilisé lors du paiement de la réservation. Selon les banques, les remboursements peuvent mettre de 5 à 14 jours ouvrés pour apparaître sur leur compte bancaire. Vous pouvez leur indiquer de contacter l'assistance de Stripe s'ils souhaitent obtenir plus de précisions.
+
+En cas de pépin, ou pour toute question, demandez au locataire de nous contacter muni de la référence de remboursement Stripe fournie dans l'email que le locataire a reçu et nous nous ferons un plaisir de leur venir en aide.
+
+À bientôt sur Locavelow !

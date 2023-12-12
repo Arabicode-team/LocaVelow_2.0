@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
 
         @rental = rental
 
-        mail(to: @user.email, subject: 'Confirmation de votre réservation chez Locavelow')
+        mail(to: @user.email, subject: 'Confirmation : Votre réservation chez Locavelow est bien prise en compte.')
       end
       
       def owner_rental_notification(owner_email, rental)
@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
         @bicycle = rental.bicycle
         days_until_start = (@rental.start_date.to_date - Date.today).to_i
     
-        if days_until_start == 1 && !@rental.cancelled? && !@rental.completed?
+        if days_until_start <= 1 && !@rental.cancelled? && !@rental.completed?
           mail(to: @renter.email, subject: "Rappel : Votre réservation sur Locavelow, c'est pour bientôt !")
         end
       end
@@ -46,11 +46,20 @@ class UserMailer < ApplicationMailer
         end
       end
 
-      def renter_return_reminder(rental)
+      def renter_cancellation_and_refund_confirmation(rental)
         @rental = rental
         @renter = rental.renter
-        @owner = rental.bicycle.owner
     
-        mail(to: @renter.email, subject: "La fin de votre virée à vélo approche, on compte sur vous !")
+        return unless rental.stripe_refund_id.present?
+    
+        mail(to: @renter.email, subject: "Alerte : Votre location sur Locavelow a été annulée et remboursée.")
+      end
+
+      def owner_cancellation_and_refund_confirmation(rental)
+        @rental = rental
+        @owner_email = rental.bicycle.owner.email
+        @owner = User.find_by(email: @owner_email)
+    
+        mail(to: @owner.email, subject: 'Alerte : La location de votre vélo sur Locavelow a été annulée et remboursée.')
       end
 end

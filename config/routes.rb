@@ -20,6 +20,13 @@ Rails.application.routes.draw do
   resources :rentals
   resources :bicycles
 
+  resources :rentals do
+    member do
+      post 'refund'
+      get 'refund'
+    end
+  end
+    
   #route for gem letter_opener for emails in dev environment
 
   if Rails.env.development?

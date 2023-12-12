@@ -28,7 +28,7 @@
               <tr>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Vélo</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 custom-color">Type</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Nombre de résa</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Résa en cours</th>
                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Prix/Heure</th>
                 <th class="text-secondary opacity-7 custom-color"></th>
               </tr>
@@ -54,14 +54,25 @@
                     <p class="text-xs font-weight-bold mb-0"><%= bicycle.bicycle_type.humanize %></p>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-success"><%= bicycle.rentals.count %></span>
+                    <ul class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><%= bicycle.rentals.count %></a>
+  
+  <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
+    <h6 class="dropdown-header">Cliquez sur une des locations pour voir plus d'options</h6>
+
+    <% bicycle.rentals.each do |rental| %>
+      <a class="dropdown-item" href="<%= rental_path(rental) %>">Location <%= rental.id %></a>
+    <% end %>
+  </div>
+</ul>
+
                   </td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
                   </td>
                   <td class="align-middle">
-                    <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
-                  </td>
+                  <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>              
+                </td>
                 </tr>
               <% end %>
             </tbody>
