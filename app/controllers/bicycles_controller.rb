@@ -1,5 +1,6 @@
 class BicyclesController < ApplicationController
   before_action :set_bicycle, only: %i[ edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /bicycles or /bicycles.json
   def index

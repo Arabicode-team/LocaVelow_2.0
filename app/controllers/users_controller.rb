@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authorize_user, only: [:show, :edit, :update, :destroy]
 
   def show
     @user = current_user
@@ -22,6 +24,12 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  private
+
+  def authorize_user
+    redirect_to root_path, alert: 'Accès refusé!' unless current_user == User.find(params[:id])
   end
   
 end
