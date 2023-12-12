@@ -7975,29 +7975,47 @@
   window.CONFIGURATION = CONFIGURATION;
 
   // app/javascript/packs/indexMap.js
-  async function initIndex() {
-    let markers = [];
-    let map;
-    let mode = "all";
-    let searchParams = null;
-    window.loadBicyclesDataTimeout = null;
-    function setupAutocomplete() {
-      const input = document.getElementById("city-input");
-      if (!input)
-        return;
-      const autocomplete = new google.maps.places.Autocomplete(input, { types: ["(cities)"] });
-      autocomplete.bindTo("bounds", map);
-      autocomplete.addListener("place_changed", function() {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-          window.alert("No details available for input: '" + place.name + "'");
-          return;
-        }
-        if (place.geometry.viewport) {
-          map.fitBounds(place.geometry.viewport);
-        } else {
-          map.setCenter(place.geometry.location);
-          map.setZoom(17);
+  async function initIndexMap() {
+    console.log("initIndexMap called");
+    const mapElement = document.getElementById("index-map");
+    if (!mapElement)
+      return;
+    const mapOptions = {
+      center: { "lat": 48.8566, "lng": 2.3522 },
+      zoom: 10
+    };
+    const map = new google.maps.Map(mapElement, mapOptions);
+    loadMarkers(map);
+    setupAutocomplete(map);
+    setupBoundsChangedListener(map);
+  }
+  function loadMarkers(map) {
+    fetch("/bicycles.json").then((response) => response.json()).then((bicycles) => {
+      bicycles.forEach((bicycle) => {
+        if (bicycle.latitude && bicycle.longitude) {
+          const marker = new google.maps.Marker({
+            position: { lat: bicycle.latitude, lng: bicycle.longitude },
+            map,
+            title: bicycle.model
+          });
+          const contentString = `
+        <div>
+          <h3>${bicycle.model}</h3>
+          <p><b>Type:</b> ${bicycle.bicycle_type}</p>
+          <p><b>Size:</b> ${bicycle.size}</p>
+          <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>
+          <a href="/bicycles/${bicycle.id}">View details</a>
+        </div>`;
+          const infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          marker.addListener("click", () => {
+            infowindow.open({
+              anchor: marker,
+              map,
+              shouldFocus: false
+            });
+          });
         }
       });
     }
