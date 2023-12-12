@@ -7,8 +7,8 @@ Salut ami(e) cycliste et gardien(ne) de la planète!
 Bonne nouvelle ! Votre vélo a été loué sur Locavelow.
 
 Détails de la location effectuée :
-- Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M UTC') %>
-- Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M UTC') %>
+- Début de la location : <%= @rental.start_date.strftime('%d-%m-%Y %H:%M') %>
+- Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %>
 - Coût total : <%= @rental.total_cost %> €
 
 Merci d'utiliser Locavelow pour partager vos vélos. 

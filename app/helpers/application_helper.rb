@@ -1,2 +1,5 @@
 module ApplicationHelper
-end
+    def canonical_url
+      request.original_url
+    end
+  end

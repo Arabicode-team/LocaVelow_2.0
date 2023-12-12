@@ -17,46 +17,127 @@
       <div class="text-center mt-3">
         <%= link_to "Modifier le compte", edit_user_registration_path(@user), class: "btn btn-primary" %>
       </div>
-        </div>
+    </div>
 
-    <div class="col-md-5">
-      <h3 class="mb-3 mt-6">Mes annonces</h3>
-      <ul class="list-group">
-        <% user.bicycles.each do |bicycle| %>
-          <li class="list-group-item">
-            <h5 class="text-center"><strong>Vélo :</strong> <%= bicycle.model %></h5><br>
-            <strong>Type :</strong> <%= bicycle.bicycle_type.humanize %><br>
-            <strong>Taille :</strong> <%= bicycle.size.humanize %><br>
-            <strong>État :</strong> <%= bicycle.condition %><br>
-            <strong>Prix par heure :</strong> <%= number_to_currency(bicycle.price_per_hour, unit: '€') %><br>
-            <strong>Adresse : <%= bicycle.address %>, <%= bicycle.city %>, <%= bicycle.country %></strong>
-            <br>
-            <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
-          </li>
-        <% end %>
-      </ul>
+    <div class="col-md-12 mt-6">
+      <h3 class="mb-3">Mes annonces</h3>
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Vélo</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 custom-color">Type</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Résa en cours</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Prix/Heure</th>
+                <th class="text-secondary opacity-7 custom-color"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% user.bicycles.each do |bicycle| %>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>                      
+                      <% if bicycle.image.attached? %>
+                         <%= image_tag bicycle.image, class: "avatar avatar-sm me-3" %>
+                      <% else %>
+                         <p>Image</p>
+                      <% end %>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-xs"><%= bicycle.model %></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0"><%= bicycle.bicycle_type.humanize %></p>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <ul class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><%= bicycle.rentals.count %></a>
+  
+  <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
+    <h6 class="dropdown-header">Cliquez sur une des locations pour voir plus d'options</h6>
+
+    <% bicycle.rentals.each do |rental| %>
+      <a class="dropdown-item" href="<%= rental_path(rental) %>">Location <%= rental.id %></a>
+    <% end %>
+  </div>
+</ul>
+
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
+                  </td>
+                  <td class="align-middle">
+                  <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>              
+                </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
       <li class="list-group-item mt-3">
-        <%= link_to "Nouveau vélo", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+        <%= link_to "Nouvelle annonce", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
       </li>
     </div>
 
-    <div class="col-md-6 mx-auto">
-      <h3 class="mb-3 mt-6">Mes locations</h3>
-      <ul class="list-group">
-        <% user.rentals.each do |rental| %>
-          <li class="list-group-item">
-            <h5 class="text-center"><strong>Vélo :</strong> <%= rental.bicycle.model %></h5><br>
-            <strong>Ville :</strong> <%= rental.bicycle.city %><br>
-            <strong>De :</strong> <%= rental.start_date.strftime('%Y-%m-%d %H:%M') %><br>
-            <strong>À :</strong> <%= rental.end_date.strftime('%Y-%m-%d %H:%M') %><br>
-            <strong>Statut :</strong> <%= rental.rental_status.humanize %><br>
-            <strong>Coût total :</strong> <%= number_to_currency(rental.total_cost, unit: '€') %>
-            <br>
-            <%= link_to "Voir la location", rental, class: "btn btn-secondary btn-sm d-flex justify-content-center mt-2" %>
-            <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
-          </li>
-        <% end %>
-      </ul>
+    <div class="col-md-12 mt-6">
+      <h3 class="mb-3">Mes locations</h3>
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Vélo</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 custom-color">À partir</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Jusqu'au</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 custom-color">Prix total</th>
+                <th class="text-secondary opacity-7 custom-color"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% user.rentals.each do |rental| %>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div>
+                      <% if rental.bicycle.image.attached? %>
+                        <%= image_tag rental.bicycle.image, class: "avatar avatar-sm me-3" %>
+                      <% else %>
+                        <p>Image  </p>
+                      <% end %>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-xs"><%= rental.bicycle.model %></h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0"><%= rental.start_date.strftime('%Y-%m-%d %H:%M') %></p>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm badge-success"><%= rental.end_date.strftime('%Y-%m-%d %H:%M') %></span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(rental.total_cost, unit: '€') %></span>
+                  </td>
+                  <td class="align-middle">
+                    <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
+                    <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
+                    </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <li class="list-group-item mt-3">
+       <%= link_to "Nouveau vélo", bicycles_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+    </li>
     </div>
   </div>
 </div>
