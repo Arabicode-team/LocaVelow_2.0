@@ -8,6 +8,12 @@
           <% else %>
             <%= image_tag asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo" %>
           <% end %>    
+          <div class="d-flex justify-content-center mt-6">
+            <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
+              <strong>Prix/heure : </strong>
+              <%= bicycle.price_per_hour %> €
+            </p>
+          </div>  
         </div>
         <div class="col-md-6">
           <h4 class="text-center">
@@ -25,14 +31,14 @@
           <ul>
             <p>
               <li>
-                Catégorie :
-                <%= bicycle.bicycle_type %>
+                <strong>Catégorie :</strong>
+                <%= bicycle.bicycle_type.humanize %>
               </li>
             </p>
             <p>
               <li>
                 <strong>Taille :</strong>
-                <%= bicycle.size %>
+                <%= bicycle.size.humanize %>
               </li>
             </p>
             <p>
@@ -52,26 +58,33 @@
               </li>
             </p>
           </ul> 
-
           <p class="border rounded p-3 shadow mb-2 text-center">
           <span class="ml-2" role="img" aria-label="Avatar">👤</span>
             <strong>Propriétaire :</strong>
             <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
           </p>
-          <% if @bicycle.owner.owner_reviews.any? %>
-            <h3>Avis :</h3>
-            <% @bicycle.owner.owner_reviews.each do |owner_review| %>
-              <p><strong>Note :</strong> <%= owner_review.rating %></p>
-              <p><strong>Commentaire :</strong> <%= owner_review.review_text %></p>
-            <% end %>
-          <% else %>
-            <p>L'utilisateur n'a pas encore d'avis</p>
-          <% end %>
-          <div class="d-flex justify-content-center">
-            <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
-              <strong>Prix/heure : </strong>
-              <%= bicycle.price_per_hour %> €
-            </p>
+          <div class="container mt-4">
+            <h6 class="mb-3 text-center">Avis sur cet utilisateur</h6>
+            <div class="accordion" id="reviewsAccordion">
+            <% if @bicycle.owner.owner_reviews.any? %>
+              <% @bicycle.owner.owner_reviews.first(3).each_with_index do |owner_review, index| %>
+                <div class="accordion-item rounded shadow mb-3">
+                  <h6 class="accordion-header" id="reviewHeading<%= index %>">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#reviewCollapse<%= index %>" aria-expanded="true" aria-controls="reviewCollapse<%= index %>">
+                      Note: <%= owner_review.rating %>/5
+                    </button>
+                  </h6>
+                  <div id="reviewCollapse<%= index %>" class="accordion-collapse collapse" aria-labelledby="reviewHeading<%= index %>" data-bs-parent="#reviewsAccordion">
+                    <div class="accordion-body">
+                      Commentaire : <%= owner_review.review_text %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% else %>
+              <p>L'utilisateur n'a pas encore d'avis</p>
+            <% end %>  
+            </div>
           </div>
         </div>
       </div>

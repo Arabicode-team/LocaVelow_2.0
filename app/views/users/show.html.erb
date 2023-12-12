@@ -2,9 +2,28 @@
 
 <%= render @user %>
 
-
-
-
+<div class="container mt-4">
+  <h2 class="mb-3">Avis</h2>
+  <% if @user.owner_reviews.any? %>
+    <% @user.owner_reviews.each_slice(3) do |owner_reviews_slice| %>
+      <div class="row">
+        <% owner_reviews_slice.each do |owner_review| %>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title"><%= owner_review.reviewer_user.first_name %> <%= owner_review.reviewer_user.last_name %></h6>
+                <h5 class="card-title">Note : <%= owner_review.rating %>/5</h5>
+                <p class="card-text"><%= owner_review.review_text %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>L'utilisateur n'a pas encore d'avis</p>
+  <% end %>
+</div>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <%= button_to "Supprimer le compte", @user, method: :delete, class: "btn btn-danger" %>
   <br>

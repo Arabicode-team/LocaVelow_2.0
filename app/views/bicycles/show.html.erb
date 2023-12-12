@@ -30,14 +30,27 @@
   <% end %>
 </div>
 
-<% if @bicycle.rentals.any? %>
-  <h3>Avis :</h3>
-  <% @bicycle.rentals.each do |rental| %>
-    <% if rental.renter_review %>
-      <p><strong>Note :</strong> <%= rental.renter_review.rating %></p>
-      <p><strong>Commentaire :</strong> <%= rental.renter_review.review_text %></p>
+<div class="container mt-4">
+  <h2 class="mb-3">Avis sur ce vélo</h2>
+  <% if @bicycle.rentals.any? %>
+    <% @bicycle.rentals.each_slice(3) do |rentals_slice| %>
+      <div class="row">
+        <% rentals_slice.each do |rental| %>
+          <% if rental.renter_review %>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
+                  <h5 class="card-title">Note : <%= rental.renter_review.rating %>/5</h5>
+                  <p class="card-text"><%= rental.renter_review.review_text %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
-<% else %>
-  <p>Il n'y a pas encore d'avis</p>
-<% end %>
+  <% else %>
+    <p>Il n'y a pas encore d'avis pour cette annonce</p>
+  <% end %>        
+</div>

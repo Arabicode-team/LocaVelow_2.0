@@ -14,7 +14,7 @@
           </p>
           <p class="mb-1">
             <strong>Catégorie :</strong>
-            <%= rental.bicycle.bicycle_type %>
+            <%= rental.bicycle.bicycle_type.humanize %>
           </p>
           <p class="mb-1">
             <strong>Taille :</strong>
@@ -34,9 +34,12 @@
           </p>
           <p class="mb-1">
             <strong>Locataire :</strong>
+            <%= rental.renter.first_name %> <%= rental.renter.last_name %>
+          </p>
+          <p class="mb-1">
+            <strong>Email du locataire :</strong>
             <%= rental.renter.email %>
           </p>
-
           <p class="mb-1">
             <strong>Date de début :</strong>
             <%= rental.start_date %>
@@ -52,7 +55,13 @@
           </p>
           <p class="mb-1">
             <strong>Statut de la réservation :</strong>
-            <%= rental.rental_status %>
+            <% if rental.rental_status == "in_progress" %>
+              <%= "En cours" %>
+            <% elsif rental.rental_status == "cancelled" %>
+              <%= "Annulée" %>
+            <% elsif rental.rental_status == "completed" %>
+              <%= "Terminée" %>
+            <% end %>
           </p>
           <p>
           <% if current_user && current_user.id == rental.renter_id || current_user && current_user == rental.bicycle.owner %>

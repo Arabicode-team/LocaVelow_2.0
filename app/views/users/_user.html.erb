@@ -42,7 +42,7 @@
                       <% if bicycle.image.attached? %>
                          <%= image_tag bicycle.image, class: "avatar avatar-sm me-3" %>
                       <% else %>
-                         <p>Image</p>
+                        <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3" %>
                       <% end %>
                       </div>
                       <div class="d-flex flex-column justify-content-center">
@@ -55,17 +55,14 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     <ul class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><%= bicycle.rentals.count %></a>
-  
-  <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
-    <h6 class="dropdown-header">Cliquez sur une des locations pour voir plus d'options</h6>
-
-    <% bicycle.rentals.each do |rental| %>
-      <a class="dropdown-item" href="<%= rental_path(rental) %>">Location <%= rental.id %></a>
-    <% end %>
-  </div>
-</ul>
-
+                      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><%= bicycle.rentals.count %></a>
+                      <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
+                        <h6 class="dropdown-header">Cliquez sur une des locations pour voir plus d'options</h6>
+                        <% bicycle.rentals.each do |rental| %>
+                          <a class="dropdown-item" href="<%= rental_path(rental) %>">Location <%= rental.id %></a>
+                        <% end %>
+                      </div>
+                    </ul>
                   </td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
@@ -108,7 +105,7 @@
                       <% if rental.bicycle.image.attached? %>
                         <%= image_tag rental.bicycle.image, class: "avatar avatar-sm me-3" %>
                       <% else %>
-                        <p>Image  </p>
+                        <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3" %>
                       <% end %>
                       </div>
                       <div class="d-flex flex-column justify-content-center">
