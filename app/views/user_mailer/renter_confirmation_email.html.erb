@@ -18,10 +18,10 @@
     <li>Fin de la location : <%= @rental.end_date.strftime('%d-%m-%Y %H:%M') %></li>
     <li>Montant total : <%= @rental.total_cost %> €</li>
     <% if @rental.bicycle.address.present? %>
-    Adresse de rendez-vous pour la récupération du vélo : <%= @rental.bicycle.address %>
-  <% else %>
-  Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse où vous allez rejoindre le propriétaire pour récupérer votre vélo.
-  <% end %>  
+      <li>Adresse de rendez-vous pour la récupération du vélo : <%= @rental.bicycle.address %></li>
+    <% else %>
+      <li>Rendez-vous dans votre espace personnel sur Locavelow pour obtenir l'adresse où vous allez rejoindre le propriétaire pour récupérer votre vélo.</li>
+    <% end %>
   </ul>
 </p>
 
