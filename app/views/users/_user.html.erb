@@ -53,6 +53,7 @@
             <strong>Coût total :</strong> <%= number_to_currency(rental.total_cost, unit: '€') %>
             <br>
             <%= link_to "Voir la location", rental, class: "btn btn-secondary btn-sm d-flex justify-content-center mt-2" %>
+            <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>
           </li>
         <% end %>
       </ul>

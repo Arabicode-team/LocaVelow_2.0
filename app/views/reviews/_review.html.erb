@@ -1,31 +1,31 @@
 <div id="<%= dom_id review %>">
   <p>
-    <strong>Rental:</strong>
-    <%= review.rental_id %>
+    <strong>Location :</strong>
+    <%= review.rental.bicycle.model %>
   </p>
 
   <p>
-    <strong>Reviewed user:</strong>
-    <%= review.reviewed_user_id %>
+    <strong>Utilisateur noté :</strong>
+    <%= review.rental.bicycle.owner.first_name %> <%= review.rental.bicycle.owner.last_name %>
   </p>
 
   <p>
-    <strong>Reviewer user:</strong>
-    <%= review.reviewer_user_id %>
+    <strong>Utilisateur noteur :</strong>
+    <%= review.rental.renter.first_name %> <%= review.rental.renter.last_name %>
   </p>
 
   <p>
-    <strong>Rating:</strong>
+    <strong>Note :</strong>
     <%= review.rating %>
   </p>
 
   <p>
-    <strong>Review text:</strong>
+    <strong>Avis :</strong>
     <%= review.review_text %>
   </p>
 
   <p>
-    <strong>Review date:</strong>
+    <strong>Date de l'avis :</strong>
     <%= review.review_date %>
   </p>
 
