@@ -30,3 +30,14 @@
   <% end %>
 </div>
 
+<% if @bicycle.rentals.any? %>
+  <h3>Avis :</h3>
+  <% @bicycle.rentals.each do |rental| %>
+    <% if rental.renter_review %>
+      <p><strong>Note :</strong> <%= rental.renter_review.rating %></p>
+      <p><strong>Commentaire :</strong> <%= rental.renter_review.review_text %></p>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Il n'y a pas encore d'avis</p>
+<% end %>

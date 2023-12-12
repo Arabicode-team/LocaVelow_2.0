@@ -53,6 +53,15 @@
             <strong>Propriétaire :</strong>
             <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
           </p>
+          <% if @bicycle.owner.owner_reviews.any? %>
+            <h3>Avis :</h3>
+            <% @bicycle.owner.owner_reviews.each do |owner_review| %>
+              <p><strong>Note :</strong> <%= owner_review.rating %></p>
+              <p><strong>Commentaire :</strong> <%= owner_review.review_text %></p>
+            <% end %>
+          <% else %>
+            <p>L'utilisateur n'a pas encore d'avis</p>
+          <% end %>
           <div class="d-flex justify-content-center">
             <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
               <strong>Prix/heure : </strong>
