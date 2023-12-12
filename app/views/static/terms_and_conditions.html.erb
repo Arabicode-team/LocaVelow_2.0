@@ -1,7 +1,7 @@
-<div class="text-start">
+<div class="text-start mx-3">
   <h2>Table des Matières</h2>
   <h3>
-    I. Dispositions Générales
+    <a href="#dispositions-generales">I. Dispositions Générales</a>
     <button class="toggleButton" data-toggle="generalProvisionsList" style="float: center"><i class="fas fa-eye"></i></button>
   </h3>
   <ul id="generalProvisionsList" class="generalProvisionsList">
@@ -71,8 +71,36 @@
     <li>11.3 Non Renonciation</li>
     <li>11.4 Langue</li>
     <li>11.5 Litiges et Réclamations</li>
+  </ul>
+
+ <h2 id="dispositions-generales">I. Dispositions Générales</h2>
+  <h3>1.1 Bienvenue sur Locavelow</h3>
+  <p>Bienvenue sur Locavelow, la plateforme dédiée à la facilitation de la location de vélos entre particuliers.
+   Nous sommes ravis de vous accueillir au sein de notre communauté dynamique, conçue pour connecter de manière
+    efficace les individus cherchant à louer des vélos avec ceux offrant des services de location. À travers Locavelow,
+     nous aspirons à créer une expérience conviviale et sécurisée, favorisant la mobilité partagée tout en établissant des connexions
+      entre passionnés de cyclisme. En utilisant notre application, vous vous engagez à respecter les conditions énoncées
+       dans les présentes Conditions Générales d'Utilisation. Merci de faire partie de l'aventure Locavelow et de contribuer
+        à la promotion d'une mobilité durable.</p>
+  <h3>1.2 Acceptation des Conditions Générales d'Utilisation</h3>
+  <p>En accédant à l'application Locavelow et en utilisant les services proposés, vous reconnaissez avoir pris connaissance
+   et acceptez de vous conformer aux présentes Conditions Générales d'Utilisation. Votre utilisation de l'application est
+    conditionnée à votre acceptation sans réserve de l'ensemble des dispositions énoncées dans ce document. Si vous n'êtes
+     pas en accord avec une quelconque partie de ces conditions, nous vous prions de ne pas utiliser notre service.
+  <br><br>
+    L'acceptation des Conditions Générales d'Utilisation constitue un contrat légalement contraignant entre vous
+     et Locavelow. Vous comprenez que l'utilisation du service peut également être régie par des politiques additionnelles
+      ou des conditions spécifiques à certaines fonctionnalités, lesquelles seront communiquées de manière claire au sein de l'application.
+  <br><br>
+Votre accès et votre utilisation de Locavelow signifient que vous consentez à être lié par ces conditions et toutes
+ modifications ultérieures que nous pourrions apporter. Il vous incombe de consulter régulièrement les Conditions Générales
+  d'Utilisation pour rester informé des éventuelles mises à jour. Si vous refusez de vous conformer
+ à ces conditions, nous vous prions de cesser immédiatement d'utiliser l'application Locavelow.</p>
+
 </div>
 
+
+<button onclick="topFunction()" id="myBtn" title="Go to top" class="btn btn-primary position-fixed bottom-0 end-0 mb-3 me-3"><i class="fas fa-arrow-up"></i></button>
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
   let toggleButtons = document.querySelectorAll('.toggleButton');
@@ -93,4 +121,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 });
+
+var mybutton = document.getElementById("myBtn");
+
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 </script>
