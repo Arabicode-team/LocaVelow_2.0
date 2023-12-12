@@ -61,6 +61,15 @@ class BicyclesController < ApplicationController
     end
   end
 
+    def in_bounds
+      ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
+    
+      @bicycles = Bicycle.where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
+                                ne_lat, sw_lat, ne_lng, sw_lng)
+    
+      render partial: 'bicycles/list', locals: { bicycles: @bicycles }
+    end    
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bicycle
