@@ -55,7 +55,7 @@
             <%= rental.rental_status %>
           </p>
           <p>
-          <% if current_user && current_user == rental.renter %>
+          <% if current_user && current_user.id == rental.renter_id || current_user && current_user == rental.bicycle.owner %>
           <% if rental.refundable? %>
           <p>L'annulation et le remboursement sont possibles jusqu'à 48h avant la date et l'heure prévue. Passé ce délai, il n'est plus possible d'annuler votre location.</p>
           <%= button_to 'Annuler la location et demander un remboursement', refund_rental_path(rental.id), method: :post, data: { confirm: 'Êtes-vous sûr de vouloir demander un remboursement?' } %>
