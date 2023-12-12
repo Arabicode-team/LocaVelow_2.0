@@ -23,7 +23,7 @@ class RentalsController < ApplicationController
   def create
     @bicycle = Bicycle.find_by(id: params[:rental][:bicycle_id])
     @rental = Rental.new(rental_params)
-    @rental.renter = current_user # или как вы определяете текущего пользователя
+    @rental.renter = current_user 
     @rental.total_cost = @rental.calculate_total_cost
 
   if @rental.valid?
@@ -49,7 +49,7 @@ class RentalsController < ApplicationController
           product_data: {
             name: 'Paiement de votre réservation',
           },
-          unit_amount: (@rental.total_cost * 100).to_i, # Цена в центах
+          unit_amount: (@rental.total_cost * 100).to_i, 
         },
         quantity: 1,
       }],
@@ -143,6 +143,6 @@ class RentalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rental_params
-      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status, :stripe_charge_id)
+      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status, :stripe_charge_id, :stripe_refund_id)
     end
 end
