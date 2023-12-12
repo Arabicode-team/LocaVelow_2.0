@@ -1,0 +1,47 @@
+.custom-toggler .bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #506191;
+    margin: 4px 0;
+}
+
+.para1 { 
+    max-width: 600px; 
+    padding: 10px; 
+    word-wrap: break-word; 
+    text-align: left;
+}
+
+.para2 { 
+    max-width: 600px; 
+    padding: 10px; 
+    word-wrap: break-word; 
+    text-align: right;
+}
+
+.para1.p {
+    font-size: 16px; 
+    line-height: 1.5;
+}
+
+.para2.p {
+    font-size: 16px; 
+    line-height: 1.5;
+}
+
+.lastpara {
+    max-width: 600px; 
+    padding: 10px; 
+    word-wrap: break-word;
+}
+
+.mapIndex {
+    flex: 1;
+    height: 830px;
+  }
+
+  #index-map {
+    height: 100%;
+    border-radius: 25px;
+  }

@@ -1,5 +1,3 @@
-
-
 <% if local_assigns[:show_details] == true %>
   <div id="<%= dom_id bicycle %>">
     <div class="container mt-4">
@@ -42,9 +40,13 @@
           </p>
           <p>
           <li>
-            <strong>Accessoires :</strong>
-            <%= bicycle.accessories.first&.name %>
-          </li>
+          <strong>Accessoires :</strong>
+          <% if bicycle.accessories.present? %>
+            <%= bicycle.accessories.map(&:name).join(', ') %>
+          <% else %>
+            Pas d'accessoires disponibles.
+          <% end %>
+        </li>
           </p>
           <p class="border rounded p-3 shadow mb-2 text-center">
           <span class="ml-2" role="img" aria-label="Avatar">👤</span>
@@ -86,7 +88,7 @@
       Taille : <%= bicycle.size %> <br>
       </p>
       <p>
-      Adresse : <%= bicycle.address %>
+      Localisation : <%= bicycle.country %>, <%= bicycle.city %>
       </p>
     </div>
   </div>
