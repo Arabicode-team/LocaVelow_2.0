@@ -32,11 +32,13 @@
 
 <div class="container mt-4">
   <h2 class="mb-3">Avis sur ce vélo</h2>
+  <% avis_present = false %>
   <% if @bicycle.rentals.any? %>
     <% @bicycle.rentals.each_slice(3) do |rentals_slice| %>
       <div class="row">
         <% rentals_slice.each do |rental| %>
           <% if rental.renter_review %>
+            <% avis_present = true %>
             <div class="col-md-4 mb-4">
               <div class="card">
                 <div class="card-body">
@@ -50,7 +52,9 @@
         <% end %>
       </div>
     <% end %>
-  <% else %>
+  <% end %>
+
+  <% unless avis_present %>
     <p>Il n'y a pas encore d'avis pour cette annonce</p>
   <% end %>        
 </div>

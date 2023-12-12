@@ -1,37 +1,38 @@
-<%= form_with(model: review) do |form| %>
-  <% if review.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+<div class="container mt-4" style="max-width: 600px;">
+  <%= form_with(model: review) do |form| %>
+    <% if review.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h4>
 
-      <ul>
-        <% review.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% review.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form.hidden_field :rental_id, value: params[:rental_id] %>
+    <%= form.hidden_field :reviewed_user_id, value: params[:reviewed_user_id] %>
+    <%= form.hidden_field :reviewer_user_id, value: params[:reviewer_user_id] %>
+
+    <div class="mb-3">
+      <%= form.label :rating, "Note", class: "form-label" %>
+      <%= form.number_field :rating, class: "form-control", in: 0..5 %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :review_text, "Avis", class: "form-label" %>
+      <%= form.text_area :review_text, class: "form-control", rows: 4 %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :review_date, "Date de l'avis", class: "form-label" %>
+      <%= form.datetime_field :review_date, class: "form-control" %>
+    </div>
+
+    <div class="text-center">
+      <%= form.submit "Poster un avis", class: "btn btn-primary" %>
     </div>
   <% end %>
-  
-
-  <%= form.hidden_field :rental_id, value: params[:rental_id] %>
-  <%= form.hidden_field :reviewed_user_id, value: params[:reviewed_user_id] %>
-  <%= form.hidden_field :reviewer_user_id, value: params[:reviewer_user_id] %>
-
-  <div>
-    <%= form.label :rating, "Note", style: "display: block" %>
-    <%= form.number_field :rating %>
-  </div>
-
-  <div>
-    <%= form.label :review_text, "Avis", style: "display: block" %>
-    <%= form.text_area :review_text %>
-  </div>
-
-  <div>
-    <%= form.label :review_date, "Date de l'avis", style: "display: block" %>
-    <%= form.datetime_field :review_date %>
-  </div>
-
-  <div>
-    <%= form.submit "Poster un avis" %>
-  </div>
-<% end %>
+</div>

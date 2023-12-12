@@ -1,32 +1,25 @@
-<div id="<%= dom_id review %>">
-  <p>
-    <strong>Location :</strong>
-    <%= review.rental.bicycle.model %>
-  </p>
+<div id="<%= dom_id review %>" class="card mb-3 mx-auto" style="max-width: 40rem;">
+  <div class="card-body">
+    <h5 class="card-title">Location : <%= review.rental.bicycle.model %></h5>
 
-  <p>
-    <strong>Utilisateur noté :</strong>
-    <%= review.rental.bicycle.owner.first_name %> <%= review.rental.bicycle.owner.last_name %>
-  </p>
+    <p class="card-text">
+      <strong>Utilisateur noté :</strong>
+      <%= review.rental.bicycle.owner.first_name %> <%= review.rental.bicycle.owner.last_name %>
+    </p>
 
-  <p>
-    <strong>Utilisateur noteur :</strong>
-    <%= review.rental.renter.first_name %> <%= review.rental.renter.last_name %>
-  </p>
+    <p class="card-text">
+      <strong>Note :</strong>
+      <%= review.rating %>
+    </p>
 
-  <p>
-    <strong>Note :</strong>
-    <%= review.rating %>
-  </p>
+    <p class="card-text">
+      <strong>Avis :</strong>
+      <%= review.review_text %>
+    </p>
 
-  <p>
-    <strong>Avis :</strong>
-    <%= review.review_text %>
-  </p>
-
-  <p>
-    <strong>Date de l'avis :</strong>
-    <%= review.review_date %>
-  </p>
-
+    <p class="card-text">
+      <strong>Date de l'avis :</strong>
+      <%= review.review_date %>
+    </p>
+  </div>
 </div>
