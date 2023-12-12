@@ -1,20 +1,10 @@
-<% if user_signed_in? %>
+<%= render 'shared/banner' %>
+<br></br>
   <div class="container d-flex flex-row justify-content-center align-items-stretch">
     <div>
-        <form class="d-md-flex justify-content-center mt-4">
-          <div class="form-group mx-2">
-            <input type="text" class="form-control" placeholder="Où">
-          </div>
-          <div class="form-group mx-2">
-            <input type="text" class="form-control" placeholder="Quand">
-          </div>
-          <div class="form-group mx-2">
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-          </div>
-        </form>
       <div id="bicycles" class="row d-flex justify-content-center">
-        <div style="flex: 1; height: 900px;">
-          <div id="index-map" style="height: 100%;"></div>
+        <div class="mapIndex">
+          <div id="index-map"></div>
         </div>
         <div id="carouselExampleControls" class="carousel slide col-md-6 mx-auto" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -26,7 +16,7 @@
                       <%= render bicycle %>
                       <div class="d-flex justify-content-between align-items-center">
                         <h5 class="text-primary mb-0" style="color: #FFDE8C;"><%= "#{bicycle.price_per_hour}€/1h" %></h5>
-                        <%= link_to "Voir le vélo", bicycle, class: "btn btn-outline-light btn-sm ml-auto", style: "background-color: #506191; color: #FFDE8C; border-radius: 25px;" %>
+                        <%= link_to "Voir le vélo", bicycle, class: "btn btn-outline-dark btn-sm ml-auto"%>
                       </div>
                     </div>
                   <% end %>
@@ -50,93 +40,4 @@
   </div>
   <br></br>
   <br></br>
-<% else %>
-
-  <%= render 'shared/banner' %>
-
-  <div id="index-map" style="height: 400px;"></div>
-
-  <div class="container">
-    <h1 style="font-weight: bold; font-style: italic;">Bienvenue chez Locavelow</h1>
-
-    <br></br>
-    <h3 style="font-weight: bold;">Liberté et Aventure avec Locavelow !</h3>
-
-    <h4 style="font-style: italic;">Le concept</h4>
-    <div style="max-width: 600px; padding: 10px; word-wrap: break-word;">
-      <p style="font-size: 16px; line-height: 1.5;">
-        Nous avons simplifié le processus de location de vélos pour que vous puissiez pédaler sans tracas.
-        Louez votre vélo idéal ou offrez au vôtre une vie pleine d'aventures en le mettant en location sur notre plateforme accessible dans toute la France.
-      </p>
-    </div>
-
-    <h4 style="font-style: italic; text-align: right;">Choix Illimité</h4>
-    <div class="d-flex justify-content-end">
-      <div style="max-width: 600px; padding: 10px; word-wrap: break-word; text-align: right;">
-        <p style="font-size: 16px; line-height: 1.5;">
-          Trouvez le modèle de vos rêves, vérifiez la disponibilité et partez à l'aventure n’importe où en France. Pas de complications, juste le plaisir sans limites de la découverte.
-        </p>
-      </div>
-    </div>
-
-    <h4 style="font-style: italic;">Simplicité et Disponibilité</h4>
-    <div style="max-width: 600px; padding: 10px; word-wrap: break-word;">
-      <p style="font-size: 16px; line-height: 1.5;">
-        Trouvez le modèle de vos rêves, vérifiez la disponibilité et partez à l'aventure n’importe où en France. Pas de complications, juste le plaisir sans limites de la découverte.
-      </p>
-    </div>
-
-    <div class="d-flex justify-content-end">
-      <%= link_to "Je loue un vélo", new_user_registration_path, class: "btn btn-outline-light btn-sm ml-auto", style: "background-color: #506191; color: #FFDE8C; border-radius: 25px;" %>
-    </div>
-    
-      <div id="bicycles" class="row d-flex justify-content-center">
-        <% @bicycles.each_with_index do |bicycle, index| %>
-          <div class="card border-warning col-md-3 col-lg-3 mx-1 my-2 pb-1 <%= index >= 3 ? 'd-none extra-card' : '' %>" id="card<%= index %>">
-            <%= render bicycle %>
-            <div class="d-flex justify-content-between align-items-center">
-              <h5 class="text-primary mb-0" style="color: #FFDE8C;"><%= "#{bicycle.price_per_hour}€/1h" %></h5>
-              <%= link_to "Voir le vélo", bicycle, class: "btn btn-outline-light btn-sm ml-auto", style: "background-color: #506191; color: #FFDE8C; border-radius: 25px;" %>
-            </div>
-          </div>
-        <% end %>
-
-        <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            var cards = document.querySelectorAll('.extra-card');
-            var maxCardsToShow = 3;
-
-            for (var i = maxCardsToShow; i < cards.length; i++) {
-              cards[i].style.display = 'none';
-            }
-          });
-        </script>
-      </div>
-  </div>
-
-  <div class="container">
-
-    <br></br>
-
-    <div class="d-flex justify-content-center">
-    <h1 style="font-weight: bold; font-style: italic;">Louer son propre vélo à un particulier ?</h1>
-    </div>
-
-    <br></br>
-
-    <div style="max-width: 600px; padding: 10px; word-wrap: break-word;">
-      <ul>
-          <li>Des vélos dont vous ne vous servez pas ?</li>
-          <li>Besoin de rentabiliser un achat de vélo ?</li>
-          <li>Envie de faire profiter de votre équipement à d’autres personnes, à moindre coût ?</li>
-      </ul>
-    </div>
-
-    <div class="d-flex justify-content-end">
-      <%= link_to "Mettre son vélo en location", new_user_registration_path, class: "btn btn-outline-light btn-sm ml-auto", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px;" %>
-    </div>
-
-    <br></br>
-
-<% end %>
 
