@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :admin_only, only: %i[ index destroy new ]
 
   # GET /reviews or /reviews.json
   def index
@@ -17,6 +18,11 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    unless current_user.id == @review.reviewer_user_id 
+      #Note: Only the user who left the review is allowed to edit it
+      flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+      redirect_to root_path
+    end
   end
 
   # POST /reviews or /reviews.json
@@ -25,7 +31,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to review_url(@review), notice: "L'avis a bien été déposé" }
+        format.html { redirect_to review_url(@review), notice: "L'avis a bien été déposé." }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +44,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to review_url(@review), notice: "L'avis a bien été modifié" }
+        format.html { redirect_to review_url(@review), notice: "L'avis a bien été modifié." }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -66,5 +72,12 @@ class ReviewsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def review_params
       params.require(:review).permit(:rental_id, :reviewed_user_id, :reviewer_user_id, :rating, :review_text, :review_date)
+    end
+
+    def admin_only
+      unless current_user.admin?
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
     end
 end
