@@ -8032,9 +8032,9 @@
       const duration = (endDateTime - startDateTime) / 36e5;
       if (duration > 0) {
         const cost = duration * pricePerHour;
-        costDisplay.textContent = "Estimated Cost: $" + cost.toFixed(2);
+        costDisplay.textContent = "Prix total estim\xE9: " + cost.toFixed(2) + "\u20AC";
       } else {
-        costDisplay.textContent = "Estimated Cost: $0";
+        costDisplay.textContent = "Prix total estim\xE9: 0 \u20AC";
       }
     });
   }

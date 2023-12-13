@@ -28,7 +28,7 @@ class BicyclesController < ApplicationController
 
     respond_to do |format|
       if @bicycle.save
-        format.html { redirect_to bicycle_url(@bicycle), notice: "Bicycle was successfully created." }
+        format.html { redirect_to bicycle_url(@bicycle), notice: "L'annonce a bien été créée" }
         format.json { render :show, status: :created, location: @bicycle }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class BicyclesController < ApplicationController
   def update
     respond_to do |format|
       if @bicycle.update(bicycle_params)
-        format.html { redirect_to bicycle_url(@bicycle), notice: "Bicycle was successfully updated." }
+        format.html { redirect_to bicycle_url(@bicycle), notice: "L'annonce a bien été modifiée" }
         format.json { render :show, status: :ok, location: @bicycle }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class BicyclesController < ApplicationController
   # DELETE /bicycles/1 or /bicycles/1.json
     def destroy
       if @bicycle.destroy
-        redirect_to bicycles_path, notice: 'Bicycle was successfully deleted.'
+        redirect_to bicycles_path, alert: "L'annonce a bien été supprimée"
       else
         redirect_to bicycles_path, alert: @bicycle.errors.full_messages.to_sentence
       end
