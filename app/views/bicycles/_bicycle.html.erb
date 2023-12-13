@@ -42,7 +42,7 @@
               <li>
               <strong>Accessoires :</strong>
               <% if bicycle.accessories.present? %>
-                <%= bicycle.accessories.map(&:name).join(', ') %>
+                <%= bicycle.accessories.map(&:accessory_type).join(', ').humanize %>
               <% else %>
                 Pas d'accessoires disponibles.
               <% end %>
@@ -58,8 +58,12 @@
         </div>
         <div class="col-md-6">
           <div class="d-flex justify-content-center mt-2 border rounded shadow pt-3">
+            <% if @bicycle.owner.image.attached? %>
+              <%= image_tag @bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px" %>
+            <% else %>
+              <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px" %>
+            <% end %> 
             <p class="text-center">
-              <span class="ml-2" role="img" aria-label="Avatar">👤</span>
               <strong>Propriétaire :</strong>
               <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
             </p>
@@ -69,7 +73,7 @@
               <div class="accordion-item rounded shadow mb-3">
                 <h6 class="accordion-header" id="userReviewsHeading">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#userReviewsCollapse" aria-expanded="true" aria-controls="userReviewsCollapse">
-                    Avis utilisateur
+                    <strong>Avis utilisateur</strong>
                     <span class="ms-2 me-2">
                       <% received_reviews = Review.where(reviewed_user_id: @bicycle.owner_id) %>
                       <% if received_reviews.count > 0 %>
@@ -79,7 +83,9 @@
                         <span><%= average_rating_rounded %>/5</span>
                       <% else %>
                       <% end %>
-                      <i class="fas fa-star"></i>  
+                      <% if @bicycle.owner.owner_reviews.any? %>
+                        <i class="fas fa-star"></i>  
+                      <% end %>  
                     </span>  
                     <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
@@ -161,3 +167,37 @@
   </div>
   </div>	
 <% end %>  
+
+<!-- Modal -->
+<div class="modal fade" id="addAccessoryModal" tabindex="-1" aria-labelledby="addAccessoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addAccessoryModalLabel">Ajouter un accessoire</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: Accessory.new, url: accessories_path, remote: true) do |form| %>
+          <div class="mb-3">
+            <%= form.hidden_field :bicycle_id, value: bicycle.id %>
+            <%= form.label :accessory_type, "Accessoires", class: "form-label" %>
+        
+            <% Accessory.accessory_types.keys.each do |type| %>
+              <div class="form-check">
+                <%= form.check_box :accessory_type, { multiple: true }, type, nil %>
+                <%= form.label "accessory_type_#{type}", type.humanize, class: "form-check-label" %>
+              </div>
+            <% end %>
+        
+          </div>
+          <div class="modal-footer">
+            <%= form.submit "Ajouter", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
