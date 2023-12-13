@@ -167,37 +167,3 @@
   </div>
   </div>	
 <% end %>  
-
-<!-- Modal -->
-<div class="modal fade" id="addAccessoryModal" tabindex="-1" aria-labelledby="addAccessoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addAccessoryModalLabel">Ajouter un accessoire</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <%= form_with(model: Accessory.new, url: accessories_path, remote: true) do |form| %>
-          <div class="mb-3">
-            <%= form.hidden_field :bicycle_id, value: bicycle.id %>
-            <%= form.label :accessory_type, "Accessoires", class: "form-label" %>
-        
-            <% Accessory.accessory_types.keys.each do |type| %>
-              <div class="form-check">
-                <%= form.check_box :accessory_type, { multiple: true }, type, nil %>
-                <%= form.label "accessory_type_#{type}", type.humanize, class: "form-check-label" %>
-              </div>
-            <% end %>
-        
-          </div>
-          <div class="modal-footer">
-            <%= form.submit "Ajouter", class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
