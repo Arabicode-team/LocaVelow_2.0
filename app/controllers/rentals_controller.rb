@@ -1,5 +1,8 @@
 class RentalsController < ApplicationController
   before_action :set_rental, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :authorize_user, only: %i[ show ]
+  before_action :admin_only, only: %i[ index edit destroy new ]
 
   # GET /rentals or /rentals.json
   def index
@@ -144,5 +147,21 @@ class RentalsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def rental_params
       params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status, :stripe_charge_id, :stripe_refund_id)
+    end
+
+    def authorize_user
+      @rental = Rental.find(params[:id])
+    
+      unless current_user.admin? || current_user == @rental.bicycle.owner || current_user == @rental.renter
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
+    end
+
+    def admin_only
+      unless current_user.admin?
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
     end
 end

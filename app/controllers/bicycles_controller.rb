@@ -70,5 +70,4 @@ class BicyclesController < ApplicationController
       params.require(:bicycle).permit(:owner_id, :model, :bicycle_type, :size, :condition, :price_per_hour, :latitude, :longitude,
         :address, :city, :country, :postal_code, :state, :description, :image)
     end
-   
 end
