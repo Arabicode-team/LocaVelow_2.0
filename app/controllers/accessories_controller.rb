@@ -1,6 +1,6 @@
 class AccessoriesController < ApplicationController
   before_action :set_accessory, only: %i[ show edit update destroy ]
-  before_action :admin_only, only: %i[ index show edit destroy new ]
+  before_action :admin_only, only: %i[ index edit destroy new ]
 
   # GET /accessories or /accessories.json
   def index
