@@ -40,11 +40,6 @@
           </div> 
           <%= form.text_field :condition, class: "form-control" %>
         </div>
-        <div>   
-          <%= form.label :accessory_type, "Accessoires", style: "display: block" %>
-          <%= form.select :accessory_type, Accessory.accessory_types.keys.map { |type| [type.humanize, type]}, {}, { class: "form-select", multiple: true } %> 
-        </div>
-
         <div>
           <%= form.label :description, "Description", style: "display: block" %>
           <%= form.text_area :description, class: "form-control" %>

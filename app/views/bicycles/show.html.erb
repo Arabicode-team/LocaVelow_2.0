@@ -13,8 +13,6 @@
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
 
-<div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
-
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
@@ -43,8 +41,28 @@
               <div class="card">
                 <div class="card-body">
                   <h6 class="card-title"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
-                  <h5 class="card-title">Note : <%= rental.renter_review.rating %>/5</h5>
+                  <div class="stars">
+                    <% rental.renter_review.rating.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - rental.renter_review.rating).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>  
+                  </div>  
                   <p class="card-text"><%= rental.renter_review.review_text %></p>
+                  <% if rental.renter_review.review_date.present? %>
+                    <% review_date = rental.renter_review.review_date %>
+                    <% months_ago = ((Time.now - review_date) / 1.month).round %>
+                    <p><strong>
+                      <% if months_ago.zero? %>
+                        Il y a moins d'un mois
+                      <% elsif months_ago == 1 %>
+                        Il y a un mois
+                      <% else %>
+                        Il y a <%= months_ago %> mois
+                      <% end %></strong>
+                    </p>
+                  <% end %>
                 </div>
               </div>
             </div>
