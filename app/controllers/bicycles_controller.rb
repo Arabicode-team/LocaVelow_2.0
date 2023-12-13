@@ -1,5 +1,6 @@
 class BicyclesController < ApplicationController
   before_action :set_bicycle, only: %i[ edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /bicycles or /bicycles.json
   def index
@@ -69,5 +70,4 @@ class BicyclesController < ApplicationController
       params.require(:bicycle).permit(:owner_id, :model, :bicycle_type, :size, :condition, :price_per_hour, :latitude, :longitude,
         :address, :city, :country, :postal_code, :state, :description, :image)
     end
-   
 end
