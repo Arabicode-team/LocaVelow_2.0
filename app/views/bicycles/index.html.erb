@@ -2,17 +2,22 @@
 <br></br>
   <div class="container d-flex flex-row justify-content-center align-items-stretch">
     <div>
-        <form class="d-md-flex justify-content-center mt-4">
-          <div class="form-group mx-2">
-            <input type="text" id="city-input" class="form-control" placeholder="Ville">
-          </div>
-          <div class="form-group mx-2">
-            <input type="text" class="form-control" placeholder="Quand">
-          </div>
-          <div class="form-group mx-2">
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-          </div>
-        </form>
+    <div class="form-group mx-2">
+  <%= text_field_tag :city, nil, id: "city-input", class: "form-control", placeholder: "Ville" %>
+</div>
+
+<%= form_with url: bicycles_filtered_path, method: :get, class: "d-md-flex justify-content-center mt-4", id: "search-form" do |form| %>
+  <div class="form-group mx-2">
+    <%= form.datetime_field :start_date, class: "form-control", placeholder: "Début" %>
+  </div>
+  <div class="form-group mx-2">
+    <%= form.number_field :duration, class: "form-control", placeholder: "Durée (en heures)" %>
+  </div>
+  <div class="form-group mx-2">
+    <%= form.submit "Rechercher", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
       <div id="bicycles" class="row d-flex justify-content-center">
         <div class="mapIndex">
           <div id="index-map"></div>

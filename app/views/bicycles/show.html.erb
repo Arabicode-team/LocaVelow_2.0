@@ -12,6 +12,8 @@
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
 
+<div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
+
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>

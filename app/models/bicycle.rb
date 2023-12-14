@@ -23,4 +23,19 @@ class Bicycle < ApplicationRecord
   def extra_large
     return self.image.variant(resize_to_limit: [1200, 1200]).processed
   end
+
+  def self.filter_by_date_and_city(start_date, end_date)
+    left_outer_joins(:rentals)
+      .where('rentals.id IS NULL OR (rentals.start_date >= ? OR rentals.end_date <= ?)', end_date, start_date)
+  end
+  
+
+
+    def check_active_rentals
+      if self.rentals.where.not(rental_status: :completed).exists?
+        errors.add(:base, "Cannot delete bicycle with active rentals.")
+        throw :abort
+      end
+    end
+  
 end

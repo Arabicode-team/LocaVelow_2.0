@@ -61,7 +61,7 @@ class BicyclesController < ApplicationController
     end
   end
 
-    def in_bounds
+    def bicycles_in_bounds
       ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
     
       @bicycles = Bicycle.where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
@@ -70,6 +70,23 @@ class BicyclesController < ApplicationController
       render partial: 'bicycles/list', locals: { bicycles: @bicycles }
     end    
 
+    def bicycles_filtered
+      start_datetime = DateTime.parse(params[:start_date])
+      duration = params[:duration].to_i.hours
+      end_datetime = start_datetime + duration
+    
+      @bicycles = Bicycle.filter_by_date_and_city(start_datetime, end_datetime)
+
+      puts @bicycles.to_json # Для отладки
+      
+      respond_to do |format|
+        format.json { render json: @bicycles }
+        format.html { render partial: 'bicycles/list', locals: { bicycles: @bicycles } }
+      end
+    end
+    
+    
+    
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bicycle
