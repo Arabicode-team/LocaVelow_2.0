@@ -8,8 +8,6 @@ class Bicycle < ApplicationRecord
 
   enum size: { petit: 0, moyen: 1, grand: 2, tres_grand: 3, enfant: 4, autre: 5 }
 
-  before_destroy :check_active_rentals
-
   def thumbnail
     return self.image.variant(resize_to_limit: [150, 150]).processed
   end
@@ -26,13 +24,3 @@ class Bicycle < ApplicationRecord
     return self.image.variant(resize_to_limit: [1200, 1200]).processed
   end
 end
-
-  private
-
-    def check_active_rentals
-      if rentals.where.not(rental_status: "completed").exists?
-        errors.add(:base, "Cannot delete bicycle with active rentals.")
-        throw :abort
-      end
-    end
-  
