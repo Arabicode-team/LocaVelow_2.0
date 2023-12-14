@@ -1,9 +1,9 @@
-<h1>New review</h1>
+<h1 class="text-center">Poster un avis</h1>
 
 <%= render "form", review: @review %>
 
 <br>
 
-<div>
-  <%= link_to "Back to reviews", reviews_path %>
+<div class="d-flex justify-content-center mb-6">
+  <%= link_to "Retour", user_path(current_user) %>
 </div>
