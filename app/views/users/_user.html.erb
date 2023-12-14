@@ -102,7 +102,7 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                      <% if rental.bicycle.image.attached? %>
+                      <% if rental.bicycle.image.present? && rental.bicycle.image.attached? %>
                         <%= image_tag rental.bicycle.image, class: "avatar avatar-sm me-3" %>
                       <% else %>
                         <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3" %>
