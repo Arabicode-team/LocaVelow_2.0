@@ -51,13 +51,15 @@ class BicyclesController < ApplicationController
   end
 
   # DELETE /bicycles/1 or /bicycles/1.json
-    def destroy
-      if @bicycle.destroy
-        redirect_to bicycles_path, alert: "L'annonce a bien été supprimée"
-      else
-        redirect_to bicycles_path, alert: @bicycle.errors.full_messages.to_sentence
-      end
+  def destroy
+    if @bicycle.rentals.exists?(rental_status: :in_progress)
+      redirect_to bicycles_path, alert: "Impossible de supprimer le vélo/l'annonce car il a des locations en cours."
+    elsif @bicycle.destroy
+      redirect_to bicycles_path, notice: "L'annonce a bien été supprimée."
+    else
+      redirect_to bicycles_path, alert: @bicycle.errors.full_messages.to_sentence
     end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
