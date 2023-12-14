@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :rentals
   resources :bicycles
 
+<<<<<<< HEAD
   resources :rentals do
     member do
       post 'refund'
@@ -29,6 +30,10 @@ Rails.application.routes.draw do
   end
     
   get '/bicycles_filtered', to: 'bicycles#bicycles_filtered', defaults: { format: 'html' }
+=======
+  get 'bicycles_in_bounds', to: 'bicycles#bicycles_in_bounds'
+  get '/bicycles_filtered', to: 'bicycles#bicycles_filtered', defaults: { format: 'json' }
+>>>>>>> af2f535 (marktrs of filter (seeds bug))
 
   #route for gem letter_opener for emails in dev environment
   get 'terms_and_conditions', to: 'static#terms_and_conditions'

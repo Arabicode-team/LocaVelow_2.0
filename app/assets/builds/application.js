@@ -1258,11 +1258,11 @@
     return fetchMethodFromString(fetchMethod) == FetchMethod.get;
   }
   function buildResourceAndBody(resource, method, requestBody, enctype) {
-    const searchParams = Array.from(requestBody).length > 0 ? new URLSearchParams(entriesExcludingFiles(requestBody)) : resource.searchParams;
+    const searchParams2 = Array.from(requestBody).length > 0 ? new URLSearchParams(entriesExcludingFiles(requestBody)) : resource.searchParams;
     if (isSafe(method)) {
-      return [mergeIntoURLSearchParams(resource, searchParams), null];
+      return [mergeIntoURLSearchParams(resource, searchParams2), null];
     } else if (enctype == FetchEnctype.urlEncoded) {
-      return [resource, searchParams];
+      return [resource, searchParams2];
     } else {
       return [resource, requestBody];
     }
@@ -1278,8 +1278,8 @@
     return entries;
   }
   function mergeIntoURLSearchParams(url, requestBody) {
-    const searchParams = new URLSearchParams(entriesExcludingFiles(requestBody));
-    url.search = searchParams.toString();
+    const searchParams2 = new URLSearchParams(entriesExcludingFiles(requestBody));
+    url.search = searchParams2.toString();
     return url;
   }
   var AppearanceObserver = class {
@@ -4320,8 +4320,8 @@
     setProgressBarDelay(delay) {
       this.progressBarDelay = delay;
     }
-    setFormMode(mode) {
-      this.formMode = mode;
+    setFormMode(mode2) {
+      this.formMode = mode2;
     }
     get location() {
       return this.history.location;
@@ -4586,8 +4586,8 @@
   function setConfirmMethod(confirmMethod) {
     FormSubmission.confirmMethod = confirmMethod;
   }
-  function setFormMode(mode) {
-    session.setFormMode(mode);
+  function setFormMode(mode2) {
+    session.setFormMode(mode2);
   }
   var Turbo = /* @__PURE__ */ Object.freeze({
     __proto__: null,
@@ -5490,7 +5490,7 @@
       }
     }
     get eventListeners() {
-      return Array.from(this.eventListenerMaps.values()).reduce((listeners, map) => listeners.concat(Array.from(map.values())), []);
+      return Array.from(this.eventListenerMaps.values()).reduce((listeners, map2) => listeners.concat(Array.from(map2.values())), []);
     }
     bindingConnected(binding) {
       this.fetchEventListenerForBinding(binding).bindingConnected(binding);
@@ -6000,25 +6000,25 @@
       }
     }
   };
-  function add(map, key, value) {
-    fetch3(map, key).add(value);
+  function add(map2, key, value) {
+    fetch3(map2, key).add(value);
   }
-  function del(map, key, value) {
-    fetch3(map, key).delete(value);
-    prune(map, key);
+  function del(map2, key, value) {
+    fetch3(map2, key).delete(value);
+    prune(map2, key);
   }
-  function fetch3(map, key) {
-    let values = map.get(key);
+  function fetch3(map2, key) {
+    let values = map2.get(key);
     if (!values) {
       values = /* @__PURE__ */ new Set();
-      map.set(key, values);
+      map2.set(key, values);
     }
     return values;
   }
-  function prune(map, key) {
-    const values = map.get(key);
+  function prune(map2, key) {
+    const values = map2.get(key);
     if (values != null && values.size == 0) {
-      map.delete(key);
+      map2.delete(key);
     }
   }
   var Multimap = class {
@@ -7921,9 +7921,9 @@
       }
     }
   }
-  function renderAddress(place, map, marker) {
+  function renderAddress(place, map2, marker) {
     if (place.geometry && place.geometry.location) {
-      map.setCenter(place.geometry.location);
+      map2.setCenter(place.geometry.location);
       marker.position = place.geometry.location;
     } else {
       marker.position = null;
@@ -7936,8 +7936,8 @@
     const mapOptions = CONFIGURATION.mapOptions;
     mapOptions.mapId = mapOptions.mapId || "DEMO_MAP_ID";
     mapOptions.center = mapOptions.center || { lat: 48.8566, lng: 2.3522 };
-    const map = new Map2(document.getElementById("gmp-map"), mapOptions);
-    const marker = new AdvancedMarkerElement({ map });
+    const map2 = new Map2(document.getElementById("gmp-map"), mapOptions);
+    const marker = new AdvancedMarkerElement({ map: map2 });
     const autocomplete = new Autocomplete(getFormInputElement("location"), {
       fields: ["address_components", "geometry", "name"],
       types: ["address"]
@@ -7948,7 +7948,7 @@
         window.alert(`No details available for input: '${place.name}'`);
         return;
       }
-      renderAddress(place, map, marker);
+      renderAddress(place, map2, marker);
       fillInAddress(place);
     });
   }
@@ -7975,19 +7975,21 @@
   window.CONFIGURATION = CONFIGURATION;
 
   // app/javascript/packs/indexMap.js
+  var markers = [];
+  var map;
+  var mode = "all";
+  var searchParams = null;
   async function initIndexMap() {
-    console.log("initIndexMap called");
     const mapElement = document.getElementById("index-map");
     if (!mapElement)
       return;
     const mapOptions = {
-      center: { "lat": 48.8566, "lng": 2.3522 },
+      center: { lat: 48.8566, lng: 2.3522 },
       zoom: 10
     };
-    const map = new google.maps.Map(mapElement, mapOptions);
-    loadMarkers(map);
-    setupAutocomplete(map);
-    setupBoundsChangedListener(map);
+    map = new google.maps.Map(mapElement, mapOptions);
+    loadBicyclesData();
+    setupAutocomplete();
   }
   function loadMarkers(map) {
     fetch("/bicycles.json").then((response) => response.json()).then((bicycles) => {
@@ -8106,8 +8108,8 @@
     const lng = parseFloat(mapElement.getAttribute("data-longitude"));
     if (!isNaN(lat) && !isNaN(lng)) {
       const position = { lat, lng };
-      const map = new Map2(mapElement, Object.assign({}, CONFIGURATION2.mapOptions, { center: position }));
-      new Marker({ position, map });
+      const map2 = new Map2(mapElement, Object.assign({}, CONFIGURATION2.mapOptions, { center: position }));
+      new Marker({ position, map: map2 });
     }
   }
   window.initSimpleMap = initSimpleMap;

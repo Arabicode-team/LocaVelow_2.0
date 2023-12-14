@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export async function initIndex() {
 let markers = []; // Локальный массив для хранения маркеров
 let map; // Локальная переменная карты
@@ -272,6 +273,117 @@ window.initIndex = initIndex;
 // });
 
 
+=======
+"use strict";
+
+let markers = []; // Глобальный массив для хранения текущих маркеров
+let map; // Переменная карты
+let mode = 'all'; // Режим отображения велосипедов
+let searchParams = null; // Параметры фильтра
+
+export async function initIndexMap() {
+  const mapElement = document.getElementById('index-map');
+  if (!mapElement) return;
+
+  // Настройки карты
+  const mapOptions = {
+    center: { lat: 48.8566, lng: 2.3522 },
+    zoom: 10,
+  };
+  map = new google.maps.Map(mapElement, mapOptions);
+  // Загрузка данных
+  loadBicyclesData();
+
+  // Автозаполнение и привязка к карте
+  setupAutocomplete();
+
+}
+
+function setupAutocomplete() {
+  const input = document.getElementById('city-input');
+  const autocomplete = new google.maps.places.Autocomplete(input, { types: ['(cities)'] });
+  autocomplete.bindTo('bounds', map);
+
+  autocomplete.addListener('place_changed', function() {
+    const place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("No details available for input: '" + place.name + "'");
+      return;
+    }
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);
+    }
+  });
+}
+
+function loadBicyclesData() {
+  const url = mode === 'all' ? '/bicycles.json' : `/bicycles_filtered.json?${searchParams}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(bicycles => {
+      console.log(bicycles); // Для отладки
+      loadMarkers(bicycles);
+  })
+  .catch(error => console.error('Error loading bicycles:', error));
+}
+
+function loadMarkers(bicycles) {
+  markers.forEach(marker => marker.setMap(null));
+  markers = [];
+
+  bicycles.forEach(bicycle => {
+    const marker = new google.maps.Marker({
+      position: { lat: bicycle.latitude, lng: bicycle.longitude },
+      map: map,
+      title: bicycle.model
+    });
+
+    const contentString = `
+    <div>
+      <h3>${bicycle.model}</h3>
+      <p><b>Type:</b> ${bicycle.bicycle_type}</p>
+      <p><b>Size:</b> ${bicycle.size}</p>
+      <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>
+      <a href="/bicycles/${bicycle.id}">View details</a>
+    </div>`;
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    marker.addListener('click', () => {
+      infowindow.open({ anchor: marker, map: map, shouldFocus: false });
+    });
+
+    markers.push(marker);
+  });
+}
+
+const searchForm = document.getElementById('search-form');
+const submitButton = searchForm.querySelector('input[type="submit"]');
+
+searchForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const formData = new FormData(searchForm);
+  searchParams = new URLSearchParams(formData).toString();
+
+  if (mode === 'all') {
+    mode = 'filtered';
+    submitButton.value = "Afficher tous";
+    loadBicyclesData(); // Перезагрузка данных в новом режиме
+  } else {
+    mode = 'all';
+    searchParams = null; // Сброс параметров фильтра
+    submitButton.value = "Rechercher";
+    loadBicyclesData(); // Перезагрузка данных в новом режиме
+  }
+
+});
+
+
+>>>>>>> af2f535 (marktrs of filter (seeds bug))
 // "use strict";
 
 // export async function initIndexMap() {
@@ -608,4 +720,8 @@ window.initIndex = initIndex;
 //           submitButton.value = "Rechercher";
 //       }
 //   });
+<<<<<<< HEAD
 // }
+=======
+// }
+>>>>>>> af2f535 (marktrs of filter (seeds bug))
