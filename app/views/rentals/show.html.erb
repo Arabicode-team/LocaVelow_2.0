@@ -2,10 +2,5 @@
 <%= render @rental %>
 
 <div class="d-flex justify-content-center mt-4 mb-4">
-  <% if current_user.id == @rental.bicycle.owner.id %>
-    <%= link_to "Modifier cette location", edit_rental_path(@rental), class: "btn btn-primary" %>
-    <%= button_to "Supprimer cette location", @rental, method: :delete, class: "btn btn-danger" %>
-  <% else %>
-    <%= link_to "Retour", user_path(current_user) %>
-  <% end %>  
+  <%= link_to "Retour", user_path(current_user) %>
 </div>

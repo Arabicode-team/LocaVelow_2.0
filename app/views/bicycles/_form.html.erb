@@ -15,34 +15,30 @@
         <div class="form-group">
           <div class="d-flex align-items-center">
             <%= form.label :model, "Titre", style: "display: block" %>
-            <span class="required-field-marker">*</span>
+            <span class="required-field-marker" style="font-size: 100%;">*</span>
           </div> 
           <%= form.text_field :model, class:"form-control" %> 
         </div>
         <div>
           <div class="d-flex align-items-center">
             <%= form.label :bicycle_type, "Catégorie", style: "display: block" %>
-            <span class="required-field-marker">*</span>
+            <span class="required-field-marker" style="font-size: 100%;">*</span>
           </div>
           <%= form.select :bicycle_type, Bicycle.bicycle_types.keys.map { |type| [type.humanize, type] }, {}, class: "form-select" %>
         </div>
         <div>
           <div class="d-flex align-items-center">
             <%= form.label :size, "Taille", style: "display: block" %>
-            <span class="required-field-marker">*</span>
+            <span class="required-field-marker" style="font-size: 100%;">*</span>
           </div> 
           <%= form.select :size, Bicycle.sizes.keys.map { |size| [size.humanize, size] }, {}, class: "form-select" %>
         </div>
         <div>
           <div class="d-flex align-items-center">
             <%= form.label :condition, "Etat", style: "display: block" %>
-            <span class="required-field-marker">*</span>
+            <span class="required-field-marker" style="font-size: 100%;">*</span>
           </div> 
           <%= form.text_field :condition, class: "form-control" %>
-        </div>
-        <div>
-          <%= form.label :name, "Accessoires", style: "display: block" %>
-          <%= form.select :name, "Accessoires", class: "form-select" %>
         </div>
         <div>
           <%= form.label :description, "Description", style: "display: block" %>
@@ -55,7 +51,7 @@
         <div>
           <div class="d-flex align-items-center">
             <%= form.label :price_per_hour, "Prix/heure", style: "display: block" %>
-            <span class="required-field-marker">*</span>
+            <span class="required-field-marker" style="font-size: 100%;">*</span>
           </div> 
           <%= form.number_field :price_per_hour, class: "form-control mb-4" %>
         </div>
