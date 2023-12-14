@@ -13,8 +13,6 @@
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
 
-<div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
-
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
@@ -30,3 +28,51 @@
   <% end %>
 </div>
 
+<div class="container mt-4">
+  <h2 class="mb-3">Avis sur ce vélo</h2>
+  <% avis_present = false %>
+  <% if @bicycle.rentals.any? %>
+    <% @bicycle.rentals.each_slice(3) do |rentals_slice| %>
+      <div class="row">
+        <% rentals_slice.each do |rental| %>
+          <% if rental.renter_review %>
+            <% avis_present = true %>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h6 class="card-title"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
+                  <div class="stars">
+                    <% rental.renter_review.rating.times do %>
+                      <i class="fas fa-star"></i>
+                    <% end %>
+                    <% (5 - rental.renter_review.rating).times do %>
+                      <i class="far fa-star"></i>
+                    <% end %>  
+                  </div>  
+                  <p class="card-text"><%= rental.renter_review.review_text %></p>
+                  <% if rental.renter_review.review_date.present? %>
+                    <% review_date = rental.renter_review.review_date %>
+                    <% months_ago = ((Time.now - review_date) / 1.month).round %>
+                    <p><strong>
+                      <% if months_ago.zero? %>
+                        Il y a moins d'un mois
+                      <% elsif months_ago == 1 %>
+                        Il y a un mois
+                      <% else %>
+                        Il y a <%= months_ago %> mois
+                      <% end %></strong>
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% unless avis_present %>
+    <p>Il n'y a pas encore d'avis pour cette annonce</p>
+  <% end %>        
+</div>

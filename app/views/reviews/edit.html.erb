@@ -1,10 +1,10 @@
-<h1>Editing review</h1>
+<h3 class="text-center">Modifier un avis</h3>
 
 <%= render "form", review: @review %>
 
 <br>
 
-<div>
-  <%= link_to "Show this review", @review %> |
-  <%= link_to "Back to reviews", reviews_path %>
+<div class="d-flex justify-content-center">
+  <%= link_to "Voir cet avis", @review, class: "btn btn-primary mx-3" %>
+  <%= link_to "Accueil", root_path, class: "btn btn-secondary" %>
 </div>
