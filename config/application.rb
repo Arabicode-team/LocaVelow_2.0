@@ -31,7 +31,7 @@ module LocaVelow20
       Thread.new do
         loop do
           UpdateRentalStatusJob.new.perform
-          sleep(5.minutes)
+          sleep(60.minutes)
         end
       end
     end

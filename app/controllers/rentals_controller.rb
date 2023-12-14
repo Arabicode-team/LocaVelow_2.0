@@ -1,5 +1,8 @@
 class RentalsController < ApplicationController
   before_action :set_rental, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :authorize_user, only: %i[ show ]
+  before_action :admin_only, only: %i[ index edit destroy new ]
 
   # GET /rentals or /rentals.json
   def index
@@ -123,7 +126,7 @@ class RentalsController < ApplicationController
           @rental.process_successful_refund
           redirect_to root_path, notice: 'Le remboursement a bien été effectué, la réservation est maintenant annulée. Rendez-vous dans votre espace personnel pour plus de détails.'
         else
-          redirect_to root_path, alert: 'Le remboursement a échoué. Veuillez réessayer. Si le problème persisite, nous vous invitons à contacter notre service client.'
+          redirect_to root_path, alert: 'Le remboursement a échoué. Veuillez réessayer. Si le problème persiste, nous vous invitons à contacter notre service client.'
         end
 
       rescue Stripe::StripeError => e
@@ -143,6 +146,22 @@ class RentalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def rental_params
-      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status, :stripe_charge_id, :stripe_refund_id)
+      params.require(:rental).permit(:bicycle_id, :start_date, :end_date, :rental_status, :stripe_charge_id, :stripe_refund_id, :renter_id)
+    end
+
+    def authorize_user
+      @rental = Rental.find(params[:id])
+    
+      unless current_user.admin? || current_user == @rental.bicycle.owner || current_user == @rental.renter
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
+    end
+
+    def admin_only
+      unless current_user.admin?
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
     end
 end
