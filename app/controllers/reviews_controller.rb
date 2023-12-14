@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
-  before_action :admin_only, only: %i[ index destroy new ]
+  before_action :admin_only, only: %i[ index destroy ]
+  before_action :authorize_user, only: %i[ :new ]
 
   # GET /reviews or /reviews.json
   def index
@@ -79,5 +80,9 @@ class ReviewsController < ApplicationController
         flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
         redirect_to root_path
       end
+    end
+
+    def authorize_user
+      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == @review.reviewer_user_id || current_user.admin?
     end
 end
