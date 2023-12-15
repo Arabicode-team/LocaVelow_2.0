@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'static/terms_and_conditions'
   namespace :admin do
       resources :accessories
       resources :bicycles
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
   end
     
   #route for gem letter_opener for emails in dev environment
+  get 'terms_and_conditions', to: 'static#terms_and_conditions'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
