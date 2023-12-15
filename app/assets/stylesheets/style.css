@@ -95,7 +95,7 @@ body {
 
 h2 {
   margin: 0;
-  font-family: Roboto, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
 }
 
 input {
@@ -103,7 +103,7 @@ input {
   border: 0;
   border-bottom: 1px solid black;
   font-size: 14px;
-  font-family: Roboto, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
   font-style: normal;
   font-weight: normal;
 }
