@@ -10437,7 +10437,7 @@
   }
   
   .font-monospace {
-    font-family: var(--bs-font-monospace) !important;
+    font-family: var(--bs-font-monospace);
   }
   
   .fs-1 {
@@ -24917,11 +24917,11 @@
   }
   
   .text-sans-serif {
-    font-family: "Open Sans" !important;
+    font-family: "Open Sans";
   }
   
   .text-monospace {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
   
   .text-justify {

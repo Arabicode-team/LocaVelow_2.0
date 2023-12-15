@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <title>Locavelow</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,99 +12,20 @@
     <link rel="shortcut icon" type="image/png" href="<%= asset_path('logo.png') %>">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&callback=initMaps&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <style>
-    body {
-  margin: 0;
-}
-
-.sb-title {
-  position: relative;
-  top: -12px;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-}
-
-.sb-title-icon {
-  position: relative;
-  top: -5px;
-}
-
-.card-container {
-  display: flex;
-  height: 500px;
-}
-
-.panel {
-  background: white;
-  width: 300px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.half-input-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.half-input {
-  max-width: 120px;
-}
-
-.map {
-  width: 300px;
-}
-
-h2 {
-  margin: 0;
-  font-family: Roboto, sans-serif;
-}
-
-input {
-  min-height: 30px;
-}
-
-input {
-  border: 0;
-  border-bottom: 1px solid black;
-  font-size: 14px;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-}
-
-input:focus::placeholder {
-  color: white;
-}
-
-.button-cta {
-  align-self: start;
-  background-color: #1976d2;
-  border: 0;
-  border-radius: 21px;
-  color: white;
-  cursor: pointer;
-  font-family: "Google Sans Text", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 27px;
-  padding: 3.5px 10.5px;
-}
-
-</style>
   </head>
-    <script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
-    </head>
-
   <body>
   <%= render 'shared/navbar' %>
 
-  <% flash.each do |key, message| %>
+  <div class="d-flex justify-content-center">
+  <%= button_tag "Cliquez ici pour une police adaptée aux personnes dyslexiques.", id: "toggleFontButton", data: { turbo_action: false } %>
+  </div>  
+
+<% flash.each do |key, message| %>
     <div class="alert <%= key == 'notice' ? 'alert-success' : 'alert-warning' %>" role="alert">
       <%= message %>
     </div>
@@ -113,4 +34,21 @@ input:focus::placeholder {
   <%= yield %>
   <%= render 'shared/footer' %>
   </body>
+  <script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
+  <script>
+  function toggleFont() {
+    const body = document.body;
+    body.classList.toggle('opendyslexic-font');
+  }
+
+  document.addEventListener('turbo:load', function() {
+    const toggleFontButton = document.getElementById('toggleFontButton');
+
+    if (toggleFontButton) {
+      toggleFontButton.classList.add('opendyslexic-font');
+      toggleFontButton.addEventListener('click', toggleFont);
+    }
+  });
+</script>
+
 </html>
