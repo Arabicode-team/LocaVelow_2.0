@@ -1,62 +1,127 @@
-
 .required-field-marker {
-    margin-left: 5px;
-    color: red;
-  }
+  font-size: 150%;
+  margin-left: 5px;
+  color: red;
+}
 
-  .my-logo-container {
-    max-width: 150px;
-  }
-  
-  .my-logo-container img {
-    width: 30%;
-    height: auto;
-  }
+.my-logo-container {
+  max-width: 150px;
+}
+
+.my-logo-container img {
+  width: 30%;
+  height: auto;
+}
 
 .custom-toggler .bar {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background-color: #506191;
-    margin: 4px 0;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #506191;
+  margin: 4px 0;
 }
 
-.para1 { 
-    max-width: 600px; 
-    padding: 10px; 
-    word-wrap: break-word; 
-    text-align: left;
+.para1,
+.para2 {
+  max-width: 600px;
+  padding: 10px;
+  word-wrap: break-word;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-.para2 { 
-    max-width: 600px; 
-    padding: 10px; 
-    word-wrap: break-word; 
-    text-align: right;
-}
-
-.para1.p {
-    font-size: 16px; 
-    line-height: 1.5;
-}
-
-.para2.p {
-    font-size: 16px; 
-    line-height: 1.5;
+.para2 {
+  text-align: right;
 }
 
 .lastpara {
-    max-width: 600px; 
-    padding: 10px; 
-    word-wrap: break-word;
+  max-width: 600px;
+  padding: 10px;
+  word-wrap: break-word;
 }
 
 .mapIndex {
-    flex: 1;
-    height: 830px;
-  }
+  flex: 1;
+  height: 830px;
+}
 
-  #index-map {
-    height: 100%;
-    border-radius: 25px;
-  }
+#index-map {
+  height: 100%;
+  border-radius: 25px;
+}
+
+body {
+  margin: 0;
+}
+
+.sb-title {
+  position: relative;
+  top: -12px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.sb-title-icon {
+  position: relative;
+  top: -5px;
+}
+
+.card-container {
+  display: flex;
+  height: 500px;
+}
+
+.panel {
+  background: white;
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.half-input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-input {
+  max-width: 120px;
+}
+
+.map {
+  width: 300px;
+}
+
+h2 {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+input {
+  min-height: 30px;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+input:focus::placeholder {
+  color: white;
+}
+
+.button-cta {
+  align-self: start;
+  background-color: #1976d2;
+  border: 0;
+  border-radius: 21px;
+  color: white;
+  cursor: pointer;
+  font-family: "Google Sans Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 27px;
+  padding: 3.5px 10.5px;
+}

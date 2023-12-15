@@ -1,3 +1,6 @@
+<% content_for :title, "Détails du vélo à louer."%>
+<% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer." %>
+
 <% if @rental && @rental.errors.any? %>
 <div id="error_explanation">
 <h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>

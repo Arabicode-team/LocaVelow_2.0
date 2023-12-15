@@ -1,3 +1,6 @@
+<% content_for :title, "La banner de Locavelow" %>
+<% content_for :meta_description, "Le banner de Locavelow avec la bar de recherche de cantre qui permet de choisir son vélo." %>
+
 <div class="jumbotron position-relative" style="background-image: url('<%= asset_path('bicycle_banner_img.jpg') %>'); background-size: cover; padding: 100px; overflow: hidden; width: 100%; height: 100%; background-position: center; position: relative;">
   <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-primary)); opacity: 0.8; z-index: 0;"></div>
   <div style="z-index: 2; position: relative;">
@@ -13,6 +16,6 @@
     </form> 
     <div class="text-center">
       <button type="submit" class="btn btn-primary mx-2">Rechercher</button>
-    </div>  
-  </div>   
+    </div>
+  </div>
 </div>

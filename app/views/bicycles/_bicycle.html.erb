@@ -1,10 +1,13 @@
+<% content_for :title, "Les détails de chaque vélo et la card des vélos - Locavelow - Location de Vélos" %>
+<% content_for :meta_description, "Détails du vélo. Louez ce vélo avec Locavelow et explorez !" %>
+
 <% if local_assigns[:show_details] == true %>
   <div id="<%= dom_id bicycle %>">
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6">
-          <% if @bicycle.image.attached? %>
-            <%= image_tag @bicycle.image, class: "img-fluid rounded", alt: "Image de vélo" %>
+          <% if bicycle.image.attached? %>
+            <%= image_tag bicycle.image, class: "img-fluid rounded", alt: "Image de vélo" %>
           <% else %>
             <%= image_tag asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo" %>
           <% end %>  
@@ -13,44 +16,37 @@
           </h4>
           <h6 class="text-center">
             <%= bicycle.city %>, <%= bicycle.country %>
-          <h6>  
+          </h6>  
           <p>
             <%= bicycle.description %>
           </p> 
           <h5 class="text-center mt-4"> Caractéristiques</h5>
           <p>
-          <ul>
-            <p>
+            <ul>
               <li>
                 <strong>Catégorie :</strong>
                 <%= bicycle.bicycle_type.humanize %>
               </li>
-            </p>
-            <p>
               <li>
                 <strong>Taille :</strong>
                 <%= bicycle.size.humanize %>
               </li>
-            </p>
-            <p>
               <li>
                 <strong>Etat :</strong>
                 <%= bicycle.condition %>
               </li>
-            </p>
-            <p>
               <li>
-              <strong>Accessoires :</strong>
-              <% if bicycle.accessories.present? %>
-                <%= bicycle.accessories.map(&:accessory_type).join(', ').humanize %>
-              <% else %>
-                Pas d'accessoires disponibles.
-              <% end %>
+                <strong>Accessoires :</strong>
+                <% if bicycle.accessories.present? %>
+                  <%= bicycle.accessories.map(&:accessory_type).join(', ').humanize %>
+                <% else %>
+                  Pas d'accessoires disponibles.
+                <% end %>
               </li>
-            </p>
-          </ul> 
+            </ul> 
+          </p>
           <div class="d-flex justify-content-center mt-4 mb-4">
-            <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
+            <p class="label p-2">
               <strong>Prix/heure : </strong>
               <%= bicycle.price_per_hour %> €
             </p>
@@ -58,8 +54,8 @@
         </div>
         <div class="col-md-6">
           <div class="d-flex justify-content-center mt-2 border rounded shadow pt-3">
-            <% if @bicycle.owner.image.attached? %>
-              <%= image_tag @bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px" %>
+            <% if bicycle.owner.image.attached? %>
+              <%= image_tag bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px" %>
             <% else %>
               <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px" %>
             <% end %> 
@@ -141,29 +137,28 @@
     </div>   
   </div>
 <% else %>
-    
-<div class="col mt-1">
-  <div class="card card-blog card-plain">
-    <div class="position-relative">
-      <div class="d-block blur-shadow-image">
-      <% if bicycle.image.attached? %>
-        <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
-      <% else %>
-        <%= image_tag 'icone_vélo.png', class: "img-fluid border-radius-lg" %>
-      <% end %>  
+  <div class="col mt-1">
+    <div class="card card-blog card-plain">
+      <div class="position-relative">
+        <div class="d-block blur-shadow-image">
+          <% if bicycle.image.attached? %>
+            <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
+          <% else %>
+            <%= image_tag 'icone_vélo.png', class: "img-fluid border-radius-lg" %>
+          <% end %>  
+        </div>
       </div>
-    </div>
-    <div class="card-body px-0 pt-1">
+      <div class="card-body px-0 pt-1">
         <h5>
           <%= bicycle.model %>
         </h5>
-      <p>
-      Taille : <%= bicycle.size %> <br>
-      </p>
-      <p>
-      Localisation : <%= bicycle.country %>, <%= bicycle.city %>
-      </p>
+        <p>
+          Taille : <%= bicycle.size %> <br>
+        </p>
+        <p>
+          Localisation : <%= bicycle.country %>, <%= bicycle.city %>
+        </p>
+      </div>
     </div>
   </div>
-  </div>	
 <% end %>  
