@@ -18,8 +18,8 @@
     </p>
 
     <p class="card-text">
-      <strong>Date de l'avis :</strong>
-      <%= review.review_date %>
-    </p>
+    <strong>Date de l'avis :</strong>
+    <%= review.review_date.present? ? review.review_date : Time.now.strftime('%Y-%m-%d %H:%M:%S') %>
+  </p>
   </div>
 </div>
