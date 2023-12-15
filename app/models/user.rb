@@ -27,13 +27,13 @@ class User < ApplicationRecord
   private
 
   def check_active_rentals
-    if bicycles.any? { |bicycle| bicycle.rentals.where(rental_status: "in_progress").exists? }
-      errors.add(:base, "Cannot delete user with pending rentals.")
+    if bicycles.any? { |bicycle| bicycle.rentals.exists? }
+      errors.add(:base, "Impossible de supprimer votre profil pour l'instant car vous avez encore des annonces en ligne. Merci de bien vouloir nous contacter pour procéder à la suppression de votre compte.")
       throw :abort
     end
   
-    if rentals.where(rental_status: "in_progress").exists?
-      errors.add(:base, "Cannot delete user with pending rentals.")
+    if rentals.exists?
+      errors.add(:base, "Impossible de supprimer votre profil pour l'instant car il a des locations en cours/effectuées. Merci de bien vouloir nous contacter pour procéder à la suppression de votre compte.")
       throw :abort
     end
   end

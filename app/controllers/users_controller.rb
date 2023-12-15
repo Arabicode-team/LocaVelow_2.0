@@ -12,9 +12,9 @@ class UsersController < ApplicationController
   
   def destroy
     if current_user.destroy
-      redirect_to root_path, notice: 'Votre compte a bien été supprimé'
+      redirect_to root_path, notice: 'Votre compte a bien été supprimé. On espère quand même vous revoir très vite sur Locavelow!'
     else
-      redirect_to root_path, notice: 'Impossible de supprimer un utilisateur avec des locations en cours. Rendez-vous dans votre page profil.'
+      redirect_to root_path, notice: "Une erreur est survenue. Si l'erreur persisite, veuillez nous contacter."
     end
   end
 
