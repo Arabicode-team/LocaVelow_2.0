@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import { initMap } from "./packs/autocompleteMap";
-import { initIndexMap } from "./packs/indexMap";
+import { initIndex } from "./packs/indexMap";
 import { initSimpleMap } from "./packs/simpleMap";
 import { estimateCost } from "./packs/estimate_cost";
 
@@ -13,7 +13,7 @@ function initMaps() {
     initMap(); // Функция для инициализации карты с автозаполнением на форме
   } else {
     if (document.getElementById('index-map')) {
-      initIndexMap(); // Функция для карты на главной странице
+      initIndex(); // Функция для карты на главной странице
     }
     if (document.getElementById('gmp-map')) {
       initSimpleMap(); // Функция для простой карты

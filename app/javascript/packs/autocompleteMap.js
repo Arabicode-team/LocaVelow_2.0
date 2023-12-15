@@ -110,3 +110,7 @@ function initShowMap() {
     });
   }
 }
+
+window.initMap = initMap;
+window.initShowMap = initShowMap;
+window.CONFIGURATION = CONFIGURATION;

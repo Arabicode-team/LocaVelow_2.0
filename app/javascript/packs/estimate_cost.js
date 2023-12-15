@@ -25,3 +25,4 @@ export function estimateCost() {
   });
 }
 
+window.estimateCost = estimateCost;

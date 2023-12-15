@@ -25,11 +25,14 @@ class Bicycle < ApplicationRecord
   end
 
   def self.filter_by_date_and_city(start_date, end_date)
-    left_outer_joins(:rentals)
-      .where('rentals.id IS NULL OR (rentals.start_date >= ? OR rentals.end_date <= ?)', end_date, start_date)
-  end
+      booked_bicycle_ids = Rental
+        .where("(start_date, end_date) OVERLAPS (?, ?)", start_date, end_date)
+        .pluck(:bicycle_id)
   
-
+    available_bicycles = where.not(id: booked_bicycle_ids)
+  
+    available_bicycles
+  end
 
     def check_active_rentals
       if self.rentals.where.not(rental_status: :completed).exists?

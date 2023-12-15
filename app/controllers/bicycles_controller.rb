@@ -4,9 +4,25 @@ class BicyclesController < ApplicationController
 
   # GET /bicycles or /bicycles.json
   def index
-    @bicycles = Bicycle.all
+    if params[:ne_lat] && params[:ne_lng] && params[:sw_lat] && params[:sw_lng]
+      ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
+      @bicycles = Bicycle.where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
+                                ne_lat, sw_lat, ne_lng, sw_lng)
+    else
+      @bicycles = Bicycle.all
+    end
+  
+    respond_to do |format|
+      format.json { render json: @bicycles }
+      format.html do
+        if request.xhr?
+          # Отправляем bicycles.html.erb для AJAX-запросов
+          render 'bicycles', layout: false
+        end
+        # Для обычных запросов рендерится index.html.erb с layout
+      end
+    end
   end
-
   # GET /bicycles/1 or /bicycles/1.json
   def show
     @bicycle = Bicycle.find(params[:id])
@@ -61,30 +77,28 @@ class BicyclesController < ApplicationController
     end
   end
 
-    def bicycles_in_bounds
-      ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
-    
-      @bicycles = Bicycle.where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
-                                ne_lat, sw_lat, ne_lng, sw_lng)
-    
-      render partial: 'bicycles/list', locals: { bicycles: @bicycles }
-    end    
 
     def bicycles_filtered
       start_datetime = DateTime.parse(params[:start_date])
       duration = params[:duration].to_i.hours
       end_datetime = start_datetime + duration
     
+      ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
+    
       @bicycles = Bicycle.filter_by_date_and_city(start_datetime, end_datetime)
-
-      puts @bicycles.to_json # Для отладки
-      
+                          .where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
+                                  ne_lat, sw_lat, ne_lng, sw_lng)
+    
+      # Ответ в зависимости от типа запроса
       respond_to do |format|
         format.json { render json: @bicycles }
-        format.html { render partial: 'bicycles/list', locals: { bicycles: @bicycles } }
+        format.html do
+          if request.xhr?
+            render 'bicycles_filtered', layout: false
+          end
+        end
       end
-    end
-    
+    end    
     
     
   private

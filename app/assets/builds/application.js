@@ -1258,11 +1258,11 @@
     return fetchMethodFromString(fetchMethod) == FetchMethod.get;
   }
   function buildResourceAndBody(resource, method, requestBody, enctype) {
-    const searchParams2 = Array.from(requestBody).length > 0 ? new URLSearchParams(entriesExcludingFiles(requestBody)) : resource.searchParams;
+    const searchParams = Array.from(requestBody).length > 0 ? new URLSearchParams(entriesExcludingFiles(requestBody)) : resource.searchParams;
     if (isSafe(method)) {
-      return [mergeIntoURLSearchParams(resource, searchParams2), null];
+      return [mergeIntoURLSearchParams(resource, searchParams), null];
     } else if (enctype == FetchEnctype.urlEncoded) {
-      return [resource, searchParams2];
+      return [resource, searchParams];
     } else {
       return [resource, requestBody];
     }
@@ -1278,8 +1278,8 @@
     return entries;
   }
   function mergeIntoURLSearchParams(url, requestBody) {
-    const searchParams2 = new URLSearchParams(entriesExcludingFiles(requestBody));
-    url.search = searchParams2.toString();
+    const searchParams = new URLSearchParams(entriesExcludingFiles(requestBody));
+    url.search = searchParams.toString();
     return url;
   }
   var AppearanceObserver = class {
@@ -4320,8 +4320,8 @@
     setProgressBarDelay(delay) {
       this.progressBarDelay = delay;
     }
-    setFormMode(mode2) {
-      this.formMode = mode2;
+    setFormMode(mode) {
+      this.formMode = mode;
     }
     get location() {
       return this.history.location;
@@ -4586,8 +4586,8 @@
   function setConfirmMethod(confirmMethod) {
     FormSubmission.confirmMethod = confirmMethod;
   }
-  function setFormMode(mode2) {
-    session.setFormMode(mode2);
+  function setFormMode(mode) {
+    session.setFormMode(mode);
   }
   var Turbo = /* @__PURE__ */ Object.freeze({
     __proto__: null,
@@ -5490,7 +5490,7 @@
       }
     }
     get eventListeners() {
-      return Array.from(this.eventListenerMaps.values()).reduce((listeners, map2) => listeners.concat(Array.from(map2.values())), []);
+      return Array.from(this.eventListenerMaps.values()).reduce((listeners, map) => listeners.concat(Array.from(map.values())), []);
     }
     bindingConnected(binding) {
       this.fetchEventListenerForBinding(binding).bindingConnected(binding);
@@ -6000,25 +6000,25 @@
       }
     }
   };
-  function add(map2, key, value) {
-    fetch3(map2, key).add(value);
+  function add(map, key, value) {
+    fetch3(map, key).add(value);
   }
-  function del(map2, key, value) {
-    fetch3(map2, key).delete(value);
-    prune(map2, key);
+  function del(map, key, value) {
+    fetch3(map, key).delete(value);
+    prune(map, key);
   }
-  function fetch3(map2, key) {
-    let values = map2.get(key);
+  function fetch3(map, key) {
+    let values = map.get(key);
     if (!values) {
       values = /* @__PURE__ */ new Set();
-      map2.set(key, values);
+      map.set(key, values);
     }
     return values;
   }
-  function prune(map2, key) {
-    const values = map2.get(key);
+  function prune(map, key) {
+    const values = map.get(key);
     if (values != null && values.size == 0) {
-      map2.delete(key);
+      map.delete(key);
     }
   }
   var Multimap = class {
@@ -7921,9 +7921,9 @@
       }
     }
   }
-  function renderAddress(place, map2, marker) {
+  function renderAddress(place, map, marker) {
     if (place.geometry && place.geometry.location) {
-      map2.setCenter(place.geometry.location);
+      map.setCenter(place.geometry.location);
       marker.position = place.geometry.location;
     } else {
       marker.position = null;
@@ -7936,8 +7936,8 @@
     const mapOptions = CONFIGURATION.mapOptions;
     mapOptions.mapId = mapOptions.mapId || "DEMO_MAP_ID";
     mapOptions.center = mapOptions.center || { lat: 48.8566, lng: 2.3522 };
-    const map2 = new Map2(document.getElementById("gmp-map"), mapOptions);
-    const marker = new AdvancedMarkerElement({ map: map2 });
+    const map = new Map2(document.getElementById("gmp-map"), mapOptions);
+    const marker = new AdvancedMarkerElement({ map });
     const autocomplete = new Autocomplete(getFormInputElement("location"), {
       fields: ["address_components", "geometry", "name"],
       types: ["address"]
@@ -7948,60 +7948,69 @@
         window.alert(`No details available for input: '${place.name}'`);
         return;
       }
-      renderAddress(place, map2, marker);
+      renderAddress(place, map, marker);
       fillInAddress(place);
     });
   }
+  function initShowMap() {
+    const mapElement = document.getElementById("gmp-map");
+    const lat = parseFloat(mapElement.getAttribute("data-latitude"));
+    const lng = parseFloat(mapElement.getAttribute("data-longitude"));
+    if (!isNaN(lat) && !isNaN(lng)) {
+      const mapOptions = {
+        ...CONFIGURATION.mapOptions,
+        center: { lat, lng },
+        zoom: 15
+        // Масштаб карты, который подходит для отображения маркера
+      };
+      const map = new google.maps.Map(mapElement, mapOptions);
+      new google.maps.Marker({
+        position: { lat, lng },
+        map
+      });
+    }
+  }
+  window.initMap = initMap;
+  window.initShowMap = initShowMap;
+  window.CONFIGURATION = CONFIGURATION;
 
   // app/javascript/packs/indexMap.js
-  var markers = [];
-  var map;
-  var mode = "all";
-  var searchParams = null;
-  async function initIndexMap() {
-    const mapElement = document.getElementById("index-map");
-    if (!mapElement)
-      return;
-    const mapOptions = {
-      center: { lat: 48.8566, lng: 2.3522 },
-      zoom: 10
-    };
-    map = new google.maps.Map(mapElement, mapOptions);
-    loadBicyclesData();
-    setupAutocomplete();
-  }
-  function setupAutocomplete() {
-    const input = document.getElementById("city-input");
-    const autocomplete = new google.maps.places.Autocomplete(input, { types: ["(cities)"] });
-    autocomplete.bindTo("bounds", map);
-    autocomplete.addListener("place_changed", function() {
-      const place = autocomplete.getPlace();
-      if (!place.geometry) {
-        window.alert("No details available for input: '" + place.name + "'");
+  async function initIndex() {
+    let markers = [];
+    let map;
+    let mode = "all";
+    let searchParams = null;
+    window.loadBicyclesDataTimeout = null;
+    function setupAutocomplete() {
+      const input = document.getElementById("city-input");
+      if (!input)
         return;
-      }
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
-      }
-    });
-  }
-  function loadBicyclesData() {
-    const url = mode === "all" ? "/bicycles.json" : `/bicycles_filtered.json?${searchParams}`;
-    fetch(url).then((response) => response.json()).then((bicycles) => loadMarkers(bicycles)).catch((error2) => console.error("Error loading bicycles:", error2));
-  }
-  function loadMarkers(bicycles) {
-    markers.forEach((marker) => marker.setMap(null));
-    markers = [];
-    bicycles.forEach((bicycle) => {
-      const marker = new google.maps.Marker({
-        position: { lat: bicycle.latitude, lng: bicycle.longitude },
-        map,
-        title: bicycle.model
+      const autocomplete = new google.maps.places.Autocomplete(input, { types: ["(cities)"] });
+      autocomplete.bindTo("bounds", map);
+      autocomplete.addListener("place_changed", function() {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) {
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);
+        }
       });
-      const contentString = `
+    }
+    function loadMarkers(bicycles) {
+      markers.forEach((marker) => marker.setMap(null));
+      markers = [];
+      bicycles.forEach((bicycle) => {
+        const marker = new google.maps.Marker({
+          position: { lat: bicycle.latitude, lng: bicycle.longitude },
+          map,
+          title: bicycle.model
+        });
+        const contentString = `
     <div>
       <h3>${bicycle.model}</h3>
       <p><b>Type:</b> ${bicycle.bicycle_type}</p>
@@ -8009,32 +8018,63 @@
       <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>
       <a href="/bicycles/${bicycle.id}">View details</a>
     </div>`;
-      const infowindow = new google.maps.InfoWindow({
-        content: contentString
+        const infowindow = new google.maps.InfoWindow({ content: contentString });
+        marker.addListener("click", () => {
+          infowindow.open({ anchor: marker, map, shouldFocus: false });
+        });
+        markers.push(marker);
       });
-      marker.addListener("click", () => {
-        infowindow.open({ anchor: marker, map, shouldFocus: false });
+    }
+    function initIndexMap() {
+      console.log("Initializing Index Map");
+      if (markers.length > 0) {
+        markers.forEach((marker) => marker.setMap(null));
+        markers = [];
+      }
+      const mapElement = document.getElementById("index-map");
+      if (!mapElement)
+        return;
+      if (map) {
+        map = null;
+      }
+      map = new google.maps.Map(mapElement, {
+        center: { lat: 48.8566, lng: 2.3522 },
+        zoom: 10
       });
-      markers.push(marker);
+      setupAutocomplete();
+      map.addListener("bounds_changed", function() {
+        if (window.loadBicyclesDataTimeout) {
+          clearTimeout(window.loadBicyclesDataTimeout);
+        }
+        window.loadBicyclesDataTimeout = setTimeout(loadBicyclesData, 500);
+      });
+    }
+    function loadBicyclesData() {
+      const bounds = map.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+      const boundsParams = `ne_lat=${ne.lat()}&ne_lng=${ne.lng()}&sw_lat=${sw.lat()}&sw_lng=${sw.lng()}`;
+      const jsonUrl = mode === "all" ? `/bicycles.json?${boundsParams}` : `/bicycles_filtered.json?${searchParams}&${boundsParams}`;
+      const htmlUrl = mode === "all" ? `/bicycles?${boundsParams}` : `/bicycles_filtered?${searchParams}&${boundsParams}`;
+      fetch(jsonUrl).then((response) => response.json()).then(loadMarkers).catch((error2) => console.error("Error loading bicycles:", error2));
+      fetch(htmlUrl, { headers: { "Accept": "text/html", "X-Requested-With": "XMLHttpRequest" } }).then((response) => response.text()).then((html) => document.getElementById("bicycles-list").innerHTML = html).catch((error2) => console.error("Error loading bicycles list:", error2));
+    }
+    document.addEventListener("turbo:load", function() {
+      initIndexMap();
+      const searchForm = document.getElementById("search-form");
+      if (searchForm) {
+        searchForm.addEventListener("submit", function(event) {
+          event.preventDefault();
+          const formData = new FormData(searchForm);
+          searchParams = new URLSearchParams(formData).toString();
+          mode = mode === "all" ? "filtered" : "all";
+          searchForm.querySelector('input[type="submit"]').value = mode === "all" ? "Rechercher" : "Afficher tous";
+          loadBicyclesData();
+        });
+      }
     });
   }
-  var searchForm = document.getElementById("search-form");
-  var submitButton = searchForm.querySelector('input[type="submit"]');
-  searchForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const formData = new FormData(searchForm);
-    searchParams = new URLSearchParams(formData).toString();
-    if (mode === "all") {
-      mode = "filtered";
-      submitButton.value = "Afficher tous";
-      loadBicyclesData();
-    } else {
-      mode = "all";
-      searchParams = null;
-      submitButton.value = "Rechercher";
-      loadBicyclesData();
-    }
-  });
+  window.initIndex = initIndex;
 
   // app/javascript/packs/simpleMap.js
   var CONFIGURATION2 = {
@@ -8048,10 +8088,11 @@
     const lng = parseFloat(mapElement.getAttribute("data-longitude"));
     if (!isNaN(lat) && !isNaN(lng)) {
       const position = { lat, lng };
-      const map2 = new Map2(mapElement, Object.assign({}, CONFIGURATION2.mapOptions, { center: position }));
-      new Marker({ position, map: map2 });
+      const map = new Map2(mapElement, Object.assign({}, CONFIGURATION2.mapOptions, { center: position }));
+      new Marker({ position, map });
     }
   }
+  window.initSimpleMap = initSimpleMap;
 
   // app/javascript/packs/estimate_cost.js
   function estimateCost() {
@@ -8078,6 +8119,7 @@
       }
     });
   }
+  window.estimateCost = estimateCost;
 
   // app/javascript/application.js
   function initMaps() {
@@ -8086,7 +8128,7 @@
       initMap();
     } else {
       if (document.getElementById("index-map")) {
-        initIndexMap();
+        initIndex();
       }
       if (document.getElementById("gmp-map")) {
         initSimpleMap();
