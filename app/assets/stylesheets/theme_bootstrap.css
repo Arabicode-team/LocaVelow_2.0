@@ -3617,7 +3617,7 @@
   .btn {
     --bs-btn-padding-x: 1.5rem;
     --bs-btn-padding-y: 0.75rem;
-    --bs-btn-font-family: Arial, Helvetica, sans-serif;
+    --bs-btn-font-family: var(--bs-btn-font-family);
     --bs-btn-font-size: 0.75rem;
     --bs-btn-font-weight: 700;
     --bs-btn-line-height: 1.4;
