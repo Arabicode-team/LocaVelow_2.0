@@ -21,25 +21,6 @@
   margin: 4px 0;
 }
 
-.para1,
-.para2 {
-  max-width: 600px;
-  padding: 10px;
-  word-wrap: break-word;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.para2 {
-  text-align: right;
-}
-
-.lastpara {
-  max-width: 600px;
-  padding: 10px;
-  word-wrap: break-word;
-}
-
 .mapIndex {
   flex: 1;
   height: 830px;
