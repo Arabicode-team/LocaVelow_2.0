@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg blur blur-rounded top-0 border-bottom z-index-3 shadow w-100 mt-4 my-3 py-2 fixed-top">
+<<<<<<< HEAD
   <div class="container-fluid position-relative">
     <div class="my-logo-container text-center position-absolute start-50 translate-middle-x" style="">
     <%= link_to root_path, data: { turbo: false } do %>
@@ -8,6 +9,16 @@
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
+=======
+  <div class="container-fluid">
+    <div class="text-center position-absolute start-50 translate-middle-x">
+        <%= link_to root_path, data: { turbo: false } do %>
+          <%= image_tag asset_path('logo.png'), class: "logo-img", width: "10%", alt: "Logo" %>
+        <% end %>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #FFDE8C;">
+        <span class="navbar-toggler-icon"></span>
+>>>>>>> 816e784 (bar de recherche)
       </button>
     <div class="collapse navbar-collapse mt-3" id="navbarNav">
       <ul class="navbar-nav">

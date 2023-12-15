@@ -75,6 +75,7 @@ class BicyclesController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
 
     def bicycles_filtered
       start_datetime = DateTime.parse(params[:start_date])
@@ -99,23 +100,36 @@ class BicyclesController < ApplicationController
     end    
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 816e784 (bar de recherche)
 
     def bicycles_filtered
       start_datetime = DateTime.parse(params[:start_date])
       duration = params[:duration].to_i.hours
       end_datetime = start_datetime + duration
     
+      ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
+    
       @bicycles = Bicycle.filter_by_date_and_city(start_datetime, end_datetime)
-
-      puts @bicycles.to_json # Для отладки
-      
+                          .where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
+                                  ne_lat, sw_lat, ne_lng, sw_lng)
+    
+      # Ответ в зависимости от типа запроса
       respond_to do |format|
         format.json { render json: @bicycles }
-        format.html { render partial: 'bicycles/list', locals: { bicycles: @bicycles } }
+        format.html do
+          if request.xhr?
+            render 'bicycles_filtered', layout: false
+          end
+        end
       end
+<<<<<<< HEAD
     end
     
 >>>>>>> af2f535 (marktrs of filter (seeds bug))
+=======
+    end    
+>>>>>>> 816e784 (bar de recherche)
     
     
   private
