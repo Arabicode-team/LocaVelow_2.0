@@ -6,7 +6,7 @@
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="form-group">
         <div class="d-flex align-items-center">
-          <%= f.label :email, "Email" %><br />
+          <%= f.label :email, "Email" %><br>
           <span class="required-field-marker">*</span>
         </div>  
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
@@ -17,7 +17,7 @@
           <span class="required-field-marker">*</span>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> caractères minimum)</em>
-          <% end %><br />
+          <% end %><br>
         </div>  
           <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
       </div>
@@ -28,7 +28,7 @@
         </div>  
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
       </div>
-      <p><em>Vous pourrez renseigner plus en détails vos informations (Nom, Prénom, ...) sur votre page profil</em></p>
+      <p><em>Si vous le souhaitez, rendez-vous dans votre page profil une fois inscrit(e) pour finaliser la personnalisation (nom, prénom, photo de profil, etc...).</em></p>
       <div class="actions mt-5 d-flex justify-content-center">
         <%= f.submit "S'inscrire", class: "btn btn-lg btn-primary btn-block p-2 px-4" %>
       </div>
