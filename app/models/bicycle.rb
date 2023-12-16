@@ -1,4 +1,5 @@
 class Bicycle < ApplicationRecord
+  before_destroy :check_active_rentals
   belongs_to :owner, class_name: 'User'
   has_one_attached :image
   has_many :rentals, dependent: :nullify

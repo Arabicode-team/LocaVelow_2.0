@@ -68,10 +68,8 @@ class BicyclesController < ApplicationController
 
   # DELETE /bicycles/1 or /bicycles/1.json
   def destroy
-    if @bicycle.rentals.exists?(rental_status: :in_progress)
-      redirect_to bicycles_path, alert: "Impossible de supprimer le vélo/l'annonce car il a des locations en cours."
-    elsif @bicycle.destroy
-      redirect_to bicycles_path, notice: "L'annonce a bien été supprimée."
+    if @bicycle.destroy
+      redirect_to bicycles_path, notice: 'Bicycle was successfully deleted.'
     else
       redirect_to bicycles_path, alert: @bicycle.errors.full_messages.to_sentence
     end

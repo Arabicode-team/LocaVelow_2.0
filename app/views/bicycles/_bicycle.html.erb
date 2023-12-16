@@ -19,151 +19,151 @@
           </p> 
           <h5 class="text-center mt-4"> Caractéristiques</h5>
           <p>
-          <ul>
-            <p>
-              <li>
-                <strong>Catégorie :</strong>
-                <%= bicycle.bicycle_type.humanize %>
-              </li>
-            </p>
-            <p>
-              <li>
-                <strong>Taille :</strong>
-                <%= bicycle.size.humanize %>
-              </li>
-            </p>
-            <p>
-              <li>
-                <strong>Etat :</strong>
-                <%= bicycle.condition %>
-              </li>
-            </p>
-            <p>
-              <li>
-              <strong>Accessoires :</strong>
-              <% if bicycle.accessories.present? %>
-                <%= bicycle.accessories.map(&:accessory_type).join(', ').humanize %>
+            <ul>
+              <p>
+                <li>
+                  <strong>Catégorie :</strong>
+                  <%= bicycle.bicycle_type.humanize %>
+                </li>
+              </p>
+              <p>
+                <li>
+                  <strong>Taille :</strong>
+                  <%= bicycle.size.humanize %>
+                </li>
+              </p>
+              <p>
+                <li>
+                  <strong>Etat :</strong>
+                  <%= bicycle.condition %>
+                </li>
+              </p>
+              <p>
+                <li>
+                  <strong>Accessoires :</strong>
+                  <% if bicycle.accessories.present? %>
+                    <%= bicycle.accessories.map(&:accessory_type).join(', ').humanize %>
+                  <% else %>
+                    Pas d'accessoires disponibles.
+                  <% end %>
+                </li>
+              </p>
+            </ul> 
+            <div class="d-flex justify-content-center mt-4 mb-4">
+              <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
+                <strong>Prix/heure : </strong>
+                <%= bicycle.price_per_hour %> €
+              </p>
+            </div>  
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex justify-content-center mt-2 border rounded shadow pt-3">
+              <% if @bicycle.owner.image.attached? %>
+                <%= image_tag @bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px" %>
               <% else %>
-                Pas d'accessoires disponibles.
-              <% end %>
-              </li>
-            </p>
-          </ul> 
-          <div class="d-flex justify-content-center mt-4 mb-4">
-            <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
-              <strong>Prix/heure : </strong>
-              <%= bicycle.price_per_hour %> €
-            </p>
-          </div>  
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex justify-content-center mt-2 border rounded shadow pt-3">
-            <% if @bicycle.owner.image.attached? %>
-              <%= image_tag @bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px" %>
-            <% else %>
-              <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px" %>
-            <% end %> 
-            <p class="text-center">
-              <strong>Propriétaire :</strong>
-              <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
-            </p>
-          </div>  
-          <div class="container mt-4">
-            <div class="accordion" id="userReviewsAccordion">
-              <div class="accordion-item rounded shadow mb-3">
-                <h6 class="accordion-header" id="userReviewsHeading">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#userReviewsCollapse" aria-expanded="true" aria-controls="userReviewsCollapse">
-                    <strong>Avis utilisateur</strong>
-                    <span class="ms-2 me-2">
-                      <% received_reviews = Review.where(reviewed_user_id: @bicycle.owner_id) %>
-                      <% if received_reviews.count > 0 %>
-                        <% sum_of_ratings = received_reviews.sum(:rating) %>
-                        <% average_rating = sum_of_ratings.to_f / received_reviews.count %>
-                        <% average_rating_rounded = average_rating.round(1) %>
-                        <span><%= average_rating_rounded %>/5</span>
-                      <% else %>
-                      <% end %>
-                      <% if @bicycle.owner.owner_reviews.any? %>
-                        <i class="fas fa-star"></i>  
-                      <% end %>  
-                    </span>  
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
-                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
-                  </button>
-                </h6>
-                <div id="userReviewsCollapse" class="accordion-collapse collapse" aria-labelledby="userReviewsHeading" data-bs-parent="#userReviewsAccordion">
-                  <div class="accordion-body">
-                    <% if @bicycle.owner.owner_reviews.any? %>
-                      <% @bicycle.owner.owner_reviews.first(3).each_with_index do |owner_review, index| %>
-                        <div class="mb-3">
-                          <div class="stars">
-                            <% owner_review.rating.times do %>
-                              <i class="fas fa-star"></i>
-                            <% end %>
-                            <% (5 - owner_review.rating).times do %>
-                              <i class="far fa-star"></i>
-                            <% end %>  
-                          </div>  
-                        </div>
-                        <p><strong>Commentaire :</strong> <%= owner_review.review_text %></p>
-                        <p><strong>Par :</strong> <%= owner_review.reviewer_user.first_name %> <%= owner_review.reviewer_user.last_name %></p>
-                        <% if owner_review.review_date.present? %>
-                          <% review_date = owner_review.review_date %>
-                          <% months_ago = ((Time.now - review_date) / 1.month).round %>
-                          <p><strong>
-                            <% if months_ago.zero? %>
-                              Il y a moins d'un mois
-                            <% elsif months_ago == 1 %>
-                              Il y a un mois
-                            <% else %>
-                              Il y a <%= months_ago %> mois
-                            <% end %></strong>
-                          </p>
+                <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px" %>
+              <% end %> 
+              <p class="text-center">
+                <strong>Propriétaire :</strong>
+                <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
+              </p>
+            </div>  
+            <div class="container mt-4">
+              <div class="accordion" id="userReviewsAccordion">
+                <div class="accordion-item rounded shadow mb-3">
+                  <h6 class="accordion-header" id="userReviewsHeading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#userReviewsCollapse" aria-expanded="true" aria-controls="userReviewsCollapse">
+                      <strong>Avis utilisateur</strong>
+                      <span class="ms-2 me-2">
+                        <% received_reviews = Review.where(reviewed_user_id: @bicycle.owner_id) %>
+                        <% if received_reviews.count > 0 %>
+                          <% sum_of_ratings = received_reviews.sum(:rating) %>
+                          <% average_rating = sum_of_ratings.to_f / received_reviews.count %>
+                          <% average_rating_rounded = average_rating.round(1) %>
+                          <span><%= average_rating_rounded %>/5</span>
+                        <% else %>
                         <% end %>
+                        <% if @bicycle.owner.owner_reviews.any? %>
+                          <i class="fas fa-star"></i>  
+                        <% end %>  
+                      </span>  
+                      <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                      <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                    </button>
+                  </h6>
+                  <div id="userReviewsCollapse" class="accordion-collapse collapse" aria-labelledby="userReviewsHeading" data-bs-parent="#userReviewsAccordion">
+                    <div class="accordion-body">
+                      <% if @bicycle.owner.owner_reviews.any? %>
+                        <% @bicycle.owner.owner_reviews.first(3).each_with_index do |owner_review, index| %>
+                          <div class="mb-3">
+                            <div class="stars">
+                              <% owner_review.rating.times do %>
+                                <i class="fas fa-star"></i>
+                              <% end %>
+                              <% (5 - owner_review.rating).times do %>
+                                <i class="far fa-star"></i>
+                              <% end %>  
+                            </div>  
+                          </div>
+                          <p><strong>Commentaire :</strong> <%= owner_review.review_text %></p>
+                          <p><strong>Par :</strong> <%= owner_review.reviewer_user.first_name %> <%= owner_review.reviewer_user.last_name %></p>
+                          <% if owner_review.review_date.present? %>
+                            <% review_date = owner_review.review_date %>
+                            <% months_ago = ((Time.now - review_date) / 1.month).round %>
+                            <p><strong>
+                              <% if months_ago.zero? %>
+                                Il y a moins d'un mois
+                              <% elsif months_ago == 1 %>
+                                Il y a un mois
+                              <% else %>
+                                Il y a <%= months_ago %> mois
+                              <% end %></strong>
+                            </p>
+                          <% end %>
+                        <% end %>
+                      <% else %>
+                        <p>L'utilisateur n'a pas encore d'avis</p>
                       <% end %>
-                    <% else %>
-                      <p>L'utilisateur n'a pas encore d'avis</p>
-                    <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <p class="text-center mt-6">
-            <strong>Adresse :</strong>
-            <%= "#{bicycle.city},#{bicycle.postal_code}, #{bicycle.country}" %>
-          </p>
-          <div class="mt-4">
-            <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 500px; max-width: 600px; border-radius: 25px;"></div>
+            <p class="text-center mt-6">
+              <strong>Adresse :</strong>
+              <%= "#{bicycle.city},#{bicycle.postal_code}, #{bicycle.country}" %>
+            </p>
+            <div class="mt-4">
+              <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 500px; max-width: 600px; border-radius: 25px;"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>   
   </div>
 <% else %>
-    
-<div class="col mt-1">
-  <div class="card card-blog card-plain">
-    <div class="position-relative">
-      <div class="d-block blur-shadow-image">
-      <% if bicycle.image.attached? %>
-        <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
-      <% else %>
-        <%= image_tag 'icone_vélo.png', class: "img-fluid border-radius-lg" %>
-      <% end %>  
+  <div class="col mt-1 p-3">
+    <div class="card card-blog card-plain">
+      <div class="position-relative">
+        <div class="d-block blur-shadow-image">
+          <% if bicycle.image.attached? %>
+            <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
+          <% else %>
+            <%= image_tag 'icone_vélo.png', class: "img-fluid border-radius-lg" %>
+          <% end %>  
+        </div>
       </div>
-    </div>
-    <div class="card-body px-0 pt-1">
+      <div class="card-body px-0 pt-1">
         <h5>
           <%= bicycle.model %>
         </h5>
-      <p>
-      Taille : <%= bicycle.size %> <br>
-      </p>
-      <p>
-      Localisation : <%= bicycle.country %>, <%= bicycle.city %>
-      </p>
+        <p>
+          Taille : <%= bicycle.size %> <br>
+        </p>
+        <p>
+          Localisation : <%= bicycle.country %>, <%= bicycle.city %>
+        </p>
+      </div>
     </div>
-  </div>
   </div>	
-<% end %>  
+<% end %>

@@ -1,34 +1,34 @@
-  <div class="jumbotron position-relative" style="background-image: url('<%= asset_path('bicycle_banner_img.jpg') %>'); background-size: cover; padding: 100px; overflow: hidden; width: 100%; height: 100%; background-position: center; position: relative;">
-    <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-primary)); opacity: 0.8; z-index: 0;"></div>
-    <div style="z-index: 2; position: relative;">
-      <h1 class="display-4 mx-lg-10 text-center" style="padding: 1rem;">Trouvez votre vélo idéal</h1>
-      <p class="lead text-center" style="color: var(--bs-secondary);">Louez un vélo près de chez vous</p>
-      <div class="row justify-content-center">
-        <div class="col-md-auto form-group mx-2">
-          <%= text_field_tag :city, nil, id: "city-input", class: "form-control", placeholder: "Ville" %>
-        </div>
-
-        <%= form_with url: bicycles_filtered_path, method: :get, class: "col-md-auto d-md-flex gap-3", id: "search-form" do |form| %>
-          <div class="form-group w-auto">
-            <%= form.datetime_field :start_date, class: "form-control", placeholder: "Début" %>
-          </div>
-          <div class="form-group w-auto">
-            <%= form.number_field :duration, class: "form-control", placeholder: "Durée (en heures)" %>
-          </div>
-          <div class="form-group mx-2">
-            <%= form.submit "Rechercher", class: "btn btn-primary" %>
-          </div>
-        <% end %>
+<div class="jumbotron jumbotron-custom position-relative d-flex">
+  <div class="container position-relative text-center align-self-center" style="z-index: 2;">
+    <h1 class="display-4 text-center jumbotron-heading">Trouvez votre vélo idéal</h1>
+    <p class="lead text-center jumbotron-subheading">Louez un vélo près de chez vous</p>
+    <div class="row justify-content-center">
+      <div class="col-md-auto form-group mx-2 align-items-center">
+        <%= text_field_tag :city, nil, id: "city-input", class: "form-control", placeholder: "Ville" %>
       </div>
-    </div>   
+      <%= form_with url: bicycles_filtered_path, method: :get, class: "col-md-auto d-md-flex gap-3 align-items-center", id: "search-form" do |form| %>
+        <div class="form-group w-auto">
+          <%= form.datetime_field :start_date, class: "form-control", placeholder: "Début" %>
+        </div>
+        <div class="form-group w-auto">
+          <%= form.number_field :duration, class: "form-control", placeholder: "Durée (en heures)" %>
+        </div>
+        <div class="form-group">
+          <%= form.submit "Rechercher", class: "btn btn-primary m-0" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+  <div class="gradient-overlay"></div>
+</div>
 
 
-  <div class="row justify-content-around">
-    <div class="col-lg-6 col-md-12 col-sm-12" style="height: 115vh;">
+
+  <div class="row justify-content-around mx-2 my-2">
+    <div class="col-lg-6 col-md-12 col-sm-12 map-container px-0">
       <div id="index-map" style="width: 100%; height: 100%;"></div>
     </div>
-    <div id="carouselExampleControls" class="carousel slide col-lg-6 col-md-12" data-bs-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide col-lg-6 col-md-12 col-sm-12" data-bs-ride="carousel">
       <div class="carousel-inner">
         <turbo-frame id="bicycles-list"></turbo-frame>
         <div class="d-flex align-items-center">

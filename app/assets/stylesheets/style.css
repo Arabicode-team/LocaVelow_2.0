@@ -60,3 +60,60 @@
     height: 100%;
     border-radius: 25px;
   }
+
+  /*styles responsive by Marina for banner & map*/
+
+  .map-container {
+    height: 118vh; /* Высота для больших экранов */
+  }
+  
+  @media (max-width: 768px) {
+    .map-container {
+      height: 40vh; /* Меньшая высота для мобильных устройств */
+    }
+  }
+  .jumbotron-custom {
+    background-image: url('/assets/bicycle_banner_img.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+  }
+  
+  .gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-primary));
+    opacity: 0.8;
+    z-index: 1;
+  }
+  
+  .jumbotron-heading {
+    padding: 1rem;
+    font-size: 2.5rem;
+  }
+  
+  .jumbotron-subheading {
+    color: var(--bs-secondary);
+  }
+
+  .form-control {
+    font-size: 1rem; /* Стандартный размер для полей ввода */
+  }
+  
+  @media (max-width: 768px) {
+    .jumbotron-custom {
+      min-height: 300px;
+      background-position: top center;
+    }
+    .jumbotron-heading {
+      font-size: 1.5rem; /* Меньший размер для заголовка на мобильных устройствах */
+    }
+  
+    .form-control {
+      font-size: 0.8rem; /* Меньший размер для полей ввода на мобильных устройствах */
+    }  
+  }
+
