@@ -15,7 +15,7 @@
         <li class="list-group-item"><strong>Email :</strong> <%= user.email %></li>
       </ul>
       <div class="text-center mt-3">
-        <%= link_to "Modifier le compte", edit_user_registration_path(@user), class: "btn btn-primary" %>
+        <%= link_to "Modifier le compte", edit_user_registration_path(@user), class: "btn btn-primary", aria_label: "Modifier le compte" %>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
                     <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
                   </td>
                   <td class="align-middle">
-                  <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>              
+                  <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2", aria_label: "Voir l'annonce" %>              
                 </td>
                 </tr>
               <% end %>
@@ -78,7 +78,7 @@
       </div>
       
       <li class="list-group-item mt-3">
-        <%= link_to "Nouvelle annonce", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+        <%= link_to "Nouvelle annonce", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px", aria_label: "Nouvelle annonce" %>
       </li>
     </div>
 
@@ -102,14 +102,18 @@
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                      <% if rental.bicycle.image.attached? %>
+                      <% if rental.bicycle && rental.bicycle.image.attached? %>
                         <%= image_tag rental.bicycle.image, class: "avatar avatar-sm me-3" %>
                       <% else %>
                         <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3" %>
                       <% end %>
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <%= link_to rental.bicycle.model, rental.bicycle, class: "btn btn-link text-decoration-none mb-0 text-xs", style: "text-align: center;" %>
+                      <% if rental.bicycle %>
+                        <%= link_to rental.bicycle.model, rental.bicycle, class: "btn btn-link text-decoration-none mb-0 text-xs", style: "text-align: center;", aria_label: rental.bicycle.model %>
+                      <% else %>
+                        <p class="text-xs font-weight-bold mb-0">Vélo supprimé</p>
+                      <% end %>
                       </div>
                     </div>
                   </td>
@@ -125,12 +129,12 @@
                   <td class="align-middle flex-row">
                     <div class="d-flex justify-content-center">
                       <% if rental.end_date < Date.today %>
-                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1" %>
+                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1", aria_label: "Voir la location" %>
                         <% unless rental.renter_review %>
-                          <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm mt-2" %>
+                          <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm mt-2", aria_label: "Ajouter un avis" %>
                         <% end %>
                       <% else %>
-                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1" %>
+                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1", aria_label: "Voir la location" %>
                       <% end %>  
                     </div>
                   </td>
@@ -141,7 +145,7 @@
         </div>
       </div>
       <li class="list-group-item mt-3">
-       <%= link_to "Nouveau vélo", bicycles_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+       <%= link_to "Nouveau vélo", bicycles_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px", aria_label: "Nouveau vélo" %>
     </li>
     </div>
   </div>

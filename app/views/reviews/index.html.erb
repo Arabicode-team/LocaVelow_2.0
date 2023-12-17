@@ -5,9 +5,9 @@
   <% @reviews.each do |review| %>
     <%= render review %>
     <p>
-      <%= link_to "Show this review", review %>
+      <%= link_to "Show this review", review, aria_label: "Show review" %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New review", new_review_path %>
+<%= link_to "New review", new_review_path, aria_label: "New review" %>

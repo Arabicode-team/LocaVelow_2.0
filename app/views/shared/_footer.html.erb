@@ -1,32 +1,25 @@
-<footer>
-  <div class="container">
-    <div class="d-flex justify-content-between">
-      <div>
-        <h3>Services</h3>
-        <ul>
-          <li><%= link_to "S'inscrire", new_user_registration_path %></li>
-          <li><%= link_to "Se connecter", new_user_session_path %></li>
-          <li><%= link_to "Poster une annonce", new_bicycle_path %></li>
-          <li><%= link_to "Louer un vélo", bicycles_path %></li>
-           <li><%= link_to 'Conditions générales', terms_and_conditions_path %></li>
-        </ul>
-      </div>
-      <div>
-        <h3>A propos de nous</h3>
-        <ul>
-          <li><a href="https://github.com/ikramiste">Ikram Saadi</a></li>
-          <li><a href="https://github.com/masechkacat">Marina Torunova</a></li>
-          <li><a href="https://github.com/JerkStanton">Sylvain Deligny</a></li>
-          <li><a href="https://github.com/cypradoux">Cyprien Pradoux</a></li>
-          <li><a href="https://github.com/GregMagnat">Grégory Magnat</a></li> 
-        </ul>
-      </div>
-      <div class="d-flex align-items-end justify-content-center">
-        <a href="https://github.com/Arabicode-team/LocaVelow_2.0">
-          <i class="fa-brands fa-github fa-xl"></i>
-        </a>
-        <p class="small copyright ml-2 mb-0 ms-2">Locavelow © 2023</p>
-      </div>
+<footer class="py-3 my-4">
+  <ul class="nav justify-content-center border-top border-bottom mb-3">
+    <li class="nav-item"><%= link_to "S'inscrire", new_user_registration_path, class: "nav-link px-2 text-body-secondary", "aria-label": "S'inscrire" %></li>
+    <li class="nav-item"><%= link_to "Se connecter", new_user_session_path, class: "nav-link px-2 text-body-secondary", "aria-label": "Se connecter" %></li>
+    <li class="nav-item"><%= link_to "Poster une annonce", new_bicycle_path, class: "nav-link px-2 text-body-secondary", "aria-label": "Poster une annonce" %></li>
+    <li class="nav-item"><%= link_to "Louer un vélo", bicycles_path, class: "nav-link px-2 text-body-secondary", "aria-label": "Louer un vélo" %></li>
+    <li class="nav-item"><%= link_to "CGV", bicycles_path, class: "nav-link px-2 text-body-secondary", "aria-label": "CGV" %></li>
+  </ul>
+  <div class="d-flex flex-wrap justify-content-between align-items-center mx-5">
+    <div class="col-md-4 d-flex align-items-center">
+      <%= link_to root_path, class: "mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" do %>
+        <%= image_tag asset_path('logo.png'), class: "logo-img", style: "width: 34px", alt: "Logo" %>
+      <% end %>
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2023 LocaVelow, Inc</span>
     </div>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3">
+        <%= link_to "https://github.com/Arabicode-team/LocaVelow_2.0", aria_label: "GitHub repository", class: "text-body-secondary" do %>
+          <i class="fa-brands fa-github fa-xl"></i>
+        <% end %>
+      </li>
+    </ul>
   </div>
 </footer>
+       

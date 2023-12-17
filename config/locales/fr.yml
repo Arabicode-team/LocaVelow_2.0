@@ -1,0 +1,53 @@
+fr:
+  simple_calendar:
+    previous: "<<"
+    next: ">>"
+    months:
+      january: "Janvier"
+      february: "Février"
+      march: "Mars"
+      april: "Avril"
+      may: "Mai"
+      june: "Juin"
+      july: "Juillet"
+      august: "Août"
+      september: "Septembre"
+      october: "Octobre"
+      november: "Novembre"
+      december: "Décembre"
+    days:
+      sunday: "Dimanche"
+      monday: "Lundi"
+      tuesday: "Mardi"
+      wednesday: "Mercredi"
+      thursday: "Jeudi"
+      friday: "Vendredi"
+      saturday: "Samedi"
+    today: "Aujourd'hui"
+    semaines:
+      week: "Semaine"
+      all_weeks: "Toutes les semaines"
+  devise:
+    sessions:
+      user:
+        signed_in: "Vous êtes connecté."
+        signed_out: "Déconnecté."
+        signed_up: "Inscription réussie."
+        already_signed_up: "Vous êtes déjà inscrit."
+        already_signed_in: "Vous êtes déjà connecté."
+        already_signed_out: "Vous êtes déjà déconnecté."
+        already_authenticated: "Vous êtes déjà connecté."
+        inactive_signed_up: "Inscription réussie. Vérifiez vos emails pour activer votre compte."
+        inactive_signed_in: "Vous êtes connecté. Vérifiez vos emails pour activer votre compte."
+        inactive_signed_out: "Déconnecté."
+      failure:
+        already_authenticated: "Vous êtes déjà connecté."
+        inactive: "Votre compte n'est pas activé."
+        invalid: "Email ou mot de passe invalide."
+        locked: "Votre compte est bloqué."
+        last_attempt: "Ceci est votre dernière tentative de connexion."
+        not_found_in_database: "Email ou mot de passe invalide."
+        timeout: "Votre session a expiré, veuillez vous reconnecter."
+        unauthenticated: "Vous devez être connecté pour accéder à cette page."
+        unconfirmed: "Votre compte n'est pas confirmé."
+        unlock: "Votre compte est bloqué. Veuillez vérifier vos emails pour le débloquer."

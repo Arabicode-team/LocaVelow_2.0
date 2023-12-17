@@ -11,8 +11,8 @@
             <%= render bicycle %>
             <div class="d-flex justify-content-between align-items-center mx-1">
               <h5 class="text-primary mb-0" style="color: #FFDE8C;"><%= "#{bicycle.price_per_hour}€/1h" %></h5>
-              <%= link_to "Voir le vélo", bicycle, class: "btn btn-outline-dark btn-sm ml-auto", data: { turbo: false } %>
-            </div>
+                <%= link_to "Voir le vélo", bicycle, class: "btn btn-outline-dark btn-sm ml-auto", data: { turbo: false }, aria_label: "Voir le vélo" %>
+              </div>
           </div>
         <% end %>
 =======

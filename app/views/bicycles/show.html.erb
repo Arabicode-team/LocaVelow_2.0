@@ -1,31 +1,28 @@
 <% if @rental && @rental.errors.any? %>
-<div id="error_explanation">
-<h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>
 
-<ul>
-  <% @rental.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-</ul>
-</div>
+    <ul>
+      <% @rental.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
-
-<div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 300px;"></div>
-
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
-      <% if current_user.id == @bicycle.owner.id %>
-        <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
-        <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger" %>
-      <% end %>  
-    <%= link_to "Retour", bicycles_path %>  
-  <% else %>
-    <%= link_to "Connectez-vous pour louer ce vélo", new_user_session_path, class: "btn btn-outline-primary btn-sm" %>
-  <% end %>
+    <% if current_user.id == @bicycle.owner.id %>
+      <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary", aria_label: "Modifier mon annonce" %>
+      <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger", aria_label: "Supprimer mon annonce" %>
+    <% end %>  
+      <%= link_to "Retour", bicycles_path, aria_label: "Retour" %>  
+    <% else %>
+      <%= link_to "Connectez-vous pour louer ce vélo", new_user_session_path, class: "btn btn-outline-primary btn-sm", aria_label: "Connectez-vous pour louer ce vélo" %>
+    <% end %>
 </div>
 
 <div class="container mt-4">
