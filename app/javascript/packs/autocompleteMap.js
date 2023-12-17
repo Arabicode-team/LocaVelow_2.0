@@ -67,7 +67,7 @@ function fillInAddress(place) {
 function renderAddress(place, map, marker) {
   if (place.geometry && place.geometry.location) {
     map.setCenter(place.geometry.location);
-    marker.position = place.geometry.location;
+    marker.setPosition(place.geometry.location);
   } else {
     marker.position = null;
   }
@@ -75,7 +75,6 @@ function renderAddress(place, map, marker) {
 
 export function initMap() {
   const { Map } = google.maps;
-  const { AdvancedMarkerElement } = google.maps.marker;
   const { Autocomplete } = google.maps.places;
 
   const mapOptions = CONFIGURATION.mapOptions;
@@ -83,7 +82,7 @@ export function initMap() {
   mapOptions.center = mapOptions.center || { lat: 48.8566, lng: 2.3522 }; // Paris coordinates
 
   const map = new Map(document.getElementById('gmp-map'), mapOptions);
-  const marker = new AdvancedMarkerElement({ map });
+  const marker = new google.maps.Marker({ map: map});
   const autocomplete = new Autocomplete(getFormInputElement('location'), {
     fields: ['address_components', 'geometry', 'name'],
     types: ['address'],

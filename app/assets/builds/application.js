@@ -7883,8 +7883,24 @@
   // app/javascript/packs/autocompleteMap.js
   var CONFIGURATION = {
     "ctaTitle": "Checkout",
-    "mapOptions": { "center": { "lat": 48.8566, "lng": 2.3522 }, "fullscreenControl": true, "mapTypeControl": false, "streetViewControl": true, "zoom": 11, "zoomControl": true, "maxZoom": 22, "mapId": "" },
-    "capabilities": { "addressAutocompleteControl": true, "mapDisplayControl": true, "ctaControl": true }
+    "mapOptions": {
+      "center": {
+        "lat": 48.8566,
+        "lng": 2.3522
+      },
+      "fullscreenControl": true,
+      "mapTypeControl": false,
+      "streetViewControl": true,
+      "zoom": 11,
+      "zoomControl": true,
+      "maxZoom": 22,
+      "mapId": ""
+    },
+    "capabilities": {
+      "addressAutocompleteControl": true,
+      "mapDisplayControl": true,
+      "ctaControl": true
+    }
   };
   var SHORT_NAME_ADDRESS_COMPONENT_TYPES = /* @__PURE__ */ new Set(["street_number", "administrative_area_level_1", "postal_code"]);
   var ADDRESS_COMPONENT_TYPES_IN_FORM = [
@@ -7924,20 +7940,19 @@
   function renderAddress(place, map2, marker) {
     if (place.geometry && place.geometry.location) {
       map2.setCenter(place.geometry.location);
-      marker.position = place.geometry.location;
+      marker.setPosition(place.geometry.location);
     } else {
       marker.position = null;
     }
   }
   function initMap() {
     const { Map: Map2 } = google.maps;
-    const { AdvancedMarkerElement } = google.maps.marker;
     const { Autocomplete } = google.maps.places;
     const mapOptions = CONFIGURATION.mapOptions;
     mapOptions.mapId = mapOptions.mapId || "DEMO_MAP_ID";
     mapOptions.center = mapOptions.center || { lat: 48.8566, lng: 2.3522 };
     const map2 = new Map2(document.getElementById("gmp-map"), mapOptions);
-    const marker = new AdvancedMarkerElement({ map: map2 });
+    const marker = new google.maps.Marker({ map: map2 });
     const autocomplete = new Autocomplete(getFormInputElement("location"), {
       fields: ["address_components", "geometry", "name"],
       types: ["address"]
@@ -7952,27 +7967,6 @@
       fillInAddress(place);
     });
   }
-  function initShowMap() {
-    const mapElement = document.getElementById("gmp-map");
-    const lat = parseFloat(mapElement.getAttribute("data-latitude"));
-    const lng = parseFloat(mapElement.getAttribute("data-longitude"));
-    if (!isNaN(lat) && !isNaN(lng)) {
-      const mapOptions = {
-        ...CONFIGURATION.mapOptions,
-        center: { lat, lng },
-        zoom: 15
-        // Масштаб карты, который подходит для отображения маркера
-      };
-      const map = new google.maps.Map(mapElement, mapOptions);
-      new google.maps.Marker({
-        position: { lat, lng },
-        map
-      });
-    }
-  }
-  window.initMap = initMap;
-  window.initShowMap = initShowMap;
-  window.CONFIGURATION = CONFIGURATION;
 
   // app/javascript/packs/indexMap.js
   var markers = [];
@@ -8011,7 +8005,7 @@
       });
       const contentString = `
       <div class="col text-center">
-        <img src="${bicycle.image_url}" alt="${bicycle.model}" style="width:130px;height:100px;">
+        <img src="${bicycle.image_url || "/assets/icone_v\xE9lo.png"}" alt="${bicycle.model}" style="width:130px;height:100px;">
         <h3>${bicycle.model}</h3>
         <p><b>Taille:</b> ${bicycle.size}</p>
         <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>
@@ -8137,15 +8131,23 @@
   }
 
   // app/javascript/application.js
+  var mapsInitialized = {
+    autocomplete: false,
+    index: false,
+    simple: false
+  };
   function initMaps() {
-    if (document.getElementById("location-input")) {
+    if (document.getElementById("location-input") && !mapsInitialized.autocomplete) {
       initMap();
+      mapsInitialized.autocomplete = true;
     }
-    if (document.getElementById("index-map")) {
+    if (document.getElementById("index-map") && !mapsInitialized.index) {
       initIndexMap();
+      mapsInitialized.index = true;
     }
-    if (document.getElementById("gmp-map")) {
+    if (document.getElementById("gmp-map") && !mapsInitialized.simple) {
       initSimpleMap();
+      mapsInitialized.simple = true;
     }
   }
   function initConditionalScripts() {
@@ -8157,8 +8159,13 @@
     initConditionalScripts();
     initMaps();
   });
-  window.initMaps = initMaps;
-  window.initConditionalScripts = initConditionalScripts;
+  document.addEventListener("turbo:before-visit", function() {
+    mapsInitialized = {
+      autocomplete: false,
+      index: false,
+      simple: false
+    };
+  });
 })();
 /*! Bundled license information:
 

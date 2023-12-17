@@ -5,15 +5,24 @@ import { initIndexMap } from "./packs/indexMap";
 import { initSimpleMap } from "./packs/simpleMap";
 import { estimateCost } from "./packs/estimate_cost";
 
+let mapsInitialized = {
+  autocomplete: false,
+  index: false,
+  simple: false
+};
+
 function initMaps() {
-  if (document.getElementById('location-input')) {
+  if (document.getElementById('location-input') && !mapsInitialized.autocomplete) {
     initAutocompleteMap();
+    mapsInitialized.autocomplete = true;
   }
-  if (document.getElementById('index-map')) {
+  if (document.getElementById('index-map') && !mapsInitialized.index) {
     initIndexMap();
+    mapsInitialized.index = true;
   }
-  if (document.getElementById('gmp-map')) {
+  if (document.getElementById('gmp-map') && !mapsInitialized.simple) {
     initSimpleMap();
+    mapsInitialized.simple = true;
   }
 }
 
@@ -28,5 +37,12 @@ document.addEventListener('turbo:load', function () {
   initMaps();
 });
 
-window.initMaps = initMaps;
-window.initConditionalScripts = initConditionalScripts;
+// Сбросить флаги инициализации при переходе на новую страницу
+document.addEventListener('turbo:before-visit', function () {
+  mapsInitialized = {
+    autocomplete: false,
+    index: false,
+    simple: false
+  };
+});
+

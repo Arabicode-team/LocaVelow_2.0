@@ -39,7 +39,7 @@ function loadMarkers(bicycles) {
 
     const contentString = `
       <div class="col text-center">
-        <img src="${bicycle.image_url}" alt="${bicycle.model}" style="width:130px;height:100px;">
+        <img src="${bicycle.image_url || '/assets/icone_vélo.png'}" alt="${bicycle.model}" style="width:130px;height:100px;">
         <h3>${bicycle.model}</h3>
         <p><b>Taille:</b> ${bicycle.size}</p>
         <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>

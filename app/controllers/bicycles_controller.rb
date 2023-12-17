@@ -1,6 +1,6 @@
 class BicyclesController < ApplicationController
   before_action :set_bicycle, only: %i[edit update destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :bicycles_filtered]
 
   def index
     if params[:ne_lat] && params[:ne_lng] && params[:sw_lat] && params[:sw_lng]
@@ -83,8 +83,12 @@ class BicyclesController < ApplicationController
                                   ne_lat, sw_lat, ne_lng, sw_lng)
     
       # Ответ в зависимости от типа запроса
+      bicycles_as_json = @bicycles.map do |bicycle|
+        bicycle.as_json.merge(image_url: bicycle.image_url)
+      end
+  
       respond_to do |format|
-        format.json { render json: @bicycles }
+        format.json { render json: bicycles_as_json }
         format.html do
           if request.xhr?
             render 'bicycles_filtered', layout: false
@@ -92,36 +96,6 @@ class BicyclesController < ApplicationController
         end
       end
     end    
-=======
-
-    def bicycles_filtered
-      start_datetime = DateTime.parse(params[:start_date])
-      duration = params[:duration].to_i.hours
-      end_datetime = start_datetime + duration
-    
-      ne_lat, ne_lng, sw_lat, sw_lng = params.values_at('ne_lat', 'ne_lng', 'sw_lat', 'sw_lng').map(&:to_f)
-    
-      @bicycles = Bicycle.filter_by_date_and_city(start_datetime, end_datetime)
-                          .where("latitude <= ? AND latitude >= ? AND longitude <= ? AND longitude >= ?", 
-                                  ne_lat, sw_lat, ne_lng, sw_lng)
-    
-      # Ответ в зависимости от типа запроса
-      respond_to do |format|
-        format.json { render json: @bicycles }
-        format.html do
-          if request.xhr?
-            render 'bicycles_filtered', layout: false
-          end
-        end
-      end
-<<<<<<< HEAD
-    end
-    
->>>>>>> af2f535 (marktrs of filter (seeds bug))
-=======
-    end    
->>>>>>> 816e784 (bar de recherche)
-    
     
   private
 
