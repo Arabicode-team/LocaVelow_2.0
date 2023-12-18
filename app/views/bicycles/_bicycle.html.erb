@@ -1,18 +1,18 @@
 <% if local_assigns[:show_details] == true %>
-  <div id="<%= dom_id bicycle %>">
+  <div id="<%= dom_id bicycle %>" itemprop="bicycle" itemscope itemtype="http://schema.org/Product">
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6">
-          <%= @bicycle.image.attached? ? image_tag(@bicycle.image, class: "img-fluid rounded", alt: "Image de vélo") : image_tag(asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo") %>
-          <h4 class="text-center mt-4"><%= bicycle.model %></h4>
-          <h6 class="text-center"><%= bicycle.city %>, <%= bicycle.country %></h6>  
-          <p><%= bicycle.description %></p> 
+          <%= @bicycle.image.attached? ? image_tag(@bicycle.image, class: "img-fluid rounded", alt: "Image de vélo", itemprop: "image") : image_tag(asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo", itemprop: "image") %>
+          <h4 class="text-center mt-4" itemprop="name"><%= bicycle.model %></h4>
+          <h6 class="text-center" itemprop="location"><%= bicycle.city %>, <%= bicycle.country %></h6>  
+          <p itemprop="description"><%= bicycle.description %></p> 
           <h5 class="text-center mt-4"> Caractéristiques</h5>
           <ul>
-            <li><strong>Catégorie :</strong> <%= bicycle.bicycle_type.humanize %></li>
-            <li><strong>Taille :</strong> <%= bicycle.size.humanize %></li>
-            <li><strong>Etat :</strong> <%= bicycle.condition %></li>
-            <li><strong>Accessoires :</strong> <%= bicycle.accessories.present? ? bicycle.accessories.map(&:accessory_type).join(', ').humanize : "Pas d'accessoires disponibles." %></li>
+            <li itemprop="category"><strong>Catégorie :</strong> <%= bicycle.bicycle_type.humanize %></li>
+            <li itemprop="size"><strong>Taille :</strong> <%= bicycle.size.humanize %></li>
+            <li itemprop="condition"><strong>Etat :</strong> <%= bicycle.condition %></li>
+            <li itemprop="accessories"><strong>Accessoires :</strong> <%= bicycle.accessories.present? ? bicycle.accessories.map(&:accessory_type).join(', ').humanize : "Pas d'accessoires disponibles." %></li>
           </ul> 
           <div class="d-flex justify-content-center mt-4 mb-4">
             <span class="badge bg-gradient-light badge-md"><strong>Prix/heure : </strong><%= bicycle.price_per_hour %> €</span>
@@ -92,16 +92,16 @@
   </div>
 <% else %>
   <div class="col mt-1 p-3">
-    <div class="card card-blog card-plain">
+    <div class="card card-blog card-plain" itemprop="bicycle" itemscope itemtype="http://schema.org/Product">
       <div class="position-relative">
         <div class="d-block blur-shadow-image">
-          <%= bicycle.image.attached? ? image_tag(bicycle.image, class: "img-fluid border-radius-lg", alt: "Image de vélo") : image_tag('icone_vélo.png', class: "img-fluid border-radius-lg", alt: "Icone de vélo") %>
+          <%= bicycle.image.attached? ? image_tag(bicycle.image, class: "img-fluid border-radius-lg", alt: "Image de vélo", itemprop: "image") : image_tag('icone_vélo.png', class: "img-fluid border-radius-lg", alt: "Icone de vélo", itemprop: "image") %>
         </div>
       </div>
       <div class="card-body px-0 pt-1">
-        <h5><%= bicycle.model %></h5>
-        <p>Taille : <%= bicycle.size %> <br></p>
-        <p>Localisation : <%= bicycle.country %>, <%= bicycle.city %></p>
+        <h5 itemprop="name"><%= bicycle.model %></h5>
+        <p itemprop="size">Taille : <%= bicycle.size %> <br></p>
+        <p itemprop="location">Localisation : <%= bicycle.country %>, <%= bicycle.city %></p>
       </div>
     </div>
   </div>	

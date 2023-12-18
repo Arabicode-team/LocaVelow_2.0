@@ -34,10 +34,10 @@
         <% rentals_slice.each do |rental| %>
           <% if rental.renter_review %>
             <% avis_present = true %>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" itemscope itemtype="http://schema.org/Review">
               <div class="card">
                 <div class="card-body">
-                  <h6 class="card-title"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
+                  <h6 class="card-title" itemprop="author"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
                   <div class="stars">
                     <% rental.renter_review.rating.times do %>
                       <i class="fas fa-star"></i>
@@ -46,7 +46,7 @@
                       <i class="far fa-star"></i>
                     <% end %>  
                   </div>  
-                  <p class="card-text"><%= rental.renter_review.review_text %></p>
+                  <p class="card-text" itemprop="reviewBody"><%= rental.renter_review.review_text %></p>
                   <% if rental.renter_review.review_date.present? %>
                     <% review_date = rental.renter_review.review_date %>
                     <% months_ago = ((Time.now - review_date) / 1.month).round %>

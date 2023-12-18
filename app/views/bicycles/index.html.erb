@@ -7,18 +7,16 @@
       <div class="carousel-inner">
         <turbo-frame id="bicycles-list"></turbo-frame>
         <div class="d-flex align-items-center">
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" itemprop="previousItem">
             <img src="<%= asset_path('fgauche.png') %>" alt="Flèche" width="30%" style="color: #FFDE8C;">
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" itemprop="nextItem">
             <img src="<%= asset_path('fdroite.png') %>" alt="Flèche" width="30%">
             <span class="visually-hidden">Next</span>
           </button>
         </div>
       </div>
-      
-      </div>
     </div>
   </div>
-  </div>
+</div>

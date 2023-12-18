@@ -1,12 +1,13 @@
-
 <h1>Reviews</h1>
 
 <div id="reviews">
   <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review, aria_label: "Show review" %>
-    </p>
+    <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+      <%= render review %>
+      <p>
+        <%= link_to "Show this review", review, aria_label: "Show review" %>
+      </p>
+    </div>
   <% end %>
 </div>
 
