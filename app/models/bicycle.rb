@@ -40,7 +40,7 @@ class Bicycle < ApplicationRecord
 
   def check_active_rentals
     if self.rentals.where.not(rental_status: :completed).exists?
-      errors.add(:base, "Cannot delete bicycle with active rentals.")
+      errors.add(:base, "Impossible de supprimer le vélo avec des locations en cours.")
       throw :abort
     end
   end
