@@ -3965,13 +3965,18 @@
   .btn-outline-light {
     background-color: #FFDE8C; 
     color: #506191; 
-    border-radius: 25px
+    border-radius: 25px;
+    --bs-btn-active-color: #506191;
+    --bs-btn-active-bg: #FFDE8C;
+    --bs-btn-disabled-color: #506191;
+    --bs-btn-disabled-bg: #FFDE8C;
+    --bs-btn-hover-bg: #FFDE8C;
   }
   
   .btn-outline-dark {
     background-color: #506191; 
     color: #FFDE8C; 
-    border-radius: 25px
+    border-radius: 25px;
   }
   
   .btn-outline-white {
