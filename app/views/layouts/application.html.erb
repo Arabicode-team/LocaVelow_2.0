@@ -22,7 +22,11 @@
 <body>
   <%= render 'shared/navbar' %>
 
-  <% flash.each do |key, message| %>
+  <div class="d-flex justify-content-center">
+  <%= button_tag "Cliquez ici pour activer/désactiver la police adaptée aux personnes dyslexiques.", id: "toggleFontButton", data: { turbo_action: false } %>
+  </div>  
+
+<% flash.each do |key, message| %>
     <div class="alert <%= key == 'notice' ? 'alert-success' : 'alert-warning' %>" role="alert">
       <%= message %>
     </div>
