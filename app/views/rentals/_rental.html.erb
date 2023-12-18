@@ -4,47 +4,54 @@
       <h3 class="card-title text-center">Détails de la réservation</h3>
       <div class="card-text">
         <div id="<%= dom_id rental %>">
-          <p class="mb-1">
-            <strong>Vélo :</strong>
-            <%= rental.bicycle.model %>
-          </p>
-          <p class="mb-1">
-            <strong>Description :</strong>
-            <%= rental.bicycle.description %>
-          </p>
-          <p class="mb-1">
-            <strong>Catégorie :</strong>
-            <%= rental.bicycle.bicycle_type.humanize %>
-          </p>
-          <p class="mb-1">
-            <strong>Taille :</strong>
-            <%= rental.bicycle.size.humanize %>
-          </p>
-          <p class="mb-1">
-            <strong>Accessoires :</strong>
-            <%= rental.bicycle.accessories.first&.name %>
-          </p>
-          <p class="mb-1">
-            <strong>Etat :</strong>
-            <%= rental.bicycle.condition %>
-          </p>
-          <p class="mb-1">
-            <strong>Localisation :</strong>
-            <%= rental.bicycle.city %>, <%= rental.bicycle.postal_code %>, <%= rental.bicycle.country %>
-          </p>
-          <p class="mb-1">
-            <strong>Locataire :</strong>
-            <%= rental.renter.first_name %> <%= rental.renter.last_name %>
-          </p>
-          <p class="mb-1">
-            <strong>Email du locataire :</strong>
-            <%= rental.renter.email %>
-          </p>
+          <% if rental.bicycle %>
+            <p class="mb-1">
+              <strong>Vélo :</strong>
+              <%= rental.bicycle.model %>
+            </p>
+            <p class="mb-1">
+              <strong>Description :</strong>
+              <%= rental.bicycle.description %>
+            </p>
+            <p class="mb-1">
+              <strong>Catégorie :</strong>
+              <%= rental.bicycle.bicycle_type.humanize %>
+            </p>
+            <p class="mb-1">
+              <strong>Taille :</strong>
+              <%= rental.bicycle.size.humanize %>
+            </p>
+            <p class="mb-1">
+              <strong>Accessoires :</strong>
+              <%= rental.bicycle.accessories.first&.name %>
+            </p>
+            <p class="mb-1">
+              <strong>Etat :</strong>
+              <%= rental.bicycle.condition %>
+            </p>
+            <p class="mb-1">
+              <strong>Localisation :</strong>
+              <%= rental.bicycle.city %>, <%= rental.bicycle.postal_code %>, <%= rental.bicycle.country %>
+            </p>
+          <% else %>
+            <p>Le vélo a été supprimé</p>
+          <% end %>
+          <% if rental.renter %>
+            <p class="mb-1">
+              <strong>Locataire :</strong>
+              <%= rental.renter.first_name %> <%= rental.renter.last_name %>
+            </p>
+            <p class="mb-1">
+              <strong>Email du locataire :</strong>
+              <%= rental.renter.email %>
+            </p>
+          <% else %>
+            <p>Le locataire a supprimé son compte</p>
+          <% end %>
           <p class="mb-1">
             <strong>Date de début :</strong>
             <%= rental.start_date %>
           </p>
-
           <p class="mb-1">
             <strong>Date de fin :</strong>
             <%= rental.end_date %>
@@ -64,17 +71,17 @@
             <% end %>
           </p>
           <p>
-          <% if current_user && current_user.id == rental.renter_id || current_user && current_user == rental.bicycle.owner %>
-            <% if rental.refundable? %>
-              <p>L'annulation et le remboursement sont possibles jusqu'à 48h avant la date et l'heure prévue. Passé ce délai, il n'est plus possible d'annuler votre location.</p>
-              <div class="d-flex justify-content-center mt-4 mb-4">
-                <%= button_to 'Annuler la location et demander un remboursement', refund_rental_path(rental.id), method: :post, data: { confirm: 'Êtes-vous sûr de vouloir demander un remboursement?' }, class: "btn btn-danger" %>
-              </div>
-                <% else %>
-              <p>L'annulation et le remboursement sont possibles jusqu'à 48h avant la date et l'heure prévue. Passé ce délai, il n'est plus possible d'annuler votre location. Si une réservation est déjà annulée, vous le verrez ci-dessus dans "Statut de la réservation".</p>
+            <% if current_user && current_user.id == rental.renter_id || current_user && current_user == rental.bicycle.owner %>
+              <% if rental.refundable? %>
+                <p>L'annulation et le remboursement sont possibles jusqu'à 48h avant la date et l'heure prévue. Passé ce délai, il n'est plus possible d'annuler votre location.</p>
+                <div class="d-flex justify-content-center mt-4 mb-4">
+                  <%= button_to 'Annuler la location et demander un remboursement', refund_rental_path(rental.id), method: :post, data: { confirm: 'Êtes-vous sûr de vouloir demander un remboursement?' }, class: "btn btn-danger" %>
+                </div>
+              <% else %>
+                <p>L'annulation et le remboursement sont possibles jusqu'à 48h avant la date et l'heure prévue. Passé ce délai, il n'est plus possible d'annuler votre location. Si une réservation est déjà annulée, vous le verrez ci-dessus dans "Statut de la réservation".</p>
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
+          </p>
         </div>
       </div>
     </div>

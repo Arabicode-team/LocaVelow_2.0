@@ -1,43 +1,48 @@
-// Entry point for the build script in your package.json
-import "@hotwired/turbo-rails"
-import "./controllers"
-import { initMap } from "./packs/autocompleteMap";
+import "@hotwired/turbo-rails";
+import "./controllers";
+import { initMap as initAutocompleteMap } from "./packs/autocompleteMap";
 import { initIndexMap } from "./packs/indexMap";
 import { initSimpleMap } from "./packs/simpleMap";
 import { estimateCost } from "./packs/estimate_cost";
 
-function initMaps() {
-  const isFormPage = document.getElementById('location-input') !== null; // Проверка на наличие поля автозаполнения
+let mapsInitialized = {
+  autocomplete: false,
+  index: false,
+  simple: false
+};
 
-  if (isFormPage) {
-    initMap(); // Функция для инициализации карты с автозаполнением на форме
-  } else {
-    if (document.getElementById('index-map')) {
-      initIndexMap(); // Функция для карты на главной странице
-    }
-    if (document.getElementById('gmp-map')) {
-      initSimpleMap(); // Функция для простой карты
-    }
+function initMaps() {
+  if (document.getElementById('location-input') && !mapsInitialized.autocomplete) {
+    initAutocompleteMap();
+    mapsInitialized.autocomplete = true;
+  }
+  if (document.getElementById('index-map') && !mapsInitialized.index) {
+    initIndexMap();
+    mapsInitialized.index = true;
+  }
+  if (document.getElementById('gmp-map') && !mapsInitialized.simple) {
+    initSimpleMap();
+    mapsInitialized.simple = true;
   }
 }
 
 function initConditionalScripts() {
-  // Проверяем, нужно ли инициализировать карты
-  if (document.getElementById('index-map') || document.getElementById('gmp-map') || document.getElementById('location-input')) {
-    initMaps();
-  }
-
-  // Проверяем, нужно ли инициализировать расчет стоимости
   if (document.getElementById('rental_form')) {
     estimateCost();
   }
 }
 
 document.addEventListener('turbo:load', function () {
-  // Инициализация карт и расчета стоимости
   initConditionalScripts();
+  initMaps();
 });
 
-window.initMaps = initMaps;
-window.initConditionalScripts = initConditionalScripts;
+// Сбросить флаги инициализации при переходе на новую страницу
+document.addEventListener('turbo:before-visit', function () {
+  mapsInitialized = {
+    autocomplete: false,
+    index: false,
+    simple: false
+  };
+});
 

@@ -2,8 +2,8 @@
 <%= render @accessory %>
 
 <div>
-  <%= link_to "Edit this accessory", edit_accessory_path(@accessory) %> |
-  <%= link_to "Back to accessories", accessories_path %>
+  <%= link_to "Edit this accessory", edit_accessory_path(@accessory), aria_label: "Edit accessory" %> |
+  <%= link_to "Back to accessories", accessories_path, aria_label: "Back to accessories" %>
 
   <%= button_to "Destroy this accessory", @accessory, method: :delete %>
 </div>
