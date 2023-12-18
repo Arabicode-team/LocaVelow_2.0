@@ -31,10 +31,16 @@
                     <strong>Avis utilisateur</strong>
                     <span class="ms-2 me-2">
                       <% received_reviews = Review.where(reviewed_user_id: @bicycle.owner_id) %>
-                      <%= received_reviews.count > 0 ? (sum_of_ratings = received_reviews.sum(:rating); average_rating = sum_of_ratings.to_f / received_reviews.count; average_rating_rounded = average_rating.round(1); "<span>#{average_rating_rounded}/5</span>") : "" %>
-                      <%= @bicycle.owner.owner_reviews.any? ? "<i class='fas fa-star'></i>" : "" %>  
-                    </span>  
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                      <% if received_reviews.count > 0 %>
+                        <% sum_of_ratings = received_reviews.sum(:rating) %>
+                        <% average_rating = sum_of_ratings.to_f / received_reviews.count %>
+                        <% average_rating_rounded = average_rating.round(1) %>
+                        <span><%= average_rating_rounded %>/5</span>
+                      <% end %>
+                      <% if @bicycle.owner.owner_reviews.any? %>
+                        <i class="fas fa-star"></i>  
+                      <% end %>  
+                    </span>                      <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                   </button>
                 </h6>
