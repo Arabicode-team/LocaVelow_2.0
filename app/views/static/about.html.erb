@@ -1,0 +1,62 @@
+<style>
+header, section {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+</style>
+
+<header class="text-center ml-3">
+  <h1><i class="fas fa-bicycle"></i> Locavelow - Comment ça marche</h1>
+</header>
+
+<section class="ml-3">
+  <h2><i class="fas fa-question-circle"></i> Qu'est-ce que Locavelow ?</h2>
+  <p>
+    Locavelow est une plateforme de location de vélos entre particuliers qui vise à rendre le cyclisme accessible, économique et écologique.
+  </p>
+</section>
+
+<section class="ml-3">
+  <h2><i class="fas fa-heart"></i> Pourquoi choisir Locavelow ?</h2>
+  <p>
+    Chez Locavelow, nous croyons au pouvoir du partage. Notre plateforme connecte les propriétaires de vélos passionnés avec des utilisateurs à la recherche d'une solution de cyclisme pratique et abordable.
+  </p>
+</section>
+
+<section class="ml-3">
+  <h2><i class="fas fa-cogs"></i> Comment ça marche</h2>
+  <ol class="ml-3">
+    <li><i class="fas fa-user-plus"></i> Créez un compte sur Locavelow.</li>
+    <li><i class="fas fa-search"></i> Explorez notre catalogue de vélos disponibles à la location.</li>
+    <li><i class="fas fa-bicycle"></i> Choisissez le vélo qui correspond à vos besoins et à votre emplacement.</li>
+    <li><i class="fas fa-comments"></i> Contactez le propriétaire pour organiser les détails de la location.</li>
+    <li><i class="fas fa-smile"></i> Profitez de votre balade à vélo !</li>
+  </ol>
+</section>
+
+<section class="ml-3">
+  <h2><i class="fas fa-key"></i> Pour les propriétaires :</h2>
+  <p>
+    Vous avez un vélo que vous souhaitez mettre en location ? Voici comment faire :
+  </p>
+  <ol class="ml-3">
+    <li><i class="fas fa-sign-in-alt"></i> Connectez-vous à votre compte Locavelow.</li>
+    <li><i class="fas fa-plus-circle"></i> Cliquez sur "Je suis propriétaire" dans la barre de navigation.</li>
+    <li><i class="fas fa-edit"></i> Renseignez les détails de votre vélo, y compris la localisation, le tarif, et des photos attrayantes.</li>
+    <li><i class="fas fa-bullhorn"></i> Publiez votre annonce et attendez les demandes de location.</li>
+    <li><i class="fas fa-comments"></i> Communiquez avec les locataires potentiels pour finaliser les détails de la location.</li>
+    <li><i class="fas fa-money-bill-wave"></i> Gagnez de l'argent en partageant votre passion pour le vélo !</li>
+  </ol>
+</section>
+
+<section class="text-center ml-3">
+  <%= link_to "<i class='fas fa-plus'></i> Poster une annonce".html_safe, new_bicycle_path, class: "btn btn-primary", "aria-label": "Poster une annonce" %>
+  <%= link_to "<i class='fas fa-bicycle'></i> Louer un vélo".html_safe, bicycles_path, class: "btn btn-secondary", "aria-label": "Louer un vélo" %>
+</section>
+
+<section class="ml-3">
+  <h2><i class="fas fa-envelope"></i> Contact</h2>
+  <p>
+    Pour toute question ou assistance, n'hésitez pas à nous contacter à l'adresse email : <a href="mailto:locavelow@gmail.com">locavelow@gmail.com</a>.
+  </p>
+</section>

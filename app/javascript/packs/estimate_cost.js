@@ -21,7 +21,7 @@ export function estimateCost() {
       costDisplay.textContent = 'Prix total estimé: ' + cost.toFixed(2) + '€';
       submitButton.disabled = false;
     } else {
-      costDisplay.textContent = 'Invalid date input';
+      costDisplay.textContent = 'Date invalide';
       submitButton.disabled = true;
     }
   }
