@@ -1,30 +1,28 @@
 <% if @rental && @rental.errors.any? %>
-<div id="error_explanation">
-<h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>
+  <div id="error_explanation">
+    <h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>
 
-<ul>
-  <% @rental.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-</ul>
-</div>
+    <ul>
+      <% @rental.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
-
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
-      <% if current_user.id == @bicycle.owner.id %>
-        <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary" %>
-        <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger" %>
-      <% else %>
-      <% end %>  
-    <%= link_to "Retour", bicycles_path %>  
-  <% else %>
-    <%= link_to "Connectez-vous pour louer ce vélo", new_user_session_path, class: "btn btn-outline-primary btn-sm" %>
-  <% end %>
+    <% if current_user.id == @bicycle.owner.id %>
+      <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary", aria_label: "Modifier mon annonce" %>
+      <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger", aria_label: "Supprimer mon annonce" %>
+    <% end %>  
+      <%= link_to "Retour", bicycles_path, aria_label: "Retour" %>  
+    <% else %>
+      <%= link_to "Connectez-vous pour louer ce vélo", new_user_session_path, class: "btn btn-outline-primary btn-sm", aria_label: "Connectez-vous pour louer ce vélo" %>
+    <% end %>
 </div>
 
 <div class="container mt-4">
@@ -36,10 +34,10 @@
         <% rentals_slice.each do |rental| %>
           <% if rental.renter_review %>
             <% avis_present = true %>
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" itemscope itemtype="http://schema.org/Review">
               <div class="card">
                 <div class="card-body">
-                  <h6 class="card-title"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
+                  <h6 class="card-title" itemprop="author"><%= rental.renter.first_name %> <%= rental.renter.last_name %></h6>
                   <div class="stars">
                     <% rental.renter_review.rating.times do %>
                       <i class="fas fa-star"></i>
@@ -48,7 +46,7 @@
                       <i class="far fa-star"></i>
                     <% end %>  
                   </div>  
-                  <p class="card-text"><%= rental.renter_review.review_text %></p>
+                  <p class="card-text" itemprop="reviewBody"><%= rental.renter_review.review_text %></p>
                   <% if rental.renter_review.review_date.present? %>
                     <% review_date = rental.renter_review.review_date %>
                     <% months_ago = ((Time.now - review_date) / 1.month).round %>

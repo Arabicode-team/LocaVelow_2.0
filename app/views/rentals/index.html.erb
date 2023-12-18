@@ -5,9 +5,9 @@
   <% @rentals.each do |rental| %>
     <%= render rental %>
     <p>
-      <%= link_to "Show this rental", rental %>
+      <%= link_to "Show this rental", rental, aria_label: "Show rental" %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New rental", new_rental_path %>
+<%= link_to "New rental", new_rental_path, aria_label: "New rental" %>
