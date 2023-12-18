@@ -23,6 +23,11 @@ module LocaVelow20
     #
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # config/application.rb
+    config.i18n.available_locales = [:en, :de, :fr]
+    config.i18n.default_locale = :fr
+
+
     config.time_zone = "Paris"
 
     config.after_initialize do

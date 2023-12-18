@@ -1,31 +1,25 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
-  before_action :admin_only, only: %i[ index destroy new ]
+  before_action :set_review, only: %i[show edit update destroy]
+  before_action :admin_only, only: %i[index destroy new]
 
-  # GET /reviews or /reviews.json
   def index
     @reviews = Review.all
   end
 
-  # GET /reviews/1 or /reviews/1.json
   def show
   end
 
-  # GET /reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
   def edit
-    unless current_user.id == @review.reviewer_user_id 
-      #Note: Only the user who left the review is allowed to edit it
+    unless current_user.id == @review.reviewer_user_id
       flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
       redirect_to root_path
     end
   end
 
-  # POST /reviews or /reviews.json
   def create
     @review = Review.new(review_params)
 
@@ -40,7 +34,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
     respond_to do |format|
       if @review.update(review_params)
@@ -53,7 +46,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # DELETE /reviews/1 or /reviews/1.json
   def destroy
     @review.destroy!
 
@@ -64,20 +56,19 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit(:rental_id, :reviewed_user_id, :reviewer_user_id, :rating, :review_text, :review_date)
-    end
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
-    def admin_only
-      unless current_user.admin?
-        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
-        redirect_to root_path
-      end
+  def review_params
+    params.require(:review).permit(:rental_id, :reviewed_user_id, :reviewer_user_id, :rating, :review_text, :review_date)
+  end
+
+  def admin_only
+    unless current_user.admin?
+      flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+      redirect_to root_path
     end
+  end
 end
