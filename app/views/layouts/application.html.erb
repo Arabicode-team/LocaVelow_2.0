@@ -13,6 +13,7 @@
   <link rel="shortcut icon" type="image/png" href="<%= asset_path('logo.png') %>">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true, async: true %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -34,5 +35,21 @@
 
   <%= yield %>
   <%= render 'shared/footer' %>
-</body>
+  </body>
+  <script>
+  function toggleFont() {
+    const body = document.body;
+    body.classList.toggle('opendyslexic-font');
+  }
+
+  document.addEventListener('turbo:load', function() {
+    const toggleFontButton = document.getElementById('toggleFontButton');
+
+    if (toggleFontButton) {
+      toggleFontButton.classList.add('opendyslexic-font');
+      toggleFontButton.addEventListener('click', toggleFont);
+    }
+  });
+</script>
+
 </html>
