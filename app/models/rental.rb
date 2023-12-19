@@ -11,7 +11,6 @@ class Rental < ApplicationRecord
   validate :date_not_already_booked, on: :create
   validate :date_not_in_past, on: :create
 
-
   after_create :send_renter_confirmation_email
   after_create :send_owner_confirmation_email
   after_create :renter_schedule_upcoming_reminder
@@ -41,9 +40,9 @@ class Rental < ApplicationRecord
   def refundable?
     return false if rental_status.in?(['cancelled', 'completed'])
     return false if start_date - 48.hours <= DateTime.now
-  
+
     true
-  end  
+  end
 
   def send_renter_confirmation_email
     UserMailer.renter_confirmation_email(User.find(self.renter_id), self).deliver_now
@@ -74,17 +73,17 @@ class Rental < ApplicationRecord
     if start_date.present? && start_date < Date.current
       errors.add(:start_date, "La date de début de la location ne peut pas être dans le passé.")
     end
-  
+
     if end_date.present? && end_date < Date.current
       errors.add(:end_date, "La date de fin de la location ne peut pas être dans le passé.")
     end
-  
+
     if start_date.present? && end_date.present? && start_date > end_date
       errors.add(:start_date, "La date de début ne peut pas être postérieure à la date de fin.")
       errors.add(:end_date, "La date de fin ne peut pas être antérieure à la date de début.")
     end
   end
-  
+
   private
 
   def date_not_already_booked

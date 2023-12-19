@@ -7,6 +7,7 @@
     "esbuild": "^0.19.8"
   },
   "scripts": {
-    "build": "esbuild app/javascript/packs/*.js --bundle --outdir=app/assets/builds && esbuild app/javascript/application.js --bundle --outdir=app/assets/builds"
+    "build": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds",
+    "watch": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --watch"
   }
 }

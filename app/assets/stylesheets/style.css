@@ -1,5 +1,5 @@
 .required-field-marker {
-  font-size: 150%;
+  font-size: 100%;
   margin-left: 5px;
   color: red;
 }
@@ -31,6 +31,105 @@
   border-radius: 25px;
 }
 
+.index-map-container {
+  height: 118vh;
+}
+
+.simple-map-container {
+  height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .index-map-container {
+    height: 40vh;
+  }
+  .simple-map-container {
+    height: 40vh;
+  }
+}
+
+.jumbotron-custom {
+  background-image: url('/assets/bicycle_banner_img.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-primary));
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.jumbotron-heading {
+  padding: 1rem;
+  font-size: 2.5rem;
+}
+
+.jumbotron-subheading {
+  color: var(--bs-secondary);
+}
+
+.form-control {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .jumbotron-custom {
+    min-height: 300px;
+    background-position: top center;
+  }
+  .jumbotron-heading {
+    font-size: 1.5rem;
+  }
+
+  .form-control {
+    font-size: 0.8rem;
+  }
+}
+
+.week-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.day {
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.custom-calendar {
+  max-width: 100px;
+}
+
+.reserved-interval {
+  background-color: #FFDE8C;
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .week-calendar {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .day-calendar {
+    display: none;
+  }
+}
+
+/*styles of autocomplete google maps*/
 body {
   margin: 0;
 }
@@ -106,3 +205,6 @@ input:focus::placeholder {
   line-height: 27px;
   padding: 3.5px 10.5px;
 }
+  .opendyslexic-font, .opendyslexic-font * {
+    font-family: 'Opendyslexic', sans-serif;
+  }

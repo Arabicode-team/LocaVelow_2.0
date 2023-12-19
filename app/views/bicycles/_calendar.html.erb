@@ -1,43 +1,29 @@
 <% content_for :title, "Le calendrier pour pouvoir réserver son vélo en prix par heure" %>
 <% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer - #{ @bicycle.name }. Trouvez votre vélo idéal avec Locavelow. Utilisez notre carte interactive avec l'API Google Maps pour explorer et sélectionner vos itinéraires préférés." %>
-
-<style>
-  .week-calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-top: 20px;
-  }
-
-  .day {
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .custom-calendar {
-    max-width: 100px;
-  }
-
-  .reserved-interval {
-    background-color: #FFDE8C;
-    border-radius: 3px;
-    padding: 5px;
-    margin-top: 5px;
-  }
-
-</style>
-
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-8">
-      <div style="overflow-x: auto;">
+      <div class="week-calendar d-none d-md-block" itemprop="weekCalendar" itemscope itemtype="http://schema.org/ItemList">
         <%= week_calendar do |date| %>
-          <div class="day">
+          <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
             <%= date %>
             <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
             <% reserved_intervals.each do |interval| %>
-              <div class="reserved-interval">
+              <div class="reserved-interval" itemprop="reservedInterval" itemscope itemtype="http://schema.org/Reservation">
+                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Réservé
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="day-calendar d-block d-md-none" itemprop="dayCalendar" itemscope itemtype="http://schema.org/ItemList">
+        <%= calendar(number_of_days: 1) do |date| %>
+          <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
+            <%= date %>
+            <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
+            <% reserved_intervals.each do |interval| %>
+              <div class="reserved-interval" itemprop="reservedInterval" itemscope itemtype="http://schema.org/Reservation">
                 <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Réservé
               </div>
             <% end %>

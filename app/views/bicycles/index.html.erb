@@ -3,44 +3,23 @@
 
 <%= render 'shared/banner' %>
 
-<br></br>
-  <div class="container d-flex flex-row justify-content-center align-items-stretch">
-    <div>
-      <div id="bicycles" class="row d-flex justify-content-center">
-        <div class="mapIndex">
-          <div id="index-map"></div>
-        </div>
-        <div id="carouselExampleControls" class="carousel slide col-md-6 mx-auto" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <% @bicycles.each_slice(4).with_index do |group, index| %>
-              <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-                <div class="row justify-content-center">
-                  <% group.each_with_index do |bicycle, i| %>
-                    <div class="card border-warning col-md-0 col-lg-5 mx-1 my-2 pb-1" id="card<%= index * 4 + i %>">
-                      <%= render bicycle %>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="text-primary mb-0" style="color: #FFDE8C;"><%= "#{bicycle.price_per_hour}€/1h" %></h5>
-                        <%= link_to "Voir le vélo", bicycle, class: "btn btn-outline-dark btn-sm ml-auto"%>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-            <div class="d-flex align-items-center">
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <img src="<%= asset_path('fgauche.png') %>" alt="Flèche" width="30%" style="color: #FFDE8C;">
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <img src="<%= asset_path('fdroite.png') %>" alt="Flèche" width="30%">
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
+<div class="row justify-content-around mx-2 my-2">
+  <div class="col-lg-6 col-md-12 col-sm-12 index-map-container px-0">
+    <div id="index-map" style="width: 100%; height: 100%;"></div>
+  </div>
+  <div id="carouselExampleControls" class="carousel slide col-lg-6 col-md-12 col-sm-12" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <turbo-frame id="bicycles-list"></turbo-frame>
+      <div class="d-flex align-items-center">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" itemprop="previousItem">
+          <img src="<%= asset_path('fgauche.png') %>" alt="Flèche" width="30%" style="color: #FFDE8C;">
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" itemprop="nextItem">
+          <img src="<%= asset_path('fdroite.png') %>" alt="Flèche" width="30%">
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
   </div>
-  <br></br>
-  <br></br>
+</div>

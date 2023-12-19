@@ -2,21 +2,21 @@
 <% content_for :meta_description, "Ajoutez une adresse pour le vélo que vous mettez en location sur Locavelow." %>
 
 <div class="card-container">
-  <div class="panel">
+  <div class="panel" itemscope itemtype="http://schema.org/PostalAddress">
     <div class="d-flex justify-content-center">
-      <span class="sb-title">Adresse</span>
+      <span class="sb-title" itemprop="address">Adresse</span>
       <img class="sb-title-icon" src="<%= asset_path('logo') %>" alt="" style="width: 30px; height: 30px;">
     </div>
-    <%= form.text_field :address, id: "location-input", placeholder: "Adresse", class: "form-control" %>
-    <%= form.hidden_field :suite, placeholder: "Apt, Suite, etc (optional)" %>
-    <%= form.text_field :city, id: "locality-input", placeholder: "Ville", class: "form-control" %>
+    <%= form.text_field :address, id: "location-input", placeholder: "Adresse", class: "form-control", itemprop: "streetAddress" %>
+    <%= form.hidden_field :suite, placeholder: "Apt, Suite, etc (optional)", itemprop: "suite" %>
+    <%= form.text_field :city, id: "locality-input", placeholder: "Ville", class: "form-control", itemprop: "addressLocality" %>
     <div class="half-input-container">
-      <%= form.text_field :state, id: "administrative_area_level_1-input", placeholder: "Région", class: "half-input form-control" %>
-      <%= form.text_field :postal_code, id: "postal_code-input", placeholder: "Code postal", class: "half-input form-control" %>
+      <%= form.text_field :state, id: "administrative_area_level_1-input", placeholder: "Région", class: "half-input form-control", itemprop: "addressRegion" %>
+      <%= form.text_field :postal_code, id: "postal_code-input", placeholder: "Code postal", class: "half-input form-control", itemprop: "postalCode" %>
     </div>
-      <%= form.text_field :country, id: "country-input", placeholder: "Pays", class: "form-control" %>
-      <%= form.hidden_field :latitude, id: "latitude-input" %>
-      <%= form.hidden_field :longitude, id: "longitude-input" %>
+      <%= form.text_field :country, id: "country-input", placeholder: "Pays", class: "form-control", itemprop: "addressCountry" %>
+      <%= form.hidden_field :latitude, id: "latitude-input", itemprop: "latitude" %>
+      <%= form.hidden_field :longitude, id: "longitude-input", itemprop: "longitude" %>
   </div>
   <div class="map d-none d-sm-block" id="gmp-map" style="border-radius: 25px;"></div> 
 </div>

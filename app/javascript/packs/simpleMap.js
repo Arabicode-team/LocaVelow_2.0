@@ -18,3 +18,4 @@ export function initSimpleMap() {
     new Marker({position: position, map: map});
   }
 }
+
