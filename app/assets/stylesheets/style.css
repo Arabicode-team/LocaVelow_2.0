@@ -240,3 +240,12 @@ input:focus::placeholder {
   .opendyslexic-font, .opendyslexic-font * {
     font-family: 'Opendyslexic', sans-serif;
   }
+
+
+.accordion-button:not(.collapsed) .collapse-close {
+    display: none;
+  }
+  
+.accordion-button.collapsed .collapse-open {
+    display: none;
+  }
