@@ -5,57 +5,136 @@ header, section {
 }
 </style>
 
-<header class="text-center ml-3">
-  <h1><i class="fas fa-bicycle"></i> Locavelow - Comment ça marche</h1>
+<header class="text-center ml-3 mb-4 mt-4">
+  <h1><%= image_tag asset_path('logo.png'), class: "logo-img", width: "5%", alt: "Logo" %>Locavelow - Comment ça marche ?</h1>
 </header>
 
-<section class="ml-3">
-  <h2><i class="fas fa-question-circle"></i> Qu'est-ce que Locavelow ?</h2>
-  <p>
-    Locavelow est une plateforme de location de vélos entre particuliers qui vise à rendre le cyclisme accessible, économique et écologique.
+<section class="ml-4 mb-4">
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <h2 class="mb-3"><i class="fas fa-question-circle" style="color: #FFDE8C";></i> Qu'est-ce que Locavelow ?</h2>
+      <p class="mx-4">
+        Locavelow est une plateforme de <strong>location de vélos entre particuliers</strong> qui vise à rendre le cyclisme accessible, <strong>économique</strong> et <strong>écologique</strong>. Les propriétaires peuvent mettre à disposition les vélos dont ils ne se servent pas afin que des locataires puissent les louer. Ce système met en avant <strong>l'économie circulaire</strong>, concept primordial pour assurer le développement durable de notre planète ! Les fonctionnalités implantées et celles qui le seront à l'avenir, permettent d'assurer aux deux parties (propriétaire & locataire) le bon déroulement de la location.
+      </p>
+    </div>
+    <div class="col-md-12 col-lg-6 d-flex justify-content-center">
+      <%= image_tag asset_path('photo_velo_about.jpg'), class: "img-fluid w-80 rounded", alt: "Image" %>
+    </div>
+  </div>
+</section>
+
+<section class="ml-4">
+  <h2><i class="fas fa-heart" style="color: #FFDE8C";></i> Pourquoi choisir Locavelow ?</h2>
+  <p class="mx-4 mb-4">
+    Chez Locavelow, nous croyons au pouvoir du <strong>partage</strong>. Notre plateforme connecte les propriétaires de vélos passionnés avec des utilisateurs à la recherche d'une solution de cyclisme pratique et abordable. Profitez des avantages suivants en choisissant <strong>Locavelow</strong> :
   </p>
+
+  <div class="row ml-3">
+    <div class="col-md-4 mb-3">
+      <div class="card bg-secondary h-100 d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-star"></i> Avis et système de notation</h5>
+          <p class="card-text">
+            Donnez votre avis et consultez les commentaires des autres utilisateurs pour choisir le vélo parfait.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card bg-secondary h-100 d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-lock"></i> Paiement sécurisé</h5>
+          <p class="card-text">
+            Effectuez vos transactions en toute sécurité grâce à notre système de paiement intégré.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card bg-secondary h-100 d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-calendar-check"></i> Système de réservation</h5>
+          <p class="card-text">
+            Planifiez vos balades en réservant le vélo qui correspond à vos dates et à votre emplacement.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card bg-secondary h-100 d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-undo"></i> Remboursement</h5>
+          <p class="card-text">
+            Bénéficiez d'une politique de remboursement flexible en cas de changement de plan.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card bg-secondary h-100 d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-search-location"></i> Système de recherche avancée</h5>
+          <p class="card-text">
+            Trouvez le vélo idéal en utilisant notre barre de recherche par ville, filtres par date, et cartes interactives.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ml-3 mt-4 mb-4">
+  <h2 class="text-center"><i class="fas fa-cogs" style="color: #FFDE8C";></i> Comment ça marche ?</h2>
+  <div class="row mt-4">
+    <div class="col-lg-6 col-md-12">
+      <h4><i class="fas fa-search-location" style="color: #FFDE8C";></i> Vous recherchez un vélo ?</h4>
+      <ol class="ml-3">
+        <li>Créez un <strong>compte</strong> ou connectez-vous sur Locavelow.</li>
+        <li>Explorez notre catalogue de vélos disponibles à la location.</li>
+        <li>Choisissez le vélo qui correspond à vos besoins et à votre emplacement.</li>
+        <li><strong>Réserve</strong> le vélo sur une période.</li>
+        <li><strong>Payer</strong> via le système de paiement sécurisé.</li>
+        <li><strong>Contactez</strong> le propriétaire pour organiser les détails de la location.</li>
+        <li>Profitez de votre balade à vélo !</li>
+        <li>Laissez un <strong>avis</strong> au propriétaire du vélo.</li>
+      </ol>
+      <div class="text-center">
+        <%= link_to "<i class='fas fa-bicycle'></i> Louer un vélo".html_safe, bicycles_path, class: "btn btn-primary", "aria-label": "Louer un vélo" %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 mb-4 order-lg-first d-flex justify-content-center">
+      <%= image_tag asset_path('photo_velo_about_locataire.jpg'), class: "img-fluid w-70 rounded", alt: "Image" %>
+    </div>
+  </div>    
+</section>
+
+<section class="ml-3 mb-4">
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <h4><i class="fas fa-key" style="color: #FFDE8C";></i> Vous souhaitez mettre en location un vélo ?</h4>
+      <ol class="ml-3">
+        <li>Créez un <strong>compte</strong> ou connectez-vous sur Locavelow.</li>
+        <li>Cliquez sur <strong>"Je suis propriétaire"</strong> dans la barre de navigation.</li>
+        <li>Renseignez les <strong>détails</strong> de votre vélo, y compris la localisation, le tarif, et des photos attrayantes.</li>
+        <li><strong>Publiez</strong> votre annonce et attendez les demandes de location.</li>
+        <li>Communiquez avec les locataires potentiels pour finaliser les détails de la location.</li>
+        <li>Gagnez de l'argent en partageant votre passion pour le vélo !</li>
+      </ol>
+      <div class="text-center">
+        <%= link_to "<i class='fas fa-plus'></i> Poster une annonce".html_safe, new_bicycle_path, class: "btn btn-secondary", "aria-label": "Poster une annonce" %>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 mb-4 d-flex justify-content-center">
+      <%= image_tag asset_path('photo_velo_about_proprietaire.jpg'), class: "img-fluid w-70 rounded", alt: "Image" %>
+    </div>
+  </div>    
 </section>
 
 <section class="ml-3">
-  <h2><i class="fas fa-heart"></i> Pourquoi choisir Locavelow ?</h2>
-  <p>
-    Chez Locavelow, nous croyons au pouvoir du partage. Notre plateforme connecte les propriétaires de vélos passionnés avec des utilisateurs à la recherche d'une solution de cyclisme pratique et abordable.
-  </p>
-</section>
-
-<section class="ml-3">
-  <h2><i class="fas fa-cogs"></i> Comment ça marche</h2>
-  <ol class="ml-3">
-    <li><i class="fas fa-user-plus"></i> Créez un compte sur Locavelow.</li>
-    <li><i class="fas fa-search"></i> Explorez notre catalogue de vélos disponibles à la location.</li>
-    <li><i class="fas fa-bicycle"></i> Choisissez le vélo qui correspond à vos besoins et à votre emplacement.</li>
-    <li><i class="fas fa-comments"></i> Contactez le propriétaire pour organiser les détails de la location.</li>
-    <li><i class="fas fa-smile"></i> Profitez de votre balade à vélo !</li>
-  </ol>
-</section>
-
-<section class="ml-3">
-  <h2><i class="fas fa-key"></i> Pour les propriétaires :</h2>
-  <p>
-    Vous avez un vélo que vous souhaitez mettre en location ? Voici comment faire :
-  </p>
-  <ol class="ml-3">
-    <li><i class="fas fa-sign-in-alt"></i> Connectez-vous à votre compte Locavelow.</li>
-    <li><i class="fas fa-plus-circle"></i> Cliquez sur "Je suis propriétaire" dans la barre de navigation.</li>
-    <li><i class="fas fa-edit"></i> Renseignez les détails de votre vélo, y compris la localisation, le tarif, et des photos attrayantes.</li>
-    <li><i class="fas fa-bullhorn"></i> Publiez votre annonce et attendez les demandes de location.</li>
-    <li><i class="fas fa-comments"></i> Communiquez avec les locataires potentiels pour finaliser les détails de la location.</li>
-    <li><i class="fas fa-money-bill-wave"></i> Gagnez de l'argent en partageant votre passion pour le vélo !</li>
-  </ol>
-</section>
-
-<section class="text-center ml-3">
-  <%= link_to "<i class='fas fa-plus'></i> Poster une annonce".html_safe, new_bicycle_path, class: "btn btn-primary", "aria-label": "Poster une annonce" %>
-  <%= link_to "<i class='fas fa-bicycle'></i> Louer un vélo".html_safe, bicycles_path, class: "btn btn-secondary", "aria-label": "Louer un vélo" %>
-</section>
-
-<section class="ml-3">
-  <h2><i class="fas fa-envelope"></i> Contact</h2>
+  <h2><i class="fas fa-envelope" style="color: #FFDE8C";></i> Contact</h2>
   <p>
     Pour toute question ou assistance, n'hésitez pas à nous contacter à l'adresse email : <a href="mailto:locavelow@gmail.com">locavelow@gmail.com</a>.
   </p>
