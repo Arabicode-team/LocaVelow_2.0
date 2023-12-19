@@ -1,41 +1,5 @@
-fr:
-  simple_calendar:
-    previous: "<<"
-    next: ">>"
-    weekdays:
-      sunday: "Dim"
-      monday: "Lun"
-      tuesday: "Mar"
-      wednesday: "Mer"
-      thursday: "Jeu"
-      friday: "Ven"
-      saturday: "Sam"
-    week: "Semaine"
-    months:
-      january: "Janvier"
-      february: "Février"
-      march: "Mars"
-      april: "Avril"
-      may: "Mai"
-      june: "Juin"
-      july: "Juillet"
-      august: "Août"
-      september: "Septembre"
-      october: "Octobre"
-      november: "Novembre"
-      december: "Décembre"
-    days:
-      sunday: "Dimanche"
-      monday: "Lundi"
-      tuesday: "Mardi"
-      wednesday: "Mercredi"
-      thursday: "Jeudi"
-      friday: "Vendredi"
-      saturday: "Samedi"
-    today: "Aujourd'hui"
-    semaines:
-      week: "Semaine"
-      all_weeks: "Toutes les semaines"
+# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
+
 fr:
   devise:
     confirmations:
