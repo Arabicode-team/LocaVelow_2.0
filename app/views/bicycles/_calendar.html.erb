@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-8">
+     <h5>Choisis un créneaux horaires disponibles :</h5>
       <div class="week-calendar d-none d-md-block" itemprop="weekCalendar" itemscope itemtype="http://schema.org/ItemList">
         <%= week_calendar do |date| %>
           <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
@@ -14,7 +15,6 @@
           </div>
         <% end %>
       </div>
-
       <div class="day-calendar d-block d-md-none" itemprop="dayCalendar" itemscope itemtype="http://schema.org/ItemList">
         <%= calendar(number_of_days: 1) do |date| %>
           <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">

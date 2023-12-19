@@ -22,7 +22,7 @@
           <div class="d-flex justify-content-center mt-2 border rounded shadow pt-3">
             <%= @bicycle.owner.image.attached? ? image_tag(@bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px") : image_tag(asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px") %>
             <p class="text-center"><strong>Propriétaire :</strong> <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %></p>
-          </div>  
+          </div>
           <div class="container mt-4">
             <div class="accordion" id="userReviewsAccordion">
               <div class="accordion-item rounded shadow mb-3">
