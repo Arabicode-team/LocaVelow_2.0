@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Changez de mot de passe ici</h2>
+  <h2>Changez de mot de passe ici :</h2>
 
   <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.submit "Confirmez votre changement de mot de passe", class: "btn btn-primary" %>
+      <%= f.submit "Confirmer le changement de mot de passe", class: "btn btn-primary" %>
     </div>
   <% end %>
 
