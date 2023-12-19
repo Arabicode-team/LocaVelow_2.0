@@ -146,6 +146,14 @@
   margin-top: 5px;
 }
 
+.availability {
+  background-color: #c5e8b7; /* Зеленый цвет фона */
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+
 @media (max-width: 768px) {
   .week-calendar {
     display: none;
@@ -236,4 +244,13 @@ input:focus::placeholder {
   font-weight: 500;
   line-height: 27px;
   padding: 3.5px 10.5px;
+}
+
+/*styles terms and conditions*/
+.accordion-button:not(.collapsed) .collapse-close {
+  display: none;
+}
+
+.accordion-button.collapsed .collapse-open {
+  display: none;
 }
