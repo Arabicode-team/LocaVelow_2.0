@@ -245,12 +245,15 @@ input:focus::placeholder {
   line-height: 27px;
   padding: 3.5px 10.5px;
 }
+  .opendyslexic-font, .opendyslexic-font * {
+    font-family: 'Opendyslexic', sans-serif;
+  }
 
-/*styles terms and conditions*/
+
 .accordion-button:not(.collapsed) .collapse-close {
-  display: none;
-}
-
+    display: none;
+  }
+  
 .accordion-button.collapsed .collapse-open {
-  display: none;
-}
+    display: none;
+  }

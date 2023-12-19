@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[show edit update destroy]
-  before_action :admin_only, only: %i[index destroy new]
+  before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :admin_only, only: %i[ index destroy ]
+  before_action :authorize_user, only: [ :new :create ]
 
   def index
     @reviews = Review.all
@@ -14,7 +15,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @review.reviewer_user_id
+    unless current_user.id == @review.reviewer_user_id 
       flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
       redirect_to root_path
     end
@@ -56,19 +57,23 @@ class ReviewsController < ApplicationController
   end
 
   private
-
-  def set_review
-    @review = Review.find(params[:id])
-  end
-
-  def review_params
-    params.require(:review).permit(:rental_id, :reviewed_user_id, :reviewer_user_id, :rating, :review_text, :review_date)
-  end
-
-  def admin_only
-    unless current_user.admin?
-      flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
-      redirect_to root_path
+    def set_review
+      @review = Review.find(params[:id])
     end
-  end
+
+    def review_params
+      params.require(:review).permit(:rental_id, :reviewed_user_id, :reviewer_user_id, :rating, :review_text, :review_date)
+    end
+
+    def admin_only
+      unless current_user.admin?
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
+    end
+
+    def authorize_user
+      rental_id = params[:rental_id]
+      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == Rental.find(rental_id).renter_id || current_user.admin?
+    end
 end
