@@ -74,12 +74,12 @@ puts "Starting the seed process..."
   25.times do
     bicycle = Bicycle.all.sample
     renter = User.all.sample
-    rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 30)
-    rental_end = Faker::Time.between(from: rental_start, to: rental_start + 30.days)
+    rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 10)
+    rental_end = Faker::Time.between(from: rental_start, to: rental_start + 10.days)
   
     while bicycle.rentals.exists?(['(start_date <= ? AND end_date >= ?) OR (start_date >= ? AND start_date <= ?)', rental_end, rental_start, rental_start, rental_end])
-      rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 15)
-      rental_end = Faker::Time.between(from: rental_start, to: rental_start + 15.days)
+      rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 10)
+      rental_end = Faker::Time.between(from: rental_start, to: rental_start + 10.days)
     end
   
     Rental.create!(
