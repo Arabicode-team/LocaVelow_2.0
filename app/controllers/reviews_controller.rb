@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
   before_action :admin_only, only: %i[ index destroy ]
-  before_action :authorize_user, only: %i[ :new ]
+  before_action :authorize_user, only: [ :new :create ]
 
   # GET /reviews or /reviews.json
   def index
@@ -83,6 +83,7 @@ class ReviewsController < ApplicationController
     end
 
     def authorize_user
-      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == @review.reviewer_user_id && current_user.id == @rental.renter_id || current_user.admin?
+      rental_id = params[:rental_id]
+      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == Rental.find(rental_id).renter_id || current_user.admin?
     end
 end
