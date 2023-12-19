@@ -83,6 +83,6 @@ class ReviewsController < ApplicationController
     end
 
     def authorize_user
-      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == @review.reviewer_user_id || current_user.admin?
+      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == @review.reviewer_user_id && current_user.id == @rental.reviewer_user_id || current_user.admin?
     end
 end
