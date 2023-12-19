@@ -237,3 +237,6 @@ input:focus::placeholder {
   line-height: 27px;
   padding: 3.5px 10.5px;
 }
+  .opendyslexic-font, .opendyslexic-font * {
+    font-family: 'Opendyslexic', sans-serif;
+  }

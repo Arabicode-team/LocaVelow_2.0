@@ -13,6 +13,7 @@
   <link rel="shortcut icon" type="image/png" href="<%= asset_path('logo.png') %>">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&libraries=places,marker&solution_channel=GMP_QB_addressselection_v2_cABC", defer: true, async: true %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -22,7 +23,11 @@
 <body>
   <%= render 'shared/navbar' %>
 
-  <% flash.each do |key, message| %>
+  <div class="d-flex justify-content-center">
+  <%= button_tag "Cliquez ici pour activer/désactiver la police adaptée aux personnes dyslexiques.", id: "toggleFontButton", data: { turbo_action: false } %>
+  </div>  
+
+<% flash.each do |key, message| %>
     <div class="alert <%= key == 'notice' ? 'alert-success' : 'alert-warning' %>" role="alert">
       <%= message %>
     </div>
@@ -30,5 +35,23 @@
 
   <%= yield %>
   <%= render 'shared/footer' %>
-</body>
+
+  </body>
+  <script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
+  <script>
+  function toggleFont() {
+    const body = document.body;
+    body.classList.toggle('opendyslexic-font');
+  }
+
+  document.addEventListener('turbo:load', function() {
+    const toggleFontButton = document.getElementById('toggleFontButton');
+
+    if (toggleFontButton) {
+      toggleFontButton.classList.add('opendyslexic-font');
+      toggleFontButton.addEventListener('click', toggleFont);
+    }
+  });
+</script>
+
 </html>
