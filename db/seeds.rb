@@ -21,7 +21,7 @@ Faker::Config.locale = 'fr'
 bike_models = ["Peugeot", "Lapierre", "Look", "B'Twin", "Time", "Moustache Bikes", "Gitane", "LAPIERRE", "Decathlon", "Sunn"]
 cities = ["Paris", "Lourmarin", "Moustiers-Sainte-Marie", "Riquewihr", "Saint-Cirq-Lapopie", "Gordes", "La Roque-Gageac", "Collonges-la-Rouge", "Eguisheim", "Saint-Guilhem-le-Désert", "Ars-en-Ré", "Yvoire", "Castelnou", "Châteauneuf-en-Auxois", "Rochefort-en-Terre", "Sainte-Agnès"]
 zip_codes = ["75000", "12320", "24250", "32230", "48170", "56120", "64121", "71460", "82140", "11230", "26240", "32170", "36300", "51500", "71260", "82340"]
-streets = ["Avenue de la Tolérance Zéro", "Impasse Pas de Problèmes", "Allée du Déni", "Cul-de-sac de l'inaction", "Route de l'Espoir trompeur", "Esplanade de la Duperie", "Chemin de l'Échec Assuré", "Ruelle de l'Optimisme Démesuré", "Chemin des Illusions Perdues", "Ruelle des Malentendus", "Quai des Blagues Tordues", "Avenue de l'Autodérision", "Promenade des Quotidiens Tragiques", "Chemin des Espoirs Déçus", "Passage de l'Ironie Cruelle", "Route des Rires Solitaires"]
+streets = ["Rue de la Paix", "Avenue des Champs-Élysées", "Boulevard Saint-Michel", "Rue du Faubourg Saint-Antoine", "Rue de Rivoli", "Rue de la République", "Quai des Grands Augustins", "Boulevard Haussmann", "Rue du Bac", "Avenue Montaigne", "Rue Mouffetard", "Quai de la Tournelle", "Boulevard de l'Hôpital", "Avenue de l'Opéra", "Rue de la Roquette"]
 depart = ["Ile-de-France","Lozère", "Creuse", "Haute-Loire", "Ardèche", "Aveyron", "Mayenne", "Nièvre", "Tarn-et-Garonne", "Gers", "Allier"]
 conditions = ["Prêt à dévaler l'Everest", "Comme si le Tour de France l'avait adopté", "Légèrement rouillé mais toujours fiable", "Style rétro-chic des années 1800", "Entraîné à la dure sur la Canebière", "Nouveau", "Comme neuf", "Très bon état", "Bon état", "Usé mais fonctionnel", "En roue libre"]
 profiles = ["Amateur de plein air, passionné de cyclisme et de voyages.", "Étudiant passionné de vélos et de randonnées.", "Professionnel du vélo, offrant des vélos de qualité pour une expérience inoubliable.", "Explorateur urbain, prêt à partager mes vélos pour vos aventures en ville.", "Amoureux de la nature, mes vélos sont prêts à vous accompagner dans vos escapades.", "Passionné de vélo depuis toujours, mes deux-roues sont prêts pour vos aventures !", "Cycliste amateur offrant des vélos bien entretenus pour des balades inoubliables.", "Amoureux de la liberté à deux roues, louez mes vélos pour découvrir de nouveaux horizons.", "Voyageur cycliste passionné, partagez l'aventure avec mes vélos fiables et confortables.", "Explorateur des pistes cyclables, mes vélos sont là pour rendre chaque trajet unique."]
@@ -74,12 +74,12 @@ puts "Starting the seed process..."
   25.times do
     bicycle = Bicycle.all.sample
     renter = User.all.sample
-    rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 30)
-    rental_end = Faker::Time.between(from: rental_start, to: rental_start + 30.days)
+    rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 10)
+    rental_end = Faker::Time.between(from: rental_start, to: rental_start + 10.days)
   
     while bicycle.rentals.exists?(['(start_date <= ? AND end_date >= ?) OR (start_date >= ? AND start_date <= ?)', rental_end, rental_start, rental_start, rental_end])
-      rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 30)
-      rental_end = Faker::Time.between(from: rental_start, to: rental_start + 30.days)
+      rental_start = Faker::Time.between(from: DateTime.now, to: DateTime.now + 10)
+      rental_end = Faker::Time.between(from: rental_start, to: rental_start + 10.days)
     end
   
     Rental.create!(
@@ -87,19 +87,8 @@ puts "Starting the seed process..."
       renter: renter,
       start_date: rental_start,
       end_date: rental_end,
-      rental_status: rand(0..1),
+      rental_status: 0,
       total_cost: Faker::Commerce.price(range: 10..100.0, as_string: true)
-    )
-  end
-  
-  10.times do
-    Review.create!(
-      rental: Rental.all.sample,
-      reviewed_user: User.all.sample,
-      reviewer_user: User.all.sample,
-      rating: rand(1..5),
-      review_text: Faker::Quotes::Shakespeare.as_you_like_it_quote,
-      review_date: Faker::Time.between(from: DateTime.now - 30, to: DateTime.now)
     )
   end
   
