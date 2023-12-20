@@ -1,25 +1,30 @@
-<div id="<%= dom_id review %>" class="card mb-3 mx-auto" style="max-width: 40rem;">
+
+<% content_for :title, "Avis sur la location | Locavelow" %>
+<% content_for :meta_description, "Avis sur la location. Détails de l'avis, note, commentaire, et date de l'avis." %>
+                       
+<div id="<%= dom_id review %>" class="card mb-3 mx-auto" style="max-width: 40rem;" itemscope itemtype="http://schema.org/Review">
+
   <div class="card-body">
     <h5 class="card-title">Location : <%= review.rental.bicycle.model %></h5>
 
     <p class="card-text">
       <strong>Utilisateur noté :</strong>
-      <%= review.rental.bicycle.owner.first_name %> <%= review.rental.bicycle.owner.last_name %>
+      <span itemprop="author"><%= review.rental.bicycle.owner.first_name %> <%= review.rental.bicycle.owner.last_name %></span>
     </p>
 
     <p class="card-text">
       <strong>Note :</strong>
-      <%= review.rating %>
+      <span itemprop="rating"><%= review.rating %></span>
     </p>
 
     <p class="card-text">
       <strong>Avis :</strong>
-      <%= review.review_text %>
+      <span itemprop="reviewBody"><%= review.review_text %></span>
     </p>
 
     <p class="card-text">
     <strong>Date de l'avis :</strong>
-    <%= review.review_date.present? ? review.review_date : Time.now.strftime('%Y-%m-%d %H:%M:%S') %>
+    <span itemprop="datePublished"><%= review.review_date.present? ? review.review_date : Time.now.strftime('%Y-%m-%d %H:%M:%S') %></span>
   </p>
   </div>
 </div>

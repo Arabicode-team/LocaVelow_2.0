@@ -1,73 +1,31 @@
+<% content_for :title, "Page détailée du vélo | Locavelow | Location de Vélos" %>
+<% content_for :meta_description, "Résumé des spécificités des différents vélos disponsibles. Louez ce vélo avec Locavelow et explorez la France !" %>
+
 <% if local_assigns[:show_details] == true %>
-  <div id="<%= dom_id bicycle %>">
+  <div id="<%= dom_id bicycle %>" itemprop="bicycle" itemscope itemtype="http://schema.org/Product">
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6">
-          <% if @bicycle.image.attached? %>
-            <%= image_tag @bicycle.image, class: "img-fluid rounded", alt: "Image de vélo" %>
-          <% else %>
-            <%= image_tag asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo" %>
-          <% end %>  
-          <h4 class="text-center mt-4">
-            <%= bicycle.model %>
-          </h4>
-          <h6 class="text-center">
-            <%= bicycle.city %>, <%= bicycle.country %>
-          <h6>  
-          <p>
-            <%= bicycle.description %>
-          </p> 
+          <%= @bicycle.image.attached? ? image_tag(@bicycle.image, class: "img-fluid rounded", alt: "Image de vélo", itemprop: "image") : image_tag(asset_path('icone_vélo.png'), class: "img-fluid rounded", alt: "Icone de vélo", itemprop: "image") %>
+          <h4 class="text-center mt-4" itemprop="name"><%= bicycle.model %></h4>
+          <h6 class="text-center" itemprop="location"><%= bicycle.city %>, <%= bicycle.country %></h6>  
+          <p itemprop="description"><%= bicycle.description %></p> 
           <h5 class="text-center mt-4"> Caractéristiques</h5>
-          <p>
           <ul>
-            <p>
-              <li>
-                <strong>Catégorie :</strong>
-                <%= bicycle.bicycle_type.humanize %>
-              </li>
-            </p>
-            <p>
-              <li>
-                <strong>Taille :</strong>
-                <%= bicycle.size.humanize %>
-              </li>
-            </p>
-            <p>
-              <li>
-                <strong>Etat :</strong>
-                <%= bicycle.condition %>
-              </li>
-            </p>
-            <p>
-              <li>
-              <strong>Accessoires :</strong>
-              <% if bicycle.accessories.present? %>
-                <%= bicycle.accessories.map(&:accessory_type).join(', ').humanize %>
-              <% else %>
-                Pas d'accessoires disponibles.
-              <% end %>
-              </li>
-            </p>
+            <li itemprop="category"><strong>Catégorie :</strong> <%= bicycle.bicycle_type.humanize %></li>
+            <li itemprop="size"><strong>Taille :</strong> <%= bicycle.size.humanize %></li>
+            <li itemprop="condition"><strong>Etat :</strong> <%= bicycle.condition %></li>
+            <li itemprop="accessories"><strong>Accessoires :</strong> <%= bicycle.accessories.present? ? bicycle.accessories.map(&:accessory_type).join(', ').humanize : "Pas d'accessoires disponibles." %></li>
           </ul> 
           <div class="d-flex justify-content-center mt-4 mb-4">
-            <p class="label p-2" style="border-radius: 25px; background-color: #FFDE8C;">
-              <strong>Prix/heure : </strong>
-              <%= bicycle.price_per_hour %> €
-            </p>
+            <span class="badge bg-gradient-light badge-md"><strong>Prix/heure : </strong><%= bicycle.price_per_hour %> €</span>
           </div>  
         </div>
         <div class="col-md-6">
           <div class="d-flex justify-content-center mt-2 border rounded shadow pt-3">
-            <% if @bicycle.owner.image.attached? %>
-              <%= image_tag @bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px" %>
-            <% else %>
-              <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px" %>
-            <% end %> 
-            <p class="text-center">
-              <strong>Propriétaire :</strong>
-              <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %>
-            </p>
-          </div>  
+            <%= @bicycle.owner.image.attached? ? image_tag(@bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px") : image_tag(asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px") %>
+            <p class="text-center"><strong>Propriétaire :</strong> <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %></p>
+          </div>
           <div class="container mt-4">
             <div class="accordion" id="userReviewsAccordion">
               <div class="accordion-item rounded shadow mb-3">
@@ -81,13 +39,11 @@
                         <% average_rating = sum_of_ratings.to_f / received_reviews.count %>
                         <% average_rating_rounded = average_rating.round(1) %>
                         <span><%= average_rating_rounded %>/5</span>
-                      <% else %>
                       <% end %>
                       <% if @bicycle.owner.owner_reviews.any? %>
                         <i class="fas fa-star"></i>  
                       <% end %>  
-                    </span>  
-                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                    </span>                      <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                   </button>
                 </h6>
@@ -129,41 +85,27 @@
               </div>
             </div>
           </div>
-          <p class="text-center mt-6">
-            <strong>Adresse :</strong>
-            <%= "#{bicycle.city},#{bicycle.postal_code}, #{bicycle.country}" %>
-          </p>
-          <div class="mt-4">
-            <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="height: 500px; max-width: 600px; border-radius: 25px;"></div>
+          <p class="text-center mt-6"><strong>Adresse :</strong> <%= "#{bicycle.city},#{bicycle.postal_code}, #{bicycle.country}" %></p>
+          <div class="my-4 col-sm-12 simple-map-container px-0">
+            <div id="gmp-map" data-latitude="<%= @bicycle.latitude %>" data-longitude="<%= @bicycle.longitude %>" style="width: 100%; height: 100%; border-radius: 25px;"></div>
           </div>
         </div>
       </div>
     </div>   
   </div>
 <% else %>
-    
-<div class="col mt-1">
-  <div class="card card-blog card-plain">
-    <div class="position-relative">
-      <div class="d-block blur-shadow-image">
-      <% if bicycle.image.attached? %>
-        <%= image_tag bicycle.image, class: "img-fluid border-radius-lg" %>
-      <% else %>
-        <%= image_tag 'icone_vélo.png', class: "img-fluid border-radius-lg" %>
-      <% end %>  
+  <div class="col mt-1 p-3">
+    <div class="card card-blog card-plain" itemprop="bicycle" itemscope itemtype="http://schema.org/Product">
+      <div class="position-relative">
+        <div class="d-block blur-shadow-image">
+          <%= bicycle.image.attached? ? image_tag(bicycle.image, class: "img-fluid border-radius-lg", alt: "Image de vélo", itemprop: "image") : image_tag('icone_vélo.png', class: "img-fluid border-radius-lg", alt: "Icone de vélo", itemprop: "image") %>
+        </div>
+      </div>
+      <div class="card-body px-0 pt-1">
+        <h5 itemprop="name"><%= bicycle.model %></h5>
+        <p itemprop="size">Taille : <%= bicycle.size.humanize %> <br></p>
+        <p itemprop="location">Localisation : <%= bicycle.country %>, <%= bicycle.city %></p>
       </div>
     </div>
-    <div class="card-body px-0 pt-1">
-        <h5>
-          <%= bicycle.model %>
-        </h5>
-      <p>
-      Taille : <%= bicycle.size %> <br>
-      </p>
-      <p>
-      Localisation : <%= bicycle.country %>, <%= bicycle.city %>
-      </p>
-    </div>
-  </div>
   </div>	
-<% end %>  
+<% end %>

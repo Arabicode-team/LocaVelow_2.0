@@ -1,145 +1,227 @@
-
 .required-field-marker {
-    margin-left: 5px;
-    color: red;
-  }
+  font-size: 100%;
+  margin-left: 5px;
+  color: red;
+}
 
-  .my-logo-container {
-    max-width: 150px;
-  }
-  
-  .my-logo-container img {
-    width: 30%;
-    height: auto;
-  }
+.my-logo-container {
+  max-width: 150px;
+}
+
+.my-logo-container img {
+  width: 30%;
+  height: auto;
+}
 
 .custom-toggler .bar {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background-color: #506191;
-    margin: 4px 0;
-}
-
-.para1 { 
-    max-width: 600px; 
-    padding: 10px; 
-    word-wrap: break-word; 
-    text-align: left;
-}
-
-.para2 { 
-    max-width: 600px; 
-    padding: 10px; 
-    word-wrap: break-word; 
-    text-align: right;
-}
-
-.para1.p {
-    font-size: 16px; 
-    line-height: 1.5;
-}
-
-.para2.p {
-    font-size: 16px; 
-    line-height: 1.5;
-}
-
-.lastpara {
-    max-width: 600px; 
-    padding: 10px; 
-    word-wrap: break-word;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: #506191;
+  margin: 4px 0;
 }
 
 .mapIndex {
-    flex: 1;
-    height: 830px;
+  flex: 1;
+  height: 830px;
+}
+
+#index-map {
+  height: 100%;
+  border-radius: 25px;
+}
+
+.index-map-container {
+  height: 118vh;
+}
+
+.simple-map-container {
+  height: 80vh;
+}
+
+@media (max-width: 768px) {
+  .index-map-container {
+    height: 40vh;
+  }
+  .simple-map-container {
+    height: 40vh;
+  }
+}
+
+.jumbotron-custom {
+  background-image: url('/assets/bicycle_banner_img.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--bs-secondary), var(--bs-primary));
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.jumbotron-heading {
+  padding: 1rem;
+  font-size: 2.5rem;
+}
+
+.jumbotron-subheading {
+  color: var(--bs-secondary);
+}
+
+.form-control {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .jumbotron-custom {
+    min-height: 300px;
+    background-position: top center;
+  }
+  .jumbotron-heading {
+    font-size: 1.5rem;
   }
 
-  #index-map {
-    height: 100%;
-    border-radius: 25px;
+  .form-control {
+    font-size: 0.8rem;
   }
+}
 
-  body {
-    margin: 0;
-  }
-  
-  .sb-title {
-    position: relative;
-    top: -12px;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-  }
-  
-  .sb-title-icon {
-    position: relative;
-    top: -5px;
-  }
-  
-  .card-container {
-    display: flex;
-    height: 500px;
-  }
-  
-  .panel {
-    background: white;
-    width: 300px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  
-  .half-input-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .half-input {
-    max-width: 120px;
-  }
-  
-  .map {
-    width: 300px;
-  }
-  
-  h2 {
-    margin: 0;
-    font-family: Roboto, sans-serif;
-  }
-  
-  input {
-    min-height: 30px;
-  }
-  
-  input {
-    border: 0;
-    border-bottom: 1px solid black;
-    font-size: 14px;
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-  }
-  
-  input:focus::placeholder {
-    color: white;
-  }
-  
-  .button-cta {
-    align-self: start;
-    background-color: #1976d2;
-    border: 0;
-    border-radius: 21px;
-    color: white;
-    cursor: pointer;
-    font-family: "Google Sans Text", sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 27px;
-    padding: 3.5px 10.5px;
-  }
+.week-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-top: 20px;
+}
 
+.day {
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.custom-calendar {
+  max-width: 100px;
+}
+
+.reserved-interval {
+  background-color: #FFDE8C;
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.availability {
+  background-color: #c5e8b7; /* Зеленый цвет фона */
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+
+@media (max-width: 768px) {
+  .week-calendar {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .day-calendar {
+    display: none;
+  }
+}
+
+/*styles of autocomplete google maps*/
+body {
+  margin: 0;
+}
+
+.sb-title {
+  position: relative;
+  top: -12px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.sb-title-icon {
+  position: relative;
+  top: -5px;
+}
+
+.card-container {
+  display: flex;
+  height: 500px;
+}
+
+.panel {
+  background: white;
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.half-input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-input {
+  max-width: 120px;
+}
+
+.map {
+  width: 300px;
+}
+
+h2 {
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
+}
+
+input {
+  min-height: 30px;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+input:focus::placeholder {
+  color: white;
+}
+
+.button-cta {
+  align-self: start;
+  background-color: #1976d2;
+  border: 0;
+  border-radius: 21px;
+  color: white;
+  cursor: pointer;
+  font-family: "Google Sans Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 27px;
+  padding: 3.5px 10.5px;
+}
   .opendyslexic-font, .opendyslexic-font * {
     font-family: 'Opendyslexic', sans-serif;
+  }
+
+
+.accordion-button:not(.collapsed) .collapse-close {
+    display: none;
+  }
+  
+.accordion-button.collapsed .collapse-open {
+    display: none;
   }

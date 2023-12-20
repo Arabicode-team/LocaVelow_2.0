@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'static/terms_and_conditions'
+  get 'static/about'
   namespace :admin do
       resources :accessories
       resources :bicycles
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
     end
   end
     
+  get '/bicycles_filtered', to: 'bicycles#bicycles_filtered', defaults: { format: 'html' }
+
   #route for gem letter_opener for emails in dev environment
   get 'terms_and_conditions', to: 'static#terms_and_conditions'
 

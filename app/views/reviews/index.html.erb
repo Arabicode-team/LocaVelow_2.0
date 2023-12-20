@@ -1,13 +1,17 @@
+<% content_for :title, "Tous les avis sur Locavelow | Locavelow" %>
+<% content_for :meta_description, "Les avis sur Locavelow. Consultez les expériences de notre communautée." %>
 
 <h1>Reviews</h1>
 
 <div id="reviews">
   <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
+    <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+      <%= render review %>
+      <p>
+        <%= link_to "Show this review", review, aria_label: "Show review" %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New review", new_review_path %>
+<%= link_to "New review", new_review_path, aria_label: "New review" %>

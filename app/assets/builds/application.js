@@ -1258,11 +1258,11 @@
     return fetchMethodFromString(fetchMethod) == FetchMethod.get;
   }
   function buildResourceAndBody(resource, method, requestBody, enctype) {
-    const searchParams = Array.from(requestBody).length > 0 ? new URLSearchParams(entriesExcludingFiles(requestBody)) : resource.searchParams;
+    const searchParams2 = Array.from(requestBody).length > 0 ? new URLSearchParams(entriesExcludingFiles(requestBody)) : resource.searchParams;
     if (isSafe(method)) {
-      return [mergeIntoURLSearchParams(resource, searchParams), null];
+      return [mergeIntoURLSearchParams(resource, searchParams2), null];
     } else if (enctype == FetchEnctype.urlEncoded) {
-      return [resource, searchParams];
+      return [resource, searchParams2];
     } else {
       return [resource, requestBody];
     }
@@ -1278,8 +1278,8 @@
     return entries;
   }
   function mergeIntoURLSearchParams(url, requestBody) {
-    const searchParams = new URLSearchParams(entriesExcludingFiles(requestBody));
-    url.search = searchParams.toString();
+    const searchParams2 = new URLSearchParams(entriesExcludingFiles(requestBody));
+    url.search = searchParams2.toString();
     return url;
   }
   var AppearanceObserver = class {
@@ -4320,8 +4320,8 @@
     setProgressBarDelay(delay) {
       this.progressBarDelay = delay;
     }
-    setFormMode(mode) {
-      this.formMode = mode;
+    setFormMode(mode2) {
+      this.formMode = mode2;
     }
     get location() {
       return this.history.location;
@@ -4586,8 +4586,8 @@
   function setConfirmMethod(confirmMethod) {
     FormSubmission.confirmMethod = confirmMethod;
   }
-  function setFormMode(mode) {
-    session.setFormMode(mode);
+  function setFormMode(mode2) {
+    session.setFormMode(mode2);
   }
   var Turbo = /* @__PURE__ */ Object.freeze({
     __proto__: null,
@@ -5490,7 +5490,7 @@
       }
     }
     get eventListeners() {
-      return Array.from(this.eventListenerMaps.values()).reduce((listeners, map) => listeners.concat(Array.from(map.values())), []);
+      return Array.from(this.eventListenerMaps.values()).reduce((listeners, map2) => listeners.concat(Array.from(map2.values())), []);
     }
     bindingConnected(binding) {
       this.fetchEventListenerForBinding(binding).bindingConnected(binding);
@@ -6000,25 +6000,25 @@
       }
     }
   };
-  function add(map, key, value) {
-    fetch3(map, key).add(value);
+  function add(map2, key, value) {
+    fetch3(map2, key).add(value);
   }
-  function del(map, key, value) {
-    fetch3(map, key).delete(value);
-    prune(map, key);
+  function del(map2, key, value) {
+    fetch3(map2, key).delete(value);
+    prune(map2, key);
   }
-  function fetch3(map, key) {
-    let values = map.get(key);
+  function fetch3(map2, key) {
+    let values = map2.get(key);
     if (!values) {
       values = /* @__PURE__ */ new Set();
-      map.set(key, values);
+      map2.set(key, values);
     }
     return values;
   }
-  function prune(map, key) {
-    const values = map.get(key);
+  function prune(map2, key) {
+    const values = map2.get(key);
     if (values != null && values.size == 0) {
-      map.delete(key);
+      map2.delete(key);
     }
   }
   var Multimap = class {
@@ -7883,8 +7883,24 @@
   // app/javascript/packs/autocompleteMap.js
   var CONFIGURATION = {
     "ctaTitle": "Checkout",
-    "mapOptions": { "center": { "lat": 48.8566, "lng": 2.3522 }, "fullscreenControl": true, "mapTypeControl": false, "streetViewControl": true, "zoom": 11, "zoomControl": true, "maxZoom": 22, "mapId": "" },
-    "capabilities": { "addressAutocompleteControl": true, "mapDisplayControl": true, "ctaControl": true }
+    "mapOptions": {
+      "center": {
+        "lat": 48.8566,
+        "lng": 2.3522
+      },
+      "fullscreenControl": true,
+      "mapTypeControl": false,
+      "streetViewControl": true,
+      "zoom": 11,
+      "zoomControl": true,
+      "maxZoom": 22,
+      "mapId": ""
+    },
+    "capabilities": {
+      "addressAutocompleteControl": true,
+      "mapDisplayControl": true,
+      "ctaControl": true
+    }
   };
   var SHORT_NAME_ADDRESS_COMPONENT_TYPES = /* @__PURE__ */ new Set(["street_number", "administrative_area_level_1", "postal_code"]);
   var ADDRESS_COMPONENT_TYPES_IN_FORM = [
@@ -7921,23 +7937,22 @@
       }
     }
   }
-  function renderAddress(place, map, marker) {
+  function renderAddress(place, map2, marker) {
     if (place.geometry && place.geometry.location) {
-      map.setCenter(place.geometry.location);
-      marker.position = place.geometry.location;
+      map2.setCenter(place.geometry.location);
+      marker.setPosition(place.geometry.location);
     } else {
       marker.position = null;
     }
   }
-  async function initMap() {
+  function initMap() {
     const { Map: Map2 } = google.maps;
-    const { AdvancedMarkerElement } = google.maps.marker;
     const { Autocomplete } = google.maps.places;
     const mapOptions = CONFIGURATION.mapOptions;
     mapOptions.mapId = mapOptions.mapId || "DEMO_MAP_ID";
     mapOptions.center = mapOptions.center || { lat: 48.8566, lng: 2.3522 };
-    const map = new Map2(document.getElementById("gmp-map"), mapOptions);
-    const marker = new AdvancedMarkerElement({ map });
+    const map2 = new Map2(document.getElementById("gmp-map"), mapOptions);
+    const marker = new google.maps.Marker({ map: map2 });
     const autocomplete = new Autocomplete(getFormInputElement("location"), {
       fields: ["address_components", "geometry", "name"],
       types: ["address"]
@@ -7948,52 +7963,124 @@
         window.alert(`No details available for input: '${place.name}'`);
         return;
       }
-      renderAddress(place, map, marker);
+      renderAddress(place, map2, marker);
       fillInAddress(place);
     });
   }
 
   // app/javascript/packs/indexMap.js
-  async function initIndexMap() {
-    console.log("initIndexMap called");
-    const { Map: Map2, Marker, InfoWindow } = google.maps;
+  var markers = [];
+  var map;
+  var mode = "all";
+  var searchParams = null;
+  window.loadBicyclesDataTimeout = null;
+  function setupAutocomplete() {
+    const input = document.getElementById("city-input");
+    if (!input)
+      return;
+    const autocomplete = new google.maps.places.Autocomplete(input, { types: ["(cities)"] });
+    autocomplete.bindTo("bounds", map);
+    autocomplete.addListener("place_changed", function() {
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);
+      }
+    });
+  }
+  function loadMarkers(bicycles) {
+    markers.forEach((marker) => marker.setMap(null));
+    markers = [];
+    bicycles.forEach((bicycle) => {
+      const marker = new google.maps.Marker({
+        position: { lat: bicycle.latitude, lng: bicycle.longitude },
+        map,
+        title: bicycle.model
+      });
+      const contentString = `
+      <div class="col text-center">
+        <img src="${bicycle.image_url || "/assets/icone_v\xE9lo.png"}" alt="${bicycle.model}" style="width:130px;height:100px;">
+        <h3>${bicycle.model}</h3>
+        <p><b>Taille:</b> ${bicycle.size}</p>
+        <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>
+        <a href="/bicycles/${bicycle.id}" aria-label="View details about ${bicycle.model}">View details</a>
+      </div>`;
+      const infowindow = new google.maps.InfoWindow({ content: contentString });
+      marker.addListener("click", () => {
+        infowindow.open({ anchor: marker, map, shouldFocus: false });
+      });
+      markers.push(marker);
+    });
+  }
+  function initIndexMap() {
+    console.log("Initializing Index Map");
+    if (markers.length > 0) {
+      markers.forEach((marker) => marker.setMap(null));
+      markers = [];
+    }
     const mapElement = document.getElementById("index-map");
     if (!mapElement)
       return;
-    const mapOptions = {
-      center: { "lat": 48.8566, "lng": 2.3522 },
+    if (map) {
+      map = null;
+    }
+    map = new google.maps.Map(mapElement, {
+      center: { lat: 48.8566, lng: 2.3522 },
       zoom: 10
-    };
-    const map = new Map2(mapElement, mapOptions);
-    fetch("/bicycles.json").then((response) => response.json()).then((bicycles) => {
-      bicycles.forEach((bicycle) => {
-        if (bicycle.latitude && bicycle.longitude) {
-          const marker = new Marker({
-            position: { lat: bicycle.latitude, lng: bicycle.longitude },
-            map,
-            title: bicycle.model
-          });
-          const contentString = `
-          <div>
-            <h3>${bicycle.model}</h3>
-            <p><b>Type:</b> ${bicycle.bicycle_type}</p>
-            <p><b>Size:</b> ${bicycle.size}</p>
-            <p><b>Prix par heure: </b>${bicycle.price_per_hour} &euro;</p>
-            <a href="/bicycles/${bicycle.id}">View details</a>
-          </div>`;
-          const infowindow = new InfoWindow({
-            content: contentString
-          });
-          marker.addListener("click", () => {
-            infowindow.open({
-              anchor: marker,
-              map,
-              shouldFocus: false
-            });
-          });
-        }
+    });
+    setupAutocomplete();
+    map.addListener("bounds_changed", function() {
+      if (window.loadBicyclesDataTimeout) {
+        clearTimeout(window.loadBicyclesDataTimeout);
+      }
+      window.loadBicyclesDataTimeout = setTimeout(loadBicyclesData, 500);
+    });
+    const searchForm = document.getElementById("search-form");
+    if (searchForm) {
+      searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const formData = new FormData(searchForm);
+        searchParams = new URLSearchParams(formData).toString();
+        mode = mode === "all" ? "filtered" : "all";
+        searchForm.querySelector('input[type="submit"]').value = mode === "all" ? "Rechercher" : "Afficher tous";
+        loadBicyclesData();
+        toggleDateAndDurationFields(mode === "all");
       });
-    }).catch((error2) => console.error("Error loading bicycles:", error2));
+    }
+    toggleDateAndDurationFields(mode === "all");
+  }
+  async function loadBicyclesData() {
+    const bounds = map.getBounds();
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+    const boundsParams = `ne_lat=${ne.lat()}&ne_lng=${ne.lng()}&sw_lat=${sw.lat()}&sw_lng=${sw.lng()}`;
+    const jsonUrl = mode === "all" ? `/bicycles.json?${boundsParams}` : `/bicycles_filtered.json?${searchParams}&${boundsParams}`;
+    const htmlUrl = mode === "all" ? `/bicycles?${boundsParams}` : `/bicycles_filtered?${searchParams}&${boundsParams}`;
+    try {
+      const responseJson = await fetch(jsonUrl);
+      const bicycles = await responseJson.json();
+      loadMarkers(bicycles);
+      const responseHtml = await fetch(htmlUrl, { headers: { "Accept": "text/html", "X-Requested-With": "XMLHttpRequest" } });
+      const html = await responseHtml.text();
+      document.getElementById("bicycles-list").innerHTML = html;
+    } catch (error2) {
+      console.error("Error loading bicycles:", error2);
+    }
+    toggleDateAndDurationFields(mode === "all");
+  }
+  function toggleDateAndDurationFields(enable) {
+    const dateInput = document.getElementById("start-date-input");
+    const durationInput = document.getElementById("duration-input");
+    if (dateInput && durationInput) {
+      dateInput.disabled = !enable;
+      durationInput.disabled = !enable;
+    }
   }
 
   // app/javascript/packs/simpleMap.js
@@ -8008,8 +8095,8 @@
     const lng = parseFloat(mapElement.getAttribute("data-longitude"));
     if (!isNaN(lat) && !isNaN(lng)) {
       const position = { lat, lng };
-      const map = new Map2(mapElement, Object.assign({}, CONFIGURATION2.mapOptions, { center: position }));
-      new Marker({ position, map });
+      const map2 = new Map2(mapElement, Object.assign({}, CONFIGURATION2.mapOptions, { center: position }));
+      new Marker({ position, map: map2 });
     }
   }
 
@@ -8021,51 +8108,98 @@
     const pricePerHour = parseFloat(form.dataset.pricePerHour);
     const startDateField = form.querySelector('[name="rental[start_date]"]');
     const endDateField = form.querySelector('[name="rental[end_date]"]');
+    const submitButton = form.querySelector('input[type="submit"]');
     const costDisplay = document.getElementById("calculated_cost");
-    form.addEventListener("change", function() {
-      if (!startDateField.value || !endDateField.value) {
-        console.error("Start date or end date is missing.");
-        return;
-      }
+    function validateForm() {
+      const now2 = /* @__PURE__ */ new Date();
       const startDateTime = new Date(startDateField.value);
       const endDateTime = new Date(endDateField.value);
-      const duration = (endDateTime - startDateTime) / 36e5;
-      if (duration > 0) {
+      const datesAreValid = startDateTime >= now2 && endDateTime > startDateTime;
+      if (datesAreValid) {
+        const duration = (endDateTime - startDateTime) / 36e5;
         const cost = duration * pricePerHour;
         costDisplay.textContent = "Prix total estim\xE9: " + cost.toFixed(2) + "\u20AC";
+        submitButton.disabled = false;
       } else {
-        costDisplay.textContent = "Prix total estim\xE9: 0 \u20AC";
+        costDisplay.textContent = "Dates invalides";
+        submitButton.disabled = true;
       }
-    });
+    }
+    startDateField.addEventListener("change", validateForm);
+    endDateField.addEventListener("change", validateForm);
+    validateForm();
   }
 
-  // app/javascript/application.js
-  function initMaps() {
-    const isFormPage = document.getElementById("location-input") !== null;
-    if (isFormPage) {
-      initMap();
+  // app/javascript/packs/backToTopBtn.js
+  function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  function handleScroll() {
+    let mybutton = document.getElementById("myBtn");
+    if (!mybutton)
+      return;
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
     } else {
-      if (document.getElementById("index-map")) {
-        initIndexMap();
-      }
-      if (document.getElementById("gmp-map")) {
-        initSimpleMap();
-      }
+      mybutton.style.display = "none";
+    }
+  }
+  document.addEventListener("turbo:load", function() {
+    window.addEventListener("scroll", handleScroll);
+    const mybutton = document.getElementById("myBtn");
+    if (mybutton) {
+      mybutton.addEventListener("click", scrollToTop);
+    }
+  });
+
+  // app/javascript/application.js
+  var mapsInitialized = {
+    autocomplete: false,
+    index: false,
+    simple: false
+  };
+  function initMaps() {
+    if (document.getElementById("location-input") && !mapsInitialized.autocomplete) {
+      initMap();
+      mapsInitialized.autocomplete = true;
+    }
+    if (document.getElementById("index-map") && !mapsInitialized.index) {
+      initIndexMap();
+      mapsInitialized.index = true;
+    }
+    if (document.getElementById("gmp-map") && !mapsInitialized.simple) {
+      initSimpleMap();
+      mapsInitialized.simple = true;
     }
   }
   function initConditionalScripts() {
-    if (document.getElementById("index-map") || document.getElementById("gmp-map") || document.getElementById("location-input")) {
-      initMaps();
-    }
     if (document.getElementById("rental_form")) {
       estimateCost();
     }
   }
   document.addEventListener("turbo:load", function() {
     initConditionalScripts();
+    initMaps();
   });
-  window.initMaps = initMaps;
-  window.initConditionalScripts = initConditionalScripts;
+  document.addEventListener("turbo:before-visit", function() {
+    mapsInitialized = {
+      autocomplete: false,
+      index: false,
+      simple: false
+    };
+  });
+  function toggleFont() {
+    const body = document.body;
+    body.classList.toggle("opendyslexic-font");
+  }
+  document.addEventListener("turbo:load", function() {
+    const toggleFontButton = document.getElementById("toggleFontButton");
+    if (toggleFontButton) {
+      toggleFontButton.classList.add("opendyslexic-font");
+      toggleFontButton.addEventListener("click", toggleFont);
+    }
+  });
 })();
 /*! Bundled license information:
 
@@ -8075,3 +8209,4 @@
   Copyright © 2023 37signals LLC
    *)
 */
+//# sourceMappingURL=application.js.map

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  before_destroy :check_active_rentals
+  before_destroy :nullify_rentals
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,9 +14,7 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
-  before_destroy :check_active_rentals
 
-  before_destroy :nullify_rentals
   def thumbnail
     return self.image.variant(resize_to_limit: [150, 150]).processed
   end

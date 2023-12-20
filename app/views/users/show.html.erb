@@ -1,15 +1,17 @@
-
+<% content_for :title, "Page profil | Locavelow" %>
+<% content_for :meta_description, "Votre page de profil vous offre la possibilité de publier, créer et suivre des locations en cours. Vous pouvez également personnaliser votre profil en y ajoutant votre nom, prénom et un avatar. De plus, vous avez la possibilité de laisser des avis sur les locations terminées." %>
+                       
 <%= render @user %>
 
 <div class="container mt-4">
   <div class="d-flex align-items-center mb-3">
-    <h2 class="mx-3">Avis reçus</h2>
+    <h2 class="mx-3" itemprop="name">Avis reçus</h2>
     <% received_reviews = Review.where(reviewed_user_id: @user.id) %>
     <% if received_reviews.count > 0 %>
       <% sum_of_ratings = received_reviews.sum(:rating) %>
       <% average_rating = sum_of_ratings.to_f / received_reviews.count %>
       <% average_rating_rounded = average_rating.round(1) %>
-      <h2>
+      <h2 itemprop="ratingValue">
         <strong><%= average_rating_rounded %>/5</strong>
       </h2>
     <% else %>
@@ -20,7 +22,7 @@
       <div class="row">
         <% owner_reviews_slice.each do |owner_review| %>
           <div class="col-md-4 mb-4">
-            <div class="card">
+            <div class="card" itemprop="review" itemscope itemtype="http://schema.org/Review">
               <div class="card-body">
                 <div class="stars">
                   <% owner_review.rating.times do %>
@@ -30,12 +32,12 @@
                     <i class="far fa-star"></i>
                   <% end %>  
                 </div>  
-                <h6 class="card-title"><%= owner_review.reviewer_user.first_name %> <%= owner_review.reviewer_user.last_name %></h6>
-                <p class="card-text"><%= owner_review.review_text %></p>
+                <h6 class="card-title" itemprop="author"><%= owner_review.reviewer_user.first_name %> <%= owner_review.reviewer_user.last_name %></h6>
+                <p class="card-text" itemprop="reviewBody"><%= owner_review.review_text %></p>
                 <% if owner_review.review_date.present? %>
                   <% review_date = owner_review.review_date %>
                   <% months_ago = ((Time.now - review_date) / 1.month).round %>
-                  <p><strong>
+                  <p itemprop="datePublished"><strong>
                     <% if months_ago.zero? %>
                       Il y a moins d'un mois
                     <% elsif months_ago == 1 %>
@@ -55,8 +57,11 @@
     <p>L'utilisateur n'a pas encore d'avis</p>
   <% end %>
 </div>
+
+<%= render 'shared/delete_confirmation_modal', delete_path: user_path(@user), confirm_text: "Êtes-vous sûr de vouloir supprimer votre profil ?" %>
+
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
-  <%= button_to "Supprimer le compte", @user, method: :delete, class: "btn btn-danger" %>
+  <%= link_to "Supprimer le compte", "#", class: "btn btn-danger", "data-bs-toggle" => "modal", "data-bs-target" => "#deleteBicycleModal", "aria-label" => "Supprimer mon profil" %>
   <br>
-  <%= link_to "Accueil", root_path, class: "btn btn-primary" %>
+  <%= link_to "Accueil", root_path, class: "btn btn-primary", aria_label: "Accueil" %>
 </div>

@@ -1,10 +1,13 @@
+<% content_for :title, "Formulaire mettre votre vélo en location | Locavelow" %>
+<% content_for :meta_description, "Ajoutez un nouveau vélo à louer avec Locavelow. Remplissez les détails, téléchargez une image, et partagez votre annonce avec la France entière." %>
+
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <%= form_with(model: bicycle) do |form| %>
         <% if bicycle.errors.any? %>
           <div style="color: red">
-            <h2><%= pluralize(bicycle.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
+            <h2><%= pluralize(bicycle.errors.count, "error") %> empêche(nt) la sauvegarde de ce vélo:</h2>
             <ul>
               <% bicycle.errors.each do |error| %>
                 <li><%= error.full_message %></li>
@@ -14,44 +17,44 @@
         <% end %>
         <div class="form-group">
           <div class="d-flex align-items-center">
-            <%= form.label :model, "Titre", style: "display: block" %>
-            <span class="required-field-marker" style="font-size: 100%;">*</span>
+            <%= form.label :model, "Titre", style: "display: block", itemprop: "model" %>
+            <span class="required-field-marker">*</span>
           </div> 
           <%= form.text_field :model, class:"form-control" %> 
         </div>
         <div>
           <div class="d-flex align-items-center">
-            <%= form.label :bicycle_type, "Catégorie", style: "display: block" %>
-            <span class="required-field-marker" style="font-size: 100%;">*</span>
+            <%= form.label :bicycle_type, "Catégorie", style: "display: block", itemprop: "bicycleType" %>
+            <span class="required-field-marker">*</span>
           </div>
           <%= form.select :bicycle_type, Bicycle.bicycle_types.keys.map { |type| [type.humanize, type] }, {}, class: "form-select" %>
         </div>
         <div>
           <div class="d-flex align-items-center">
-            <%= form.label :size, "Taille", style: "display: block" %>
-            <span class="required-field-marker" style="font-size: 100%;">*</span>
+            <%= form.label :size, "Taille", style: "display: block", itemprop: "size" %>
+            <span class="required-field-marker">*</span>
           </div> 
           <%= form.select :size, Bicycle.sizes.keys.map { |size| [size.humanize, size] }, {}, class: "form-select" %>
         </div>
         <div>
           <div class="d-flex align-items-center">
-            <%= form.label :condition, "Etat", style: "display: block" %>
-            <span class="required-field-marker" style="font-size: 100%;">*</span>
+            <%= form.label :condition, "Etat", style: "display: block", itemprop: "condition" %>
+            <span class="required-field-marker">*</span>
           </div> 
           <%= form.text_field :condition, class: "form-control" %>
         </div>
         <div>
-          <%= form.label :description, "Description", style: "display: block" %>
+          <%= form.label :description, "Description", style: "display: block", itemprop: "description" %>
           <%= form.text_area :description, class: "form-control" %>
         </div>
         <div class="form-group">
-          <%= form.label :image, "Image", style: "display: block" %>
+          <%= form.label :image, "Image", style: "display: block", itemprop: "image" %>
           <%= form.file_field :image, class: "form-control mb-2" %>
         </div>
         <div>
           <div class="d-flex align-items-center">
-            <%= form.label :price_per_hour, "Prix/heure", style: "display: block" %>
-            <span class="required-field-marker" style="font-size: 100%;">*</span>
+            <%= form.label :price_per_hour, "Prix/heure", style: "display: block", itemprop: "pricePerHour" %>
+            <span class="required-field-marker">*</span>
           </div> 
           <%= form.number_field :price_per_hour, class: "form-control mb-4" %>
         </div>
@@ -62,5 +65,4 @@
       <% end %>
     </div>
   </div>
-</div>        
-    
+</div>

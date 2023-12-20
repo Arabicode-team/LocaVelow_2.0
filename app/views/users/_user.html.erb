@@ -1,28 +1,31 @@
-<div id="<%= dom_id user %>" class="container mt-4">
+<% content_for :title, "Page profil | Locavelow" %>
+<% content_for :meta_description, "Votre page de profil vous offre la possibilité de publier, créer et suivre des locations en cours. Vous pouvez également personnaliser votre profil en y ajoutant votre nom, prénom et un avatar. De plus, vous avez la possibilité de laisser des avis sur les locations terminées." %>
+    
+<div id="<%= dom_id user %>" class="container mt-4" itemprop="user" itemscope itemtype="http://schema.org/Person">
   <div class="row">
     <div class="col-md-4">
       <div class="text-center mb-3">
         <% if @user.image.attached? %>
-          <%= image_tag @user.image, class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;" %>
+          <%= image_tag @user.image, class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;", itemprop: "image" %>
         <% else %>
-          <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;" %>
+          <%= image_tag asset_path('icone_user.png'), class: "img-fluid rounded-circle", style: "width: 200px; height: 200px;", itemprop: "image" %>
         <% end %>    
       </div>
     </div>
     <div class="col-md-8 mt-6">
       <ul class="list-group">
-        <li class="list-group-item"><strong>Nom : </strong><%= user.first_name %> <%= user.last_name %></li>
-        <li class="list-group-item"><strong>Email :</strong> <%= user.email %></li>
+        <li class="list-group-item"><strong>Nom : </strong><span itemprop="givenName"><%= user.first_name %></span> <span itemprop="familyName"><%= user.last_name %></span></li>
+        <li class="list-group-item"><strong>Email :</strong> <span itemprop="email"><%= user.email %></span></li>
       </ul>
       <div class="text-center mt-3">
-        <%= link_to "Modifier le compte", edit_user_registration_path(@user), class: "btn btn-primary" %>
+        <%= link_to "Modifier le compte", edit_user_registration_path(@user), class: "btn btn-primary", aria_label: "Modifier le compte" %>
       </div>
     </div>
 
     <div class="col-md-12 mt-6">
       <h3 class="mb-3">Mes annonces</h3>
       <div class="card">
-        <div class="table-responsive">
+        <div class="table-responsive", style="overflow-x: visible;">
           <table class="table align-items-center mb-0">
             <thead>
               <tr>
@@ -35,23 +38,23 @@
             </thead>
             <tbody>
               <% user.bicycles.each do |bicycle| %>
-                <tr>
+                <tr itemprop="bicycle" itemscope itemtype="http://schema.org/Product">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>                      
                       <% if bicycle.image.attached? %>
-                         <%= image_tag bicycle.image, class: "avatar avatar-sm me-3" %>
+                         <%= image_tag bicycle.image, class: "avatar avatar-sm me-3", itemprop: "image" %>
                       <% else %>
-                        <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3" %>
+                        <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3", itemprop: "image" %>
                       <% end %>
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-xs"><%= bicycle.model %></h6>
+                        <h6 class="mb-0 text-xs" itemprop="model"><%= bicycle.model %></h6>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0"><%= bicycle.bicycle_type.humanize %></p>
+                    <p class="text-xs font-weight-bold mb-0" itemprop="bicycle_type"><%= bicycle.bicycle_type.humanize %></p>
                   </td>
                   <td class="align-middle text-center text-sm">
                     <ul class="nav-item dropdown">
@@ -65,10 +68,10 @@
                     </ul>
                   </td>
                   <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
+                    <span class="text-secondary text-xs font-weight-bold" itemprop="price_per_hour"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
                   </td>
                   <td class="align-middle">
-                  <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2" %>              
+                  <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2", aria_label: "Voir l'annonce" %>              
                 </td>
                 </tr>
               <% end %>
@@ -78,7 +81,7 @@
       </div>
       
       <li class="list-group-item mt-3">
-        <%= link_to "Nouvelle annonce", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+        <%= link_to "Nouvelle annonce", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px", aria_label: "Nouvelle annonce" %>
       </li>
     </div>
 
@@ -98,39 +101,43 @@
             </thead>
             <tbody>
               <% user.rentals.each do |rental| %>
-                <tr>
+                <tr itemprop="rental" itemscope itemtype="http://schema.org/RentalCarReservation">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
-                      <% if rental.bicycle.image.present? && rental.bicycle.image.attached? %>
-                        <%= image_tag rental.bicycle.image, class: "avatar avatar-sm me-3" %>
+                      <% if rental.bicycle && rental.bicycle.image.attached? %>
+                        <%= image_tag rental.bicycle.image, class: "avatar avatar-sm me-3", itemprop: "image" %>
                       <% else %>
-                        <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3" %>
+                        <%= image_tag asset_path('icone_vélo.png'), class: "avatar avatar-sm me-3", itemprop: "image" %>
                       <% end %>
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <%= link_to rental.bicycle.model, rental.bicycle, class: "btn btn-link text-decoration-none mb-0 text-xs", style: "text-align: center;" %>
+                      <% if rental.bicycle %>
+                        <%= link_to rental.bicycle.model, rental.bicycle, class: "btn btn-link text-decoration-none mb-0 text-xs", style: "text-align: center;", aria_label: rental.bicycle.model, itemprop: "itemOffered" %>
+                      <% else %>
+                        <p class="text-xs font-weight-bold mb-0">Vélo supprimé</p>
+                      <% end %>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0"><%= rental.start_date.strftime('%Y-%m-%d %H:%M') %></p>
+                    <p class="text-xs font-weight-bold mb-0" itemprop="startDate"><%= rental.start_date.strftime('%Y-%m-%d %H:%M') %></p>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <p class="text-xs font-weight-bold mb-0""><%= rental.end_date.strftime('%Y-%m-%d %H:%M') %></p>
+                    <p class="text-xs font-weight-bold mb-0" itemprop="endDate"><%= rental.end_date.strftime('%Y-%m-%d %H:%M') %></p>
                   </td>
                   <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold"><%= number_to_currency(rental.total_cost, unit: '€') %></span>
+                    <span class="text-secondary text-xs font-weight-bold" itemprop="totalPrice"><%= number_to_currency(rental.total_cost, unit: '€') %></span>
                   </td>
                   <td class="align-middle flex-row">
                     <div class="d-flex justify-content-center">
-                      <% if rental.end_date < Date.today %>
-                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1" %>
+                      <% if rental.end_date < DateTime.now && rental.rental_status == "completed" %>
+                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1", aria_label: "Voir la location" %>
                         <% unless rental.renter_review %>
-                          <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm mt-2" %>
+                          <%= link_to "Ajouter un avis", new_review_path(rental_id: rental.id, reviewed_user_id: rental.bicycle.owner.id, reviewer_user_id: current_user.id), class: "btn btn-primary btn-sm mt-2", aria_label: "Ajouter un avis" %>
                         <% end %>
                       <% else %>
-                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1" %>
+                        <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1", aria_label: "Voir la location" %>
                       <% end %>  
                     </div>
                   </td>
@@ -141,7 +148,7 @@
         </div>
       </div>
       <li class="list-group-item mt-3">
-       <%= link_to "Nouveau vélo", bicycles_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px" %>
+       <%= link_to "Nouveau vélo", bicycles_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px", aria_label: "Nouveau vélo" %>
     </li>
     </div>
   </div>

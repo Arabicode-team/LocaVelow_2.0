@@ -1,6 +1,9 @@
+<% content_for :title, "Récapitulatif de l'avis sur Locavelow | Locavelow" %>
+<% content_for :meta_description, "Consultez le récapitulatif de cet avis laissé sur Locavelow." %>
+
 <h3 class="text-center">Récapitulatif de l'avis</h3>
 <%= render @review %>
 
 <div class="d-flex justify-content-center">
-  <%= link_to "Accueil", root_path, class: "btn btn-primary" %>
+  <%= link_to "Accueil", root_path, class: "btn btn-primary", aria_label: "Accueil" %>
 </div>
