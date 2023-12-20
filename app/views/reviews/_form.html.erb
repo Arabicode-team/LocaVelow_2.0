@@ -18,20 +18,19 @@
     <%= form.hidden_field :rental_id, value: params[:rental_id] %>
     <%= form.hidden_field :reviewed_user_id, value: params[:reviewed_user_id] %>
     <%= form.hidden_field :reviewer_user_id, value: params[:reviewer_user_id] %>
-
+    
     <div class="mb-3">
       <%= form.label :rating, "Note", class: "form-label" %>
-      <%= form.number_field :rating, class: "form-control", in: 0..5 %>
+      <%= form.select :rating, (0..5).to_a, { include_blank: "Sélectionnez une note" }, class: "form-select" %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :review_text, "Avis", class: "form-label" %>
+      <%= form.label :review_text, "Commentaire", class: "form-label" %>
       <%= form.text_area :review_text, class: "form-control", rows: 4 %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :review_date, "Date de l'avis", class: "form-label" %>
-      <%= form.datetime_field :review_date, class: "form-control" %>
+      <%= form.datetime_field :review_date, class: "form-control", value: Time.now, style: "display: none;" %>
     </div>
 
     <div class="text-center">

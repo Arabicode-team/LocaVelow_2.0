@@ -103,7 +103,7 @@
       </div>
       <div class="card-body px-0 pt-1">
         <h5 itemprop="name"><%= bicycle.model %></h5>
-        <p itemprop="size">Taille : <%= bicycle.size %> <br></p>
+        <p itemprop="size">Taille : <%= bicycle.size.humanize %> <br></p>
         <p itemprop="location">Localisation : <%= bicycle.country %>, <%= bicycle.city %></p>
       </div>
     </div>
