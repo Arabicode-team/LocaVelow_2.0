@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'static/terms_and_conditions'
+  get 'static/about'
   namespace :admin do
       resources :accessories
       resources :bicycles
