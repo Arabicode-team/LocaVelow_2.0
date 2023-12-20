@@ -36,7 +36,6 @@ fr:
     semaines:
       week: "Semaine"
       all_weeks: "Toutes les semaines"
-fr:
   devise:
     confirmations:
       confirmed: "Votre adresse e-mail a été confirmée."

@@ -8121,7 +8121,7 @@
         costDisplay.textContent = "Prix total estim\xE9: " + cost.toFixed(2) + "\u20AC";
         submitButton.disabled = false;
       } else {
-        costDisplay.textContent = "Invalid date input";
+        costDisplay.textContent = "Dates invalides";
         submitButton.disabled = true;
       }
     }
@@ -8129,6 +8129,29 @@
     endDateField.addEventListener("change", validateForm);
     validateForm();
   }
+
+  // app/javascript/packs/backToTopBtn.js
+  function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  function handleScroll() {
+    let mybutton = document.getElementById("myBtn");
+    if (!mybutton)
+      return;
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
+  document.addEventListener("turbo:load", function() {
+    window.addEventListener("scroll", handleScroll);
+    const mybutton = document.getElementById("myBtn");
+    if (mybutton) {
+      mybutton.addEventListener("click", scrollToTop);
+    }
+  });
 
   // app/javascript/application.js
   var mapsInitialized = {
@@ -8165,6 +8188,17 @@
       index: false,
       simple: false
     };
+  });
+  function toggleFont() {
+    const body = document.body;
+    body.classList.toggle("opendyslexic-font");
+  }
+  document.addEventListener("turbo:load", function() {
+    const toggleFontButton = document.getElementById("toggleFontButton");
+    if (toggleFontButton) {
+      toggleFontButton.classList.add("opendyslexic-font");
+      toggleFontButton.addEventListener("click", toggleFont);
+    }
   });
 })();
 /*! Bundled license information:

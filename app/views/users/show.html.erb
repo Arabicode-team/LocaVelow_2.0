@@ -57,8 +57,11 @@
     <p>L'utilisateur n'a pas encore d'avis</p>
   <% end %>
 </div>
+
+<%= render 'shared/delete_confirmation_modal', delete_path: user_path(@user), confirm_text: "Êtes-vous sûr de vouloir supprimer votre profil ?" %>
+
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
-  <%= button_to "Supprimer le compte", @user, method: :delete, class: "btn btn-danger" %>
+  <%= link_to "Supprimer le compte", "#", class: "btn btn-danger", "data-bs-toggle" => "modal", "data-bs-target" => "#deleteBicycleModal", "aria-label" => "Supprimer mon profil" %>
   <br>
-    <%= link_to "Accueil", root_path, class: "btn btn-primary", aria_label: "Accueil" %>
-  </div>
+  <%= link_to "Accueil", root_path, class: "btn btn-primary", aria_label: "Accueil" %>
+</div>
