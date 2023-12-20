@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Locavelow</title>
+  <title><%= yield :title %> | Locavelow - Location de Vélos</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <meta name="description" content="Locavelow propose une large gamme de vélos à louer.">
+  <meta name="keywords" content="location de vélo, vélo à louer, vélo de ville, vélo électrique VTT, cyclisme, balade à vélo">
   <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css', media: 'all' %>
   <%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', integrity: 'sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM', crossorigin: 'anonymous' %>
   <%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css', media: 'all' %>
@@ -18,6 +20,8 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   <script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
+  <link rel="canonical" href="<%= canonical_url %>" />
+  <meta name="description" content="<%= yield :meta_description %>">
 </head>
 
 <body>
@@ -35,23 +39,22 @@
 
   <%= yield %>
   <%= render 'shared/footer' %>
+</body>
+<script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
+<script>
+function toggleFont() {
+  const body = document.body;
+  body.classList.toggle('opendyslexic-font');
+}
 
-  </body>
-  <script src="https://kit.fontawesome.com/b3bc60b412.js" crossorigin="anonymous"></script>
-  <script>
-  function toggleFont() {
-    const body = document.body;
-    body.classList.toggle('opendyslexic-font');
+document.addEventListener('turbo:load', function() {
+  const toggleFontButton = document.getElementById('toggleFontButton');
+
+  if (toggleFontButton) {
+    toggleFontButton.classList.add('opendyslexic-font');
+    toggleFontButton.addEventListener('click', toggleFont);
   }
-
-  document.addEventListener('turbo:load', function() {
-    const toggleFontButton = document.getElementById('toggleFontButton');
-
-    if (toggleFontButton) {
-      toggleFontButton.classList.add('opendyslexic-font');
-      toggleFontButton.addEventListener('click', toggleFont);
-    }
-  });
+});
 </script>
 
-</html>
+</html> 
