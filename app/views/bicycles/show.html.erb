@@ -15,13 +15,17 @@
 
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
+
+<%= render 'shared/delete_confirmation_modal', delete_path: bicycle_path(@bicycle), confirm_text: "Êtes-vous sûr de vouloir supprimer ce vélo ?" %>
+
+
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
     <% if current_user.id == @bicycle.owner.id %>
       <%= link_to "Modifier mon annonce", edit_bicycle_path(@bicycle), class: "btn btn-primary", aria_label: "Modifier mon annonce" %>
-      <%= button_to "Supprimer mon annonce", @bicycle, method: :delete, class: "btn btn-danger", aria_label: "Supprimer mon annonce" %>
-    <% end %>  
+      <%= link_to "Supprimer mon annonce", "#", class: "btn btn-danger", "data-bs-toggle" => "modal", "data-bs-target" => "#deleteBicycleModal", aria_label: "Supprimer mon annonce" %>
+      <% end %>  
       <%= link_to "Retour", bicycles_path, aria_label: "Retour" %>  
     <% else %>
       <%= link_to "Connectez-vous pour louer ce vélo", new_user_session_path, class: "btn btn-outline-primary btn-sm", aria_label: "Connectez-vous pour louer ce vélo" %>

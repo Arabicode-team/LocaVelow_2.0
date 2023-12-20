@@ -4,6 +4,7 @@ import { initMap as initAutocompleteMap } from "./packs/autocompleteMap";
 import { initIndexMap } from "./packs/indexMap";
 import { initSimpleMap } from "./packs/simpleMap";
 import { estimateCost } from "./packs/estimate_cost";
+import "./packs/backToTopBtn.js";
 
 let mapsInitialized = {
   autocomplete: false,
@@ -37,7 +38,6 @@ document.addEventListener('turbo:load', function () {
   initMaps();
 });
 
-// Сбросить флаги инициализации при переходе на новую страницу
 document.addEventListener('turbo:before-visit', function () {
   mapsInitialized = {
     autocomplete: false,
@@ -46,3 +46,17 @@ document.addEventListener('turbo:before-visit', function () {
   };
 });
 
+
+function toggleFont() {
+  const body = document.body;
+  body.classList.toggle('opendyslexic-font');
+}
+
+document.addEventListener('turbo:load', function() {
+  const toggleFontButton = document.getElementById('toggleFontButton');
+
+  if (toggleFontButton) {
+    toggleFontButton.classList.add('opendyslexic-font');
+    toggleFontButton.addEventListener('click', toggleFont);
+  }
+});
