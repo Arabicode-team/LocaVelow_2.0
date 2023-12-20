@@ -1,9 +1,9 @@
-<% content_for :title, "Le calendrier pour pouvoir réserver son vélo en prix par heure" %>
-<% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer - #{ @bicycle.name }. Trouvez votre vélo idéal avec Locavelow. Utilisez notre carte interactive avec l'API Google Maps pour explorer et sélectionner vos itinéraires préférés." %>
+<% content_for :title, "Le calendrier pour pouvoir réserver son vélo en prix par heure | Locavelow" %>
+<% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer - #{ @bicycle.model || @bicycle.type }. Trouvez votre vélo idéal avec Locavelow. Utilisez notre carte interactive avec l'API Google Maps pour explorer et sélectionner vos itinéraires préférés." %>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-12 col-lg-8">
-     <h5>Choisis un créneaux horaires disponibles :</h5>
+     <h5>Choisissez un des créneaux horaires disponibles :</h5>
       <div class="week-calendar d-none d-md-block" itemprop="weekCalendar" itemscope itemtype="http://schema.org/ItemList">
         <%= week_calendar do |date| %>
           <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
