@@ -117,6 +117,14 @@
   margin-top: 5px;
 }
 
+.availability {
+  background-color: #c5e8b7; /* Зеленый цвет фона */
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+
 @media (max-width: 768px) {
   .week-calendar {
     display: none;

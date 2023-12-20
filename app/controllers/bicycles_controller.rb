@@ -64,7 +64,7 @@ class BicyclesController < ApplicationController
 
   def destroy
     if @bicycle.destroy
-      redirect_to bicycles_path, notice: 'Bicycle was successfully deleted.'
+      redirect_to bicycles_path, notice: 'Le vélo a été supprimé avec succès.'
     else
       redirect_to bicycles_path, alert: @bicycle.errors.full_messages.to_sentence
     end

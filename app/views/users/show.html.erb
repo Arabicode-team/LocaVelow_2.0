@@ -1,5 +1,5 @@
-<% content_for :title, "Le profil User de Locavelow" %>
-<% content_for :meta_description, "Le profil permet de poster, de créer et de suivre les locations en cours, de personnaliser son profil avec une image et de gérer les avis." %>
+<% content_for :title, "Page profil | Locavelow" %>
+<% content_for :meta_description, "Votre page de profil vous offre la possibilité de publier, créer et suivre des locations en cours. Vous pouvez également personnaliser votre profil en y ajoutant votre nom, prénom et un avatar. De plus, vous avez la possibilité de laisser des avis sur les locations terminées." %>
                        
 <%= render @user %>
 
@@ -57,8 +57,11 @@
     <p>L'utilisateur n'a pas encore d'avis</p>
   <% end %>
 </div>
+
+<%= render 'shared/delete_confirmation_modal', delete_path: user_path(@user), confirm_text: "Êtes-vous sûr de vouloir supprimer votre profil ?" %>
+
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
-  <%= button_to "Supprimer le compte", @user, method: :delete, class: "btn btn-danger" %>
+  <%= link_to "Supprimer le compte", "#", class: "btn btn-danger", "data-bs-toggle" => "modal", "data-bs-target" => "#deleteBicycleModal", "aria-label" => "Supprimer mon profil" %>
   <br>
-    <%= link_to "Accueil", root_path, class: "btn btn-primary", aria_label: "Accueil" %>
-  </div>
+  <%= link_to "Accueil", root_path, class: "btn btn-primary", aria_label: "Accueil" %>
+</div>
