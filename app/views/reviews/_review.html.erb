@@ -1,4 +1,9 @@
+
+<% content_for :title, "Avis sur la location" %>
+<% content_for :meta_description, "Avis sur la location. Détails de l'avis, note, commentaire, et date de l'avis." %>
+                       
 <div id="<%= dom_id review %>" class="card mb-3 mx-auto" style="max-width: 40rem;" itemscope itemtype="http://schema.org/Review">
+
   <div class="card-body">
     <h5 class="card-title">Location : <%= review.rental.bicycle.model %></h5>
 

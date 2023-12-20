@@ -1,3 +1,6 @@
+<% content_for :title, "Poster un avis sur Locavelow" %>
+<% content_for :meta_description, "Partagez votre avis sur Locavelow. Donnez une note et partagez vos commentaires sur l'expérience de location." %>
+
 <div class="container mt-4" style="max-width: 600px;">
   <%= form_with(model: review) do |form| %>
     <% if review.errors.any? %>
