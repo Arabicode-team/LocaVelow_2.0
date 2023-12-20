@@ -1,35 +1,51 @@
-<% content_for :title, "Le calendrier pour pouvoir réserver son vélo en prix par heure" %>
-<% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer - #{ @bicycle.model }. Trouvez votre vélo idéal avec Locavelow. Utilisez notre carte interactive avec l'API Google Maps pour explorer et sélectionner vos itinéraires préférés." %>
+<% content_for :title, "Le calendrier pour pouvoir réserver son vélo en prix par heure | Locavelow" %>
+<% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer - #{ @bicycle.model || @bicycle.type }. Trouvez votre vélo idéal avec Locavelow. Utilisez notre carte interactive avec l'API Google Maps pour explorer et sélectionner vos itinéraires préférés." %>
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-12 col-lg-8">
-     <h5>Choisis un créneaux horaires disponibles :</h5>
-      <div class="week-calendar d-none d-md-block" itemprop="weekCalendar" itemscope itemtype="http://schema.org/ItemList">
-        <%= week_calendar do |date| %>
-          <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
-            <%= date %>
-            <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
+
+   <div class="col-12">
+    <h5>Choisis un créneaux horaires disponibles :</h5>
+    <div class="week-calendar d-none d-md-block" itemprop="weekCalendar" itemscope itemtype="http://schema.org/ItemList">
+      <%= week_calendar do |date| %>
+        <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
+          <%= date %>
+          <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
+          <% if reserved_intervals.empty? %>
+            <div class="availability" itemprop="availability" itemscope itemtype="http://schema.org/ItemAvailability">
+              Dispo <i class="bi bi-unlock-fill"></i>
+            </div>
+          <% else %>
             <% reserved_intervals.each do |interval| %>
               <div class="reserved-interval" itemprop="reservedInterval" itemscope itemtype="http://schema.org/Reservation">
-                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Réservé
+                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %><i class="bi bi-lock-fill"></i>
               </div>
             <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="day-calendar d-block d-md-none" itemprop="dayCalendar" itemscope itemtype="http://schema.org/ItemList">
-        <%= calendar(number_of_days: 1) do |date| %>
-          <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
-            <%= date %>
-            <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="day-calendar d-block d-md-none" itemprop="dayCalendar" itemscope itemtype="http://schema.org/ItemList">
+      <%= calendar(number_of_days: 1) do |date| %>
+        <div class="day" itemprop="day" itemscope itemtype="http://schema.org/DayOfWeek">
+          <%= date %>
+          <% reserved_intervals = group_reserved_intervals(bicycle.rentals, date) %>
+          <% if reserved_intervals.empty? %>
+            <div class="availability" itemprop="availability" itemscope itemtype="http://schema.org/ItemAvailability">
+              Dispo
+            </div>
+          <% else %>
+
             <% reserved_intervals.each do |interval| %>
               <div class="reserved-interval" itemprop="reservedInterval" itemscope itemtype="http://schema.org/Reservation">
-                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %> Réservé
+                <%= interval[:start].strftime('%H:%M') %> - <%= interval[:end].strftime('%H:%M') %><i class="bi bi-lock-fill"></i>
               </div>
             <% end %>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
     </div>
   </div>
 </div>
