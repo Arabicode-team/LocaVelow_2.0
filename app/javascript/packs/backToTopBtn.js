@@ -21,7 +21,9 @@ function scrollToTop() {
     window.addEventListener('scroll', handleScroll);
     const mybutton = document.getElementById("myBtn");
     if (mybutton) {
-      mybutton.addEventListener('click', scrollToTop);
-    }
-  });
-  
+      mybutton.addEventListener('click', function(event) {
+        event.preventDefault();
+        scrollToTop();
+    });
+}
+}); ̀

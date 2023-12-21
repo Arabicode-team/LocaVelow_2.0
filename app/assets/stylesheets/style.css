@@ -1,9 +1,16 @@
+/* Marqueur asterix, étoile rouge, champs obligatoires */
 .required-field-marker {
   font-size: 100%;
   margin-left: 5px;
   color: red;
 }
 
+/* Navbar */
+.nav-item {
+  style: "box-shadow: none;";
+}
+
+/* logo */
 .my-logo-container {
   max-width: 150px;
 }
@@ -13,6 +20,7 @@
   height: auto;
 }
 
+/* Menu hamburger/Toggle dans la navbar */
 .custom-toggler .bar {
   display: block;
   width: 20px;
@@ -21,6 +29,7 @@
   margin: 4px 0;
 }
 
+/* Map en index */
 .mapIndex {
   flex: 1;
   height: 830px;
@@ -39,6 +48,7 @@
   height: 80vh;
 }
 
+ /* Ajustements pour les petits écrans map */
 @media (max-width: 768px) {
   .index-map-container {
     height: 40vh;
@@ -48,6 +58,7 @@
   }
 }
 
+/* Jumbotron/banner */
 .jumbotron-custom {
   background-image: url('/assets/bicycle_banner_img.jpg');
   background-size: cover;
@@ -75,10 +86,12 @@
   color: var(--bs-secondary);
 }
 
+/* Dans les formulaires, le champ de saisie de texte, les zones de texte, les listes déroulantes */
 .form-control {
   font-size: 1rem;
 }
 
+/* Ajustements pour les petits écrans du jumbo */
 @media (max-width: 768px) {
   .jumbotron-custom {
     min-height: 300px;
@@ -93,6 +106,7 @@
   }
 }
 
+/* Le calendrier */
 .week-calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -118,26 +132,27 @@
 }
 
 .availability {
-  background-color: #c5e8b7; /* Зеленый цвет фона */
+  background-color: #c5e8b7;
   border-radius: 3px;
   padding: 5px;
   margin-top: 5px;
 }
 
-
+ /* Ajustements pour les petits écrans du calendrier*/
 @media (max-width: 768px) {
   .week-calendar {
     display: none;
   }
 }
 
+/* Ajustements pour les grands écrans du calendrier */
 @media (min-width: 769px) {
   .day-calendar {
     display: none;
   }
 }
 
-/*styles of autocomplete google maps*/
+/* Autocomplétion de Google Maps */
 body {
   margin: 0;
 }
@@ -200,6 +215,7 @@ input:focus::placeholder {
   color: white;
 }
 
+/* Bouton d'appel à l'action */
 .button-cta {
   align-self: start;
   background-color: #1976d2;
@@ -213,15 +229,17 @@ input:focus::placeholder {
   line-height: 27px;
   padding: 3.5px 10.5px;
 }
-  .opendyslexic-font, .opendyslexic-font * {
-    font-family: 'Opendyslexic', sans-serif;
-  }
 
+/* Font OpenDyslexic */
+.opendyslexic-font, .opendyslexic-font * {
+  font-family: 'Opendyslexic', sans-serif;
+}
 
+/* Accordéon pour les avis utilisateurs haut, vue du vélo */
 .accordion-button:not(.collapsed) .collapse-close {
-    display: none;
-  }
-  
+  display: none;
+}
+
 .accordion-button.collapsed .collapse-open {
-    display: none;
-  }
+  display: none;
+}

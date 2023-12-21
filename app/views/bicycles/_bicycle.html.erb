@@ -3,6 +3,7 @@
 
 <% if local_assigns[:show_details] == true %>
   <div id="<%= dom_id bicycle %>" itemprop="bicycle" itemscope itemtype="http://schema.org/Product">
+  <!-- Partie information vélo et avis, pour le fichier Show.html.erb -->
     <div class="container mt-4">
       <div class="row">
         <div class="col-md-6">
@@ -26,6 +27,7 @@
             <%= @bicycle.owner.image.attached? ? image_tag(@bicycle.owner.image, class: "img-fluid rounded mx-2", alt: "Avatar", style: "width: 30px; height: 30px") : image_tag(asset_path('icone_user.png'), class: "img-fluid rounded mx-2", alt: "Icone utilisateur", style: "width: 30px; height: 30px") %>
             <p class="text-center"><strong>Propriétaire :</strong> <%= bicycle.owner.first_name %> <%= bicycle.owner.last_name %></p>
           </div>
+          <!-- class accordion utilisé pour afficher les avis utilisateur en haut à droite de la page -->
           <div class="container mt-4">
             <div class="accordion" id="userReviewsAccordion">
               <div class="accordion-item rounded shadow mb-3">
@@ -43,10 +45,13 @@
                       <% if @bicycle.owner.owner_reviews.any? %>
                         <i class="fas fa-star"></i>  
                       <% end %>  
-                    </span>                      <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                    </span>       
+                    <!-- class collapse permet de masqué ou affiché en réponse à des actions de l'utilisateur -->              
+                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                   </button>
                 </h6>
+                <!-- Avis laissez sur le vélo en question -->              
                 <div id="userReviewsCollapse" class="accordion-collapse collapse" aria-labelledby="userReviewsHeading" data-bs-parent="#userReviewsAccordion">
                   <div class="accordion-body">
                     <% if @bicycle.owner.owner_reviews.any? %>

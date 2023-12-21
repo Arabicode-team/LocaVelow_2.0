@@ -1,11 +1,13 @@
 <% content_for :title, "Locavelow | Recherchez votre vélo" %>
 <% content_for :meta_description, "Le bannière de Locavelow avec la barre de recherche qui permet de choisir son vélo en filtrant par ville, par date, et durée de disponibilité." %>
 
+<!-- Jumbotron avec la barre de recherche en partial -->
 <div class="jumbotron jumbotron-custom position-relative d-flex">
   <div class="container position-relative text-center align-self-center" style="z-index: 2;">
     <h1 class="display-6 text-center jumbotron-heading">Trouvez votre vélo idéal</h1>
     <p class="lead text-center jumbotron-subheading">Louez un vélo près de chez vous</p>
     <div class="row justify-content-center">
+    <!-- Elements barre de recherche -->
       <div class="col-md-auto form-group mx-2 align-items-center">
         <%= label_tag :city, "Ville", for: "city-input", hidden: true %>
         <%= text_field_tag :city, nil, id: "city-input", class: "form-control", placeholder: "Ville" %>

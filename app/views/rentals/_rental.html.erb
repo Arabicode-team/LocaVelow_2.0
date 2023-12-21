@@ -1,6 +1,7 @@
 <% content_for :title, "Détails de la réservation" %>
 <% content_for :meta_description, "Détails de la réservation pour le vélo loué sur Locavelow. Consultez les informations sur le vélo, le locataire, les dates de location, et le statut de la réservation." %>
 
+<!-- Page utilisé dans le show rentals, qui vas permettre de voir la location en cours et un bouton d'annulation /remboursment -->   
 <div class="container mt-5">
   <div class="card">
     <div class="card-body">
@@ -74,6 +75,7 @@
             <% end %>
           </p>
           <p>
+          <!-- bouton Annuler la location et demander un remboursement avec condition If Else -->   
             <% if current_user && current_user.id == rental.renter_id || current_user && current_user == rental.bicycle.owner %>
               <% if rental.refundable? %>
                 <p>L'annulation et le remboursement sont possibles jusqu'à 48h avant la date et l'heure prévue. Passé ce délai, il n'est plus possible d'annuler votre location.</p>
