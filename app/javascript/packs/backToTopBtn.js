@@ -26,4 +26,4 @@ function scrollToTop() {
         scrollToTop();
     });
 }
-}); ̀
+});
