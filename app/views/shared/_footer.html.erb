@@ -1,6 +1,7 @@
 <% content_for :title, "Locavelow | Pied de page" %>
 <% content_for :meta_description, "Vous pouvez vous inscrire, vous connecter, poster une annonce, louer un vélo, consulter nos conditions générales de vente et nous contacter. Vous y trouverez aussi un lien vers le Github de notre organisation, où vous pourrez découvrir les membres de notre équipe de développeurs." %>
 
+<!--Footer en partial-->
 <footer class="py-3 my-4">
   <ul class="nav justify-content-center border-top border-bottom mb-3">
     <li class="nav-item"><%= link_to "A propos", static_about_path, class: "nav-link px-2 text-body-secondary", "aria-label": "A propos" %></li>
@@ -9,6 +10,7 @@
     <li class="nav-item"><%= link_to "Poster une annonce", new_bicycle_path, class: "nav-link px-2 text-body-secondary", "aria-label": "Poster une annonce" %></li>
     <li class="nav-item"><%= link_to "Louer un vélo", bicycles_path, class: "nav-link px-2 text-body-secondary", "aria-label": "Louer un vélo" %></li>
     <li class="nav-item"><%= link_to "CGV", terms_and_conditions_path, class: "nav-link px-2 text-body-secondary", "aria-label": "CGV" %></li>
+    <!-- Lien qui redirige l'utilisateur sur sa boite mail par défaut avec l'adresse mail du SAV-->
     <li class="nav-item"><%= link_to "Contact", "mailto:locavelow@gmail.com", class: "nav-link px-2 text-body-secondary", "aria-label": "Contact" %></li>
   </ul>
   <div class="d-flex flex-wrap justify-content-between align-items-center mx-5">

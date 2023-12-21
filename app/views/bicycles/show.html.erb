@@ -1,6 +1,7 @@
 <% content_for :title, "Détails du vélo à louer | Locavelow"%>
 <% content_for :meta_description, "Découvrez les détails et les avis sur le vélo à louer." %>
 
+<!-- Permet de controler si il y a une erreur associé à un objet @rental-->   
 <% if @rental && @rental.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@rental.errors.count, "erreur") %> vous empêchent de continuer:</h2>
@@ -13,12 +14,13 @@
   </div>
 <% end %>
 
+<!-- Page Show d'un vélo qui appel avec render les fichier _bicycle.html.erb / _calendar.html.erb et /shared/delete_cofirmation_modal-->   
 <%= render @bicycle, bicycle: @bicycle, show_details: true %>
 <%= render 'bicycles/calendar', bicycle: @bicycle %>
 
 <%= render 'shared/delete_confirmation_modal', delete_path: bicycle_path(@bicycle), confirm_text: "Êtes-vous sûr de vouloir supprimer ce vélo ?" %>
 
-
+<!-- Boutons pour modifier, supprimer ou retourner en arrière, en fonction du statut de connexion de l'utilisateur. -->  
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">
   <% if user_signed_in? %>
     <%= render 'rentals/form', bicycle: @bicycle %>
@@ -32,6 +34,7 @@
     <% end %>
 </div>
 
+<!-- Avis associés à ce vélo. Parcourt les locations associées au vélo et vérifie s'il existe des avis de locataires. Si des avis sont présents, les affiches sinon un message "aucun avis ..." -->  
 <div class="container mt-4">
   <h2 class="mb-3">Avis sur ce vélo</h2>
   <% avis_present = false %>

@@ -26,6 +26,7 @@
 <body>
   <%= render 'shared/navbar' %>
 
+  <!-- Bouton pour afficher la font open dyslexiques avec du js dans /app/javascript/application.js -->   
   <div class="d-flex justify-content-center">
   <%= button_tag "Cliquez ici pour activer/désactiver la police adaptée aux personnes dyslexiques.", id: "toggleFontButton", data: { turbo_action: false } %>
   </div>  
@@ -36,7 +37,12 @@
     </div>
   <% end %>
 
+  <!-- Yiel est utilisée pour injecter le contenu spécifique à chaque page dans le modèle (layout) de la page. -->  
   <%= yield %>
+
+  <!-- Bouton en bas à droite de la page qui permet de remonter en haut de la page avec une animaton JS dans /app/javascript/packs/backtotopbtn.js -->   
+  <button id="myBtn" title="Go to top" class="btn btn-primary position-fixed bottom-0 end-0 mb-3 me-5" style="z-index: 3;"><i class="fas fa-arrow-up"></i></button>
+
   <%= render 'shared/footer' %>
   </body>
 </html>
