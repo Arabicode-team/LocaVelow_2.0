@@ -3,6 +3,7 @@
                        
 <%= render @user %>
 
+<!-- Page Show du user qui appel avec render _user.html.erb et les lignes 7 à 60 permettent si il y a des avis, d'afficher en bas de page ceux de l'utilisateurs -->   
 <div class="container mt-4">
   <div class="d-flex align-items-center mb-3">
     <h2 class="mx-3" itemprop="name">Avis reçus</h2>
@@ -58,6 +59,7 @@
   <% end %>
 </div>
 
+<!-- utilisation du bouton de supression dans le dossier shared -->   
 <%= render 'shared/delete_confirmation_modal', delete_path: user_path(@user), confirm_text: "Êtes-vous sûr de vouloir supprimer votre profil ?" %>
 
 <div class="mt-6 mb-6 d-flex flex-column align-items-center">

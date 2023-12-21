@@ -1,6 +1,7 @@
 <% content_for :title, "Page profil | Locavelow" %>
 <% content_for :meta_description, "Votre page de profil vous offre la possibilité de publier, créer et suivre des locations en cours. Vous pouvez également personnaliser votre profil en y ajoutant votre nom, prénom et un avatar. De plus, vous avez la possibilité de laisser des avis sur les locations terminées." %>
-    
+
+<!-- Page User, utilisé dans la show, utilisation de la class table responsive du thème bootstrap avec à l'intérieur, des boutons et un dropdown menu pour afficher les locatiosn en cours sur le vélo du propriétaire -->   
 <div id="<%= dom_id user %>" class="container mt-4" itemprop="user" itemscope itemtype="http://schema.org/Person">
   <div class="row">
     <div class="col-md-4">
@@ -22,10 +23,11 @@
       </div>
     </div>
 
+  <!-- La class table-responsive ligne 30 -->   
     <div class="col-md-12 mt-6">
       <h3 class="mb-3">Mes annonces</h3>
       <div class="card">
-        <div class="table-responsive", style="overflow-x: visible;">
+        <div class="table-responsive">
           <table class="table align-items-center mb-0">
             <thead>
               <tr>
@@ -58,6 +60,7 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     <ul class="nav-item dropdown">
+                      <!-- La class dropdown utilisé pour le nobre de rental sur le vélo du propiétaire -->   
                       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><%= bicycle.rentals.count %></a>
                       <div class="dropdown-menu" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 42px);" data-popper-placement="bottom-start">
                         <h6 class="dropdown-header">Cliquez sur une des locations pour voir plus d'options</h6>
@@ -70,6 +73,7 @@
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold" itemprop="price_per_hour"><%= number_to_currency(bicycle.price_per_hour, unit: '€') %></span>
                   </td>
+                  <!-- Un lien pour voir l'annonce sous forme de bouton -->   
                   <td class="align-middle">
                   <%= link_to "Voir l'annonce", bicycle, class: "btn btn-primary btn-sm d-flex justify-content-center mt-2", aria_label: "Voir l'annonce" %>              
                 </td>
@@ -79,7 +83,7 @@
           </table>
         </div>
       </div>
-      
+      <!-- Un lien pour déposer une nouvelle annonce sous forme de bouton -->   
       <li class="list-group-item mt-3">
         <%= link_to "Nouvelle annonce", new_bicycle_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px", aria_label: "Nouvelle annonce" %>
       </li>
@@ -131,6 +135,7 @@
                   </td>
                   <td class="align-middle flex-row">
                     <div class="d-flex justify-content-center">
+                      <!-- Bouton Voir la location et Ajotuer un avis sur le vélo une fois la location terminé et pas avant, une fois l'avis laissé, disparition du bouton avec un if/else.. -->   
                       <% if rental.end_date < DateTime.now && rental.rental_status == "completed" %>
                         <%= link_to "Voir la location", rental, class: "btn btn-primary btn-sm mt-2 mx-1", aria_label: "Voir la location" %>
                         <% unless rental.renter_review %>
@@ -147,6 +152,7 @@
           </table>
         </div>
       </div>
+      <!-- Un lien pour déposer une nouvelle annonce de vélo sous forme de bouton -->   
       <li class="list-group-item mt-3">
        <%= link_to "Nouveau vélo", bicycles_path, class: "btn btn-outline-light btn-sm", style: "background-color: #FFDE8C; color: #506191; border-radius: 25px", aria_label: "Nouveau vélo" %>
     </li>
