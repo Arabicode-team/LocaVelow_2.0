@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
   before_action :admin_only, only: %i[ index destroy ]
-  before_action :authorize_user, only: [ :new, :create, :show ]
+  before_action :authorize_user, only: [ :new, :create, :show, :edit, :update ]
 
   def index
     @reviews = Review.all
