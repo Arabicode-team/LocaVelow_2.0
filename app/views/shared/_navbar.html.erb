@@ -40,11 +40,11 @@
       <ul class="navbar-nav ms-auto">
         <li class="nav-item py-1 py-lg-0">
           <% if user_signed_in? %>
-            <%= link_to user_path(current_user), class: "btn btn-default btn-sm m-0 px-3", aria_label: "Profil" do %>
+            <%= link_to user_path(current_user), class: "btn btn-default btn-sm m-0 px-3", style: "box-shadow: none;", aria_label: "Profil" do %>
               <i class="fas fa-user me-2"></i> Profil
             <% end %>
           <% else %>
-            <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-default btn-sm m-0 px-3", aria_label: "S'inscrire" %>
+            <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-default btn-sm m-0 px-3", style: "box-shadow: none;", aria_label: "S'inscrire" %>
           <% end %>
         </li>
         <li class="nav-item pt-1 pb-2 py-lg-0">
