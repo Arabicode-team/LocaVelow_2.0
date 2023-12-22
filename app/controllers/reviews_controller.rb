@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
-  before_action :admin_only, only: %i[ index destroy ]
+  before_action :admin_only, only: [ :index, :destroy, :new, :create, :show, :edit, :update ]
   before_action :authorize_user, only: [ :new, :create, :show, :edit, :update ]
 
   def index
