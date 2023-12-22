@@ -74,6 +74,16 @@ class ReviewsController < ApplicationController
 
     def authorize_user
       rental_id = params[:rental_id]
-      redirect_to root_path, alert: "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action." unless current_user.id == Rental.find(rental_id).renter_id || current_user.admin?
+    
+      begin
+        rental = Rental.find(rental_id)
+      rescue ActiveRecord::RecordNotFound
+        rental = nil
+      end
+    
+      unless rental && (current_user.id == rental.renter_id || current_user.admin?)
+        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
+        redirect_to root_path
+      end
     end
 end
