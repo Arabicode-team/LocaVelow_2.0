@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
-  before_action :admin_only, only: [ :index, :destroy, :new, :create, :show, :edit, :update ]
   before_action :authorize_user, only: [ :new, :create, :show, :edit, :update ]
 
   def index
@@ -15,10 +14,6 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @review.reviewer_user_id 
-      flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
-      redirect_to root_path
-    end
   end
 
   def create
@@ -63,13 +58,6 @@ class ReviewsController < ApplicationController
 
     def review_params
       params.require(:review).permit(:rental_id, :reviewed_user_id, :reviewer_user_id, :rating, :review_text, :review_date)
-    end
-
-    def admin_only
-      unless current_user.admin?
-        flash[:alert] = "Accès refusé! Vous n'avez pas le droit d'accéder à cette page et/ou d'effectuer cette action."
-        redirect_to root_path
-      end
     end
 
     def authorize_user
