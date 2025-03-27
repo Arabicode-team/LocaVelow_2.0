@@ -7,7 +7,7 @@
 _Avant-propos :_
 
 ☕ Github de l'équipe : [Arabicode-Team](https://github.com/Arabicode-team)<br>
-🔌Le site Locavelow en production : [Locavelow](https://locavelik-115195375a5a.herokuapp.com/)<br>
+🔌Le site Locavelow en production : [Locavelow](https://locavelow.fr/)<br>
 💡Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
 
 # Locavelow, c'est quoi ?
