@@ -1,4 +1,4 @@
-# LOCAVELOW : Projet Fullstack (Session Automne 2023)
+# LOCAVELOW (2023)
 
 ![ruby](https://forthebadge.com/images/badges/made-with-ruby.svg)
 ![Arabicode en mode Locavelow](app/assets/images/made-by-arabicode.svg)
@@ -8,7 +8,6 @@ _Avant-propos :_
 
 ☕ Github de l'équipe : [Arabicode-Team](https://github.com/Arabicode-team)<br>
 🔌Le site Locavelow en production : [Locavelow](https://locavelow.fr/)<br>
-💡Le lien du Trello : [Trello](https://trello.com/b/kJSLR5PY/locavelow-thp)
 
 # Locavelow, c'est quoi ?
 
@@ -373,7 +372,7 @@ Elle est disponible ici : [Figma Locavelow](https://www.figma.com/file/6xWBCB7yc
 [![forthebadge](https://forthebadge.com/images/badges/powered-by-coffee.svg)](https://forthebadge.com)
 
 - [Marina](https://github.com/masechkacat)
-- [Sylvain](https://github.com/JerkStanton)
-- [Grégory](https://github.com/100PBaguuette)
+- [Sylvain](https://github.com/DelignyS)
+- [Ikrame](https://github.com/ikramagix)
+- [Grégory](https://github.com/GregMagnat)
 - [Cyprien](https://github.com/cypradoux)
-- [Ikrame](https://github.com/ikramiste)
